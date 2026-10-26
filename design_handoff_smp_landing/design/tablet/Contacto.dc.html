@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="../support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <title>Simple Manage Pro — Contacto</title>
+  <link rel="stylesheet" href="../_ds/simple-manage-pro-design-system-b97d6b38-6a29-409e-a740-afb561d4c8b5/tokens/fonts.css">
+  <link rel="stylesheet" href="../_ds/simple-manage-pro-design-system-b97d6b38-6a29-409e-a740-afb561d4c8b5/tokens/colors.css">
+  <link rel="stylesheet" href="../_ds/simple-manage-pro-design-system-b97d6b38-6a29-409e-a740-afb561d4c8b5/tokens/base.css">
+  <link rel="stylesheet" href="../_ds/simple-manage-pro-design-system-b97d6b38-6a29-409e-a740-afb561d4c8b5/styles.css">
+  <script src="../_ds/simple-manage-pro-design-system-b97d6b38-6a29-409e-a740-afb561d4c8b5/_ds_bundle.js"></script>
+  <style>
+    html,body{margin:0;background:#f6f6f9;}
+    body{font-family:'Poppins',system-ui,sans-serif;-webkit-font-smoothing:antialiased;}
+    a{color:#4455e6;text-decoration:none;}
+    a:hover{color:#111e88;}
+  </style>
+</helmet>
+
+<header ref="{{ refs.header }}" style="position:fixed;top:0;left:0;right:0;z-index:30;box-sizing:border-box;display:flex;justify-content:space-between;align-items:center;gap:16px;padding:16px 40px;color:#363949;transition:background 400ms cubic-bezier(.65,0,.35,1), padding 400ms cubic-bezier(.65,0,.35,1);">
+  <a href="Home.dc.html" style="display:flex;align-items:center;gap:10px;font-size:13px;font-weight:800;letter-spacing:0.04em;color:inherit;white-space:nowrap;">
+    <img src="../assets/apple-touch-icon.png" alt="" style="width:32px;height:32px;border-radius:9px;">
+    <span>SIMPLE</span><span style="color:#ff7782;margin-left:-4px;">MANAGE PRO</span>
+  </a>
+  <button type="button" aria-label="Abrir menú" aria-expanded="{{ menu.expanded }}" onClick="{{ menu.open }}" style="width:44px;height:44px;flex:none;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;border:none;background:transparent;color:inherit;cursor:pointer;padding:0;"><span style="width:22px;height:2px;border-radius:2px;background:currentColor;"></span><span style="width:22px;height:2px;border-radius:2px;background:currentColor;"></span><span style="width:22px;height:2px;border-radius:2px;background:currentColor;"></span></button>
+</header>
+<div aria-hidden="{{ menu.hidden }}" style="position:fixed;inset:0;z-index:60;pointer-events:{{ menu.pe }};">
+  <div onClick="{{ menu.close }}" style="position:absolute;inset:0;background:rgba(196,200,242,0.62);opacity:{{ menu.scrim }};transition:opacity 400ms cubic-bezier(.65,0,.35,1);"></div>
+  <nav aria-label="Menú" style="position:absolute;top:0;right:0;bottom:0;width:min(85%,480px);box-sizing:border-box;background:#fff;box-shadow:0 2rem 3rem rgba(132,139,200,0.28);transform:{{ menu.x }};transition:transform 400ms cubic-bezier(.65,0,.35,1);display:flex;flex-direction:column;gap:32px;padding:12px 24px 32px;overflow-y:auto;">
+    <div style="display:flex;justify-content:space-between;align-items:center;gap:16px;min-height:56px;">
+      <a href="Home.dc.html" style="display:flex;align-items:center;gap:10px;font-size:13px;font-weight:800;letter-spacing:0.04em;color:#363949;white-space:nowrap;"><img src="../assets/apple-touch-icon.png" alt="" style="width:32px;height:32px;border-radius:9px;"><span>SIMPLE</span><span style="color:#ff7782;margin-left:-4px;">MANAGE PRO</span></a>
+      <button type="button" aria-label="Cerrar menú" onClick="{{ menu.close }}" style="position:relative;width:44px;height:44px;flex:none;border:none;border-radius:999px;background:#f6f6f9;color:#363949;cursor:pointer;padding:0;"><span style="position:absolute;left:13px;top:21px;width:18px;height:2px;border-radius:2px;background:currentColor;transform:rotate(45deg);"></span><span style="position:absolute;left:13px;top:21px;width:18px;height:2px;border-radius:2px;background:currentColor;transform:rotate(-45deg);"></span></button>
+    </div>
+    <div style="flex:1;display:flex;flex-direction:column;justify-content:center;">
+      <a href="Home.dc.html" style="display:flex;align-items:center;min-height:64px;font-size:clamp(30px,6.75vw,60px);font-weight:800;letter-spacing:-0.045em;color:#363949;border-bottom:1px solid rgba(132,139,200,0.22);">Inicio</a>
+      <a href="Producto.dc.html" style="display:flex;align-items:center;min-height:64px;font-size:clamp(30px,6.75vw,60px);font-weight:800;letter-spacing:-0.045em;color:#363949;border-bottom:1px solid rgba(132,139,200,0.22);">Producto</a>
+      <a href="Piloto.dc.html" style="display:flex;align-items:center;min-height:64px;font-size:clamp(30px,6.75vw,60px);font-weight:800;letter-spacing:-0.045em;color:#363949;border-bottom:1px solid rgba(132,139,200,0.22);">Piloto 2027</a>
+      <a href="Nosotros.dc.html" style="display:flex;align-items:center;min-height:64px;font-size:clamp(30px,6.75vw,60px);font-weight:800;letter-spacing:-0.045em;color:#363949;border-bottom:1px solid rgba(132,139,200,0.22);">Nosotros</a>
+      <a href="Contacto.dc.html" style="display:flex;align-items:center;min-height:64px;font-size:clamp(30px,6.75vw,60px);font-weight:800;letter-spacing:-0.045em;color:#4455e6;border-bottom:1px solid rgba(132,139,200,0.22);">Contacto</a>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:4px;">
+      <a href="https://wa.me/50671848300?text=Buenas%2C%20soy%20director%2Fa%20de%20%5Bcolegio%5D%20y%20quisiera%20conocer%20m%C3%A1s%20sobre%20el%20piloto%202027." target="_blank" rel="noopener" style="display:flex;flex-direction:column;justify-content:center;gap:2px;min-height:56px;color:#363949;"><span style="font-size:12px;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;color:#627388;">WhatsApp</span><span style="font-size:17px;font-weight:600;">+506 7184 8300</span></a>
+      <a href="mailto:contact@gzelaya.com" style="display:flex;flex-direction:column;justify-content:center;gap:2px;min-height:56px;color:#363949;"><span style="font-size:12px;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;color:#627388;">Correo</span><span style="font-size:17px;font-weight:600;">contact@gzelaya.com</span></a>
+    </div>
+  </nav>
+</div>
+
+
+<section data-screen-label="01 Contacto" data-rv="1" style="position:relative;background:#f6f6f9;padding:112px 40px 40px;overflow:hidden;">
+  <div style="position:absolute;right:-16vw;top:-30vw;width:72vw;height:72vw;max-width:1100px;max-height:1100px;border-radius:50%;background:radial-gradient(closest-side,rgba(115,128,236,0.14),rgba(115,128,236,0));pointer-events:none;"></div>
+  <div style="position:relative;max-width:1440px;margin:0 auto;display:grid;grid-template-columns:minmax(0,1fr);gap:20px;align-items:end;">
+    <div style="display:flex;flex-direction:column;gap:28px;">
+      <h1 style="margin:0;font-weight:800;font-size:clamp(40px,9.38vw,87px);line-height:0.94;letter-spacing:-0.055em;color:#363949;">
+        <span style="display:block;overflow:hidden;padding-bottom:0.05em;"><span data-rise="1" style="display:block;transform:translateY(110%);">Hablemos de</span></span>
+        <span style="display:block;overflow:hidden;padding-bottom:0.05em;"><span data-rise="1" style="display:block;transform:translateY(110%);color:#4455e6;">su colegio.</span></span>
+      </h1>
+    </div>
+    <p data-fade="1" style="margin:0;opacity:0;max-width:30rem;font-size:18px;line-height:1.6;color:#4d5566;text-wrap:pretty;">Escríbanos por el medio que prefiera. Respondemos en las próximas 24 horas hábiles.</p>
+  </div>
+</section>
+
+<section data-screen-label="02 Medios" data-rv="1" style="position:relative;background:#f6f6f9;padding:0 28px 72px;">
+  <div style="max-width:1440px;margin:0 auto;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px;">
+
+    <div data-fade="1" style="opacity:0;background:#fff;border-radius:28px;box-shadow:0 2rem 3rem rgba(132,139,200,0.18);box-sizing:border-box;padding:24px 40px;display:flex;flex-direction:column;gap:20px;min-width:0;">
+      <div style="display:flex;justify-content:space-between;align-items:center;gap:16px;">
+        <span aria-hidden="true" style="width:56px;height:56px;border-radius:50%;background:linear-gradient(135deg,#7380ec,#a78bfa);color:#fff;display:flex;align-items:center;justify-content:center;"><x-import component-from-global-scope="SimpleManageProDesignSystem_b97d6b.Icon" name="call" color="#fff" size="1.6rem" hint-size="24px,24px"></x-import></span>
+        <span style="font-size:14px;font-weight:700;color:#4455e6;font-variant-numeric:tabular-nums;">01</span>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:8px;">
+        <h2 style="margin:0;font-size:24px;font-weight:700;letter-spacing:-0.02em;color:#363949;">WhatsApp</h2>
+        <p style="margin:0;font-size:15px;line-height:1.6;color:#667281;text-wrap:pretty;">Para consultas rápidas o coordinar una llamada.</p>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:6px;padding:20px 0;border-top:1px solid rgba(132,139,200,0.3);border-bottom:1px solid rgba(132,139,200,0.3);">
+        <span style="font-size:0.78rem;font-weight:600;letter-spacing:0.04em;text-transform:uppercase;color:#627388;">Teléfono</span>
+        <a href="tel:+50671848300" style="font-size:22px;font-weight:700;letter-spacing:-0.02em;color:#363949;font-variant-numeric:tabular-nums;" style-hover="color:#4455e6;">+506 7184-8300</a>
+      </div>
+      <div style="margin-top:auto;display:flex;flex-wrap:wrap;align-items:center;gap:12px;">
+        <a href="https://wa.me/50671848300?text=Buenas%2C%20soy%20director%2Fa%20de%20%5Bcolegio%5D%20y%20quisiera%20conocer%20m%C3%A1s%20sobre%20Simple%20Manage%20Pro." target="_blank" rel="noopener" style="display:inline-flex;align-items:center;min-height:52px;padding:0 28px;border-radius:999px;background:#5a69e9;color:#fff;font-size:15px;font-weight:600;box-shadow:0 1rem 2rem rgba(90,105,233,0.28);transition:opacity 100ms;" style-hover="opacity:0.9;color:#fff;">Abrir WhatsApp</a>
+        <x-import component-from-global-scope="SimpleManageProDesignSystem_b97d6b.Button" variant="ghost" icon="content_copy" onClick="{{ copyTel }}" hint-size="110px,44px">Copiar</x-import>
+      </div>
+    </div>
+
+    <div data-fade="1" style="opacity:0;background:#fff;border-radius:28px;box-shadow:0 2rem 3rem rgba(132,139,200,0.18);box-sizing:border-box;padding:24px 40px;display:flex;flex-direction:column;gap:20px;min-width:0;">
+      <div style="display:flex;justify-content:space-between;align-items:center;gap:16px;">
+        <span aria-hidden="true" style="width:56px;height:56px;border-radius:50%;background:linear-gradient(135deg,#7380ec,#a78bfa);color:#fff;display:flex;align-items:center;justify-content:center;"><x-import component-from-global-scope="SimpleManageProDesignSystem_b97d6b.Icon" name="mail" color="#fff" size="1.6rem" hint-size="24px,24px"></x-import></span>
+        <span style="font-size:14px;font-weight:700;color:#4455e6;font-variant-numeric:tabular-nums;">02</span>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:8px;">
+        <h2 style="margin:0;font-size:24px;font-weight:700;letter-spacing:-0.02em;color:#363949;">Correo electrónico</h2>
+        <p style="margin:0;font-size:15px;line-height:1.6;color:#667281;text-wrap:pretty;">Para consultas con más detalle o documentos adjuntos.</p>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:6px;padding:20px 0;border-top:1px solid rgba(132,139,200,0.3);border-bottom:1px solid rgba(132,139,200,0.3);">
+        <span style="font-size:0.78rem;font-weight:600;letter-spacing:0.04em;text-transform:uppercase;color:#627388;">Correo</span>
+        <a href="mailto:contact@gzelaya.com" style="font-size:22px;font-weight:700;letter-spacing:-0.02em;color:#363949;overflow-wrap:anywhere;" style-hover="color:#4455e6;">contact@gzelaya.com</a>
+      </div>
+      <div style="margin-top:auto;display:flex;flex-wrap:wrap;align-items:center;gap:12px;">
+        <a href="mailto:contact@gzelaya.com?subject=Consulta%20sobre%20Simple%20Manage%20Pro" style="display:inline-flex;align-items:center;min-height:52px;padding:0 28px;border-radius:999px;background:#5a69e9;color:#fff;font-size:15px;font-weight:600;box-shadow:0 1rem 2rem rgba(90,105,233,0.28);transition:opacity 100ms;" style-hover="opacity:0.9;color:#fff;">Escribir un correo</a>
+        <x-import component-from-global-scope="SimpleManageProDesignSystem_b97d6b.Button" variant="ghost" icon="content_copy" onClick="{{ copyMail }}" hint-size="110px,44px">Copiar</x-import>
+      </div>
+    </div>
+
+    <div data-fade="1" style="grid-column:1/-1;opacity:0;background:#fff;border-radius:28px;box-shadow:0 2rem 3rem rgba(132,139,200,0.18);box-sizing:border-box;padding:24px 40px;display:flex;flex-direction:column;gap:20px;min-width:0;">
+      <div style="display:flex;justify-content:space-between;align-items:center;gap:16px;">
+        <span aria-hidden="true" style="width:56px;height:56px;border-radius:50%;background:linear-gradient(135deg,#7380ec,#a78bfa);color:#fff;display:flex;align-items:center;justify-content:center;"><x-import component-from-global-scope="SimpleManageProDesignSystem_b97d6b.Icon" name="edit_note" color="#fff" size="1.6rem" hint-size="24px,24px"></x-import></span>
+        <span style="font-size:14px;font-weight:700;color:#4455e6;font-variant-numeric:tabular-nums;">03</span>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:8px;">
+        <h2 style="margin:0;font-size:24px;font-weight:700;letter-spacing:-0.02em;color:#363949;">Piloto 2027</h2>
+        <p style="margin:0;font-size:15px;line-height:1.6;color:#667281;text-wrap:pretty;">Para postular a su colegio al curso lectivo 2027.</p>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:6px;padding:20px 0;border-top:1px solid rgba(132,139,200,0.3);border-bottom:1px solid rgba(132,139,200,0.3);">
+        <span style="font-size:0.78rem;font-weight:600;letter-spacing:0.04em;text-transform:uppercase;color:#627388;">Formulario</span>
+        <span style="font-size:22px;font-weight:700;letter-spacing:-0.02em;color:#363949;">Postulación</span>
+      </div>
+      <div style="margin-top:auto;display:flex;flex-wrap:wrap;align-items:center;gap:12px;">
+        <a href="Piloto.dc.html#postular" style="display:inline-flex;align-items:center;gap:12px;min-height:52px;padding:0 28px;border-radius:999px;background:#5a69e9;color:#fff;font-size:15px;font-weight:600;box-shadow:0 1rem 2rem rgba(90,105,233,0.28);transition:opacity 100ms;" style-hover="opacity:0.9;color:#fff;">Llenar el formulario<span style="width:24px;height:1px;background:currentColor;"></span></a>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<div role="status" aria-live="polite" style="position:fixed;top:80px;left:0;right:0;z-index:40;display:flex;justify-content:center;pointer-events:none;">
+  <div style="opacity:{{ toastOp }};transform:translateY({{ toastY }}px);transition:opacity 250ms cubic-bezier(.16,1,.3,1), transform 250ms cubic-bezier(.16,1,.3,1);">
+    <x-import component-from-global-scope="SimpleManageProDesignSystem_b97d6b.Toast" hint-size="200px,48px">{{ toastMsg }}</x-import>
+  </div>
+</div>
+
+<footer data-screen-label="Footer" style="position:relative;background:#f6f6f9;padding:0 40px 32px;">
+  <div style="max-width:1440px;margin:0 auto;display:flex;flex-direction:column;gap:40px;padding-top:40px;border-top:1px solid rgba(132,139,200,0.3);">
+    <div style="display:flex;flex-wrap:wrap;gap:40px 64px;">
+      <div style="display:flex;flex-direction:column;gap:16px;flex:1 1 320px;min-width:0;">
+        <div style="display:flex;align-items:center;gap:10px;font-size:14px;font-weight:800;letter-spacing:0.04em;color:#363949;">
+          <img src="../assets/apple-touch-icon.png" alt="" style="width:32px;height:32px;border-radius:9px;">
+          <span>SIMPLE</span><span style="color:#ff7782;margin-left:-4px;">MANAGE PRO</span>
+        </div>
+        <p style="margin:0;max-width:26rem;font-size:14px;line-height:1.6;color:#667281;">Sistema de gestión para colegios. Notas, asistencia, horarios y expedientes en un solo lugar.</p>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:12px;font-size:14px;flex:0 1 220px;">
+        <div style="font-size:12px;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;color:#627388;margin-bottom:4px;">Sitio</div>
+        <a href="Home.dc.html" style="color:#363949;" style-hover="color:#4455e6;">Inicio</a>
+        <a href="Producto.dc.html" style="color:#363949;" style-hover="color:#4455e6;">Producto</a>
+        <a href="Piloto.dc.html" style="color:#363949;" style-hover="color:#4455e6;">Piloto 2027</a>
+        <a href="Nosotros.dc.html" style="color:#363949;" style-hover="color:#4455e6;">Nosotros</a>
+        <a href="Contacto.dc.html" style="color:#363949;" style-hover="color:#4455e6;">Contacto</a>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:12px;font-size:14px;flex:0 1 220px;">
+        <div style="font-size:12px;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;color:#627388;margin-bottom:4px;">Legal</div>
+        <a href="/privacy.html" style="color:#363949;" style-hover="color:#4455e6;">Privacidad</a>
+        <a href="/terms.html" style="color:#363949;" style-hover="color:#4455e6;">Términos</a>
+        <span style="color:#667281;line-height:1.6;">Expedientes alojados en Estados Unidos, cifrados en tránsito y en reposo.</span>
+      </div>
+    </div>
+    <div style="display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px 32px;font-size:13px;color:#627388;">
+      <span>© 2026 Simple Manage Pro</span>
+      <span>SMP no reemplaza nada del MEP.</span>
+    </div>
+  </div>
+</footer>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;motionIntensity&quot;:{&quot;editor&quot;:&quot;range&quot;,&quot;default&quot;:1,&quot;min&quot;:0,&quot;max&quot;:1,&quot;step&quot;:0.1,&quot;tsType&quot;:&quot;number&quot;,&quot;section&quot;:&quot;Motion&quot;}}">
+class Component extends DCLogic {
+  constructor(p) {
+    super(p);
+    this.r = { header: React.createRef() };
+    this.state = { toastOn: false, toastMsg: 'Copiado.' };
+  }
+  tick(cb) {
+    if (this.dead) return;
+    let done = false; const run = () => { if (done) return; done = true; cb(performance.now()); };
+    if (!document.hidden) requestAnimationFrame(run);
+    setTimeout(run, document.hidden ? 16 : 60);
+  }
+  tw(dur, delay, fn) {
+    const t0 = performance.now() + delay, e = k => k >= 1 ? 1 : 1 - Math.pow(2, -10 * k);
+    fn(0);
+    const s = () => { const k = dur <= 1 ? 1 : Math.min(1, Math.max(0, (performance.now() - t0) / dur)); fn(e(k)); if (k < 1) this.tick(s); };
+    this.tick(s);
+  }
+  still() { return this.reduce || (this.props.motionIntensity ?? 1) === 0; }
+  reveal(root) {
+    const f = this.still();
+    root.querySelectorAll('[data-rise]').forEach((el, i) => this.tw(f ? 1 : 1100, f ? 0 : 120 + i * 90, e => { el.style.transform = 'translateY(' + (1 - e) * 110 + '%)'; }));
+    root.querySelectorAll('[data-fade]').forEach((el, i) => this.tw(f ? 1 : 900, f ? 0 : 450 + i * 100, e => { el.style.opacity = e; el.style.transform = e >= 1 ? 'none' : 'translateY(' + (1 - e) * 14 + 'px)'; }));
+  }
+  copy(text) {
+    const done = ok => { clearTimeout(this.tt); this.setState({ toastOn: true, toastMsg: ok ? 'Copiado.' : 'No se pudo copiar. Selecciónelo manualmente.' }); this.tt = setTimeout(() => this.setState({ toastOn: false }), 2200); };
+    if (navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(text).then(() => done(true), () => done(this.fallbackCopy(text)));
+    else done(this.fallbackCopy(text));
+  }
+  fallbackCopy(text) {
+    try { const t = document.createElement('textarea'); t.value = text; t.style.cssText = 'position:fixed;opacity:0;'; document.body.appendChild(t); t.select(); const ok = document.execCommand('copy'); t.remove(); return ok; } catch (e) { return false; }
+  }
+  componentDidMount() {
+    this.onKey = e => { if (e.key === 'Escape' && this.state && this.state.menuOpen) this.setMenu(false); };
+    addEventListener('keydown', this.onKey);
+    this.reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+    this.rv = [...document.querySelectorAll('[data-rv]')];
+    this.onScroll = () => {
+      const H = innerHeight;
+      this.rv = this.rv.filter(el => { const r = el.getBoundingClientRect(); if (r.top < H * 0.9 && r.bottom > 0) { this.reveal(el); return false; } return true; });
+      const hd = this.r.header.current, past = scrollY > 40 || document.scrollingElement.scrollTop > 40;
+      if (hd && this.past !== past) { this.past = past; hd.style.background = past ? 'rgba(246,246,249,0.94)' : 'transparent'; hd.style.paddingTop = hd.style.paddingBottom = past ? '12px' : '16px'; }
+    };
+    document.addEventListener('scroll', this.onScroll, { passive: true, capture: true });
+    addEventListener('resize', this.onScroll);
+    this.poll = setInterval(this.onScroll, 300);
+    this.onScroll();
+  }
+  componentWillUnmount() {
+    this.dead = true; clearInterval(this.poll); clearTimeout(this.tt);
+    document.removeEventListener('scroll', this.onScroll, { capture: true });
+    removeEventListener('resize', this.onScroll);
+  }
+  setMenu(open) {
+    this.setState({ menuOpen: open });
+    document.documentElement.style.overflow = open ? 'hidden' : '';
+  }
+  menuVals() {
+    const mo = !!(this.state && this.state.menuOpen);
+    return { open: () => this.setMenu(true), close: () => this.setMenu(false), x: mo ? 'translateX(0)' : 'translateX(101%)', scrim: mo ? 1 : 0, pe: mo ? 'auto' : 'none', hidden: mo ? 'false' : 'true', expanded: mo ? 'true' : 'false' };
+  }
+  renderVals() {
+    const s = this.state;
+    return {
+      menu: this.menuVals(),
+      refs: this.r,
+      copyTel: () => this.copy('+506 7184-8300'),
+      copyMail: () => this.copy('contact@gzelaya.com'),
+      toastOp: s.toastOn ? 1 : 0, toastY: s.toastOn ? 0 : -12, toastMsg: s.toastMsg
+    };
+  }
+}
+</script>
+</body>
+</html>

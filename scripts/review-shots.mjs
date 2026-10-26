@@ -20,11 +20,15 @@ const OUT = process.env.REVIEW_OUT || path.join(os.tmpdir(), "review");
 const BASE = process.env.REVIEW_URL || BASE_URL;
 const ROUTES = selectedRoutes();
 
+// Light only: V.2 dropped dark mode. Tablet is its own layout now, so it gets
+// both of its reviewed widths.
 const VIEWS = [
   { name: "desktop", width: 1440, height: 900 },
+  { name: "tablet-1024", width: 1024, height: 768 },
+  { name: "tablet-768", width: 768, height: 1024 },
   { name: "mobile", width: 390, height: 844 },
 ];
-const THEMES = ["light", "dark"];
+const THEMES = ["light"];
 
 await mkdir(OUT, { recursive: true });
 // Honour a pre-installed browser when the environment supplies one whose build

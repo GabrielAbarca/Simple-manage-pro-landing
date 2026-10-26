@@ -1,10 +1,13 @@
 // @ts-check
 import { defineConfig } from "astro/config";
 import sitemap from "@astrojs/sitemap";
+import vercel from "@astrojs/vercel";
 
-// Five static Spanish pages. Still no adapter, no SSR and no data fetching —
-// nothing on the site needs a server. What changed is that it is no longer one
-// document, so the parts that assumed a single route had to go.
+// Five static Spanish pages plus one on-demand route. Every page still
+// prerenders; the Vercel adapter exists only so /api/postular (the Piloto
+// form, sent with Resend) can opt out with `prerender = false`. Astro 5 has no
+// `output: "hybrid"`: static output plus an adapter is what lets one route run
+// on demand.
 export default defineConfig({
   site: "https://simplemanagepro.com",
   // Directory build already serves every route with a trailing slash, and the
@@ -14,6 +17,7 @@ export default defineConfig({
   // second, redirecting URL.
   trailingSlash: "always",
   compressHTML: true,
+  adapter: vercel(),
   integrations: [sitemap()],
   build: {
     // Was "always", which is right for one page and wrong for five: the shared

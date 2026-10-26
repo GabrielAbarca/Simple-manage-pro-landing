@@ -1,0 +1,16 @@
+/* Spacing — a 0.4rem step scale plus the two padding constants
+   every card and panel in the product uses. */
+:root{
+  --space-1:0.4rem;
+  --space-2:0.8rem;
+  --space-3:1.2rem;
+  --space-4:1.6rem;
+  --space-5:2rem;
+  --space-6:2.4rem;
+
+  --card-padding:1.8rem;
+  --padding-1:1.2rem;
+
+  /* Smallest comfortable pointer target (WCAG 2.5.5) */
+  --tap-target:44px;
+}

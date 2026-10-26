@@ -11,20 +11,24 @@
     "capture": "node scripts/capture-screenshots.mjs",
     "og": "node scripts/make-og.mjs",
     "audit:contrast": "node scripts/contrast-audit.mjs",
-    "check:crease": "node scripts/crease-check.mjs",
     "review": "node scripts/review-shots.mjs",
-    "check:nojs": "node scripts/check-nojs.mjs"
+    "check:nojs": "node scripts/check-nojs.mjs",
+    "compare": "node scripts/compare-design.mjs"
   },
   "devDependencies": {
     "@astrojs/check": "^0.9.4",
     "@astrojs/sitemap": "^3.7.3",
+    "@types/three": "0.160.0",
     "astro": "^5.6.1",
     "playwright": "^1.50.0",
     "sharp": "^0.34.1",
     "typescript": "^5.8.3"
   },
   "dependencies": {
+    "@astrojs/vercel": "^8.2.11",
     "@vercel/analytics": "^2.0.1",
-    "@vercel/speed-insights": "^2.0.0"
+    "@vercel/speed-insights": "^2.0.0",
+    "resend": "^6.34.1",
+    "three": "0.160.0"
   }
 }

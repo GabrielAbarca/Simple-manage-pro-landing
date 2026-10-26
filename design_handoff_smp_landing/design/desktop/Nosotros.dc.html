@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="../support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <title>Simple Manage Pro — Nosotros</title>
+  <link rel="stylesheet" href="../_ds/simple-manage-pro-design-system-b97d6b38-6a29-409e-a740-afb561d4c8b5/tokens/fonts.css">
+  <link rel="stylesheet" href="../_ds/simple-manage-pro-design-system-b97d6b38-6a29-409e-a740-afb561d4c8b5/tokens/colors.css">
+  <link rel="stylesheet" href="../_ds/simple-manage-pro-design-system-b97d6b38-6a29-409e-a740-afb561d4c8b5/tokens/base.css">
+  <link rel="stylesheet" href="../_ds/simple-manage-pro-design-system-b97d6b38-6a29-409e-a740-afb561d4c8b5/styles.css">
+  <script src="../_ds/simple-manage-pro-design-system-b97d6b38-6a29-409e-a740-afb561d4c8b5/_ds_bundle.js"></script>
+  <style>
+    html,body{margin:0;background:#f6f6f9;}
+    body{font-family:'Poppins',system-ui,sans-serif;-webkit-font-smoothing:antialiased;}
+    a{color:#4455e6;text-decoration:none;}
+    a:hover{color:#111e88;}
+  </style>
+</helmet>
+
+<header ref="{{ refs.header }}" style="position:fixed;top:0;left:0;right:0;z-index:30;box-sizing:border-box;display:flex;justify-content:space-between;align-items:center;gap:24px;padding:24px 4vw;color:#363949;transition:background 400ms cubic-bezier(.65,0,.35,1), padding 400ms cubic-bezier(.65,0,.35,1);">
+  <a href="Home.dc.html" style="display:flex;align-items:center;gap:10px;font-size:14px;font-weight:800;letter-spacing:0.04em;color:inherit;">
+    <img src="../assets/apple-touch-icon.png" alt="" style="width:32px;height:32px;border-radius:9px;">
+    <span>SIMPLE</span><span style="color:#ff7782;margin-left:-4px;">MANAGE PRO</span>
+  </a>
+  <nav style="display:flex;align-items:center;gap:32px;font-size:14px;font-weight:500;">
+    <a href="Home.dc.html" style="color:inherit;" style-hover="opacity:0.7;">Inicio</a>
+    <a href="Producto.dc.html" style="color:inherit;" style-hover="opacity:0.7;">Producto</a>
+    <a href="Piloto.dc.html" style="color:inherit;" style-hover="opacity:0.7;">Piloto 2027</a>
+    <a href="Nosotros.dc.html" style="color:#4455e6;font-weight:600;">Nosotros</a>
+    <a href="Contacto.dc.html" style="color:inherit;" style-hover="opacity:0.7;">Contacto</a>
+  </nav>
+  <a href="https://demo.simplemanagepro.com" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;min-height:44px;padding:0 22px;border-radius:999px;background:#363949;color:#fff;font-size:14px;font-weight:600;transition:opacity 100ms;" style-hover="opacity:0.9;color:#fff;">Ver la demo</a>
+</header>
+
+<section data-screen-label="01 Hero" data-rv="1" style="position:relative;min-height:100vh;box-sizing:border-box;padding:128px 4vw 40px;display:flex;flex-direction:column;justify-content:space-between;gap:48px;background:#f6f6f9;overflow:hidden;">
+  <div style="position:absolute;left:-18vw;bottom:-34vw;width:80vw;height:80vw;max-width:1200px;max-height:1200px;border-radius:50%;background:radial-gradient(closest-side,rgba(115,128,236,0.14),rgba(115,128,236,0));pointer-events:none;"></div>
+  <h1 style="position:relative;margin:0;font-weight:800;font-size:clamp(52px,8.4vw,164px);line-height:0.92;letter-spacing:-0.055em;color:#363949;">
+    <span style="display:block;overflow:hidden;padding-bottom:0.05em;"><span data-rise="1" style="display:block;transform:translateY(110%);">Somos un software</span></span>
+    <span style="display:block;overflow:hidden;padding-bottom:0.05em;"><span data-rise="1" style="display:block;transform:translateY(110%);">escolar pensado</span></span>
+    <span style="display:block;overflow:hidden;padding-bottom:0.05em;"><span data-rise="1" style="display:block;transform:translateY(110%);color:#4455e6;">para su colegio.</span></span>
+  </h1>
+  <div data-fade="1" style="position:relative;display:flex;justify-content:flex-end;opacity:0;">
+    <span style="display:flex;align-items:center;gap:12px;font-size:13px;font-weight:500;color:#627388;">Desplácese<span style="width:48px;height:1px;background:#627388;"></span></span>
+  </div>
+</section>
+
+<section data-screen-label="02 Misión y visión" data-rv="1" style="position:relative;background:#f6f6f9;padding:clamp(48px,8vh,96px) 2vw clamp(96px,16vh,180px);">
+  <div onKeyDown="{{ mv.key }}" style="max-width:1560px;margin:0 auto;background:#fff;border-radius:48px;box-shadow:0 2rem 3rem rgba(132,139,200,0.18);box-sizing:border-box;padding:clamp(28px,4.5vw,80px);display:flex;flex-direction:column;gap:clamp(32px,5vh,56px);">
+    <div style="display:flex;justify-content:space-between;align-items:flex-end;gap:24px;flex-wrap:wrap;">
+      <div style="position:relative;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:clamp(24px,3vw,48px);">
+        <div role="tablist" aria-label="Misión y visión" style="display:contents;">
+          <button type="button" role="tab" id="mv-t0" aria-selected="{{ mv.sel0 }}" aria-controls="mv-p0" onClick="{{ mv.go0 }}" style="min-height:56px;padding:0 0 14px;border:none;background:transparent;cursor:pointer;text-align:left;font-family:inherit;font-size:clamp(22px,2vw,32px);font-weight:700;letter-spacing:-0.03em;color:{{ mv.col0 }};transition:color 300ms cubic-bezier(.16,1,.3,1);" style-hover="color:#363949;" style-focus-visible="outline:2px solid #4455e6;outline-offset:3px;border-radius:6px;">Misión</button>
+          <button type="button" role="tab" id="mv-t1" aria-selected="{{ mv.sel1 }}" aria-controls="mv-p1" onClick="{{ mv.go1 }}" style="min-height:56px;padding:0 0 14px;border:none;background:transparent;cursor:pointer;text-align:left;font-family:inherit;font-size:clamp(22px,2vw,32px);font-weight:700;letter-spacing:-0.03em;color:{{ mv.col1 }};transition:color 300ms cubic-bezier(.16,1,.3,1);" style-hover="color:#363949;" style-focus-visible="outline:2px solid #4455e6;outline-offset:3px;border-radius:6px;">Visión</button>
+        </div>
+        <div aria-hidden="true" style="position:absolute;left:0;right:0;bottom:0;height:3px;border-radius:3px;background:rgba(132,139,200,0.25);"></div>
+        <div aria-hidden="true" style="position:absolute;left:0;bottom:0;height:3px;width:calc(50% - clamp(24px,3vw,48px) / 2);border-radius:3px;background:#4455e6;transform:translateX({{ mv.barX }});transition:transform 600ms cubic-bezier(.65,0,.35,1);"></div>
+      </div>
+      <div style="display:flex;align-items:center;gap:16px;">
+        <span aria-live="polite" style="font-size:14px;font-weight:600;color:#363949;font-variant-numeric:tabular-nums;">{{ mv.count }} <span style="color:#627388;font-weight:500;">/ 02</span></span>
+        <div style="display:flex;gap:8px;">
+          <x-import component-from-global-scope="SimpleManageProDesignSystem_b97d6b.Button" variant="{{ mv.prevV }}" icon="chevron_left" aria-label="Anterior" onClick="{{ mv.prev }}" disabled="{{ mv.atStart }}" hint-size="120px,44px">Anterior</x-import>
+          <x-import component-from-global-scope="SimpleManageProDesignSystem_b97d6b.Button" variant="{{ mv.nextV }}" icon="chevron_right" aria-label="Siguiente" onClick="{{ mv.next }}" disabled="{{ mv.atEnd }}" hint-size="120px,44px">Siguiente</x-import>
+        </div>
+      </div>
+    </div>
+    <div data-fade="1" style="overflow:hidden;opacity:0;">
+      <div style="display:flex;width:200%;align-items:flex-start;transform:translateX({{ mv.trackX }});transition:transform 700ms cubic-bezier(.65,0,.35,1);">
+          <div role="tabpanel" id="mv-p0" aria-labelledby="mv-t0" aria-hidden="{{ mv.hidden0 }}" style="flex:0 0 50%;box-sizing:border-box;padding-right:clamp(24px,4vw,64px);display:flex;flex-direction:column;gap:clamp(20px,3vh,32px);opacity:{{ mv.op0 }};transition:opacity 600ms cubic-bezier(.65,0,.35,1);">
+            <div style="display:flex;align-items:baseline;gap:16px;"><span style="font-size:clamp(56px,6vw,108px);font-weight:800;line-height:0.9;letter-spacing:-0.05em;color:#dfe2fa;font-variant-numeric:tabular-nums;">01</span></div>
+            <p style="margin:0;max-width:62rem;font-size:clamp(21px,2vw,32px);font-weight:500;line-height:1.48;letter-spacing:-0.015em;color:#363949;text-wrap:pretty;">Nuestra misión en Simple Manage Pro es proveer a las instituciones educativas de Costa Rica un sistema de gestión escolar que refleje la estructura del sistema educativo costarricense, con curso lectivo, periodos, niveles, secciones y expedientes, para que de este modo, los colegios puedan administrar sus procesos académicos de manera eficiente y segura.</p>
+          </div>
+          <div role="tabpanel" id="mv-p1" aria-labelledby="mv-t1" aria-hidden="{{ mv.hidden1 }}" style="flex:0 0 50%;box-sizing:border-box;padding-right:clamp(24px,4vw,64px);display:flex;flex-direction:column;gap:clamp(20px,3vh,32px);opacity:{{ mv.op1 }};transition:opacity 600ms cubic-bezier(.65,0,.35,1);">
+            <div style="display:flex;align-items:baseline;gap:16px;"><span style="font-size:clamp(56px,6vw,108px);font-weight:800;line-height:0.9;letter-spacing:-0.05em;color:#dfe2fa;font-variant-numeric:tabular-nums;">02</span></div>
+            <p style="margin:0;max-width:62rem;font-size:clamp(21px,2vw,32px);font-weight:500;line-height:1.48;letter-spacing:-0.015em;color:#363949;text-wrap:pretty;">Simple Manage Pro aspira a construir un estándar en la gestión escolar en Costa Rica, ofreciendo un sistema que no solo cumpla con las necesidades administrativas de los colegios, sino que también promueva la transparencia, la seguridad de los datos y la eficiencia en la administración educativa. Buscamos ser un aliado confiable para las instituciones educativas proveyendo software moderno que solucione los desafíos de la gestión escolar, facilitando su labor y contribuyendo al desarrollo académico de los estudiantes.</p>
+          </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section data-screen-label="03 Nuestra historia" style="position:relative;background:#f6f6f9;padding:0 4vw clamp(96px,16vh,180px);">
+  <div style="max-width:1440px;margin:0 auto;display:flex;flex-direction:column;gap:clamp(56px,9vh,104px);">
+    <div data-rv="1" style="display:flex;flex-direction:column;gap:clamp(28px,4vh,40px);">
+      <div style="overflow:hidden;"><div data-rise="1" style="display:flex;align-items:center;gap:10px;font-size:13px;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;color:#4455e6;transform:translateY(110%);"><span style="width:8px;height:8px;border-radius:50%;background:#7380ec;"></span>Nuestra historia</div></div>
+      <h2 style="margin:0;font-weight:800;font-size:clamp(44px,5.6vw,100px);line-height:0.94;letter-spacing:-0.05em;color:#363949;">
+        <span style="display:block;overflow:hidden;padding-bottom:0.06em;"><span data-rise="1" style="display:block;transform:translateY(110%);">Empezó como un proyecto</span></span>
+        <span style="display:block;overflow:hidden;padding-bottom:0.06em;"><span data-rise="1" style="display:block;transform:translateY(110%);color:#4455e6;">de feria científica.</span></span>
+      </h2>
+      <p data-fade="1" style="margin:0;opacity:0;max-width:46rem;font-size:clamp(18px,1.45vw,22px);line-height:1.6;color:#4d5566;text-wrap:pretty;">El problema era el mismo que sigue resolviendo hoy: al cierre de cada periodo, alguien en la dirección arma las notas a mano desde archivos sueltos, los resultados tardaban días o incluso semanas en llegar a los estudiantes. Tres cursos lectivos después, es un sistema que un colegio puede usar de verdad. Hoy ese trabajo lo hacen <a href="Producto.dc.html" style="color:#4455e6;font-weight:600;text-decoration:underline;text-underline-offset:3px;" style-hover="color:#111e88;">las tres consolas del sistema</a>.</p>
+    </div>
+    <ol ref="{{ refs.story }}" style="list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(auto-fit,minmax(clamp(calc(25% - 24px),(880px - 100%) * 999,calc(50% - 16px)),1fr));gap:40px clamp(16px,2vw,32px);">
+      <sc-for list="{{ story }}" as="s" hint-placeholder-count="4">
+        <li style="display:flex;flex-direction:column;gap:14px;min-width:0;">
+          <div style="position:relative;height:2px;border-radius:2px;background:rgba(132,139,200,0.3);margin-bottom:14px;">
+            <div data-fill="1" style="position:absolute;inset:0;border-radius:2px;background:#4455e6;transform:scaleX(0);transform-origin:left;"></div>
+            <span data-dot="1" style="position:absolute;left:0;top:-5px;width:12px;height:12px;border-radius:50%;background:#c9cdf5;box-shadow:0 0 0 4px #f6f6f9;transition:background 300ms cubic-bezier(.16,1,.3,1);"></span>
+          </div>
+          <span data-beat="1" style="font-size:clamp(36px,3.2vw,56px);font-weight:800;line-height:1;letter-spacing:-0.04em;color:#4455e6;font-variant-numeric:tabular-nums;opacity:0;">{{ s.year }}</span>
+          <h3 data-beat="1" style="margin:0;font-size:clamp(18px,1.4vw,22px);font-weight:700;line-height:1.25;letter-spacing:-0.02em;color:#363949;text-wrap:balance;opacity:0;">{{ s.title }}</h3>
+          <p data-beat="1" style="margin:0;font-size:15px;line-height:1.6;color:#667281;text-wrap:pretty;opacity:0;">{{ s.body }}</p>
+        </li>
+      </sc-for>
+    </ol>
+  </div>
+</section>
+
+<section data-screen-label="04 Fundador" data-rv="1" style="position:relative;background:#f6f6f9;padding:0 2vw clamp(96px,16vh,180px);">
+  <div style="max-width:1560px;margin:0 auto;background:#fff;border-radius:48px;box-shadow:0 2rem 3rem rgba(132,139,200,0.18);box-sizing:border-box;padding:clamp(32px,5vw,88px);display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,420px),1fr));gap:48px 6vw;align-items:center;">
+    <div style="display:flex;flex-direction:column;gap:28px;">
+      <div style="overflow:hidden;"><div data-rise="1" style="display:flex;align-items:center;gap:10px;font-size:13px;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;color:#4455e6;transform:translateY(110%);"><span style="width:8px;height:8px;border-radius:50%;background:#7380ec;"></span>Fundador</div></div>
+      <div style="display:flex;align-items:center;gap:clamp(20px,2vw,32px);">
+        <span data-fade="1" aria-hidden="true" style="flex:0 0 auto;width:clamp(88px,8vw,128px);height:clamp(88px,8vw,128px);border-radius:50%;background:linear-gradient(135deg,#7380ec,#a78bfa);color:#fff;display:flex;align-items:center;justify-content:center;font-size:clamp(28px,2.6vw,40px);font-weight:700;letter-spacing:0.02em;opacity:0;">GZ</span>
+        <div style="display:flex;flex-direction:column;gap:6px;min-width:0;">
+          <h2 style="margin:0;font-weight:800;font-size:clamp(36px,4vw,72px);line-height:0.98;letter-spacing:-0.045em;color:#363949;">
+            <span style="display:block;overflow:hidden;padding-bottom:0.06em;"><span data-rise="1" style="display:block;transform:translateY(110%);">Gabriel Zelaya</span></span>
+          </h2>
+          <span data-fade="1" style="font-size:15px;font-weight:600;letter-spacing:0.04em;text-transform:uppercase;color:#627388;opacity:0;">Founder &amp; CEO</span>
+        </div>
+      </div>
+    </div>
+    <p data-fade="1" style="margin:0;opacity:0;max-width:36rem;font-size:clamp(18px,1.45vw,23px);font-weight:500;line-height:1.55;color:#363949;text-wrap:pretty;">Gabriel Zelaya es un desarrollador Full-Stack con experiencia remota e internacional. Especializado en la creación de software pensado para la aportación de valor para los clientes.</p>
+  </div>
+</section>
+
+<footer data-screen-label="Footer" style="position:relative;background:#f6f6f9;padding:0 4vw 40px;">
+  <div style="max-width:1440px;margin:0 auto;display:flex;flex-direction:column;gap:56px;padding-top:56px;border-top:1px solid rgba(132,139,200,0.3);">
+    <div style="display:flex;flex-wrap:wrap;gap:40px 64px;">
+      <div style="display:flex;flex-direction:column;gap:16px;flex:1 1 320px;min-width:0;">
+        <div style="display:flex;align-items:center;gap:10px;font-size:14px;font-weight:800;letter-spacing:0.04em;color:#363949;">
+          <img src="../assets/apple-touch-icon.png" alt="" style="width:32px;height:32px;border-radius:9px;">
+          <span>SIMPLE</span><span style="color:#ff7782;margin-left:-4px;">MANAGE PRO</span>
+        </div>
+        <p style="margin:0;max-width:26rem;font-size:14px;line-height:1.6;color:#667281;">Sistema de gestión para colegios. Notas, asistencia, horarios y expedientes en un solo lugar.</p>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:12px;font-size:14px;flex:0 1 220px;">
+        <div style="font-size:12px;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;color:#627388;margin-bottom:4px;">Sitio</div>
+        <a href="Home.dc.html" style="color:#363949;" style-hover="color:#4455e6;">Inicio</a>
+        <a href="Producto.dc.html" style="color:#363949;" style-hover="color:#4455e6;">Producto</a>
+        <a href="Piloto.dc.html" style="color:#363949;" style-hover="color:#4455e6;">Piloto 2027</a>
+        <a href="Nosotros.dc.html" style="color:#363949;" style-hover="color:#4455e6;">Nosotros</a>
+        <a href="Contacto.dc.html" style="color:#363949;" style-hover="color:#4455e6;">Contacto</a>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:12px;font-size:14px;flex:0 1 220px;">
+        <div style="font-size:12px;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;color:#627388;margin-bottom:4px;">Legal</div>
+        <a href="/privacy.html" style="color:#363949;" style-hover="color:#4455e6;">Privacidad</a>
+        <a href="/terms.html" style="color:#363949;" style-hover="color:#4455e6;">Términos</a>
+        <span style="color:#667281;line-height:1.6;">Expedientes alojados en Estados Unidos, cifrados en tránsito y en reposo.</span>
+      </div>
+    </div>
+    <div style="display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px 32px;font-size:13px;color:#627388;">
+      <span>© 2026 Simple Manage Pro</span>
+      <span>SMP no reemplaza nada del MEP.</span>
+    </div>
+  </div>
+</footer>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;motionIntensity&quot;:{&quot;editor&quot;:&quot;range&quot;,&quot;default&quot;:1,&quot;min&quot;:0,&quot;max&quot;:1,&quot;step&quot;:0.1,&quot;tsType&quot;:&quot;number&quot;,&quot;section&quot;:&quot;Motion&quot;}}">
+class Component extends DCLogic {
+  constructor(p) {
+    super(p);
+    this.r = { header: React.createRef(), story: React.createRef() };
+    this.state = { mv: 0 };
+  }
+  tick(cb) {
+    if (this.dead) return;
+    let done = false; const run = () => { if (done) return; done = true; cb(performance.now()); };
+    if (!document.hidden) requestAnimationFrame(run);
+    setTimeout(run, document.hidden ? 16 : 60);
+  }
+  tw(dur, delay, fn) {
+    const t0 = performance.now() + delay, e = k => k >= 1 ? 1 : 1 - Math.pow(2, -10 * k);
+    fn(0);
+    const s = () => { const k = dur <= 1 ? 1 : Math.min(1, Math.max(0, (performance.now() - t0) / dur)); fn(e(k)); if (k < 1) this.tick(s); };
+    this.tick(s);
+  }
+  still() { return this.reduce || (this.props.motionIntensity ?? 1) === 0; }
+  reveal(root) {
+    const f = this.still();
+    root.querySelectorAll('[data-rise]').forEach((el, i) => this.tw(f ? 1 : 1100, f ? 0 : 120 + i * 90, e => { el.style.transform = 'translateY(' + (1 - e) * 110 + '%)'; }));
+    root.querySelectorAll('[data-fade]').forEach((el, i) => this.tw(f ? 1 : 900, f ? 0 : 450 + i * 100, e => { el.style.opacity = e; el.style.transform = e >= 1 ? 'none' : 'translateY(' + (1 - e) * 14 + 'px)'; }));
+  }
+  playStory(root) {
+    const f = this.still(), step = f ? 0 : 250;
+    [...root.children].forEach((li, i) => {
+      const fill = li.querySelector('[data-fill]'), dot = li.querySelector('[data-dot]'), d = i * step;
+      if (dot) setTimeout(() => { dot.style.background = '#4455e6'; }, d);
+      if (fill) this.tw(f ? 1 : 250, d, e => { fill.style.transform = 'scaleX(' + e + ')'; });
+      li.querySelectorAll('[data-beat]').forEach((el, j) => this.tw(f ? 1 : 600, d + j * 60, e => { el.style.opacity = e; el.style.transform = e >= 1 ? 'none' : 'translateY(' + (1 - e) * 12 + 'px)'; }));
+    });
+  }
+  componentDidMount() {
+    this.reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+    this.rv = [...document.querySelectorAll('[data-rv]')];
+    this.onScroll = () => {
+      const H = innerHeight;
+      this.rv = this.rv.filter(el => { const r = el.getBoundingClientRect(); if (r.top < H * 0.82 && r.bottom > 0) { this.reveal(el); return false; } return true; });
+      const st = this.r.story.current;
+      if (st && !this.storyOn && st.children.length >= 4 && st.getBoundingClientRect().top < H * 0.8) { this.storyOn = true; this.playStory(st); }
+      const hd = this.r.header.current, past = scrollY > 40 || document.scrollingElement.scrollTop > 40;
+      if (hd && this.past !== past) { this.past = past; hd.style.background = past ? 'rgba(246,246,249,0.94)' : 'transparent'; hd.style.paddingTop = hd.style.paddingBottom = past ? '14px' : '24px'; }
+    };
+    document.addEventListener('scroll', this.onScroll, { passive: true, capture: true });
+    addEventListener('resize', this.onScroll);
+    this.poll = setInterval(this.onScroll, 300);
+    this.onScroll();
+  }
+  componentWillUnmount() {
+    this.dead = true; clearInterval(this.poll);
+    document.removeEventListener('scroll', this.onScroll, { capture: true });
+    removeEventListener('resize', this.onScroll);
+  }
+  renderVals() {
+    const i = this.state.mv, go = n => this.setState({ mv: Math.max(0, Math.min(1, n)) });
+    return {
+      mv: {
+        trackX: (-50 * i) + '%', barX: i ? 'calc(100% + clamp(24px,3vw,48px))' : '0px', count: '0' + (i + 1),
+        op0: i === 0 ? 1 : 0.15, op1: i === 1 ? 1 : 0.15, hidden0: String(i !== 0), hidden1: String(i !== 1),
+        sel0: String(i === 0), sel1: String(i === 1), col0: i === 0 ? '#363949' : '#627388', col1: i === 1 ? '#363949' : '#627388',
+        go0: () => go(0), go1: () => go(1), prev: () => go(i - 1), next: () => go(i + 1), atStart: i === 0, atEnd: i === 1, prevV: i === 0 ? 'ghost' : 'primary', nextV: i === 1 ? 'ghost' : 'primary',
+        key: e => { if (e.key === 'ArrowRight') go(i + 1); else if (e.key === 'ArrowLeft') go(i - 1); }
+      },
+      refs: this.r,
+      story: [
+        { year: '2024', title: 'Un proyecto de feria científica', body: 'La idea fue plasmada en un proyecto de feria científica, con un prototipo estático que mostraba mucho potencial, ganando así el segundo puesto de la feria.' },
+        { year: '2025', title: 'De prototipo a sistema', body: 'Las tres consolas, los periodos ponderados, la asistencia por sección y la matrícula. Se empezó a construir un software funcional con un propósito.' },
+        { year: '2026', title: 'Lanzamiento oficial del sistema junto a la demo pública', body: 'Curso lectivo, secciones, cédula y materias en español, abierta para que cualquier colegio la revise sin pedir permiso ni dejar datos.' },
+        { year: '2027', title: 'Piloto 2027', body: 'El piloto arranca en febrero con el curso lectivo 2027. Cada colegio con su estructura y su propia base de datos.' }
+      ]
+    };
+  }
+}
+</script>
+</body>
+</html>

@@ -18,11 +18,11 @@
 export const BASE_URL = process.env.PREVIEW_URL || "http://localhost:4321";
 
 export const ROUTES = [
-  { path: "/", slug: "home" },
-  { path: "/portales/", slug: "portales" },
-  { path: "/piloto/", slug: "piloto" },
-  { path: "/nosotros/", slug: "nosotros" },
-  { path: "/contacto/", slug: "contacto" },
+  { path: "/", slug: "home", design: "Home" },
+  { path: "/producto/", slug: "producto", design: "Producto" },
+  { path: "/piloto/", slug: "piloto", design: "Piloto" },
+  { path: "/nosotros/", slug: "nosotros", design: "Nosotros" },
+  { path: "/contacto/", slug: "contacto", design: "Contacto" },
 ];
 
 /** Allow a single-route run while iterating: ROUTE=/piloto/ npm run review */

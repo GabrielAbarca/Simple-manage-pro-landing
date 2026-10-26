@@ -1,0 +1,94 @@
+/* Colour — brand hues carry identity (rings, bars, dots, fills);
+   the -text / -fill siblings are the legible shades for type and for
+   surfaces that hold white text. Copied verbatim from the product. */
+:root{
+  color-scheme:light;
+
+  /* Brand + status hues */
+  --color-primary:#7380ec;
+  --color-primary-light:rgba(115,128,236,0.15);
+  --color-primary-variant:#111e88;
+  --color-primary-accent:#a78bfa;
+  --color-danger:#ff7782;
+  --color-danger-light:rgba(255,119,130,0.15);
+  --color-success:#41f1b6;
+  --color-success-light:rgba(65,241,182,0.15);
+  --color-warning:#ffbb55;
+  --color-warning-light:rgba(255,187,85,0.15);
+  --color-white:#fff;
+  --color-background:#f6f6f9;
+  --color-dark:#363949;
+  --color-dark-variant:#667281;
+  --color-info-dark:#627388;
+  --color-info-light:#dce1eb;
+  --color-light:rgba(132,139,200,0.18);
+
+  /* Extended status palette */
+  --color-success-dark:#0d9668;
+  --color-warning-dark:#b97a1e;
+  --color-warning-strong:#f59e0b;
+  --color-info:#0891b2;
+  --color-info-bg:rgba(6,182,212,0.12);
+  --color-suspension:#f97316;
+  --color-suspension-bg:rgba(249,115,22,0.12);
+
+  /* Readable text shades (>=4.5:1 on card, page, and each hue's own tint) */
+  --color-primary-text:#4455e6;
+  --color-success-text:#097c56;
+  --color-warning-text:#9d5e00;
+  --color-danger-text:#d30011;
+  --color-info-text:#06738e;
+  --color-suspension-text:#af4b05;
+
+  /* Fills that carry white text */
+  --color-primary-fill:#5a69e9;
+  --color-success-fill:#0a875d;
+  --color-warning-fill:#a56a07;
+  --color-danger-fill:#ee0013;
+
+  /* Borders, split by role: decorative hairline vs. control boundary */
+  --border-subtle:var(--color-light);
+  --border-control:var(--color-info-dark);
+
+  /* Hover tint for small surfaces — always moves away from the surface */
+  --surface-hover:rgba(0,0,0,0.06);
+
+  /* Focus */
+  --focus-ring:0 0 0 3px var(--color-primary-light);
+  --focus-outline:2px solid var(--color-primary-text);
+
+  /* Semantic aliases */
+  --surface-page:var(--color-background);
+  --surface-card:var(--color-white);
+  --text-heading:var(--color-dark);
+  --text-body:var(--color-dark-variant);
+  --text-muted:var(--color-info-dark);
+  --text-on-fill:#fff;
+
+  /* Brand gradients (avatars, login panel, submit button, card top rules) */
+  --gradient-brand:linear-gradient(135deg,var(--color-primary),var(--color-primary-accent));
+  --gradient-brand-rule:linear-gradient(90deg,var(--color-primary),var(--color-primary-accent));
+  --gradient-brand-panel:linear-gradient(135deg,var(--color-primary-variant) 0%,var(--color-primary) 55%,var(--color-primary-accent) 100%);
+}
+
+/* Dark theme — applied by adding .dark-theme-variables to <html>. */
+.dark-theme-variables{
+  color-scheme:dark;
+  --color-background:#181a1e;
+  --color-white:#202528;
+  --color-dark:#edeffd;
+  --color-dark-variant:#a3bdcc;
+  --color-info-dark:#7d8da1;
+  --color-light:rgba(0,0,0,0.4);
+  --surface-hover:rgba(255,255,255,0.08);
+  --color-success-dark:#41f1b6;
+  --color-warning-dark:#ffcf7a;
+  --color-info:#38bdf8;
+  --color-suspension:#fb923c;
+  --color-primary-text:#8994ef;
+  --color-success-text:#41f1b6;
+  --color-warning-text:#ffcf7a;
+  --color-danger-text:#ff7782;
+  --color-info-text:#38bdf8;
+  --color-suspension-text:#fb923c;
+}

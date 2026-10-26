@@ -1,0 +1,824 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="../support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <title>Simple Manage Pro — Inicio</title>
+  <link rel="stylesheet" href="../_ds/simple-manage-pro-design-system-b97d6b38-6a29-409e-a740-afb561d4c8b5/tokens/fonts.css">
+  <link rel="stylesheet" href="../_ds/simple-manage-pro-design-system-b97d6b38-6a29-409e-a740-afb561d4c8b5/tokens/colors.css">
+  <link rel="stylesheet" href="../_ds/simple-manage-pro-design-system-b97d6b38-6a29-409e-a740-afb561d4c8b5/tokens/typography.css">
+  <link rel="stylesheet" href="../_ds/simple-manage-pro-design-system-b97d6b38-6a29-409e-a740-afb561d4c8b5/tokens/spacing.css">
+  <link rel="stylesheet" href="../_ds/simple-manage-pro-design-system-b97d6b38-6a29-409e-a740-afb561d4c8b5/tokens/elevation.css">
+  <link rel="stylesheet" href="../_ds/simple-manage-pro-design-system-b97d6b38-6a29-409e-a740-afb561d4c8b5/tokens/motion.css">
+  <link rel="stylesheet" href="../_ds/simple-manage-pro-design-system-b97d6b38-6a29-409e-a740-afb561d4c8b5/tokens/base.css">
+  <link rel="stylesheet" href="../_ds/simple-manage-pro-design-system-b97d6b38-6a29-409e-a740-afb561d4c8b5/styles.css">
+  <script src="../_ds/simple-manage-pro-design-system-b97d6b38-6a29-409e-a740-afb561d4c8b5/_ds_bundle.js"></script>
+  <style>
+    html,body{margin:0;background:#f6f6f9;}
+    body{font-family:'Poppins',system-ui,sans-serif;-webkit-font-smoothing:antialiased;}
+    a{color:#4455e6;text-decoration:none;}
+    a:hover{color:#111e88;}
+  </style>
+</helmet>
+
+<header ref="{{ refs.header }}" style="position:fixed;top:0;left:0;right:0;z-index:30;box-sizing:border-box;display:flex;justify-content:space-between;align-items:center;gap:24px;padding:24px 4vw;color:#363949;transition:color 400ms cubic-bezier(.65,0,.35,1), background 400ms cubic-bezier(.65,0,.35,1), padding 400ms cubic-bezier(.65,0,.35,1);">
+      <a href="#" style="display:flex;align-items:center;gap:10px;font-size:14px;font-weight:800;letter-spacing:0.04em;color:inherit;">
+        <img src="../assets/apple-touch-icon.png" alt="" style="width:32px;height:32px;border-radius:9px;">
+        <span>SIMPLE</span><span style="color:#ff7782;margin-left:-4px;">MANAGE PRO</span>
+      </a>
+      <nav style="display:flex;align-items:center;gap:32px;font-size:14px;font-weight:500;">
+        <a href="Home.dc.html" style="color:#4455e6;font-weight:600;">Inicio</a>
+        <a href="Producto.dc.html" style="color:inherit;" style-hover="opacity:0.7;">Producto</a>
+        <a href="Piloto.dc.html" style="color:inherit;" style-hover="opacity:0.7;">Piloto 2027</a>
+        <a href="Nosotros.dc.html" style="color:inherit;" style-hover="opacity:0.7;">Nosotros</a>
+        <a href="Contacto.dc.html" style="color:inherit;" style-hover="opacity:0.7;">Contacto</a>
+      </nav>
+      <a ref="{{ refs.navCta }}" href="https://demo.simplemanagepro.com" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;min-height:44px;padding:0 22px;border-radius:999px;background:#363949;color:#fff;font-size:14px;font-weight:600;transition:opacity 100ms, background 400ms, color 400ms;" style-hover="opacity:0.9;color:#fff;">Ver la demo</a>
+    </header>
+
+<section ref="{{ refs.hero }}" data-screen-label="Hero" style="position:relative;height:300vh;background:#f6f6f9;">
+  <div style="position:sticky;top:0;height:100vh;overflow:hidden;">
+    <div style="position:absolute;right:-10vw;top:10vh;width:80vw;height:80vw;max-width:1100px;max-height:1100px;border-radius:50%;background:radial-gradient(closest-side,rgba(115,128,236,0.16),rgba(115,128,236,0));pointer-events:none;"></div>
+    <div ref="{{ refs.stage }}" style="position:absolute;inset:0;pointer-events:none;"></div>
+    <div ref="{{ refs.intro }}" style="position:absolute;inset:0;z-index:6;background:#111e88;color:#fff;display:flex;flex-direction:column;padding:96px 4vw 32px;box-sizing:border-box;overflow:hidden;font-family:'Poppins',sans-serif;">
+    
+    
+      <div ref="{{ refs.introLines }}" style="flex:1;display:flex;flex-direction:column;justify-content:center;font-weight:800;font-size:clamp(64px,11vw,210px);line-height:0.92;letter-spacing:-0.045em;">
+        <div style="overflow:hidden;padding-bottom:0.06em;"><div data-irise="1" style="transform:translateY(110%);">Hecho para</div></div>
+        <div style="overflow:hidden;padding-bottom:0.06em;"><div data-irise="1" style="transform:translateY(110%);color:#b9b0ff;">Costa Rica.</div></div>
+      </div>
+    
+      <div data-ifade="1" style="display:flex;justify-content:space-between;align-items:flex-end;gap:32px;flex-wrap:wrap;">
+        <div ref="{{ refs.months }}" style="display:flex;gap:14px;flex-wrap:wrap;padding-bottom:14px;">
+          <div data-m="1" style="display:flex;flex-direction:column;gap:8px;opacity:0.35;"><span style="font-size:12px;font-weight:600;letter-spacing:0.08em;">FEB</span><div style="width:40px;height:2px;background:rgba(255,255,255,0.22);"><div data-bar="1" style="height:100%;background:#fff;transform:scaleX(0);transform-origin:left;"></div></div></div>
+          <div data-m="1" style="display:flex;flex-direction:column;gap:8px;opacity:0.35;"><span style="font-size:12px;font-weight:600;letter-spacing:0.08em;">MAR</span><div style="width:40px;height:2px;background:rgba(255,255,255,0.22);"><div data-bar="1" style="height:100%;background:#fff;transform:scaleX(0);transform-origin:left;"></div></div></div>
+          <div data-m="1" style="display:flex;flex-direction:column;gap:8px;opacity:0.35;"><span style="font-size:12px;font-weight:600;letter-spacing:0.08em;">ABR</span><div style="width:40px;height:2px;background:rgba(255,255,255,0.22);"><div data-bar="1" style="height:100%;background:#fff;transform:scaleX(0);transform-origin:left;"></div></div></div>
+          <div data-m="1" style="display:flex;flex-direction:column;gap:8px;opacity:0.35;"><span style="font-size:12px;font-weight:600;letter-spacing:0.08em;">MAY</span><div style="width:40px;height:2px;background:rgba(255,255,255,0.22);"><div data-bar="1" style="height:100%;background:#fff;transform:scaleX(0);transform-origin:left;"></div></div></div>
+          <div data-m="1" style="display:flex;flex-direction:column;gap:8px;opacity:0.35;"><span style="font-size:12px;font-weight:600;letter-spacing:0.08em;">JUN</span><div style="width:40px;height:2px;background:rgba(255,255,255,0.22);"><div data-bar="1" style="height:100%;background:#fff;transform:scaleX(0);transform-origin:left;"></div></div></div>
+          <div data-m="1" style="display:flex;flex-direction:column;gap:8px;opacity:0.35;"><span style="font-size:12px;font-weight:600;letter-spacing:0.08em;">JUL</span><div style="width:40px;height:2px;background:rgba(255,255,255,0.22);"><div data-bar="1" style="height:100%;background:#fff;transform:scaleX(0);transform-origin:left;"></div></div></div>
+          <div data-m="1" style="display:flex;flex-direction:column;gap:8px;opacity:0.35;"><span style="font-size:12px;font-weight:600;letter-spacing:0.08em;">AGO</span><div style="width:40px;height:2px;background:rgba(255,255,255,0.22);"><div data-bar="1" style="height:100%;background:#fff;transform:scaleX(0);transform-origin:left;"></div></div></div>
+          <div data-m="1" style="display:flex;flex-direction:column;gap:8px;opacity:0.35;"><span style="font-size:12px;font-weight:600;letter-spacing:0.08em;">SET</span><div style="width:40px;height:2px;background:rgba(255,255,255,0.22);"><div data-bar="1" style="height:100%;background:#fff;transform:scaleX(0);transform-origin:left;"></div></div></div>
+          <div data-m="1" style="display:flex;flex-direction:column;gap:8px;opacity:0.35;"><span style="font-size:12px;font-weight:600;letter-spacing:0.08em;">OCT</span><div style="width:40px;height:2px;background:rgba(255,255,255,0.22);"><div data-bar="1" style="height:100%;background:#fff;transform:scaleX(0);transform-origin:left;"></div></div></div>
+          <div data-m="1" style="display:flex;flex-direction:column;gap:8px;opacity:0.35;"><span style="font-size:12px;font-weight:600;letter-spacing:0.08em;">NOV</span><div style="width:40px;height:2px;background:rgba(255,255,255,0.22);"><div data-bar="1" style="height:100%;background:#fff;transform:scaleX(0);transform-origin:left;"></div></div></div>
+          <div data-m="1" style="display:flex;flex-direction:column;gap:8px;opacity:0.35;"><span style="font-size:12px;font-weight:600;letter-spacing:0.08em;">DIC</span><div style="width:40px;height:2px;background:rgba(255,255,255,0.22);"><div data-bar="1" style="height:100%;background:#fff;transform:scaleX(0);transform-origin:left;"></div></div></div>
+        </div>
+        <div ref="{{ refs.counter }}" style="margin-left:auto;font-size:clamp(96px,16vw,280px);font-weight:800;line-height:0.78;letter-spacing:-0.05em;font-variant-numeric:tabular-nums;">000</div>
+      </div>
+      <div style="position:absolute;left:0;right:0;bottom:0;height:3px;background:rgba(255,255,255,0.12);"><div ref="{{ refs.progress }}" style="height:100%;background:#a78bfa;transform:scaleX(0);transform-origin:left;"></div></div>
+    </div>
+
+
+
+
+    <div ref="{{ refs.headline }}" style="position:absolute;left:4vw;top:0;bottom:0;z-index:4;display:flex;flex-direction:column;justify-content:center;gap:28px;max-width:min(52rem,60vw);will-change:transform,opacity;">
+      <h1 style="margin:0;font-weight:800;font-size:clamp(56px,8.6vw,156px);line-height:0.92;letter-spacing:-0.05em;color:#363949;">
+        <span style="display:block;overflow:hidden;padding-bottom:0.06em;"><span data-rise="1" style="display:block;transform:translateY(110%);">Hecho para</span></span>
+        <span style="display:block;overflow:hidden;padding-bottom:0.06em;"><span data-rise="1" style="display:block;transform:translateY(110%);color:#4455e6;">Costa Rica.</span></span>
+      </h1>
+      <p data-fade="1" style="margin:0;max-width:30rem;font-size:clamp(16px,1.25vw,19px);line-height:1.6;color:#667281;text-wrap:pretty;opacity:0;">Notas, asistencia, horarios y expedientes en un solo lugar. Un programa piloto a partir de febrero de 2027.</p>
+      <div data-fade="1" style="display:flex;flex-wrap:wrap;gap:12px;opacity:0;">
+        <a href="https://demo.simplemanagepro.com" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;min-height:52px;padding:0 28px;border-radius:999px;background:#5a69e9;color:#fff;font-size:15px;font-weight:600;box-shadow:0 1rem 2rem rgba(90,105,233,0.28);transition:opacity 100ms;" style-hover="opacity:0.9;color:#fff;">Ver la demo</a>
+        <a href="https://wa.me/50671848300?text=Buenas%2C%20soy%20director%2Fa%20de%20%5Bcolegio%5D%20y%20quisiera%20conocer%20m%C3%A1s%20sobre%20el%20piloto%202027." target="_blank" rel="noopener" style="display:inline-flex;align-items:center;min-height:52px;padding:0 28px;border-radius:999px;border:1px solid #627388;color:#363949;font-size:15px;font-weight:600;transition:background 100ms;" style-hover="background:rgba(0,0,0,0.04);color:#363949;">Conversar por WhatsApp</a>
+      </div>
+    </div>
+
+    <div ref="{{ refs.fanTitle }}" style="position:absolute;left:4vw;top:15vh;z-index:4;opacity:0;pointer-events:none;">
+      <div style="font-weight:800;font-size:clamp(40px,4.8vw,84px);line-height:0.95;letter-spacing:-0.045em;color:#363949;">Tres portales.<br><span style="color:#4455e6;">Un mismo registro.</span></div>
+    </div>
+
+    <div ref="{{ refs.cap0 }}" style="position:absolute;left:0;top:0;z-index:4;opacity:0;width:min(200px,18vw);pointer-events:none;">
+      <div style="font-size:13px;font-weight:700;color:#4455e6;margin-bottom:6px;">01</div>
+      <div style="font-size:19px;font-weight:700;color:#363949;letter-spacing:-0.01em;">Consola de administración</div>
+      <div style="font-size:14px;line-height:1.5;color:#667281;margin-top:4px;">Curso lectivo, secciones, horarios y matrícula.</div>
+    </div>
+    <div ref="{{ refs.cap1 }}" style="position:absolute;left:0;top:0;z-index:4;opacity:0;width:min(200px,18vw);pointer-events:none;">
+      <div style="font-size:13px;font-weight:700;color:#4455e6;margin-bottom:6px;">02</div>
+      <div style="font-size:19px;font-weight:700;color:#363949;letter-spacing:-0.01em;">Consola docente</div>
+      <div style="font-size:14px;line-height:1.5;color:#667281;margin-top:4px;">Lecciones del día, libro de notas y asistencia.</div>
+    </div>
+    <div ref="{{ refs.cap2 }}" style="position:absolute;left:0;top:0;z-index:4;opacity:0;width:min(200px,18vw);pointer-events:none;">
+      <div style="font-size:13px;font-weight:700;color:#4455e6;margin-bottom:6px;">03</div>
+      <div style="font-size:19px;font-weight:700;color:#363949;letter-spacing:-0.01em;">Portal estudiantil</div>
+      <div style="font-size:14px;line-height:1.5;color:#667281;margin-top:4px;">Notas por periodo, horario y asistencia.</div>
+    </div>
+
+    <div ref="{{ refs.cue }}" data-fade="1" style="position:absolute;left:4vw;right:4vw;bottom:28px;z-index:4;display:flex;justify-content:space-between;align-items:center;gap:24px;flex-wrap:wrap;font-size:13px;font-weight:500;color:#627388;opacity:0;">
+      <span>Programa piloto · Febrero 2027</span>
+      <span style="display:flex;align-items:center;gap:12px;">Desplácese<span style="width:48px;height:1px;background:#627388;"></span></span>
+    </div>
+  </div>
+</section>
+
+<section ref="{{ refs.pilot }}" data-screen-label="Piloto" style="position:relative;z-index:2;background:#f6f6f9;padding:clamp(96px,16vh,180px) 4vw clamp(32px,6vh,72px);">
+  <div data-rv="1" style="max-width:1440px;margin:0 auto;display:flex;justify-content:space-between;align-items:flex-end;gap:32px 64px;flex-wrap:wrap;">
+    <div style="display:flex;flex-direction:column;gap:24px;">
+      <h2 style="margin:0;font-weight:800;font-size:clamp(56px,8.4vw,152px);line-height:0.92;letter-spacing:-0.05em;color:#363949;"><span style="display:block;overflow:hidden;padding-bottom:0.06em;"><span data-rise2="1" style="display:block;transform:translateY(110%);">La seguridad</span></span><span style="display:block;overflow:hidden;padding-bottom:0.06em;"><span data-rise2="1" style="display:block;transform:translateY(110%);color:#4455e6;">nos importa.</span></span></h2>
+    </div>
+    <div style="display:flex;flex-direction:column;align-items:flex-start;gap:20px;max-width:20rem;padding-bottom:12px;">
+      <p data-fade2="1" style="opacity:0;margin:0;font-size:clamp(16px,1.2vw,18px);line-height:1.6;color:#667281;text-wrap:pretty;">Cada colegio tiene su propia base de datos, cifrada en tránsito y en reposo.</p>
+      <a data-fade2="1" href="/privacy.html" style="opacity:0;display:inline-flex;align-items:center;gap:12px;min-height:52px;padding:0 28px;border-radius:999px;background:#363949;color:#fff;font-size:15px;font-weight:600;transition:opacity 100ms;" style-hover="opacity:0.9;color:#fff;">Política de privacidad<span style="width:28px;height:1px;background:currentColor;"></span></a>
+    </div>
+  </div>
+  <div ref="{{ refs.pilotStage }}" style="position:relative;max-width:1440px;margin:clamp(16px,3vh,40px) auto 0;height:clamp(380px,60vh,640px);touch-action:pan-y;">
+  </div>
+</section>
+
+<section id="contacto" data-screen-label="Contacto" style="position:relative;z-index:2;background:#f6f6f9;padding:clamp(32px,6vh,72px) 2vw clamp(64px,10vh,120px);">
+  <div style="max-width:1560px;margin:0 auto;background:#fff;border-radius:48px;box-shadow:0 2rem 3rem rgba(132,139,200,0.18);display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,440px),1fr));gap:16px;padding:16px;box-sizing:border-box;">
+    <div data-rv="1" style="padding:clamp(28px,5vw,80px);display:flex;flex-direction:column;justify-content:center;gap:36px;">
+      <h2 style="margin:0;font-weight:800;font-size:clamp(44px,5.2vw,96px);line-height:0.95;letter-spacing:-0.05em;color:#363949;">
+        <span style="display:block;overflow:hidden;padding-bottom:0.06em;"><span data-rise2="1" style="display:block;transform:translateY(110%);">¿Su colegio</span></span>
+        <span style="display:block;overflow:hidden;padding-bottom:0.06em;"><span data-rise2="1" style="display:block;transform:translateY(110%);">podría ser parte</span></span>
+        <span style="display:block;overflow:hidden;padding-bottom:0.06em;"><span data-rise2="1" style="display:block;transform:translateY(110%);color:#4455e6;">del piloto?</span></span>
+      </h2>
+      <div data-fade2="1" style="opacity:0;display:flex;flex-wrap:wrap;align-items:center;gap:12px 20px;">
+        <a href="https://wa.me/50671848300?text=Buenas%2C%20soy%20director%2Fa%20de%20%5Bcolegio%5D%20y%20quisiera%20conocer%20m%C3%A1s%20sobre%20el%20piloto%202027." target="_blank" rel="noopener" onMouseEnter="{{ ctaOn }}" onMouseLeave="{{ ctaOff }}" style="display:inline-flex;align-items:center;min-height:56px;padding:0 32px;border-radius:999px;background:#5a69e9;color:#fff;font-size:16px;font-weight:600;box-shadow:0 1rem 2rem rgba(90,105,233,0.28);transition:opacity 100ms;" style-hover="opacity:0.9;color:#fff;">Conversar por WhatsApp</a>
+        <a href="mailto:contact@gzelaya.com" style="display:inline-flex;align-items:center;min-height:56px;padding:0 32px;border-radius:999px;border:1px solid #627388;color:#363949;font-size:16px;font-weight:600;transition:background 100ms;" style-hover="background:rgba(0,0,0,0.04);color:#363949;">Escribir un correo</a>
+        <a href="https://demo.simplemanagepro.com" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;gap:10px;min-height:44px;color:#4455e6;font-size:16px;font-weight:600;" style-hover="color:#111e88;">Ver la demo<span style="width:28px;height:1px;background:currentColor;"></span></a>
+      </div>
+    </div>
+    <div ref="{{ refs.contactStage }}" style="position:relative;min-height:clamp(420px,64vh,680px);border-radius:36px;background:#f6f6f9;overflow:hidden;touch-action:pan-y;"></div>
+  </div>
+</section>
+
+<footer id="nosotros" data-screen-label="Footer" style="position:relative;z-index:2;background:#f6f6f9;padding:0 4vw 40px;">
+  <div style="max-width:1440px;margin:0 auto;display:flex;flex-direction:column;gap:56px;padding-top:56px;border-top:1px solid rgba(132,139,200,0.3);">
+    <div style="display:flex;flex-wrap:wrap;gap:40px 64px;">
+      <div style="display:flex;flex-direction:column;gap:16px;flex:1 1 320px;min-width:0;">
+        <div style="display:flex;align-items:center;gap:10px;font-size:14px;font-weight:800;letter-spacing:0.04em;color:#363949;">
+          <img src="../assets/apple-touch-icon.png" alt="" style="width:32px;height:32px;border-radius:9px;">
+          <span>SIMPLE</span><span style="color:#ff7782;margin-left:-4px;">MANAGE PRO</span>
+        </div>
+        <p style="margin:0;max-width:26rem;font-size:14px;line-height:1.6;color:#667281;">Sistema de gestión para colegios. Notas, asistencia, horarios y expedientes en un solo lugar.</p>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:12px;font-size:14px;flex:0 1 220px;">
+        <div style="font-size:12px;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;color:#627388;margin-bottom:4px;">Sitio</div>
+        <a href="Home.dc.html" style="color:#363949;" style-hover="color:#4455e6;">Inicio</a>
+        <a href="Producto.dc.html" style="color:#363949;" style-hover="color:#4455e6;">Producto</a>
+        <a href="Piloto.dc.html" style="color:#363949;" style-hover="color:#4455e6;">Piloto 2027</a>
+        <a href="Nosotros.dc.html" style="color:#363949;" style-hover="color:#4455e6;">Nosotros</a>
+        <a href="Contacto.dc.html" style="color:#363949;" style-hover="color:#4455e6;">Contacto</a>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:12px;font-size:14px;flex:0 1 220px;">
+        <div style="font-size:12px;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;color:#627388;margin-bottom:4px;">Legal</div>
+        <a href="/privacy.html" style="color:#363949;" style-hover="color:#4455e6;">Privacidad</a>
+        <a href="/terms.html" style="color:#363949;" style-hover="color:#4455e6;">Términos</a>
+        <span style="color:#667281;line-height:1.6;">Expedientes alojados en Estados Unidos, cifrados en tránsito y en reposo.</span>
+      </div>
+    </div>
+    <div style="display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px 32px;font-size:13px;color:#627388;">
+      <span>© 2026 Simple Manage Pro</span>
+      <span>SMP no reemplaza nada del MEP.</span>
+    </div>
+  </div>
+</footer>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;alwaysPlayIntro&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Intro&quot;},&quot;motionIntensity&quot;:{&quot;editor&quot;:&quot;range&quot;,&quot;default&quot;:1.6,&quot;min&quot;:0,&quot;max&quot;:1.6,&quot;step&quot;:0.1,&quot;tsType&quot;:&quot;number&quot;,&quot;section&quot;:&quot;3D object&quot;}}">
+class Component extends DCLogic {
+  constructor(p) {
+    super(p);
+    this.r = {};
+    ['intro','header','navCta','pilot','pilotStage','contactStage','introLines','months','counter','progress','hero','stage','headline','fanTitle','cap0','cap1','cap2','cue'].forEach(k => this.r[k] = React.createRef());
+    this.scrollP = 0; this.mouse = { x: 0, y: 0 }; this.sm = { x: 0, y: 0, p: 0 }; this.entrStart = 0;
+  }
+
+  componentDidMount() {
+    window.__smpHero = this;
+    if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
+    scrollTo(0, 0);
+    if (location.hash) setTimeout(() => { const el = document.getElementById(location.hash.slice(1)); if (el) scrollTo(0, el.getBoundingClientRect().top + scrollY); }, 400);
+    this.reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+    this.onScroll = () => {
+      const h = this.r.hero.current; if (!h) return;
+      const rect = h.getBoundingClientRect();
+      const total = h.offsetHeight - innerHeight;
+      this.scrollP = Math.min(1, Math.max(0, -rect.top / total));
+      this.heroOff = rect.bottom < 0;
+      this.updateChrome(rect);
+      this.checkReveal();
+      if (this.introRunning && !this.exited && this.scrollP > 0.015) { this.gen = 2; clearTimeout(this.exitTimer); this.introExit(700); }
+    };
+    this.onMouse = e => { this.mouse.x = e.clientX / innerWidth * 2 - 1; this.mouse.y = e.clientY / innerHeight * 2 - 1; };
+    this.onResize = () => { this.resize && this.resize(); (this.resizers || []).forEach(f => f()); };
+    document.addEventListener('scroll', this.onScroll, { passive: true, capture: true });
+    addEventListener('mousemove', this.onMouse);
+    addEventListener('resize', this.onResize);
+    this.onScroll();
+    this.initThree();
+    this.initExtras();
+    this.pending = [...document.querySelectorAll('[data-rv]')];
+    this.checkReveal();
+    this.poll = setInterval(() => this.onScroll(), 300);
+    let seen = false; try { seen = sessionStorage.getItem('smp-intro-seen') === '1'; } catch (e) {}
+    if ((this.props.alwaysPlayIntro || !seen) && !this.reduce) this.runIntro();
+    else { this.r.intro.current.style.display = 'none'; this.heroIn(); }
+  }
+
+  componentWillUnmount() {
+    this.dead = true;
+    clearInterval(this.poll);
+    document.removeEventListener('scroll', this.onScroll, { capture: true });
+    removeEventListener('mousemove', this.onMouse);
+    removeEventListener('resize', this.onResize);
+    if (this.renderer) this.renderer.dispose();
+    (this.renderers || []).forEach(r => r.dispose());
+  }
+
+  tick(cb) {
+    if (this.dead) return;
+    let done = false; const run = () => { if (done) return; done = true; cb(performance.now()); };
+    if (!document.hidden) requestAnimationFrame(run);
+    setTimeout(run, document.hidden ? 16 : 60);
+  }
+  tw(dur, delay, ease, fn, done, gen) {
+    const t0 = performance.now() + delay;
+    fn(0);
+    const s = () => {
+      if (gen !== undefined && gen !== this.gen) return;
+      const k = dur <= 1 ? 1 : Math.min(1, Math.max(0, (performance.now() - t0) / dur));
+      fn(ease(k));
+      if (k < 1) this.tick(s); else if (done) done();
+    };
+    this.tick(s);
+  }
+
+  runIntro() {
+    const intro = this.r.intro.current;
+    this.introRunning = true; this.setNav(true);
+    this.gen = 1;
+    const months = [...intro.querySelectorAll('[data-m]')];
+    const inout = k => k < .5 ? 4 * k * k * k : 1 - Math.pow(-2 * k + 2, 3) / 2;
+    this.tw(1700, 150, inout, e => {
+      this.r.counter.current.textContent = String(Math.round(e * 100)).padStart(3, '0');
+      this.r.progress.current.style.transform = `scaleX(${e})`;
+      months.forEach((m, i) => {
+        const f = Math.min(1, Math.max(0, e * 11 - i));
+        m.querySelector('[data-bar]').style.transform = `scaleX(${f})`;
+        m.style.opacity = .35 + .65 * f;
+      });
+    }, () => this.introPhase2(), 1);
+  }
+
+  introPhase2() {
+    const intro = this.r.intro.current;
+    const out = this.eOut;
+    [this.r.counter.current, this.r.months.current].forEach(el => this.tw(500, 0, out, e => { el.style.opacity = 1 - e; el.style.transform = `translateY(${e * 20}px)`; }, null, 1));
+    intro.querySelectorAll('[data-irise]').forEach((el, i) => this.tw(1000, 150 + i * 110, out, e => { el.style.transform = `translateY(${(1 - e) * 110}%)`; }, null, 1));
+    this.exitTimer = setTimeout(() => this.introExit(1100), 1700);
+  }
+
+  updateChrome(heroRect) {
+    const hd = this.r.header.current; if (!hd) return;
+    const past = heroRect.bottom <= 90;
+    if (!this.introRunning) this.setNav(false);
+    const bg = past ? 'rgba(246,246,249,0.94)' : 'transparent';
+    if (this.hdBg !== bg) { this.hdBg = bg; hd.style.background = bg; hd.style.paddingTop = past ? '14px' : '24px'; hd.style.paddingBottom = past ? '14px' : '24px'; }
+  }
+
+  checkReveal() {
+    if (!this.pending || !this.pending.length) return;
+    this.pending = this.pending.filter(g => { if (g.getBoundingClientRect().top < innerHeight * 0.85) { this.reveal(g); return false; } return true; });
+  }
+
+  reveal(g) {
+    const fast = this.reduce;
+    g.querySelectorAll('[data-rise2]').forEach((el, i) => this.tw(fast ? 1 : 1100, fast ? 0 : i * 100, this.eOut, e => { el.style.transform = `translateY(${(1 - e) * 110}%)`; }));
+    g.querySelectorAll('[data-fade2]').forEach((el, i) => this.tw(fast ? 1 : 900, fast ? 0 : 150 + i * 90, this.eOut, e => { el.style.opacity = e; el.style.transform = e >= 1 ? 'none' : `translateY(${(1 - e) * 24}px)`; }));
+  }
+
+  setNav(onDark) {
+    if (this.navDark === onDark) return; this.navDark = onDark;
+    const hd = this.r.header.current, b = this.r.navCta.current; if (!hd || !b) return;
+    hd.style.color = onDark ? '#fff' : '#363949';
+    b.style.background = onDark ? '#fff' : '#363949';
+    b.style.color = onDark ? '#111e88' : '#fff';
+  }
+
+  eOut(k) { return k >= 1 ? 1 : 1 - Math.pow(2, -10 * k); }
+  eMove(k) { return k < .5 ? 4 * k * k * k : 1 - Math.pow(-2 * k + 2, 3) / 2; }
+
+  introExit(dur) {
+    const intro = this.r.intro.current; if (!intro || this.exited) return;
+    this.exited = true;
+    try { sessionStorage.setItem('smp-intro-seen', '1'); } catch (e) {}
+    const lines = this.r.introLines.current;
+    this.tw(dur, 0, this.eMove, e => { intro.style.clipPath = `inset(0 0 ${e * 100}% 0)`; lines.style.transform = `translateY(${-e * 18}vh)`; if (e > 0.86) this.setNav(false); }, () => { intro.style.display = 'none'; this.introRunning = false; this.setNav(false); });
+    setTimeout(() => this.heroIn(), dur * 0.35);
+  }
+
+  heroIn() {
+    if (this.heroStarted) return; this.heroStarted = true;
+    const root = this.r.hero.current;
+    const fast = this.reduce;
+    root.querySelectorAll('[data-rise]').forEach((el, i) => this.tw(fast ? 1 : 1200, fast ? 0 : 80 + i * 100, this.eOut, e => { el.style.transform = `translateY(${(1 - e) * 110}%)`; }));
+    root.querySelectorAll('[data-fade]').forEach((el, i) => this.tw(fast ? 1 : 900, fast ? 0 : 450 + i * 90, this.eOut, e => { el.style.opacity = e; el.style.transform = e >= 1 ? 'none' : `translateY(${(1 - e) * 14}px)`; }));
+    this.entrStart = performance.now() + (fast ? -5000 : 100);
+  }
+
+  async initThree() {
+    let THREE;
+    try { THREE = await import('https://unpkg.com/three@0.160.0/build/three.module.js'); } catch (e) { console.warn('three.js failed to load', e); return; }
+    try { await Promise.all(['400', '500', '600', '700', '800'].map(w => document.fonts.load(`${w} 40px Poppins`))); } catch (e) {}
+    const stage = this.r.stage.current; if (!stage) return;
+    const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true, preserveDrawingBuffer: true });
+    renderer.setPixelRatio(Math.min(devicePixelRatio, 2));
+    renderer.outputColorSpace = THREE.SRGBColorSpace;
+    renderer.domElement.style.cssText = 'width:100%;height:100%;display:block;';
+    stage.appendChild(renderer.domElement);
+    this.renderer = renderer;
+    const scene = new THREE.Scene();
+    const camera = new THREE.PerspectiveCamera(28, 1, 0.1, 100);
+    camera.position.set(0, 0, 18);
+    scene.add(new THREE.HemisphereLight(0xffffff, 0xc4c8f2, 1.4));
+    const dl = new THREE.DirectionalLight(0xffffff, 1.4); dl.position.set(4, 6, 9); scene.add(dl);
+
+    const W = 6.4, H = 4, R = 0.3, D = 0.12;
+    const shape = new THREE.Shape();
+    const x0 = -W / 2, y0 = -H / 2;
+    shape.moveTo(x0 + R, y0); shape.lineTo(x0 + W - R, y0); shape.quadraticCurveTo(x0 + W, y0, x0 + W, y0 + R);
+    shape.lineTo(x0 + W, y0 + H - R); shape.quadraticCurveTo(x0 + W, y0 + H, x0 + W - R, y0 + H);
+    shape.lineTo(x0 + R, y0 + H); shape.quadraticCurveTo(x0, y0 + H, x0, y0 + H - R);
+    shape.lineTo(x0, y0 + R); shape.quadraticCurveTo(x0, y0, x0 + R, y0);
+    const bodyGeo = new THREE.ExtrudeGeometry(shape, { depth: D, bevelEnabled: true, bevelThickness: 0.02, bevelSize: 0.02, bevelSegments: 3, curveSegments: 20 });
+    bodyGeo.translate(0, 0, -D / 2);
+    const faceGeo = new THREE.ShapeGeometry(shape, 20);
+    const pos = faceGeo.attributes.position, uv = faceGeo.attributes.uv;
+    for (let i = 0; i < pos.count; i++) uv.setXY(i, (pos.getX(i) + W / 2) / W, (pos.getY(i) + H / 2) / H);
+
+    const shTex = new THREE.CanvasTexture(this.drawShadow());
+    const bodyMat = new THREE.MeshStandardMaterial({ color: 0xffffff, roughness: 0.4, metalness: 0 });
+    const draws = [() => this.drawAdmin(), () => this.drawTeacher(), () => this.drawStudent()];
+    this.slabs = draws.map(fn => {
+      const g = new THREE.Group();
+      const cnv = fn();
+      const tex = new THREE.CanvasTexture(cnv);
+      this.texs = this.texs || []; this.texs.push({ tex, fn });
+      tex.colorSpace = THREE.SRGBColorSpace; tex.anisotropy = renderer.capabilities.getMaxAnisotropy();
+      const face = new THREE.Mesh(faceGeo, new THREE.MeshBasicMaterial({ map: tex }));
+      face.position.z = D / 2 + 0.025;
+      const sh = new THREE.Mesh(new THREE.PlaneGeometry(W * 1.45, H * 1.7), new THREE.MeshBasicMaterial({ map: shTex, transparent: true, depthWrite: false }));
+      sh.position.set(0, -0.45, -D / 2 - 0.06);
+      g.add(sh, new THREE.Mesh(bodyGeo, bodyMat), face);
+      return g;
+    });
+    const redraw = () => (this.texs || []).forEach(o => { o.tex.image = o.fn(); o.tex.needsUpdate = true; });
+    document.fonts.ready.then(redraw); setTimeout(redraw, 1500);
+    document.fonts.addEventListener && document.fonts.addEventListener('loadingdone', redraw);
+    const root = new THREE.Group();
+    this.slabs.forEach(s => root.add(s));
+    scene.add(root);
+
+    this.resize = () => {
+      const w = stage.clientWidth, h = stage.clientHeight;
+      renderer.setSize(w, h, false); camera.aspect = w / h; camera.updateProjectionMatrix();
+    };
+    this.resize();
+
+    const caps = [this.r.cap0, this.r.cap1, this.r.cap2];
+    const v = new THREE.Vector3();
+    const lerp = (a, b, t) => a + (b - a) * t;
+    const cl = (x) => Math.min(1, Math.max(0, x));
+    const smooth = x => x * x * (3 - 2 * x);
+    const outExpo = x => x >= 1 ? 1 : 1 - Math.pow(2, -10 * x);
+
+    const loop = now => {
+      this.tick(loop);
+      if (this.heroOff) return;
+      const k = this.props.motionIntensity ?? 1;
+      const t = now / 1000;
+      const dt = Math.min(1, (now - (this.lastT || now)) / 1000); this.lastT = now;
+      const am = 1 - Math.pow(0.95, dt * 60), ap = 1 - Math.pow(0.88, dt * 60);
+      const ent = this.entrStart ? outExpo(cl((now - this.entrStart) / 2000)) : 0;
+      this.sm.x += (this.mouse.x - this.sm.x) * am;
+      this.sm.y += (this.mouse.y - this.sm.y) * am;
+      this.sm.p += ((this.debugP ?? this.scrollP) - this.sm.p) * ap;
+      const p = this.sm.p;
+      const lift = smooth(cl(p / 0.28));
+      const fan = smooth(cl((p - 0.12) / 0.5));
+      const idle = this.reduce ? 0 : k;
+
+      const visH = 2 * Math.tan(camera.fov * Math.PI / 360) * camera.position.z;
+      const visW = visH * camera.aspect;
+      const wide = camera.aspect > 1.15;
+      const baseX = wide ? visW * (camera.aspect < 1.9 ? 0.27 : 0.2) : 0;
+      const baseY = wide ? -0.1 : -visH * 0.22;
+      const baseS = wide ? Math.min(1, visW / 16.5) : Math.min(0.8, visW / 9);
+      const fanS = Math.min(0.74, visW / 20, visH / 11);
+
+      root.position.x = lerp(baseX, wide ? visW * 0.04 : 0, fan);
+      root.position.y = lerp(baseY, -visH * 0.04, fan) - (1 - ent) * 4 + Math.sin(t * 0.8) * 0.08 * idle * (1 - fan * 0.6);
+      root.scale.setScalar(lerp(baseS, fanS, fan));
+      root.rotation.x = lerp(-0.95, -0.16, fan) + this.sm.y * 0.08 * idle;
+      root.rotation.y = lerp(0, -0.5, fan) + this.sm.x * 0.12 * idle + (1 - ent) * 0.5;
+      root.rotation.z = lerp(0.55, 0.05, fan);
+
+      const sep = lerp(0.6 + Math.sin(t * 1.1) * 0.05 * idle, 2.2, fan) * ent;
+      this.slabs.forEach((s, i) => {
+        s.position.z = (1 - i) * sep;
+        s.position.x = (i - 1) * 4.6 * fan;
+        s.position.y = (1 - i) * 0.25 * fan;
+      });
+
+      root.updateMatrixWorld();
+      const w = stage.clientWidth, h = stage.clientHeight;
+      caps.forEach((c, i) => {
+        const el = c.current; if (!el) return;
+        v.set(-W / 2 + 0.2, -H / 2 - 0.35, 0).applyMatrix4(this.slabs[i].matrixWorld).project(camera);
+        const sx = (v.x * 0.5 + 0.5) * w, sy = (-v.y * 0.5 + 0.5) * h;
+        const o = cl((fan - 0.6 - i * 0.1) / 0.25);
+        el.style.opacity = o;
+        el.style.transform = `translate(${sx}px, ${sy + (1 - o) * 16}px)`;
+      });
+
+      const hl = this.r.headline.current;
+      if (hl) { hl.style.transform = `translateY(${-lift * 140}px)`; hl.style.opacity = 1 - lift; hl.style.pointerEvents = lift > 0.5 ? 'none' : 'auto'; }
+      const cue = this.r.cue.current; if (cue && this.heroStarted) cue.style.visibility = lift > 0.6 ? 'hidden' : 'visible';
+      const ft = this.r.fanTitle.current;
+      if (ft) { const o = cl((fan - 0.45) / 0.3); ft.style.opacity = o; ft.style.transform = `translateY(${(1 - o) * 30}px)`; }
+
+      renderer.render(scene, camera);
+    };
+    this.tick(loop);
+  }
+
+  cv() { const c = document.createElement('canvas'); c.width = 1600; c.height = 1000; return c; }
+  rr(x, c, X, Y, w, h, r) { x.beginPath(); x.moveTo(X + r, Y); x.arcTo(X + w, Y, X + w, Y + h, r); x.arcTo(X + w, Y + h, X, Y + h, r); x.arcTo(X, Y + h, X, Y, r); x.arcTo(X, Y, X + w, Y, r); x.closePath(); if (c) { x.fillStyle = c; x.fill(); } }
+  card(x, X, Y, w, h, r = 44) { x.save(); x.shadowColor = 'rgba(132,139,200,0.30)'; x.shadowBlur = 50; x.shadowOffsetY = 22; this.rr(x, '#fff', X, Y, w, h, r); x.restore(); }
+  t(x, s, X, Y, size, weight, color, align = 'left', ls = 0) { x.font = `${weight} ${size}px Poppins`; x.fillStyle = color; x.textAlign = align; x.letterSpacing = ls + 'px'; x.fillText(s, X, Y); x.letterSpacing = '0px'; }
+  grad(x, X, Y, s) { const g = x.createLinearGradient(X, Y, X + s, Y + s); g.addColorStop(0, '#7380ec'); g.addColorStop(1, '#a78bfa'); x.beginPath(); x.arc(X + s / 2, Y + s / 2, s / 2, 0, Math.PI * 2); x.fillStyle = g; x.fill(); }
+  badge(x, s, X, Y, tint, color, align = 'left') { x.font = '600 19px Poppins'; const w = x.measureText(s).width + 32; const bx = align === 'right' ? X - w : X; this.rr(x, tint, bx, Y - 28, w, 40, 20); this.t(x, s, bx + 16, Y - 1, 19, 600, color); }
+
+  base(items, active) {
+    const c = this.cv(), x = c.getContext('2d');
+    x.fillStyle = '#f6f6f9'; x.fillRect(0, 0, 1600, 1000);
+    const g = x.createLinearGradient(40, 50, 92, 102); g.addColorStop(0, '#7380ec'); g.addColorStop(1, '#a78bfa');
+    this.rr(x, g, 44, 52, 48, 48, 13);
+    this.t(x, 'SIMPLE', 106, 86, 21, 800, '#363949', 'left', 0.8);
+    x.font = '800 21px Poppins'; x.letterSpacing = '0.8px'; const sw = x.measureText('SIMPLE ').width; x.letterSpacing = '0px';
+    this.t(x, 'MANAGE PRO', 106 + sw, 86, 21, 800, '#ff7782', 'left', 0.8);
+    items.forEach((it, i) => {
+      const y = 190 + i * 66;
+      if (i === active) { this.rr(x, 'rgba(115,128,236,0.15)', 28, y - 38, 262, 60, 14); x.fillStyle = '#7380ec'; x.fillRect(28, y - 38, 6, 60); }
+      this.t(x, it, 62, y, 22, i === active ? 600 : 500, i === active ? '#4455e6' : '#667281');
+    });
+    return { c, x };
+  }
+
+  drawAdmin() {
+    const { c, x } = this.base(['Resumen', 'Curso lectivo', 'Niveles y secciones', 'Materias', 'Horarios', 'Docentes', 'Estudiantes', 'Cuentas'], 0);
+    this.t(x, 'Resumen', 340, 125, 58, 800, '#363949', 'left', -1);
+    this.t(x, 'Curso lectivo 2026 · 4 secciones · 107 estudiantes', 342, 172, 23, 400, '#667281');
+    const stats = [['Estudiantes', '107', '+3 este mes'], ['Docentes', '14', '2 guías nuevos'], ['Asistencia', '94,2 %', 'I Periodo']];
+    const cw = (1220 - 60) / 3;
+    stats.forEach((s, i) => {
+      const X = 340 + i * (cw + 30), Y = 215;
+      this.card(x, X, Y, cw, 210);
+      this.grad(x, X + 34, Y + 32, 60);
+      this.t(x, s[2], X + cw - 34, Y + 70, 18, 600, i === 2 ? '#4455e6' : '#097c56', 'right');
+      this.t(x, s[1], X + 34, Y + 158, 52, 800, '#363949', 'left', -1);
+      this.t(x, s[0], X + 34, Y + 190, 20, 500, '#667281');
+    });
+    this.card(x, 340, 460, 1220, 500);
+    this.t(x, 'Secciones', 380, 525, 28, 700, '#363949');
+    this.t(x, 'Ver todas', 1520, 525, 20, 600, '#4455e6', 'right');
+    const cols = [380, 560, 780, 1150, 1380];
+    ['SECCIÓN', 'NIVEL', 'DOCENTE GUÍA', 'ESTUDIANTES', 'PROMEDIO'].forEach((h, i) => this.t(x, h, cols[i], 585, 16, 600, '#627388', 'left', 1));
+    const rows = [['12-1', 'Duodécimo', 'Andrés Mora Solís', '27', '84,2'], ['11-1', 'Undécimo', 'Daniela Jiménez Castro', '28', '81,7'], ['10-2', 'Décimo', 'Luis Chaves Arias', '26', '68,9'], ['10-1', 'Décimo', 'María Fernanda Ulate', '26', '79,4']];
+    rows.forEach((r, i) => {
+      const y = 660 + i * 76;
+      x.fillStyle = 'rgba(132,139,200,0.18)'; x.fillRect(380, y - 50, 1140, 2);
+      this.t(x, r[0], cols[0], y, 22, 600, '#363949');
+      this.t(x, r[1], cols[1], y, 22, 400, '#667281');
+      this.t(x, r[2], cols[2], y, 22, 400, '#667281');
+      this.t(x, r[3], cols[3], y, 22, 500, '#363949');
+      const low = parseFloat(r[4].replace(',', '.')) < 70;
+      this.badge(x, r[4], cols[4], y, low ? 'rgba(255,187,85,0.15)' : 'rgba(65,241,182,0.15)', low ? '#9d5e00' : '#097c56');
+    });
+    return c;
+  }
+
+  drawTeacher() {
+    const { c, x } = this.base(['Hoy', 'Mis clases', 'Materias', 'Ajustes'], 0);
+    this.t(x, 'Hoy', 340, 125, 58, 800, '#363949', 'left', -1);
+    this.t(x, 'Martes 3 de febrero · 4 lecciones', 342, 172, 23, 400, '#667281');
+    const L = [['07:00 – 07:40', 'Matemáticas', 'Sección 12-1 · Aula 14', '#7380ec', 'En curso', 'rgba(65,241,182,0.15)', '#097c56'], ['08:20 – 09:00', 'Matemáticas', 'Sección 11-1 · Aula 14', '#a78bfa', 'Siguiente', 'rgba(115,128,236,0.15)', '#4455e6'], ['10:00 – 10:40', 'Estadística', 'Sección 10-2 · Aula 9', '#41f1b6', 'Pendiente', 'rgba(132,139,200,0.18)', '#627388'], ['13:00 – 13:40', 'Matemáticas', 'Sección 10-1 · Aula 14', '#ffbb55', 'Pendiente', 'rgba(132,139,200,0.18)', '#627388']];
+    L.forEach((l, i) => {
+      const Y = 215 + i * 186;
+      this.card(x, 340, Y, 580, 160, 36);
+      x.save(); this.rr(x, null, 340, Y, 580, 160, 36); x.clip(); x.fillStyle = l[3]; x.fillRect(340, Y, 6, 160); x.restore();
+      this.t(x, l[0], 380, Y + 50, 19, 600, '#627388');
+      this.t(x, l[1], 380, Y + 96, 30, 700, '#363949');
+      this.t(x, l[2], 380, Y + 132, 20, 400, '#667281');
+      this.badge(x, l[4], 886, Y + 58, l[5], l[6], 'right');
+    });
+    this.card(x, 950, 215, 610, 745);
+    this.t(x, 'Libro de notas', 990, 280, 28, 700, '#363949');
+    this.t(x, 'Matemáticas · 12-1 · I Periodo', 990, 318, 19, 400, '#667281');
+    const S = [['Alvarado Méndez, Sofía', 92], ['Brenes Quesada, Mateo', 78], ['Castro Solano, Valeria', 85], ['Fallas Ureña, Diego', 64], ['Rojas Vargas, Yendry', 88], ['Vega Arias, Camila', 74], ['Zúñiga Mora, Tomás', 81]];
+    S.forEach((s, i) => {
+      const y = 395 + i * 80;
+      this.t(x, s[0], 990, y, 20, 500, '#363949');
+      this.rr(x, 'rgba(132,139,200,0.18)', 990, y + 18, 440, 10, 5);
+      this.rr(x, s[1] < 70 ? '#ff7782' : '#7380ec', 990, y + 18, 440 * s[1] / 100, 10, 5);
+      this.t(x, String(s[1]), 1520, y + 28, 24, 700, s[1] < 70 ? '#d30011' : '#363949', 'right');
+    });
+    return c;
+  }
+
+  drawStudent() {
+    const { c, x } = this.base(['Inicio', 'Notas', 'Horario', 'Docentes', 'Asistencia', 'Eventos'], 0);
+    this.t(x, 'Hola, Yendry', 340, 125, 58, 800, '#363949', 'left', -1);
+    this.t(x, 'Duodécimo · Sección 12-1 · I Periodo', 342, 172, 23, 400, '#667281');
+    const cw = (1220 - 60) / 3;
+    [0, 1, 2].forEach(i => this.card(x, 340 + i * (cw + 30), 215, cw, 210));
+    let X = 340, Y = 215;
+    x.lineWidth = 14; x.lineCap = 'round';
+    x.strokeStyle = 'rgba(132,139,200,0.18)'; x.beginPath(); x.arc(X + 100, Y + 105, 58, 0, Math.PI * 2); x.stroke();
+    x.strokeStyle = '#41f1b6'; x.beginPath(); x.arc(X + 100, Y + 105, 58, -Math.PI / 2, -Math.PI / 2 + Math.PI * 2 * 0.96); x.stroke();
+    this.t(x, '96 %', X + 100, Y + 114, 24, 700, '#363949', 'center');
+    this.t(x, 'Asistencia', X + 190, Y + 96, 20, 500, '#667281');
+    this.t(x, '2 ausencias', X + 190, Y + 130, 22, 600, '#363949');
+    X = 340 + cw + 30;
+    this.grad(x, X + 34, Y + 32, 60);
+    this.t(x, '87,4', X + 34, Y + 158, 52, 800, '#363949', 'left', -1);
+    this.t(x, 'Promedio general', X + 34, Y + 190, 20, 500, '#667281');
+    X = 340 + 2 * (cw + 30);
+    this.t(x, 'PRÓXIMA CLASE', X + 34, Y + 64, 16, 600, '#627388', 'left', 1);
+    this.t(x, 'Química', X + 34, Y + 140, 40, 800, '#363949', 'left', -0.5);
+    this.t(x, '09:20 · Aula 8', X + 34, Y + 180, 20, 500, '#667281');
+    this.card(x, 340, 460, 1220, 500);
+    this.t(x, 'Notas por materia', 380, 525, 28, 700, '#363949');
+    this.t(x, 'Nota mínima 70', 1520, 525, 19, 500, '#627388', 'right');
+    const G = [['Matemáticas', 88], ['Español', 91], ['Química', 79], ['Física', 84], ['Inglés', 95], ['Estudios Sociales', 86]];
+    const bx = 680, bw = 740;
+    G.forEach((g, i) => {
+      const y = 590 + i * 62;
+      this.t(x, g[0], 380, y, 21, 600, '#363949');
+      this.rr(x, 'rgba(132,139,200,0.18)', bx, y - 12, bw, 12, 6);
+      const gr = x.createLinearGradient(bx, 0, bx + bw, 0); gr.addColorStop(0, '#7380ec'); gr.addColorStop(1, '#a78bfa');
+      this.rr(x, gr, bx, y - 12, bw * g[1] / 100, 12, 6);
+      this.t(x, String(g[1]), 1520, y, 22, 700, '#363949', 'right');
+    });
+    x.fillStyle = 'rgba(98,115,136,0.55)'; x.fillRect(bx + bw * 0.7, 548, 2, 380);
+    return c;
+  }
+
+  drawShadow() {
+    const c = document.createElement('canvas'); c.width = 512; c.height = 512;
+    const x = c.getContext('2d');
+    x.filter = 'blur(34px)';
+    this.rr(x, 'rgba(70,80,180,0.42)', 92, 110, 328, 300, 40);
+    return c;
+  }
+
+  async initExtras() {
+    let THREE;
+    try { THREE = await import('https://unpkg.com/three@0.160.0/build/three.module.js'); } catch (e) { return; }
+    try { await document.fonts.load('500 40px Poppins'); } catch (e) {}
+    this.initPilot(THREE);
+    this.initContact(THREE);
+  }
+
+  makeStage(THREE, el, fov) {
+    const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true, preserveDrawingBuffer: true });
+    renderer.setPixelRatio(Math.min(devicePixelRatio, 2));
+    renderer.outputColorSpace = THREE.SRGBColorSpace;
+    renderer.domElement.style.cssText = 'position:absolute;inset:0;width:100%;height:100%;display:block;';
+    el.insertBefore(renderer.domElement, el.firstChild);
+    const scene = new THREE.Scene();
+    const camera = new THREE.PerspectiveCamera(fov, 1, 0.1, 100);
+    const resize = () => { const w = el.clientWidth, h = el.clientHeight; if (!w || !h) return; renderer.setSize(w, h, false); camera.aspect = w / h; camera.updateProjectionMatrix(); };
+    resize();
+    (this.resizers = this.resizers || []).push(resize);
+    (this.renderers = this.renderers || []).push(renderer);
+    const ptr = new THREE.Vector2(); ptr.in = false;
+    el.addEventListener('pointermove', e => { const r = el.getBoundingClientRect(); ptr.x = (e.clientX - r.left) / r.width * 2 - 1; ptr.y = -((e.clientY - r.top) / r.height * 2 - 1); ptr.in = true; });
+    el.addEventListener('pointerleave', () => { ptr.in = false; });
+    scene.environment = this.makeEnv(THREE, renderer);
+    scene.add(new THREE.HemisphereLight(0xffffff, 0xd4d8f5, 0.7));
+    const dl = new THREE.DirectionalLight(0xffffff, 1.3); dl.position.set(4, 9, 7); scene.add(dl);
+    return { renderer, scene, camera, ptr, ray: new THREE.Raycaster(), m: { x: 0, y: 0 } };
+  }
+
+  makeEnv(THREE, renderer) {
+    const pm = new THREE.PMREMGenerator(renderer);
+    const s = new THREE.Scene();
+    s.add(new THREE.Mesh(new THREE.BoxGeometry(20, 20, 20), new THREE.MeshBasicMaterial({ color: 0xe6e8f6, side: THREE.BackSide })));
+    const panel = (w, h, x, y, z, c) => { const m = new THREE.Mesh(new THREE.PlaneGeometry(w, h), new THREE.MeshBasicMaterial({ color: c, side: THREE.DoubleSide })); m.position.set(x, y, z); m.lookAt(0, 0, 0); s.add(m); };
+    panel(10, 5, 0, 9, 1, new THREE.Color(4, 4, 4));
+    panel(6, 8, -9, 1, 5, new THREE.Color(2.6, 2.6, 2.8));
+    panel(6, 6, 9, 0, -3, new THREE.Color(1.8, 1.9, 2.8));
+    const env = pm.fromScene(s, 0.04).texture; pm.dispose();
+    return env;
+  }
+
+  rrShape(THREE, W, H, R) {
+    const s = new THREE.Shape(), x0 = -W / 2, y0 = -H / 2;
+    s.moveTo(x0 + R, y0); s.lineTo(x0 + W - R, y0); s.quadraticCurveTo(x0 + W, y0, x0 + W, y0 + R);
+    s.lineTo(x0 + W, y0 + H - R); s.quadraticCurveTo(x0 + W, y0 + H, x0 + W - R, y0 + H);
+    s.lineTo(x0 + R, y0 + H); s.quadraticCurveTo(x0, y0 + H, x0, y0 + H - R);
+    s.lineTo(x0, y0 + R); s.quadraticCurveTo(x0, y0, x0 + R, y0);
+    return s;
+  }
+
+  slab(THREE, W, H, R, D, bodyMat, faceMat, bv) {
+    const shape = this.rrShape(THREE, W, H, R);
+    const geo = new THREE.ExtrudeGeometry(shape, { depth: D, bevelEnabled: true, bevelThickness: bv, bevelSize: bv, bevelSegments: 5, curveSegments: 24 });
+    geo.translate(0, 0, -D / 2);
+    const g = new THREE.Group();
+    g.add(new THREE.Mesh(geo, bodyMat));
+    if (faceMat) {
+      const fg = new THREE.ShapeGeometry(shape, 24);
+      const p = fg.attributes.position, uv = fg.attributes.uv;
+      for (let i = 0; i < p.count; i++) uv.setXY(i, (p.getX(i) + W / 2) / W, (p.getY(i) + H / 2) / H);
+      const f = new THREE.Mesh(fg, faceMat); f.position.z = D / 2 + bv + 0.004; g.add(f);
+    }
+    return g;
+  }
+
+  drawRadial() {
+    const c = document.createElement('canvas'); c.width = c.height = 256;
+    const x = c.getContext('2d'), g = x.createRadialGradient(128, 128, 0, 128, 128, 128);
+    g.addColorStop(0, 'rgba(70,80,170,0.34)'); g.addColorStop(0.55, 'rgba(70,80,170,0.12)'); g.addColorStop(1, 'rgba(70,80,170,0)');
+    x.fillStyle = g; x.fillRect(0, 0, 256, 256); return c;
+  }
+
+  drawBubble() {
+    const c = document.createElement('canvas'); c.width = 1400; c.height = 575;
+    const x = c.getContext('2d');
+    x.fillStyle = '#5a69e9'; x.fillRect(0, 0, 1400, 575);
+    x.fillStyle = '#fff'; x.font = '500 60px Poppins';
+    const lines = []; let line = '';
+    'Buenas, soy director/a de [colegio] y quisiera conocer más sobre el piloto 2027.'.split(' ').forEach(w => { const t = line ? line + ' ' + w : w; if (x.measureText(t).width > 1200) { lines.push(line); line = w; } else line = t; });
+    lines.push(line);
+    lines.forEach((l, i) => x.fillText(l, 100, 170 + i * 88));
+    x.font = '500 34px Poppins'; x.fillStyle = 'rgba(255,255,255,0.78)'; x.textAlign = 'right'; x.fillText('08:14', 1300, 500);
+    return c;
+  }
+
+  initPilot(THREE) {
+    const el = this.r.pilotStage.current; if (!el) return;
+    const S = this.makeStage(THREE, el, 28); const { scene, camera, ptr, ray, m } = S;
+    const V = THREE.Vector2;
+    const lathe = (r, h, c) => { const p = [new V(0, -h / 2)]; for (let a = 0; a <= 8; a++) { const t = -Math.PI / 2 + a / 8 * Math.PI / 2; p.push(new V(r - c + Math.cos(t) * c, -h / 2 + c + Math.sin(t) * c)); } for (let a = 0; a <= 8; a++) { const t = a / 8 * Math.PI / 2; p.push(new V(r - c + Math.cos(t) * c, h / 2 - c + Math.sin(t) * c)); } p.push(new V(0, h / 2)); return new THREE.LatheGeometry(p, 96); };
+    const DR = 1.55, DH = 0.58;
+    const dGeo = lathe(DR, DH, 0.18), pGeo = lathe(2.3, 0.2, 0.09);
+    const dMats = [0x5a69e9, 0x7380ec, 0xa78bfa].map(c => new THREE.MeshPhysicalMaterial({ color: c, roughness: 0.3, clearcoat: 1, clearcoatRoughness: 0.16, envMapIntensity: 0.9 }));
+    const white = new THREE.MeshPhysicalMaterial({ color: 0xffffff, roughness: 0.42, clearcoat: 0.7, clearcoatRoughness: 0.2, envMapIntensity: 0.85 });
+    const ledGeo = new THREE.SphereGeometry(0.07, 16, 12), ledMat = new THREE.MeshBasicMaterial({ color: 0x41f1b6 });
+    const shMat = new THREE.MeshBasicMaterial({ map: new THREE.CanvasTexture(this.drawRadial()), transparent: true, depthWrite: false });
+    const db = new THREE.Group(); scene.add(db);
+    const ped = new THREE.Mesh(pGeo, white); ped.position.y = -0.1; db.add(ped);
+    const sh = new THREE.Mesh(new THREE.PlaneGeometry(7, 7), shMat); sh.rotation.x = -Math.PI / 2; sh.position.y = -0.21; db.add(sh);
+    const spin = new THREE.Group(); db.add(spin);
+    const disks = [0, 1, 2].map(j => {
+      const d = new THREE.Group(); d.add(new THREE.Mesh(dGeo, dMats[j]));
+      [0, 0.35].forEach((o, n) => { const a = j * 0.9 + o, led = new THREE.Mesh(ledGeo, n ? new THREE.MeshBasicMaterial({ color: 0xffffff }) : ledMat); led.position.set(Math.sin(a) * (DR - 0.02), 0.05, Math.cos(a) * (DR - 0.02)); d.add(led); });
+      spin.add(d); return d;
+    });
+    // orbit ring
+    const RX = 3.0, RZ = 2.35, YC = 1.05;
+    const ring = new THREE.Mesh(new THREE.TorusGeometry(1, 0.008, 8, 160), new THREE.MeshBasicMaterial({ color: 0x7380ec, transparent: true, opacity: 0.45 }));
+    ring.rotation.x = Math.PI / 2; ring.scale.set(RX, RZ, 1); ring.position.y = YC; db.add(ring);
+    // lock
+    const lock = new THREE.Group(); db.add(lock);
+    const lockIn = new THREE.Group(); lock.add(lockIn);
+    const body = this.slab(THREE, 1.15, 0.95, 0.22, 0.42, white, null, 0.06); lockIn.add(body);
+    const dark = new THREE.MeshPhysicalMaterial({ color: 0x363949, roughness: 0.5 });
+    const kh1 = new THREE.Mesh(new THREE.CylinderGeometry(0.1, 0.1, 0.04, 32), dark); kh1.rotation.x = Math.PI / 2; kh1.position.set(0, 0.06, 0.28); lockIn.add(kh1);
+    const kh2 = new THREE.Mesh(new THREE.BoxGeometry(0.08, 0.2, 0.04), dark); kh2.position.set(0, -0.08, 0.28); lockIn.add(kh2);
+    const metal = new THREE.MeshPhysicalMaterial({ color: 0xd9ddf2, metalness: 0.95, roughness: 0.22, envMapIntensity: 1.2 });
+    const shackle = new THREE.Group(); lockIn.add(shackle);
+    const arc = new THREE.Mesh(new THREE.TorusGeometry(0.34, 0.075, 20, 48, Math.PI), metal); arc.position.y = 0.78; shackle.add(arc);
+    [-0.34, 0.34].forEach(x => { const c = new THREE.Mesh(new THREE.CylinderGeometry(0.075, 0.075, 0.36, 20), metal); c.position.set(x, 0.6, 0); shackle.add(c); });
+    const lsh = new THREE.Mesh(new THREE.PlaneGeometry(2.2, 2.2), shMat); lsh.rotation.x = -Math.PI / 2; db.add(lsh);
+    let hovered = false, hv = 0, spinT = 0, spinV = 0, clank = 0;
+    el.addEventListener('click', () => { if (hovered) { spinT += Math.PI * 2; clank = 1; } });
+    const cl = x => Math.min(1, Math.max(0, x)), oc = x => 1 - Math.pow(1 - x, 3);
+    const loop = now => {
+      this.tick(loop);
+      const r = el.getBoundingClientRect(); if (r.bottom < 0 || r.top > innerHeight) return;
+      const t = now / 1000, k = this.reduce ? 0 : (this.props.motionIntensity ?? 1);
+      const q = this.reduce ? 1 : cl((innerHeight - r.top) / (innerHeight * 0.85));
+      m.x += (this.mouse.x - m.x) * 0.05; m.y += (this.mouse.y - m.y) * 0.05;
+      const fit = Math.max(0.5, Math.min(1, camera.aspect / 1.5));
+      camera.position.set(m.x * 1.0 * k, 3.2 - m.y * 0.6 * k, 9.6 / fit);
+      camera.lookAt(0, 1.2, 0);
+      hovered = false;
+      if (ptr.in) { ray.setFromCamera(ptr, camera); hovered = ray.intersectObjects([spin, lock], true).length > 0; }
+      el.style.cursor = hovered ? 'pointer' : '';
+      hv += ((hovered ? 1 : 0) - hv) * 0.12;
+      spinV += (spinT - spinV) * 0.06;
+      clank *= 0.92;
+      spin.rotation.y = t * 0.22 * k + spinV;
+      const pitch = DH + 0.12 + 0.3 * hv;
+      disks.forEach((d, j) => {
+        const e = oc(cl((q * 1.5 - j * 0.14) / 0.4));
+        d.position.y = DH / 2 + j * pitch + (1 - e) * 7 + Math.sin(t * 1.3 + j) * 0.03 * k;
+        d.visible = e > 0.001;
+      });
+      const le = oc(cl((q * 1.5 - 0.55) / 0.45));
+      const a = t * 0.55 * Math.max(0.25, k) + 0.9 + spinV * 0.5;
+      const x = Math.cos(a) * RX, z = Math.sin(a) * RZ;
+      lock.position.set(x, YC + 0.35 * hv + Math.sin(a * 2) * 0.18, z);
+      lock.rotation.set(0.08, Math.atan2(x, z) * 0.55, Math.sin(a) * 0.08);
+      lock.scale.setScalar(le * (1 + hv * 0.12));
+      lock.visible = le > 0.001;
+      shackle.position.y = -clank * 0.14 * Math.abs(Math.sin(clank * 9));
+      lsh.position.set(x, -0.19, z); lsh.material.opacity = 1; lsh.scale.setScalar(le);
+      ring.material.opacity = 0.45 * le;
+      S.renderer.render(scene, camera);
+    };
+    this.tick(loop);
+  }
+
+  initContact(THREE) {
+    const el = this.r.contactStage.current; if (!el) return;
+    const S = this.makeStage(THREE, el, 30); const { scene, camera, ptr, ray, renderer, m } = S;
+    camera.position.set(0, 0, 15);
+    const root = new THREE.Group(); scene.add(root);
+    const white = new THREE.MeshPhysicalMaterial({ color: 0xffffff, roughness: 0.4, clearcoat: 0.8, clearcoatRoughness: 0.2, envMapIntensity: 0.9 });
+    const shTex = new THREE.CanvasTexture(this.drawShadow());
+    const withShadow = (g, w, h, d) => { const sh = new THREE.Mesh(new THREE.PlaneGeometry(w * 1.5, h * 1.7), new THREE.MeshBasicMaterial({ map: shTex, transparent: true, depthWrite: false })); sh.position.set(0, -h * 0.12, -d / 2 - 0.25); g.add(sh); return g; };
+    const ic = document.createElement('canvas'); ic.width = ic.height = 640;
+    const icx = ic.getContext('2d'); icx.fillStyle = '#fff'; icx.fillRect(0, 0, 640, 640);
+    const iconTex = new THREE.CanvasTexture(ic); iconTex.colorSpace = THREE.SRGBColorSpace; iconTex.anisotropy = renderer.capabilities.getMaxAnisotropy();
+    const img = new Image(); img.onload = () => { icx.drawImage(img, 96, 96, 448, 448); iconTex.needsUpdate = true; }; img.src = '../assets/android-chrome-512x512.png';
+    const tile = withShadow(this.slab(THREE, 2.6, 2.6, 0.62, 0.36, white, new THREE.MeshBasicMaterial({ map: iconTex }), 0.06), 2.6, 2.6, 0.36);
+    const bTex = new THREE.CanvasTexture(this.drawBubble()); bTex.colorSpace = THREE.SRGBColorSpace; bTex.anisotropy = renderer.capabilities.getMaxAnisotropy();
+    const redrawB = () => { bTex.image = this.drawBubble(); bTex.needsUpdate = true; };
+    document.fonts.ready.then(redrawB); setTimeout(redrawB, 1500); setTimeout(redrawB, 4000);
+    document.fonts.addEventListener && document.fonts.addEventListener('loadingdone', redrawB);
+    document.fonts.load('500 60px Poppins').then(redrawB).catch(() => {});
+    const bMat = new THREE.MeshPhysicalMaterial({ color: 0x5a69e9, roughness: 0.35, clearcoat: 1, clearcoatRoughness: 0.15, envMapIntensity: 0.8 });
+    const bubble = withShadow(this.slab(THREE, 5.6, 2.3, 0.6, 0.2, bMat, new THREE.MeshBasicMaterial({ map: bTex }), 0.05), 5.6, 2.3, 0.2);
+    const typing = withShadow(this.slab(THREE, 2.1, 1.0, 0.5, 0.16, white, null, 0.04), 2.1, 1.0, 0.16);
+    const dotMat = new THREE.MeshPhysicalMaterial({ color: 0x7380ec, roughness: 0.3, clearcoat: 1 });
+    const dots = [-0.48, 0, 0.48].map(x => { const d = new THREE.Mesh(new THREE.SphereGeometry(0.13, 24, 16), dotMat); d.position.set(x, 0, 0.2); typing.add(d); return d; });
+    const items = [
+      { o: tile, p: [-2.6, 2.0, 0.4], r: [0.12, 0.4, -0.1], from: [-3, 3, -5], ph: 0 },
+      { o: bubble, p: [0.7, 0.1, 0], r: [-0.04, -0.3, 0.03], from: [5, -1, -4], ph: 1.7 },
+      { o: typing, p: [-2.0, -2.2, 0.9], r: [0.05, 0.28, 0.02], from: [-2, -5, -3], ph: 3.1 }
+    ];
+    items.forEach(it => root.add(it.o));
+    const WA = 'https://wa.me/50671848300?text=Buenas%2C%20soy%20director%2Fa%20de%20%5Bcolegio%5D%20y%20quisiera%20conocer%20m%C3%A1s%20sobre%20el%20piloto%202027.';
+    let over = false, hb = 0, hoverIdx = -1;
+    const own = o => items.findIndex(it => { let p = o; while (p) { if (p === it.o) return true; p = p.parent; } return false; });
+    items.forEach(it => { it.hv = 0; });
+    el.addEventListener('click', () => { if (over) window.open(WA, '_blank', 'noopener'); });
+    const cl = x => Math.min(1, Math.max(0, x)), oc = x => 1 - Math.pow(1 - x, 3);
+    const loop = now => {
+      this.tick(loop);
+      const r = el.getBoundingClientRect(); if (r.bottom < 0 || r.top > innerHeight) return;
+      const t = now / 1000, k = this.reduce ? 0 : (this.props.motionIntensity ?? 1);
+      const q = this.reduce ? 1 : cl((innerHeight - r.top) / (innerHeight * 0.8));
+      m.x += (this.mouse.x - m.x) * 0.05; m.y += (this.mouse.y - m.y) * 0.05;
+      const visH = 2 * Math.tan(camera.fov * Math.PI / 360) * camera.position.z, visW = visH * camera.aspect;
+      root.scale.setScalar(Math.min(1.05, visW / 9.4, visH / 7.6));
+      root.rotation.set(m.y * 0.12 * k, m.x * 0.2 * k, 0);
+      over = false;
+      hoverIdx = -1;
+      if (ptr.in) { ray.setFromCamera(ptr, camera); const hit = ray.intersectObjects(items.map(it => it.o), true)[0]; if (hit) hoverIdx = own(hit.object); }
+      over = hoverIdx >= 0;
+      el.style.cursor = over ? 'pointer' : '';
+      hb += ((this.ctaHover ? 1 : 0) - hb) * 0.1;
+      items.forEach((it, i) => { it.hv += (((hoverIdx === i) || (this.ctaHover && i === 1) ? 1 : 0) - it.hv) * 0.12; });
+      items.forEach((it, i) => {
+        const e = oc(cl((q * 1.4 - i * 0.12) / 0.6));
+        const f = Math.sin(t * 0.9 + it.ph) * 0.12 * k;
+        it.o.position.set(it.p[0] + (1 - e) * it.from[0], it.p[1] + (1 - e) * it.from[1] + f, it.p[2] + (1 - e) * it.from[2]);
+        it.o.rotation.set(it.r[0] + (1 - e) * 0.6 + Math.sin(t * 0.7 + it.ph) * 0.03 * k, it.r[1] - (1 - e) * 0.8, it.r[2]);
+      });
+      items.forEach(it => {
+        it.o.position.z += it.hv * 1.3;
+        it.o.rotation.y *= 1 - it.hv * 0.85;
+        it.o.rotation.x *= 1 - it.hv * 0.6;
+        it.o.scale.setScalar(1 + it.hv * 0.12);
+      });
+      dots.forEach((d, i) => { const s = this.reduce ? 1 : 0.8 + 0.3 * Math.max(0, Math.sin(t * (3.2 + hb * 2) - i * 0.9)); d.scale.setScalar(s); });
+      S.renderer.render(scene, camera);
+    };
+    this.tick(loop);
+  }
+
+  renderVals() {
+    return {
+      refs: this.r,
+      ctaOn: () => { this.ctaHover = true; },
+      ctaOff: () => { this.ctaHover = false; },
+      skipIntro: () => {
+        if (this.exited) return;
+        this.gen = 2; clearTimeout(this.exitTimer);
+        this.introExit(700);
+      }
+    };
+  }
+}
+</script>
+</body>
+</html>

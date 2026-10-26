@@ -1,0 +1,19 @@
+/* Minimal base so a page linking styles.css already looks like SMP.
+   The product clamps the root size between 12.5px and 14px. */
+html{font-size:clamp(12.5px,12px + 0.25vw,14px)}
+body{margin:0;font-family:var(--font-sans);font-size:var(--text-base);background:var(--surface-page);color:var(--text-heading)}
+h1{font-size:var(--text-3xl);font-weight:var(--weight-black);margin:0}
+h2{font-size:var(--text-2xl);font-weight:var(--weight-bold);margin:0}
+h3,h4{font-size:var(--text-sm);font-weight:var(--weight-semibold);margin:0}
+h5{font-size:var(--text-xs);font-weight:var(--weight-semibold);margin:0}
+p{color:var(--text-body);margin:0}
+small{font-size:var(--text-xs)}
+b{color:var(--text-heading)}
+a{color:var(--color-primary-text);text-decoration:none}
+a:hover{color:var(--color-primary-variant);text-decoration:underline}
+.text-muted{color:var(--text-muted)}
+.primary{color:var(--color-primary-text)}
+.danger{color:var(--color-danger-text)}
+.success{color:var(--color-success-text)}
+.warning{color:var(--color-warning-text)}
+*:focus-visible{outline:var(--focus-outline);outline-offset:2px}
