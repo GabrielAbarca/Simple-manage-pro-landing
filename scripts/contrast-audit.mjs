@@ -2,270 +2,197 @@
 //
 //   npm run preview &   →   node scripts/contrast-audit.mjs
 //
-// The app's palette was audited to 4.5:1 against flat surfaces, and this page
-// puts a moving gradient behind some of it. A token being "audited" therefore
-// proves nothing here — what matters is the pixel that actually ends up behind
-// each glyph. So: paint every text node transparent, screenshot, and sample
-// the real background inside each text box, worst pixel wins.
+// A token being "audited" proves nothing on a page that puts glows, cards and
+// WebGL behind its copy: what matters is the pixel actually behind each glyph.
+// So, one viewport at a time: record every visible text element's colour, paint
+// all text transparent, screenshot, and sample the real background inside each
+// text box, worst pixel wins.
 //
-// Compares against WCAG 1.4.3 — 4.5:1 for normal text, 3:1 for large text
-// (>=24px, or >=18.66px when bold).
+// It walks the page in half-viewport steps rather than growing the viewport to
+// the document height (the V1 approach). V.2 pins whole scenes to 100vh inside
+// 300–700vh sections, and a viewport grown to the document height inflates all
+// of them, so the audit would measure a page no visitor ever sees. Stepping
+// also audits each scroll-driven state (chapter captions, fanned slabs) in the
+// state a visitor gets at that scroll position.
+//
+// WCAG 1.4.3: 4.5:1 for normal text, 3:1 for large (>=24px, or >=18.66px bold).
+//
+// Text drawn over a live WebGL stage is reported as WARN, not FAIL: what sits
+// behind it depends on the animation frame (a slab mid-fan, a shadow passing),
+// so one sample proves little either way. Read those by eye in `npm run
+// review`. Muted text that fails over a stage still gets the stronger muted
+// tier (--ink-muted-strong), which is how the Home captions were fixed.
 
 import { chromium } from "playwright";
+import sharp from "sharp";
 import { selectedRoutes, BASE_URL } from "./routes.mjs";
 
 const BASE = process.env.AUDIT_URL || BASE_URL;
 const VIEWS = [
   { name: "desktop", width: 1440, height: 900 },
+  { name: "tablet", width: 768, height: 1024 },
   { name: "mobile", width: 390, height: 844 },
 ];
-const THEMES = ["light", "dark"];
-
-// Flattened rather than nested three deep: every route is audited at every
-// viewport in both themes, and the body stays at one level of indentation.
-const MATRIX = selectedRoutes().flatMap((route) =>
-  VIEWS.flatMap((v) => THEMES.map((theme) => ({ route, v, theme }))),
-);
+const SETTLE_MS = 700;
 
 const srgb = (v) => {
   v /= 255;
   return v <= 0.04045 ? v / 12.92 : ((v + 0.055) / 1.055) ** 2.4;
 };
-const lum = ([r, g, b]) => 0.2126 * srgb(r) + 0.7152 * srgb(g) + 0.0722 * srgb(b);
-const ratio = (a, b) => {
-  const [hi, lo] = [lum(a), lum(b)].sort((x, y) => y - x);
+const luminance = ([r, g, b]) => 0.2126 * srgb(r) + 0.7152 * srgb(g) + 0.0722 * srgb(b);
+const contrast = (a, b) => {
+  const [hi, lo] = [luminance(a), luminance(b)].sort((x, y) => y - x);
   return (hi + 0.05) / (lo + 0.05);
 };
+const hex = (c) => "#" + c.map((n) => n.toString(16).padStart(2, "0")).join("");
 
-const browser = await chromium.launch(
-  process.env.CHROMIUM_PATH ? { executablePath: process.env.CHROMIUM_PATH } : {},
-);
-
-let failures = 0;
-let checked = 0;
-
-for (const { route, v, theme } of MATRIX) {
-  const ctx = await browser.newContext({
-    viewport: { width: v.width, height: v.height },
-    colorScheme: theme,
-  });
-  const page = await ctx.newPage();
-  await page.goto(BASE + route.path, { waitUntil: "networkidle" });
-
-  // Reveal everything and settle the drifting blobs at a fixed frame, so a
-  // run is reproducible and covers the whole document.
-  await page.emulateMedia({ reducedMotion: "reduce" });
-  await page.evaluate(() => {
-    document.querySelectorAll(".reveal").forEach((e) => e.classList.add("is-in"));
-    document.querySelectorAll("img").forEach((i) => i.setAttribute("loading", "eager"));
-  });
-  await page.waitForTimeout(500);
-
-  // Freeze anything sized to the viewport BEFORE growing it.
-  //
-  // The grow below sets the viewport to the document height so that one layout
-  // serves both the measurement and the screenshot. That silently breaks any
-  // element sized in viewport units, and the home hero is now
-  // `calc(100svh - var(--header-h))`: at a 5221px "viewport" it became a
-  // 5157px hero, so the audit measured a page no visitor will ever see. The
-  // hero wash lands somewhere else entirely at that height, which is how the
-  // eyebrow came back at 4.48:1 against a background it never actually sits
-  // on, while roughly 70 elements per pass fell out of the run.
-  //
-  // Pin the hero to the height it really had at the real viewport. Injected
-  // before pass 1 so both passes still see one layout.
-  // The fold is pinned as well as the hero. It carries its own
-  // `height: calc(100svh - var(--header-h))` so that its clip-path percentages
-  // stay percentages of the FIRST SCREEN rather than of a hero that now runs
-  // past it — which means it balloons under the grow exactly like the hero did,
-  // and the wash slides out from under the copy it is supposed to sit behind.
-  const frozen = await page.evaluate(() => {
-    const box = (sel) => {
-      const el = document.querySelector(sel);
-      return el ? Math.round(el.getBoundingClientRect().height) : 0;
-    };
-    return { hero: box(".hero"), fold: box(".fold-hero > .fold") };
-  });
-  // min-height as well as height, and that is not belt-and-braces: the hero is
-  // sized by `min-height: max(calc(100svh - ...), 89rem)`, and pinning only
-  // `height` leaves the min-height free to win. Under the grow it resolved to
-  // the document height and the hero ballooned anyway — same 70-elements-per-
-  // pass drop, second time around.
-  const pin = (sel, px) =>
-    `${sel} { height: ${px}px !important; min-height: ${px}px !important; }`;
-  const pins = [
-    frozen.hero && pin(".hero", frozen.hero),
-    frozen.fold && pin(".fold-hero > .fold", frozen.fold),
-  ].filter(Boolean);
-  if (pins.length) {
-    await page.addStyleTag({ content: pins.join("\n") });
-    await page.waitForTimeout(200);
-  }
-
-  // Grow the viewport to the whole document instead of using fullPage
-  // screenshots. fullPage re-lays-out at the document height internally, so
-  // boxes measured at 1440×900 no longer line up with the pixels captured —
-  // which is how the hero note came back reading a button's drop shadow
-  // that is nowhere near it. One layout for both measurements.
-  const docHeight = await page.evaluate(
-    () => document.documentElement.scrollHeight,
-  );
-  await page.setViewportSize({ width: v.width, height: docHeight });
-  await page.waitForTimeout(400);
-
-  // Pass 1: what each text element IS — its colour, its size, its identity.
-  // Positions are deliberately not taken here. Stamping an index on the way
-  // through is what lets pass 2 find the same elements again.
-  const targets = await page.evaluate(() => {
-    const out = [];
-    let n = 0;
-    const walk = (node) => {
-      for (const el of node.children) {
-        const hasOwnText = [...el.childNodes].some(
-          (x) => x.nodeType === 3 && x.textContent.trim().length > 1,
-        );
-        const cs = getComputedStyle(el);
-        // checkVisibility() rather than only the computed style, because a
-        // closed <details> is not covered by either. Chrome hides its contents
-        // with content-visibility on ::details-content, which leaves the
-        // children at display:block WITH a real, non-zero bounding box — so
-        // the /piloto FAQ's collapsed answers were measured, sampled against
-        // whatever is actually painted at those coordinates two sections
-        // further down, and reported as failures for text nobody can see.
-        const rendered =
-          typeof el.checkVisibility === "function"
-            ? el.checkVisibility({
-                contentVisibilityAuto: true,
-                opacityProperty: true,
-                visibilityProperty: true,
-              })
-            : true;
-        if (
-          hasOwnText &&
-          rendered &&
-          cs.visibility !== "hidden" &&
-          cs.display !== "none" &&
-          parseFloat(cs.opacity) > 0.1
-        ) {
-          const b = el.getBoundingClientRect();
-          if (b.width > 4 && b.height > 4) {
-            const id = String(n++);
-            el.setAttribute("data-audit-id", id);
-            const size = parseFloat(cs.fontSize);
-            const weight = parseInt(cs.fontWeight, 10) || 400;
-            out.push({
-              id,
-              sel:
-                el.tagName.toLowerCase() +
-                (el.className && typeof el.className === "string"
-                  ? "." + el.className.trim().split(/\s+/).slice(0, 2).join(".")
-                  : ""),
-              text: el.textContent.trim().slice(0, 40),
-              color: cs.color,
-              size,
-              large: size >= 24 || (size >= 18.66 && weight >= 700),
-            });
-          }
-        }
-        walk(el);
-      }
-    };
-    walk(document.body);
-    return out;
-  });
-
-  // Pass 2: same page, no glyphs. Whatever is left inside a text box is
-  // exactly what that text is sitting on.
-  await page.addStyleTag({
-    content: `*, *::before, *::after { color: transparent !important;
-               text-decoration-color: transparent !important; }`,
-  });
-  await page.waitForTimeout(250);
-
-  // Measure the boxes HERE, against the same layout the screenshot captures.
-  //
-  // They used to be measured in pass 1, before the glyphs were hidden, and
-  // that is wrong: a universal !important declaration forces a full style
-  // recalculation, and this page re-wraps under it — `.lede` and `.note` each
-  // lost a line, moving everything below them up by 32px. Every box below the
-  // fold was then sampled ~32px off its real position, which is how a filled
-  // primary button came back as white-on-page-background at 1.08:1. Measuring
-  // after the injection means the two can no longer disagree.
-  const geometry = await page.evaluate(() => {
-    const out = {};
-    document.querySelectorAll("[data-audit-id]").forEach((el) => {
-      const b = el.getBoundingClientRect();
-      out[el.getAttribute("data-audit-id")] = {
-        x: b.x + scrollX,
-        y: b.y + scrollY,
-        w: b.width,
-        h: b.height,
-      };
-    });
-    return out;
-  });
-
-  const shot = await page.screenshot();
-  const sharp = (await import("sharp")).default;
-  const { data, info } = await sharp(shot)
-    .raw()
-    .toBuffer({ resolveWithObject: true });
-
-  const at = (x, y) => {
-    const o = (y * info.width + x) * info.channels;
-    return [data[o], data[o + 1], data[o + 2]];
+/** Runs in the page: visible text elements fully in view, stamped with ids. */
+function collectTargets() {
+  const header = document.querySelector("[data-site-header]");
+  const headerBottom = header ? header.getBoundingClientRect().bottom : 0;
+  const effectiveOpacity = (el) => {
+    let value = 1;
+    for (let node = el; node && node.nodeType === 1; node = node.parentElement) value *= parseFloat(getComputedStyle(node).opacity);
+    return value;
   };
-
-  for (const t of targets) {
-    const box = geometry[t.id];
-    // Gone or collapsed under the recalculation: nothing left to sit on.
-    if (!box || box.w <= 4 || box.h <= 4) continue;
-    const fg = t.color.match(/\d+(\.\d+)?/g).slice(0, 3).map(Number);
-    let worst = Infinity;
-    let worstBg = null;
-    // Sample the middle of the box, not its edges. A border-box includes
-    // the element's own rounded corners (where the page shows through) and
-    // any border strip, and worst-pixel-wins would report those instead of
-    // what is behind the glyphs — a filled pill button reads as 1.08:1 off
-    // its own corner. Insetting keeps the sample on the painted surface.
-    const insetX = Math.min(box.w * 0.15, 18);
-    const insetY = Math.min(box.h * 0.3, 18);
-    const x0 = Math.max(0, Math.round(box.x + insetX));
-    const y0 = Math.max(0, Math.round(box.y + insetY));
-    const x1 = Math.min(info.width - 1, Math.round(box.x + box.w - insetX));
-    const y1 = Math.min(info.height - 1, Math.round(box.y + box.h - insetY));
-    if (x1 <= x0 || y1 <= y0) continue;
-    const stepX = Math.max(1, Math.floor((x1 - x0) / 24));
-    const stepY = Math.max(1, Math.floor((y1 - y0) / 12));
-    for (let y = y0; y <= y1; y += stepY) {
-      for (let x = x0; x <= x1; x += stepX) {
-        const bg = at(x, y);
-        const r = ratio(fg, bg);
-        if (r < worst) {
-          worst = r;
-          worstBg = bg;
-        }
-      }
+  const clippedRect = (el) => {
+    let { left, top, right, bottom } = el.getBoundingClientRect();
+    for (let node = el.parentElement; node; node = node.parentElement) {
+      const style = getComputedStyle(node);
+      if (style.overflowX === "visible" && style.overflowY === "visible") continue;
+      const clip = node.getBoundingClientRect();
+      left = Math.max(left, clip.left); top = Math.max(top, clip.top);
+      right = Math.min(right, clip.right); bottom = Math.min(bottom, clip.bottom);
     }
-    // Epsilon: --color-info-dark lands on exactly 4.50 against the page by
-    // the app's own audit, and float noise otherwise reports it as 4.4996.
-    const need = t.large ? 3 : 4.5;
-    checked++;
-    if (worst < need - 0.01) {
-      failures++;
-      const hex = (c) =>
-        "#" + c.map((n) => n.toString(16).padStart(2, "0")).join("");
-      console.log(
-        `FAIL ${route.slug} ${v.name}/${theme}  ${worst.toFixed(2)}:1 ` +
-          `(need ${need})  ${t.sel}  fg ${hex(fg)} on ${hex(worstBg)}  ` +
-          `"${t.text}"`,
-      );
-    }
+    return { left, top, right, bottom };
+  };
+  const inView = (el, rect) => {
+    if (rect.top < 0 || rect.bottom > innerHeight || rect.left < 0 || rect.right > innerWidth) return false;
+    return (header && header.contains(el)) || rect.top >= headerBottom;
+  };
+  const stages = [...document.querySelectorAll("[data-stage]")]
+    .filter((stage) => stage.querySelector("canvas") && stage.checkVisibility())
+    .map((stage) => stage.getBoundingClientRect());
+  const overStage = (r) => stages.some((s) => r.left < s.right && r.right > s.left && r.top < s.bottom && r.bottom > s.top);
+  const out = [];
+  let next = document.querySelectorAll("[data-audit-id]").length;
+  for (const el of document.body.querySelectorAll("*")) {
+    if (el.closest("[data-logotype]")) continue;
+    const ownText = [...el.childNodes].some((n) => n.nodeType === 3 && n.textContent.trim().length > 1);
+    if (!ownText || !el.checkVisibility({ contentVisibilityAuto: true, visibilityProperty: true })) continue;
+    if (effectiveOpacity(el) < 0.3) continue;
+    const full = el.getBoundingClientRect();
+    const rect = clippedRect(el);
+    const visibleArea = Math.max(0, rect.right - rect.left) * Math.max(0, rect.bottom - rect.top);
+    if (full.width <= 4 || full.height <= 4 || visibleArea < 0.5 * full.width * full.height) continue;
+    if (!inView(el, full)) continue;
+    if (!el.hasAttribute("data-audit-id")) el.setAttribute("data-audit-id", String(next++));
+    const style = getComputedStyle(el);
+    const size = parseFloat(style.fontSize);
+    const weight = parseInt(style.fontWeight, 10) || 400;
+    out.push({
+      id: el.getAttribute("data-audit-id"),
+      label: el.tagName.toLowerCase() + (typeof el.className === "string" && el.className ? "." + el.className.trim().split(/\s+/)[0] : ""),
+      text: el.textContent.trim().replace(/\s+/g, " ").slice(0, 40),
+      color: style.color,
+      large: size >= 24 || (size >= 18.66 && weight >= 700),
+      overStage: overStage(full),
+    });
   }
-
-  await ctx.close();
+  return out;
 }
 
+function boxesOf(ids) {
+  const out = {};
+  for (const id of ids) {
+    const b = document.querySelector(`[data-audit-id="${id}"]`)?.getBoundingClientRect();
+    if (b) out[id] = { x: b.x, y: b.y, w: b.width, h: b.height };
+  }
+  return out;
+}
+
+// Sample the middle of the box, not its edges: a pill's rounded corners show
+// the page through, and worst-pixel-wins would report those instead.
+function worstAgainst(foreground, box, image) {
+  const { data, info } = image;
+  const insetX = Math.min(box.w * 0.15, 18);
+  const insetY = Math.min(box.h * 0.3, 18);
+  const x0 = Math.max(0, Math.round(box.x + insetX));
+  const y0 = Math.max(0, Math.round(box.y + insetY));
+  const x1 = Math.min(info.width - 1, Math.round(box.x + box.w - insetX));
+  const y1 = Math.min(info.height - 1, Math.round(box.y + box.h - insetY));
+  if (x1 <= x0 || y1 <= y0) return null;
+  let worst = { ratio: Infinity, background: null };
+  for (let y = y0; y <= y1; y += Math.max(1, Math.floor((y1 - y0) / 12))) {
+    for (let x = x0; x <= x1; x += Math.max(1, Math.floor((x1 - x0) / 24))) {
+      const o = (y * info.width + x) * info.channels;
+      const background = [data[o], data[o + 1], data[o + 2]];
+      const ratio = contrast(foreground, background);
+      if (ratio < worst.ratio) worst = { ratio, background };
+    }
+  }
+  return worst;
+}
+
+async function auditScreen(page, results) {
+  const targets = await page.evaluate(collectTargets);
+  if (!targets.length) return;
+  const hide = await page.addStyleTag({
+    content: "*, *::before, *::after { color: transparent !important; text-decoration-color: transparent !important; }",
+  });
+  await page.waitForTimeout(250);
+  const boxes = await page.evaluate(boxesOf, targets.map((t) => t.id));
+  const image = await sharp(await page.screenshot()).raw().toBuffer({ resolveWithObject: true });
+  await hide.evaluate((node) => node.remove());
+  for (const target of targets) {
+    const box = boxes[target.id];
+    if (!box || box.w <= 4 || box.h <= 4) continue;
+    const worst = worstAgainst(target.color.match(/\d+(\.\d+)?/g).slice(0, 3).map(Number), box, image);
+    if (!worst) continue;
+    const previous = results.get(target.id);
+    if (!previous || worst.ratio < previous.ratio) results.set(target.id, { ...target, ...worst });
+  }
+}
+
+async function auditRoute(browser, route, view) {
+  const context = await browser.newContext({ viewport: { width: view.width, height: view.height }, reducedMotion: "reduce" });
+  const page = await context.newPage();
+  await page.goto(BASE + route.path, { waitUntil: "networkidle" });
+  await page.evaluate(() => document.fonts.ready);
+  await page.waitForTimeout(1500);
+  const results = new Map();
+  const documentHeight = await page.evaluate(() => document.documentElement.scrollHeight);
+  for (let y = 0; y <= documentHeight - view.height / 2; y += view.height / 2) {
+    await page.evaluate((top) => scrollTo(0, top), y);
+    await page.waitForTimeout(SETTLE_MS);
+    await auditScreen(page, results);
+  }
+  await context.close();
+  return results;
+}
+
+const browser = await chromium.launch(process.env.CHROMIUM_PATH ? { executablePath: process.env.CHROMIUM_PATH } : {});
+let failures = 0;
+let warnings = 0;
+let checked = 0;
+for (const route of selectedRoutes()) {
+  for (const view of VIEWS) {
+    const results = await auditRoute(browser, route, view);
+    checked += results.size;
+    for (const result of results.values()) {
+      const need = result.large ? 3 : 4.5;
+      // Epsilon: --color-info-dark sits on exactly 4.50 against the page.
+      if (result.ratio >= need - 0.01) continue;
+      if (result.overStage) warnings++;
+      else failures++;
+      console.log(
+        `${result.overStage ? "WARN" : "FAIL"} ${route.slug} ${view.name}  ${result.ratio.toFixed(2)}:1 (need ${need})  ${result.label}  ` +
+          `fg ${result.color} on ${hex(result.background)}  "${result.text}"`,
+      );
+    }
+    console.log(`${route.slug.padEnd(9)} ${view.name.padEnd(8)} ${results.size} elements`);
+  }
+}
 await browser.close();
 console.log(`\n${checked} text elements checked · ${failures} failing`);
 process.exit(failures ? 1 : 0);

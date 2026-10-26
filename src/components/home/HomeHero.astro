@@ -42,7 +42,7 @@ import { scrollCue } from "../../data/site";
 
     <div class="cue" data-fade>
       <span>{heroCopy.cueLeft}</span>
-      <span class="cue-right">{scrollCue}<span class="cue-line"></span></span>
+      <span class="cue-right"><span>{scrollCue}</span><span class="cue-line"></span></span>
     </div>
   </div>
 </section>
@@ -100,12 +100,14 @@ import { scrollCue } from "../../data/site";
     letter-spacing: -0.05em;
     color: var(--ink);
   }
+  /* Below 1200 the slab stack's shadow sits behind the lead, so it takes the
+     stronger muted tier there (contrast audit). */
   .lead {
     margin: 0;
     max-width: 30rem;
     font-size: 16px;
     line-height: 1.55;
-    color: var(--ink-muted);
+    color: var(--ink-muted-strong);
     text-wrap: pretty;
   }
   .ctas {
@@ -179,6 +181,7 @@ import { scrollCue } from "../../data/site";
     .lead {
       font-size: clamp(16px, 1.25vw, 19px);
       line-height: 1.6;
+      color: var(--ink-muted);
     }
     .ctas {
       gap: 12px;
@@ -212,11 +215,12 @@ import { scrollCue } from "../../data/site";
       color: var(--ink);
       letter-spacing: -0.01em;
     }
+    /* Captions sit on the fanned slabs' drop shadows: stronger muted tier. */
     .body {
       display: block;
       font-size: 14px;
       line-height: 1.5;
-      color: var(--ink-muted);
+      color: var(--ink-muted-strong);
       margin-top: 4px;
     }
     .cue {
@@ -232,7 +236,8 @@ import { scrollCue } from "../../data/site";
       flex-wrap: wrap;
       font-size: 13px;
       font-weight: 500;
-      color: var(--ink-micro);
+      /* Over the glow and the slab shadow: stronger micro tier (contrast audit). */
+      color: var(--ink-micro-strong);
     }
     .cue-right {
       display: flex;

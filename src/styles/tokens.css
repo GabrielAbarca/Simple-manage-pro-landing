@@ -131,6 +131,11 @@
   --ink-lead: #4d5566;
   --ink-muted: #667281;
   --ink-micro: #627388;
+  /* The repo's audited muted tiers (6.3:1 on the page). The design's
+     #667281 / #627388 clear 4.5:1 only on flat surfaces; any muted text the
+     contrast audit fails over a glow or a 3D shadow switches to these. */
+  --ink-muted-strong: #515c6b;
+  --ink-micro-strong: #4e5c70;
   --brand-text: #4455e6;
   --brand-fill: #5a69e9;
   --brand-periwinkle: #7380ec;
