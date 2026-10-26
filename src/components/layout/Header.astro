@@ -1,0 +1,141 @@
+---
+import Logo from "./Logo.astro";
+import MenuPanel from "./MenuPanel.astro";
+import { DEMO_URL, NAV } from "../../config";
+import { headerCopy } from "../../data/site";
+
+const currentPath = Astro.url.pathname.replace(/\/?$/, "/");
+---
+
+<header class="site-header" data-site-header>
+  <Logo href="/" class="header-logo" />
+  <nav class="desktop-nav" aria-label={headerCopy.primaryNavLabel}>
+    {
+      NAV.map((item) => (
+        <a href={item.href} aria-current={item.href === currentPath ? "page" : undefined}>
+          {item.label}
+        </a>
+      ))
+    }
+  </nav>
+  <a class="header-cta" href={DEMO_URL} target="_blank" rel="noopener">{headerCopy.demoCta}</a>
+  <button
+    type="button"
+    class="menu-button"
+    aria-label={headerCopy.openMenu}
+    aria-expanded="false"
+    aria-controls="menu-panel"
+    data-menu-open
+    data-js-only
+  >
+    <span></span><span></span><span></span>
+  </button>
+</header>
+<MenuPanel currentPath={currentPath} />
+
+<script>
+  import { initHeader } from "../../scripts/core/header";
+  import { initMenu } from "../../scripts/core/menu";
+  initHeader();
+  initMenu();
+</script>
+
+<style>
+  .site-header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 30;
+    box-sizing: border-box;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 16px;
+    padding: 16px var(--gutter);
+    color: var(--ink);
+    --logo-fs: 13px;
+    transition:
+      color 400ms var(--ease-move),
+      background 400ms var(--ease-move),
+      padding 400ms var(--ease-move);
+  }
+  .site-header[data-scrolled] {
+    background: var(--header-scrolled);
+    padding-top: 12px;
+    padding-bottom: 12px;
+  }
+  .site-header[data-on-dark] { color: #fff; }
+
+  .desktop-nav,
+  .header-cta { display: none; }
+
+  .menu-button {
+    width: 44px;
+    height: 44px;
+    flex: none;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    border: none;
+    background: transparent;
+    color: inherit;
+    cursor: pointer;
+    padding: 0;
+  }
+  .menu-button span {
+    width: 22px;
+    height: 2px;
+    border-radius: 2px;
+    background: currentColor;
+  }
+
+  @media (min-width: 1200px) {
+    .site-header {
+      gap: 24px;
+      padding: 24px 4vw;
+      --logo-fs: 14px;
+    }
+    .site-header[data-scrolled] {
+      padding-top: 14px;
+      padding-bottom: 14px;
+    }
+    .menu-button { display: none; }
+    .desktop-nav {
+      display: flex;
+      align-items: center;
+      gap: 32px;
+      font-size: 14px;
+      font-weight: 500;
+    }
+    .desktop-nav a { color: inherit; }
+    .desktop-nav a:hover { opacity: 0.7; }
+    .desktop-nav a[aria-current="page"] {
+      color: var(--brand-text);
+      font-weight: 600;
+    }
+    .desktop-nav a[aria-current="page"]:hover { opacity: 1; }
+    .header-cta {
+      display: inline-flex;
+      align-items: center;
+      min-height: 44px;
+      padding: 0 22px;
+      border-radius: 999px;
+      background: var(--ink);
+      color: #fff;
+      font-size: 14px;
+      font-weight: 600;
+      transition:
+        opacity 100ms,
+        background 400ms,
+        color 400ms;
+    }
+    .header-cta:hover { opacity: 0.9; color: #fff; }
+    .site-header[data-on-dark] .header-cta {
+      background: #fff;
+      color: var(--brand-deep);
+    }
+  }
+</style>

@@ -1,0 +1,137 @@
+---
+// The DS <StatCard>: a read-only figure. layout="row" is the admin console's
+// tinted-circle variant; "stack" is the teacher console's square brand tile.
+//
+// The bundle draws the stack variant's label and figure as <h3> and <h1>. On
+// a marketing page that would put a second <h1> in the outline, so both are
+// plain elements here with the same rendered type.
+import type { HTMLAttributes } from "astro/types";
+import Icon from "./Icon.astro";
+import type { IconName } from "./icons";
+
+interface Props extends HTMLAttributes<"div"> {
+  icon: IconName;
+  label: string;
+  value: string | number;
+  hint?: string;
+  tone?: "primary" | "success" | "warning";
+  layout?: "row" | "stack";
+}
+
+const { icon, label, value, hint, tone = "primary", layout = "row", class: className, ...rest } = Astro.props;
+---
+
+{
+  layout === "stack" ? (
+    <div class:list={["stat-card", "stack", className]} data-layout="stack" {...rest}>
+      <span class="stack-chip">
+        <Icon name={icon} size="1.6rem" />
+      </span>
+      <p class="stack-label">{label}</p>
+      <p class="stack-value" data-stat-value>{value}</p>
+      {hint && <small class="stack-hint">{hint}</small>}
+    </div>
+  ) : (
+    <div class:list={["stat-card", "row", className]} data-layout="row" data-tone={tone} {...rest}>
+      <span class="row-chip">
+        <Icon name={icon} size="1.5rem" />
+      </span>
+      <div>
+        <div class="row-label">{label}</div>
+        <div class="row-value" data-stat-value>{value}</div>
+        {hint && <div class="row-hint">{hint}</div>}
+      </div>
+    </div>
+  )
+}
+
+<style>
+  .stat-card {
+    background: var(--color-white);
+    border-radius: var(--card-border-radius);
+    box-shadow: var(--box-shadow);
+    color: var(--text-heading);
+    line-height: normal;
+  }
+
+  .row {
+    padding: 1.2rem 1.4rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  .row-chip {
+    display: inline-flex;
+    padding: 0.6rem;
+    border-radius: 50%;
+  }
+
+  .row[data-tone="primary"] .row-chip {
+    color: var(--color-primary-text);
+    background: color-mix(in srgb, var(--color-primary) 14%, transparent);
+  }
+
+  .row[data-tone="success"] .row-chip {
+    color: var(--color-success-text);
+    background: color-mix(in srgb, var(--color-success) 16%, transparent);
+  }
+
+  .row[data-tone="warning"] .row-chip {
+    color: var(--color-warning-text);
+    background: color-mix(in srgb, var(--color-warning) 20%, transparent);
+  }
+
+  .row-label {
+    font-size: 0.78rem;
+    color: var(--color-dark-variant);
+    margin-bottom: 0.15rem;
+  }
+
+  .row-value {
+    font-size: 1.5rem;
+    line-height: 1.1;
+    font-weight: 800;
+  }
+
+  .row-hint {
+    font-size: 0.72rem;
+    color: var(--color-info-dark);
+    margin-top: 0.2rem;
+  }
+
+  .stack {
+    padding: var(--card-padding);
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .stack-chip {
+    background: var(--color-primary);
+    color: var(--color-white);
+    padding: 0.5rem;
+    border-radius: var(--border-radius-1);
+    width: fit-content;
+    display: inline-flex;
+  }
+
+  .stack-label {
+    margin: 0;
+    font-size: 0.85rem;
+    color: var(--color-dark-variant);
+    font-weight: 600;
+  }
+
+  .stack-value {
+    margin: 0;
+    font-size: 1.8rem;
+    font-weight: var(--weight-black);
+    color: var(--text-heading);
+  }
+
+  .stack-hint {
+    font-size: var(--text-xs);
+    color: var(--color-info-dark);
+  }
+</style>

@@ -1,0 +1,95 @@
+---
+// The DS <ProgressRing>: a 14px round-capped arc with the figure centred
+// inside. Geometry is the bundle's verbatim (r 37, dash 232, translate 7),
+// including the arc starting at three o'clock. setProgressRing() updates the
+// [data-ring-value] arc and the [data-ring-label] text at runtime.
+import type { HTMLAttributes } from "astro/types";
+import {
+  PROGRESS_RING_CIRCUMFERENCE,
+  clampToPercentage,
+  computeProgressRingDashOffset,
+} from "../../scripts/ui/ds-runtime";
+
+interface Props extends Omit<HTMLAttributes<"div">, "style"> {
+  /** 0 to 100. */
+  value: number;
+  /** Rendered square size in px. */
+  size?: number;
+  /** Arc colour; any CSS colour. */
+  color?: string;
+  /** Replaces the default "N%" text. */
+  label?: string;
+  style?: string;
+}
+
+const {
+  value,
+  size = 92,
+  color = "var(--color-primary)",
+  label,
+  class: className,
+  style: callerStyle,
+  ...rest
+} = Astro.props;
+
+const dashOffset = computeProgressRingDashOffset(value);
+const visibleLabel = label ?? `${value}%`;
+const inlineStyle = [`width:${size}px;height:${size}px`, callerStyle].filter(Boolean).join(";");
+---
+
+<div
+  class:list={["progress-ring", className]}
+  data-progress-ring
+  data-value={clampToPercentage(value)}
+  style={inlineStyle}
+  {...rest}
+>
+  <svg width={size} height={size} viewBox="0 0 92 92" aria-hidden="true" focusable="false">
+    <circle
+      data-ring-value
+      cx="38"
+      cy="38"
+      r="37"
+      fill="none"
+      stroke={color}
+      stroke-width="14"
+      stroke-linecap="round"
+      transform="translate(7,7)"
+      stroke-dasharray={PROGRESS_RING_CIRCUMFERENCE}
+      stroke-dashoffset={dashOffset}></circle>
+  </svg>
+  <div class="label-layer">
+    <p class="label" data-ring-label>{visibleLabel}</p>
+  </div>
+</div>
+
+<style>
+  .progress-ring {
+    position: relative;
+    line-height: normal;
+  }
+
+  circle {
+    transition: stroke-dashoffset 1s ease;
+  }
+
+  .label-layer {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .label {
+    margin: 0;
+    font-size: var(--text-sm);
+    color: var(--color-dark-variant);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    circle {
+      transition: none;
+    }
+  }
+</style>

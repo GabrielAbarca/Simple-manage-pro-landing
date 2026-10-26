@@ -1,0 +1,67 @@
+---
+// The DS <Card>: the one surface every SMP view is built from. Its wide
+// tinted shadow FLATTENS on hover instead of deepening; only a `clickable`
+// card lifts, because only then does it actually open something.
+import type { HTMLAttributes } from "astro/types";
+
+type CardElement = "div" | "article" | "section" | "li" | "aside";
+
+interface Props extends Omit<HTMLAttributes<"div">, "style"> {
+  clickable?: boolean;
+  /** Any CSS padding value. Defaults to var(--card-padding). */
+  padding?: string;
+  as?: CardElement;
+  style?: string;
+}
+
+const { clickable = false, padding, as = "div", class: className, style: callerStyle, ...rest } = Astro.props;
+
+const Element = as;
+const paddingDeclaration = padding ? `padding:${padding}` : "";
+const inlineStyle = [paddingDeclaration, callerStyle].filter(Boolean).join(";") || undefined;
+---
+
+<Element
+  class:list={["card", className]}
+  data-clickable={clickable ? "true" : undefined}
+  style={inlineStyle}
+  {...rest}
+>
+  <slot />
+</Element>
+
+<style>
+  .card {
+    background: var(--surface-card);
+    border-radius: var(--card-border-radius);
+    padding: var(--card-padding);
+    box-shadow: var(--box-shadow);
+    transform: none;
+    transition:
+      box-shadow var(--duration-micro) var(--ease-out),
+      transform var(--duration-micro) var(--ease-out);
+    cursor: default;
+    border: none;
+    text-align: left;
+    color: var(--text-heading);
+  }
+
+  .card:hover {
+    box-shadow: none;
+  }
+
+  .card[data-clickable="true"] {
+    cursor: pointer;
+  }
+
+  .card[data-clickable="true"]:hover {
+    box-shadow: var(--shadow-md);
+    transform: translateY(var(--lift-hover));
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .card[data-clickable="true"]:hover {
+      transform: none;
+    }
+  }
+</style>

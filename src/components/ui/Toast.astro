@@ -1,0 +1,114 @@
+---
+// The DS <Toast> inside the prototypes' page-level wrapper: fixed, top-centre
+// and above the header, because status belongs where the eye already is.
+// Render one per page; showToast() in src/scripts/ui/toast.ts finds it by
+// [data-toast], writes the message and toggles data-visible.
+//
+// Both glyphs are rendered and the tone picks one in CSS, so a script can
+// switch tone without re-rendering markup.
+import type { HTMLAttributes } from "astro/types";
+import type { ToastTone } from "../../scripts/ui/toast";
+import Icon from "./Icon.astro";
+
+interface Props extends HTMLAttributes<"div"> {
+  tone?: ToastTone;
+  /** Initial text; normally empty and written by showToast(). */
+  message?: string;
+}
+
+const { tone = "success", message = "", class: className, ...rest } = Astro.props;
+---
+
+<div
+  class:list={["toast-viewport", className]}
+  role="status"
+  aria-live="polite"
+  data-toast
+  data-tone={tone}
+  data-visible="false"
+  {...rest}
+>
+  <div class="toast-motion">
+    <div class="toast">
+      <span class="glyph" data-toast-glyph="success"><Icon name="check_circle" color="var(--color-success)" /></span>
+      <span class="glyph" data-toast-glyph="danger"><Icon name="error" color="var(--color-danger)" /></span>
+      <span data-toast-message>{message}</span>
+    </div>
+  </div>
+</div>
+
+<style>
+  .toast-viewport {
+    position: fixed;
+    top: 80px;
+    left: 0;
+    right: 0;
+    z-index: 40;
+    display: flex;
+    justify-content: center;
+    pointer-events: none;
+  }
+
+  @media (min-width: 1200px) {
+    .toast-viewport {
+      top: 96px;
+    }
+  }
+
+  .toast-motion {
+    opacity: 0;
+    transform: translateY(-12px);
+    visibility: hidden;
+    transition:
+      opacity 250ms cubic-bezier(0.16, 1, 0.3, 1),
+      transform 250ms cubic-bezier(0.16, 1, 0.3, 1),
+      visibility 0s linear 250ms;
+  }
+
+  /* Hidden toasts leave the accessibility tree once faded, so a stale
+     message is never read out of context. */
+  [data-visible="true"] .toast-motion {
+    opacity: 1;
+    transform: translateY(0);
+    visibility: visible;
+    transition-delay: 0s;
+  }
+
+  .toast {
+    --toast-accent: var(--color-success);
+    background: var(--color-white);
+    border-radius: var(--border-radius-1);
+    padding: 0.9rem 1.4rem;
+    box-shadow: var(--shadow-md);
+    font-size: 0.85rem;
+    line-height: normal;
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    min-width: 240px;
+    border-left: 4px solid var(--toast-accent);
+    color: var(--color-dark);
+  }
+
+  [data-tone="danger"] .toast {
+    --toast-accent: var(--color-danger);
+  }
+
+  /* A flex box, so the glyph is laid out like the bare flex-item svg the DS
+     renders and adds no line box of its own. */
+  .glyph {
+    display: flex;
+  }
+
+  [data-tone="success"] [data-toast-glyph="danger"],
+  [data-tone="danger"] [data-toast-glyph="success"] {
+    display: none;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .toast-motion,
+    [data-visible="true"] .toast-motion {
+      transform: none;
+    }
+  }
+</style>

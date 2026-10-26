@@ -1,0 +1,84 @@
+/* The pill family from the V.2 prototypes. Sizes vary per instance in the
+   design (24, 28 or 32px side padding), so the box reads custom properties a
+   section can override at a breakpoint instead of growing more classes. */
+
+.pill {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--pill-gap, 0);
+  min-height: var(--pill-h, 52px);
+  padding: 0 var(--pill-px, 28px);
+  border-radius: 999px;
+  font-size: var(--pill-fs, 15px);
+  font-weight: 600;
+  font-family: inherit;
+  cursor: pointer;
+  white-space: nowrap;
+}
+.pill-lg { --pill-h: 56px; --pill-px: 32px; --pill-fs: 16px; }
+.pill-sm { --pill-h: 44px; --pill-px: 22px; --pill-fs: 14px; }
+
+.pill-primary {
+  background: var(--brand-fill);
+  color: #fff;
+  border: none;
+  box-shadow: var(--shadow-primary);
+  transition: opacity 100ms;
+}
+.pill-primary:hover { opacity: 0.9; color: #fff; }
+
+.pill-outline {
+  background: transparent;
+  color: var(--ink);
+  border: 1px solid var(--ink-micro);
+  transition: background 100ms;
+}
+.pill-outline:hover { background: rgba(0, 0, 0, 0.04); color: var(--ink); }
+
+.pill-dark {
+  background: var(--ink);
+  color: #fff;
+  border: none;
+  transition: opacity 100ms;
+}
+.pill-dark:hover { opacity: 0.9; color: #fff; }
+
+/* A pill or text link that ends in a 28px rule. */
+.rule-after::after {
+  content: "";
+  width: 28px;
+  height: 1px;
+  background: currentColor;
+}
+
+.text-rule {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  min-height: 44px;
+  color: var(--brand-text);
+  font-size: 16px;
+  font-weight: 600;
+}
+.text-rule:hover { color: var(--brand-deep); }
+
+/* CTA groups: stacked and full width on phones, inline from tablet up. */
+.cta-group {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 10px;
+}
+.cta-group > .pill,
+.cta-group > .text-rule { justify-content: center; }
+
+@media (min-width: 768px) {
+  .cta-group {
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 12px;
+  }
+  .cta-group > .pill,
+  .cta-group > .text-rule { justify-content: flex-start; }
+}

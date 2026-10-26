@@ -1,10 +1,12 @@
 ---
 import "../styles/tokens.css";
-import "../styles/base.css";
+import "../styles/globals.css";
+import "../styles/buttons.css";
 import Analytics from "@vercel/analytics/astro";
 import SpeedInsights from "@vercel/speed-insights/astro";
-import Header from "../components/Header.astro";
-import Footer from "../components/Footer.astro";
+import Header from "../components/layout/Header.astro";
+import Footer from "../components/layout/Footer.astro";
+import Toast from "../components/ui/Toast.astro";
 import { SITE_NAME } from "../config";
 
 interface Props {
@@ -17,6 +19,10 @@ interface Props {
   ogType?: "website" | "article";
   /** Set false when the title already ends in the brand. */
   brandInTitle?: boolean;
+  /** Reveal timing profile (src/scripts/core/reveal.ts). */
+  revealProfile?: "page" | "contacto" | "home";
+  /** Pages with live UI that confirms an action ("Guardado.", "Copiado."). */
+  withToast?: boolean;
 }
 
 const {
@@ -26,6 +32,8 @@ const {
   ogImageAlt = "Simple Manage Pro, el sistema con el que su colegio lleva el curso lectivo.",
   ogType = "website",
   brandInTitle = true,
+  revealProfile = "page",
+  withToast = false,
 } = Astro.props;
 
 const fullTitle = brandInTitle ? `${title} | ${SITE_NAME}` : title;
@@ -82,19 +90,10 @@ const ogImageUrl = new URL(ogImage, Astro.site);
     <link rel="icon" type="image/png" sizes="192x192" href="/android-chrome-192x192.png" />
     <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
     <link rel="manifest" href="/site.webmanifest" />
-    <meta
-      name="theme-color"
-      media="(prefers-color-scheme: light)"
-      content="#f6f6f9"
-    />
-    <meta
-      name="theme-color"
-      media="(prefers-color-scheme: dark)"
-      content="#181a1e"
-    />
+    <meta name="theme-color" content="#f6f6f9" />
 
-    {/* Only the weights that render above the fold. 800 is the display head,
-        700 the wordmark, 600 the nav and eyebrows, 400 the lede. */}
+    {/* Only the weights that render above the fold. 800 is the display head
+        and the logotype, 600 the nav and pills, 400 the lede. */}
     <link
       rel="preload"
       as="font"
@@ -106,7 +105,7 @@ const ogImageUrl = new URL(ogImage, Astro.site);
       rel="preload"
       as="font"
       type="font/woff2"
-      href="/fonts/poppins-latin-700-normal.woff2"
+      href="/fonts/poppins-latin-600-normal.woff2"
       crossorigin
     />
     <link
@@ -117,13 +116,16 @@ const ogImageUrl = new URL(ogImage, Astro.site);
       crossorigin
     />
 
-    {/* Set before first paint so a returning visitor never sees a flash of
-        the other theme. */}
+    {/* Set before first paint. `js` arms the scripted surfaces (3D stages,
+        menu button); `motion` arms the reveal start states and the Home intro,
+        and is withheld under prefers-reduced-motion so those pages render in
+        their final state instead of animating to it. */}
     <script is:inline>
-      try {
-        const saved = localStorage.getItem("smp-landing-theme");
-        if (saved) document.documentElement.dataset.theme = saved;
-      } catch (e) {}
+      (function () {
+        var root = document.documentElement;
+        root.classList.add("js");
+        if (!matchMedia("(prefers-reduced-motion: reduce)").matches) root.classList.add("motion");
+      })();
     </script>
 
     {/* Prefetch the next route on hover/pointerdown so a director clicking
@@ -142,99 +144,28 @@ const ogImageUrl = new URL(ogImage, Astro.site);
     {/* Per-page structured data and any other head extras. */}
     <slot name="head" />
   </head>
-  <body>
-    <a class="skip" href="#contenido">Saltar al contenido</a>
+  <body data-reveal-profile={revealProfile}>
+    <a class="skip-link" href="#contenido">Saltar al contenido</a>
     <Header />
     <main id="contenido">
       <slot />
     </main>
     <Footer />
+    {withToast && <Toast />}
 
     {/* Vercel Web Analytics and Speed Insights. Both are cookie-free, so there
         is no consent banner and nothing to explain under Ley 8968 (BRIEF §9).
-        Speed Insights adds real-user Core Web Vitals, which matter here because
-        the primary channel is a WhatsApp forward opening on mobile data.
 
-        Deliberately here and not in <head>, where Vercel's docs put them. Each
-        component renders a real custom element (<vercel-analytics>,
-        <vercel-speed-insights>), and an unknown element in <head> ends head
-        parsing: everything below it, including the theme script and the JSON-LD
-        slot, would be reparented into <body> and the theme script would then
-        run after first paint, which is the flash it exists to prevent. */}
+        Deliberately here and not in <head>: each renders a custom element, and
+        an unknown element in <head> ends head parsing, which would reparent
+        the gate script and the JSON-LD slot into <body>. */}
     <Analytics />
     <SpeedInsights />
 
     <script>
-      // Progressive enhancement in the literal sense: the reveal styles are
-      // gated behind .js, so this class going on is what arms them. Without JS
-      // every page renders complete and static.
-      const reduced = matchMedia("(prefers-reduced-motion: reduce)");
-
-      if (!reduced.matches) {
-        document.documentElement.classList.add("js");
-
-        // Deliberately a scroll sweep rather than an IntersectionObserver.
-        //
-        // IO only reports at the moments an element CROSSES its threshold.
-        // Miss that window — a fling scroll on a phone, a jumped scroll
-        // position, a background tab throttling frames — and the element is
-        // never reported again, so a section that is opacity:0 until told
-        // otherwise stays invisible for the rest of the visit. That is exactly
-        // what happened to the "Hoy / Con Simple Manage Pro" block under a
-        // 400px-per-tick scroll, and losing a whole section of the argument is
-        // far worse than losing an animation.
-        //
-        // Re-testing position on every scroll cannot miss: it asks "is it in
-        // view NOW", not "did it cross just now". The list only shrinks, and
-        // the listener detaches once it empties.
-        let pending = [...document.querySelectorAll<HTMLElement>(".reveal")];
-        let queued = false;
-
-        const sweep = () => {
-          queued = false;
-          const limit = innerHeight * 0.92; // reveal just before fully in view
-          pending = pending.filter((el) => {
-            if (el.getBoundingClientRect().top > limit) return true;
-            el.classList.add("is-in");
-            return false;
-          });
-          if (!pending.length) removeEventListener("scroll", onScroll);
-        };
-
-        const onScroll = () => {
-          if (queued) return;
-          queued = true;
-          requestAnimationFrame(sweep);
-        };
-
-        addEventListener("scroll", onScroll, { passive: true });
-        addEventListener("resize", onScroll, { passive: true });
-        sweep();
-      }
+      import { initReveal, REVEAL_PROFILES } from "../scripts/core/reveal";
+      const profileName = document.body.dataset.revealProfile ?? "page";
+      initReveal(REVEAL_PROFILES[profileName] ?? REVEAL_PROFILES.page);
     </script>
-
-    <style>
-      /* Visible only on keyboard focus. Placed before the sticky header in
-         the DOM so it is the first stop, and given a z-index above it so it
-         is not painted underneath. */
-      .skip {
-        position: fixed;
-        top: var(--space-2);
-        left: var(--space-2);
-        z-index: 100;
-        padding: 0.7rem 1.1rem;
-        border-radius: var(--border-radius-2);
-        background: var(--color-white);
-        color: var(--color-dark);
-        font-weight: 600;
-        text-decoration: none;
-        box-shadow: var(--elev-2);
-        transform: translateY(calc(-100% - var(--space-3)));
-        transition: transform var(--dur-fast) var(--ease-out);
-      }
-      .skip:focus-visible {
-        transform: translateY(0);
-      }
-    </style>
   </body>
 </html>

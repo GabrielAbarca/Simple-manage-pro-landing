@@ -1,0 +1,78 @@
+---
+// The DS <GradeBar>: the 6px track in the subject-performance list. The fill
+// colour comes from the score band (>=85 success, >=70 warning, below that
+// danger), carried as data-band so setGradeBar() can move it at runtime.
+import type { HTMLAttributes } from "astro/types";
+import { computeGradePercentage, resolveGradeBand } from "../../scripts/ui/ds-runtime";
+
+interface Props extends Omit<HTMLAttributes<"span">, "style"> {
+  value: number;
+  max?: number;
+  /** Overrides the band colour; any CSS colour. */
+  color?: string;
+  /**
+   * A number is px, as in the DS. A string is any CSS length, so a page can
+   * express the prototype's viewport-scaled width (clamp(60px, 10vw, 220px))
+   * without a script.
+   */
+  width?: number | string;
+  style?: string;
+}
+
+const { value, max = 100, color, width = 60, class: className, style: callerStyle, ...rest } = Astro.props;
+
+const percentage = computeGradePercentage(value, max);
+const band = resolveGradeBand(percentage);
+const trackWidth = typeof width === "number" ? `${width}px` : width;
+const trackStyle = [`width:${trackWidth}`, callerStyle].filter(Boolean).join(";");
+const fillColorDeclaration = color ? `;background:${color}` : "";
+const fillStyle = `width:${percentage}%${fillColorDeclaration}`;
+---
+
+<span
+  class:list={["grade-bar", className]}
+  data-grade-bar
+  data-band={band}
+  data-value={value}
+  data-max={max}
+  style={trackStyle}
+  {...rest}
+>
+  <span class="fill" data-grade-bar-fill style={fillStyle}></span>
+</span>
+
+<style>
+  .grade-bar {
+    display: block;
+    height: 6px;
+    background: var(--color-light);
+    border-radius: 3px;
+    overflow: hidden;
+    margin-top: 0.3rem;
+  }
+
+  .fill {
+    display: block;
+    height: 100%;
+    border-radius: 3px;
+    transition: width 800ms ease;
+  }
+
+  .grade-bar[data-band="success"] .fill {
+    background: var(--color-success);
+  }
+
+  .grade-bar[data-band="warning"] .fill {
+    background: var(--color-warning);
+  }
+
+  .grade-bar[data-band="danger"] .fill {
+    background: var(--color-danger);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .fill {
+      transition: none;
+    }
+  }
+</style>

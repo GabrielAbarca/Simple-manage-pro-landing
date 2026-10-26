@@ -1,0 +1,112 @@
+---
+// The DS <TodayCard>: a row on the teacher's Today page. Subject-coloured
+// rail, the period's start and end, the class, then the actions that start
+// the lesson. The actions column renders even when empty because the DS
+// always reserves its padding, and the row's proportions depend on it.
+import type { HTMLAttributes } from "astro/types";
+
+interface Props extends Omit<HTMLAttributes<"div">, "style"> {
+  start: string;
+  end: string;
+  subject: string;
+  meta: string;
+  /** Rail colour; any CSS colour. */
+  accent?: string;
+  /** The DS uses <h3>; drop it to <p> where the card is a product mock. */
+  subjectElement?: "h3" | "h4" | "p";
+  style?: string;
+}
+
+const {
+  start,
+  end,
+  subject,
+  meta,
+  accent = "var(--color-primary)",
+  subjectElement = "h3",
+  class: className,
+  style: callerStyle,
+  ...rest
+} = Astro.props;
+
+const SubjectElement = subjectElement;
+const inlineStyle = [`--today-card-accent:${accent}`, callerStyle].filter(Boolean).join(";");
+---
+
+<div class:list={["today-card", className]} style={inlineStyle} {...rest}>
+  <span class="rail" aria-hidden="true"></span>
+  <div class="period">
+    <b class="start">{start}</b>
+    <span class="end">{end}</span>
+  </div>
+  <div class="lesson">
+    <SubjectElement class="subject">{subject}</SubjectElement>
+    <p class="meta">{meta}</p>
+  </div>
+  <div class="actions"><slot name="actions" /></div>
+</div>
+
+<style>
+  .today-card {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    background: var(--color-white);
+    border-radius: var(--card-border-radius);
+    box-shadow: var(--box-shadow);
+    overflow: hidden;
+    padding: 0;
+    line-height: normal;
+    color: var(--text-heading);
+  }
+
+  .rail {
+    width: 6px;
+    align-self: stretch;
+    background: var(--today-card-accent);
+  }
+
+  .period {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-width: 64px;
+    padding: 1rem 0;
+  }
+
+  .start {
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--color-dark);
+  }
+
+  .end {
+    font-size: 0.78rem;
+    color: var(--color-dark-variant);
+  }
+
+  .lesson {
+    flex: 1;
+    padding: 1rem 0;
+  }
+
+  .subject {
+    margin: 0;
+    font-size: 1rem;
+    font-weight: var(--weight-semibold);
+    color: var(--color-dark);
+  }
+
+  .meta {
+    margin: 0.2rem 0 0;
+    font-size: var(--text-sm);
+    color: var(--color-dark-variant);
+  }
+
+  .actions {
+    display: flex;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+    padding: 0 1.2rem;
+  }
+</style>

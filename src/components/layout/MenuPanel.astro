@@ -1,0 +1,161 @@
+---
+// Mobile and tablet navigation: a panel that slides in from the right over a
+// lilac scrim. Closed, it is inert and aria-hidden, so neither focus nor a
+// screen reader can wander into it.
+import Logo from "./Logo.astro";
+import { EMAIL, NAV, mailtoHref, waHref } from "../../config";
+import { headerCopy, menuContacts } from "../../data/site";
+
+interface Props {
+  currentPath: string;
+}
+
+const { currentPath } = Astro.props;
+---
+
+<div class="menu-root" id="menu-panel" data-menu aria-hidden="true" inert data-js-only>
+  <div class="scrim" data-menu-close></div>
+  <nav class="panel" aria-label={headerCopy.menuLabel}>
+    <div class="panel-top">
+      <Logo href="/" />
+      <button type="button" class="close" aria-label={headerCopy.closeMenu} data-menu-close>
+        <span></span><span></span>
+      </button>
+    </div>
+    <div class="links">
+      {
+        NAV.map((item) => (
+          <a href={item.href} aria-current={item.href === currentPath ? "page" : undefined}>
+            {item.label}
+          </a>
+        ))
+      }
+    </div>
+    <div class="contacts">
+      <a href={waHref()} target="_blank" rel="noopener">
+        <span class="micro-label">{menuContacts.whatsappLabel}</span>
+        <span class="value">{menuContacts.whatsappDisplay}</span>
+      </a>
+      <a href={mailtoHref()}>
+        <span class="micro-label">{menuContacts.emailLabel}</span>
+        <span class="value">{EMAIL}</span>
+      </a>
+    </div>
+  </nav>
+</div>
+
+<style>
+  .menu-root {
+    position: fixed;
+    inset: 0;
+    z-index: 60;
+    pointer-events: none;
+    --logo-fs: 13px;
+  }
+  .menu-root[data-open] { pointer-events: auto; }
+
+  .scrim {
+    position: absolute;
+    inset: 0;
+    background: var(--menu-scrim);
+    opacity: 0;
+    transition: opacity 400ms var(--ease-move);
+  }
+  .menu-root[data-open] .scrim { opacity: 1; }
+
+  .panel {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    width: 85%;
+    box-sizing: border-box;
+    background: #fff;
+    box-shadow: var(--shadow-menu);
+    transform: translateX(101%);
+    transition: transform 400ms var(--ease-move);
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+    padding: 12px 24px 32px;
+    overflow-y: auto;
+  }
+  .menu-root[data-open] .panel { transform: translateX(0); }
+
+  .panel-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 16px;
+    min-height: 56px;
+    color: var(--ink);
+  }
+  .close {
+    position: relative;
+    width: 44px;
+    height: 44px;
+    flex: none;
+    border: none;
+    border-radius: 999px;
+    background: var(--page);
+    color: var(--ink);
+    cursor: pointer;
+    padding: 0;
+  }
+  .close span {
+    position: absolute;
+    left: 13px;
+    top: 21px;
+    width: 18px;
+    height: 2px;
+    border-radius: 2px;
+    background: currentColor;
+    transform: rotate(45deg);
+  }
+  .close span + span { transform: rotate(-45deg); }
+
+  .links {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+  .links a {
+    display: flex;
+    align-items: center;
+    min-height: 64px;
+    font-size: clamp(30px, 9vw, 40px);
+    font-weight: 800;
+    letter-spacing: -0.045em;
+    color: var(--ink);
+    border-bottom: 1px solid var(--hairline-menu);
+  }
+  .links a[aria-current="page"] { color: var(--brand-text); }
+
+  .contacts {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+  .contacts a {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 2px;
+    min-height: 56px;
+    color: var(--ink);
+  }
+  .value {
+    font-size: 17px;
+    font-weight: 600;
+  }
+
+  @media (min-width: 768px) {
+    .panel { width: min(85%, 480px); }
+    .links a { font-size: clamp(30px, 6.75vw, 60px); }
+  }
+
+  @media (min-width: 1200px) {
+    .menu-root { display: none; }
+  }
+</style>

@@ -1,12 +1,10 @@
 ---
 import Layout from "../layouts/Layout.astro";
-import Hero from "../components/sections/Hero.astro";
-import Problema from "../components/sections/Problema.astro";
-import PortalesResumen from "../components/sections/PortalesResumen.astro";
-import Datos from "../components/sections/Datos.astro";
-import PilotoResumen from "../components/sections/PilotoResumen.astro";
-import CierreCta from "../components/sections/CierreCta.astro";
+import HomeHero from "../components/home/HomeHero.astro";
+import HomeSecurity from "../components/home/HomeSecurity.astro";
+import HomeContact from "../components/home/HomeContact.astro";
 import { DEMO_URL, EMAIL, SITE_NAME } from "../config";
+import { homeMeta } from "../data/home";
 
 const site = Astro.site?.origin ?? "https://simplemanagepro.com";
 
@@ -26,8 +24,7 @@ const jsonLd = {
       areaServed: { "@type": "Country", name: "Costa Rica" },
       founder: { "@type": "Person", name: "Gabriel Zelaya" },
       // The entity-resolution signal that ties the brand to a reachable
-      // channel. Email only: the WhatsApp number in config is still a
-      // placeholder, and a placeholder phone in schema is worse than none.
+      // channel.
       contactPoint: {
         "@type": "ContactPoint",
         contactType: "customer support",
@@ -54,7 +51,7 @@ const jsonLd = {
       url: site,
       publisher: { "@id": `${site}/#organization` },
       description:
-        "Sistema de gestión escolar para colegios de Costa Rica: notas, asistencia, horarios, documentos externos, con consolas separadas para la dirección, los docentes y los estudiantes.",
+        "Sistema de gestión escolar para colegios de Costa Rica: notas, asistencia, horarios y expedientes, con portales para la dirección, los docentes y los estudiantes.",
       featureList: [
         "Curso lectivo y periodos",
         "Niveles, secciones y aulas",
@@ -70,10 +67,7 @@ const jsonLd = {
 };
 ---
 
-<Layout
-  title="Sistema de gestión escolar en Costa Rica"
-  description="Notas, asistencia, horarios y expedientes de su colegio en un solo sistema, para la dirección, los docentes y los estudiantes. Piloto 2027 para tres colegios."
->
+<Layout title={homeMeta.title} description={homeMeta.description} revealProfile="home">
   <script
     slot="head"
     is:inline
@@ -81,10 +75,12 @@ const jsonLd = {
     set:html={JSON.stringify(jsonLd)}
   />
 
-  <Hero />
-  <Problema />
-  <PortalesResumen />
-  <Datos />
-  <PilotoResumen />
-  <CierreCta />
+  <HomeHero />
+  <HomeSecurity />
+  <HomeContact />
 </Layout>
+
+<script>
+  import { initHomePage } from "../scripts/home/page";
+  initHomePage();
+</script>

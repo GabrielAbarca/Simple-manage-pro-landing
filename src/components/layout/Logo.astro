@@ -1,0 +1,40 @@
+---
+// The SIMPLE MANAGE PRO lockup: app icon plus the caps logotype. The crimson
+// half is the app's own sidebar colour; the contrast audit skips it through
+// data-logotype, since WCAG 1.4.3 exempts logotypes.
+interface Props {
+  href?: string;
+  class?: string;
+}
+
+const { href, class: className } = Astro.props;
+const Tag = href ? "a" : "div";
+---
+
+<Tag href={href} class:list={["logo", className]} aria-label={href ? "Simple Manage Pro, inicio" : undefined}>
+  <img src="/apple-touch-icon.png" alt="" width="32" height="32" />
+  <span>SIMPLE</span><span class="accent" data-logotype>MANAGE PRO</span>
+</Tag>
+
+<style>
+  .logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: var(--logo-fs, 14px);
+    font-weight: 800;
+    letter-spacing: 0.04em;
+    white-space: nowrap;
+    color: inherit;
+  }
+  a.logo:hover { color: inherit; }
+  img {
+    width: 32px;
+    height: 32px;
+    border-radius: 9px;
+  }
+  .accent {
+    color: var(--logo-accent);
+    margin-left: -4px;
+  }
+</style>

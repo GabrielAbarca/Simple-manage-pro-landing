@@ -4,29 +4,41 @@
 
 export const DEMO_URL = "https://demo.simplemanagepro.com";
 
-// Legal pages live on the demo origin. BRIEF §9: link them, never copy them —
+// Legal pages live on the demo origin. BRIEF §9: link them, never copy them:
 // two divergent privacy policies is a real liability.
 export const PRIVACY_URL = `${DEMO_URL}/privacy.html`;
 export const TERMS_URL = `${DEMO_URL}/terms.html`;
 
-// TODO: real number. wa.me wants digits only, country code first (506 = CR).
+// wa.me wants digits only, country code first (506 = CR).
 export const WHATSAPP = "50671848300";
 export const EMAIL = "contact@gzelaya.com";
 
-export const WHATSAPP_MSG =
+// Two prefills: the pilot one everywhere a director is deciding whether to
+// apply, the product one where the reader is still evaluating the software.
+export const WA_MSG_PILOTO =
   "Buenas, soy director/a de [colegio] y quisiera conocer más sobre el piloto 2027.";
+export const WA_MSG_PRODUCTO =
+  "Buenas, soy director/a de [colegio] y quisiera conocer más sobre Simple Manage Pro.";
 
-export const waHref = `https://wa.me/${WHATSAPP}?text=${encodeURIComponent(
-  WHATSAPP_MSG,
-)}`;
+export function waHref(message: string = WA_MSG_PILOTO): string {
+  return `https://wa.me/${WHATSAPP}?text=${encodeURIComponent(message)}`;
+}
 
-// Nav order is the director's reading order, not the sitemap's: what it is,
-// then what it costs to try, then who is behind it, then how to make contact.
+export const mailtoHref = (subject?: string): string =>
+  subject ? `mailto:${EMAIL}?subject=${encodeURIComponent(subject)}` : `mailto:${EMAIL}`;
+
+// Hrefs carry the trailing slash the build serves (trailingSlash: "always"),
+// so a nav click never costs a redirect.
 export const NAV = [
-  { href: "/portales", label: "Portales" },
-  { href: "/piloto", label: "Piloto 2027" },
-  { href: "/nosotros", label: "Nosotros" },
-  { href: "/contacto", label: "Contacto" },
+  { href: "/", label: "Inicio" },
+  { href: "/producto/", label: "Producto" },
+  { href: "/piloto/", label: "Piloto 2027" },
+  { href: "/nosotros/", label: "Nosotros" },
+  { href: "/contacto/", label: "Contacto" },
 ] as const;
+
+// The design's three layouts. CSS uses the same numbers as min-width queries;
+// the 3D scenes read them through matchMedia (src/scripts/core/breakpoints.ts).
+export const BREAKPOINTS = { tablet: 768, desktop: 1200 } as const;
 
 export const SITE_NAME = "Simple Manage Pro";

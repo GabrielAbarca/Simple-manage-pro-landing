@@ -24,18 +24,3 @@ export function breadcrumbLd(name: string, path: string) {
     ],
   };
 }
-
-/** FAQPage for /piloto's straight-answers block. The questions on the page and
- *  the questions in this graph must stay identical: marking up copy the reader
- *  cannot see is a structured-data violation, not a shortcut. */
-export function faqLd(items: { q: string; a: string }[]) {
-  return {
-    "@context": "https://schema.org",
-    "@type": "FAQPage",
-    mainEntity: items.map((i) => ({
-      "@type": "Question",
-      name: i.q,
-      acceptedAnswer: { "@type": "Answer", text: i.a },
-    })),
-  };
-}
