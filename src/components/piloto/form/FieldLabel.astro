@@ -1,0 +1,38 @@
+---
+// The DS field label: small uppercase, tracked. A `<label>` when it names one
+// control; a `<span>` with an id when it names a group (radiogroup, checkbox
+// grid) through aria-labelledby. `optional` appends the lowercase hint.
+import { formCopy } from "../../../data/postulacion";
+
+interface Props {
+  text: string;
+  /** The control this label names. Omit for a group label. */
+  for?: string;
+  /** Needed on a group label so the group can reference it. */
+  id?: string;
+  optional?: boolean;
+}
+
+const { text, for: controlId, id, optional = false } = Astro.props;
+const Tag = controlId ? "label" : "span";
+---
+
+<Tag class="field-label" for={controlId} id={id}
+  >{text}{optional && " "}{optional && <span class="hint">{formCopy.optionalHint}</span>}</Tag
+>
+
+<style>
+  .field-label {
+    font-size: 0.78rem;
+    font-weight: 600;
+    color: var(--color-dark-variant);
+    text-transform: uppercase;
+    letter-spacing: var(--tracking-label);
+  }
+  .hint {
+    font-weight: 500;
+    text-transform: none;
+    letter-spacing: 0;
+    color: var(--color-info-dark);
+  }
+</style>

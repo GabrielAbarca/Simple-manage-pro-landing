@@ -1,0 +1,20 @@
+---
+// The DS error line for controls that are not the DS <Input> (which draws its
+// own). Empty until the controller writes a message; empty takes no space.
+interface Props {
+  id: string;
+}
+
+const { id } = Astro.props;
+---
+
+<span class="field-error" id={id} data-field-error></span>
+
+<style>
+  .field-error {
+    font-size: 0.72rem;
+    font-weight: 500;
+    color: var(--color-danger-text);
+  }
+  .field-error:empty { display: none; }
+</style>

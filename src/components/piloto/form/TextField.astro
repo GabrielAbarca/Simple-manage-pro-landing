@@ -1,0 +1,40 @@
+---
+// A labelled DS <Input> in its field column. The label sits outside the
+// component, as in the design, so it can carry the field grid's spacing; the
+// error line is the component's own (#{id}-error).
+import type { HTMLAttributes } from "astro/types";
+import Input from "../../ui/Input.astro";
+import type { IconName } from "../../ui/icons";
+import type { FieldName } from "../../../lib/postular/validate";
+import FieldLabel from "./FieldLabel.astro";
+import FormField from "./FormField.astro";
+
+type InputAttributes = HTMLAttributes<"input">;
+
+interface Props {
+  id: string;
+  name: FieldName;
+  label: string;
+  type?: InputAttributes["type"];
+  autocomplete?: InputAttributes["autocomplete"];
+  icon?: IconName;
+  maxlength?: number;
+  fullRow?: boolean;
+}
+
+const { id, name, label, type = "text", autocomplete, icon, maxlength, fullRow = false } = Astro.props;
+---
+
+<FormField name={name} fullRow={fullRow}>
+  <FieldLabel text={label} for={id} />
+  <Input
+    id={id}
+    name={name}
+    type={type}
+    autocomplete={autocomplete}
+    icon={icon}
+    maxlength={maxlength}
+    required
+    inputAttributes={{ "data-control": name } as InputAttributes}
+  />
+</FormField>

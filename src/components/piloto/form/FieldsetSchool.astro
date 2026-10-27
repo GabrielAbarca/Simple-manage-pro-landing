@@ -1,0 +1,27 @@
+---
+// Fieldset 01 "El colegio": name, provincia, cantón, tipo, niveles, size.
+import { ESTUDIANTES, PROVINCIAS, TEXT_MAX_LENGTH, formCopy } from "../../../data/postulacion";
+import FormFieldset from "./FormFieldset.astro";
+import NivelesField from "./NivelesField.astro";
+import SelectField from "./SelectField.astro";
+import TextField from "./TextField.astro";
+import TipoField from "./TipoField.astro";
+
+const { fieldsets, labels } = formCopy;
+---
+
+<FormFieldset number={fieldsets.school.number} title={fieldsets.school.title}>
+  <TextField
+    id="pf-colegio"
+    name="colegio"
+    label={labels.colegio}
+    autocomplete="organization"
+    maxlength={TEXT_MAX_LENGTH.colegio}
+    fullRow
+  />
+  <SelectField id="pf-provincia" name="provincia" label={labels.provincia} options={PROVINCIAS} />
+  <TextField id="pf-canton" name="canton" label={labels.canton} maxlength={TEXT_MAX_LENGTH.canton} />
+  <TipoField />
+  <NivelesField />
+  <SelectField id="pf-est" name="estudiantes" label={labels.estudiantes} options={ESTUDIANTES} optional />
+</FormFieldset>

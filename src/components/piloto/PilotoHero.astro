@@ -1,0 +1,158 @@
+---
+// "Piloto 2027." over the clipboard scene: a board holding the signed
+// application sheet and a pen, swaying beside the headline.
+import { pilotoHeroCopy } from "../../data/piloto";
+import { scrollCue } from "../../data/site";
+---
+
+<section class="hero" data-screen-label="01 Hero" data-rv>
+  <div class="glow" aria-hidden="true"></div>
+  <div class="stage" data-stage data-clipboard-stage aria-hidden="true"></div>
+  <h1>
+    <span class="line-mask"><span data-rise>{pilotoHeroCopy.headline[0]}</span></span>
+    <span class="line-mask"><span data-rise class="accent">{pilotoHeroCopy.headline[1]}</span></span>
+  </h1>
+  <div class="bottom">
+    <p data-fade>{pilotoHeroCopy.lead}</p>
+    <div class="actions" data-fade>
+      <a class="pill pill-lg pill-primary rule-after" href="#postular">{pilotoHeroCopy.applyCta}</a>
+      <span class="cue">{scrollCue}<span class="cue-line"></span></span>
+    </div>
+  </div>
+</section>
+
+<style>
+  .hero {
+    position: relative;
+    min-height: 100vh;
+    min-height: 100svh;
+    box-sizing: border-box;
+    padding: 100px var(--gutter) 32px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 32px;
+    background: var(--page);
+    overflow: hidden;
+  }
+  .glow {
+    position: absolute;
+    right: -14vw;
+    bottom: -30vw;
+    width: 80vw;
+    height: 80vw;
+    max-width: 1200px;
+    max-height: 1200px;
+    border-radius: 50%;
+    background: radial-gradient(closest-side, var(--glow), rgba(115, 128, 236, 0));
+    pointer-events: none;
+  }
+  .stage {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: clamp(250px, 34vh, 300px);
+    bottom: clamp(230px, 30vh, 270px);
+    pointer-events: none;
+    opacity: 0;
+  }
+  h1 {
+    position: relative;
+    margin: 0;
+    font-weight: 800;
+    font-size: clamp(72px, 24vw, 110px);
+    line-height: 0.86;
+    letter-spacing: -0.06em;
+    color: var(--ink);
+  }
+  h1 .line-mask { padding-bottom: 0.04em; }
+  .accent { color: var(--brand-text); }
+  .bottom {
+    position: relative;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    gap: 24px 48px;
+    flex-wrap: wrap;
+  }
+  p {
+    margin: 0;
+    max-width: 32rem;
+    font-size: 16px;
+    line-height: 1.55;
+    color: var(--ink-lead);
+    text-wrap: pretty;
+  }
+  .actions {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 16px;
+    width: 100%;
+  }
+  .pill {
+    justify-content: center;
+    --pill-gap: 12px;
+    --pill-px: 28px;
+  }
+  .cue {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--ink-micro);
+  }
+  .cue-line {
+    width: 48px;
+    height: 1px;
+    background: var(--ink-micro);
+  }
+
+  @media (min-width: 768px) {
+    h1 { font-size: clamp(72px, 18vw, 165px); }
+    p {
+      font-size: 18px;
+      line-height: 1.6;
+    }
+    .actions {
+      flex-direction: row;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+      gap: 16px 24px;
+    }
+  }
+
+  @media (min-width: 1200px) {
+    .hero {
+      min-height: 100vh;
+      padding: 128px 4vw 40px;
+      gap: 48px;
+    }
+    .stage {
+      left: auto;
+      right: 2vw;
+      top: 13vh;
+      bottom: 18vh;
+      width: min(42vw, 680px);
+    }
+    h1 {
+      font-size: clamp(96px, 19vw, 360px);
+      line-height: 0.84;
+    }
+    p {
+      font-size: clamp(17px, 1.4vw, 21px);
+      line-height: 1.55;
+    }
+    .actions {
+      justify-content: flex-start;
+      gap: 12px 24px;
+      width: auto;
+    }
+    .pill {
+      justify-content: normal;
+      --pill-px: 32px;
+    }
+  }
+</style>

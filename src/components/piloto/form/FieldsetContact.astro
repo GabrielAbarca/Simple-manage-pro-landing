@@ -1,0 +1,25 @@
+---
+// Fieldset 02 "Persona de contacto": name, cargo, email, phone.
+import { CARGOS, TEXT_MAX_LENGTH, formCopy } from "../../../data/postulacion";
+import FormFieldset from "./FormFieldset.astro";
+import PhoneField from "./PhoneField.astro";
+import SelectField from "./SelectField.astro";
+import TextField from "./TextField.astro";
+
+const { fieldsets, labels } = formCopy;
+---
+
+<FormFieldset number={fieldsets.contact.number} title={fieldsets.contact.title} ruled>
+  <TextField id="pf-nombre" name="nombre" label={labels.nombre} autocomplete="name" maxlength={TEXT_MAX_LENGTH.nombre} />
+  <SelectField id="pf-cargo" name="cargo" label={labels.cargo} options={CARGOS} />
+  <TextField
+    id="pf-correo"
+    name="correo"
+    label={labels.correo}
+    type="email"
+    autocomplete="email"
+    icon="mail"
+    maxlength={TEXT_MAX_LENGTH.correo}
+  />
+  <PhoneField />
+</FormFieldset>

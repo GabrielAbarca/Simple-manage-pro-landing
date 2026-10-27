@@ -1,0 +1,70 @@
+---
+// A native <select> in the DS input look (FORM_RESEND §1): the same border,
+// radius, tint and focus ring as <Input>, with the chevron drawn as a
+// background so the control stays native for keyboards and screen readers.
+import type { FieldName } from "../../../lib/postular/validate";
+import { formCopy } from "../../../data/postulacion";
+import FieldError from "./FieldError.astro";
+import FieldLabel from "./FieldLabel.astro";
+import FormField from "./FormField.astro";
+
+interface Props {
+  id: string;
+  name: FieldName;
+  label: string;
+  options: readonly string[];
+  optional?: boolean;
+}
+
+const { id, name, label, options, optional = false } = Astro.props;
+const errorId = `${id}-error`;
+---
+
+<FormField name={optional ? undefined : name}>
+  <FieldLabel text={label} for={id} optional={optional} />
+  <select
+    class="select"
+    id={id}
+    name={name}
+    required={!optional}
+    aria-describedby={optional ? undefined : errorId}
+    data-control={name}
+  >
+    <option value="">{formCopy.selectPlaceholder}</option>
+    {options.map((option) => <option value={option}>{option}</option>)}
+  </select>
+  {!optional && <FieldError id={errorId} />}
+</FormField>
+
+<style>
+  .select {
+    width: 100%;
+    box-sizing: border-box;
+    padding: 0.75rem 2.6rem 0.75rem 1rem;
+    border: 1.5px solid var(--border-control);
+    border-radius: var(--border-radius-2);
+    background-color: var(--color-background);
+    background-image: url('data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 -960 960 960%22%3E%3Cpath fill=%22%23667281%22 d=%22M480-345 240-585l43-43 197 197 197-197 43 43-240 240Z%22/%3E%3C/svg%3E');
+    background-repeat: no-repeat;
+    background-position: right 0.8rem center;
+    background-size: 1.1rem;
+    color: var(--color-dark);
+    font-family: var(--font-sans);
+    font-size: 0.87rem;
+    cursor: pointer;
+    appearance: none;
+    outline: none;
+    box-shadow: none;
+  }
+  .select[aria-invalid="true"] {
+    border-color: var(--color-danger);
+    box-shadow: 0 0 0 3px var(--color-danger-light);
+  }
+  /* After the invalid rule: in the design a focused select shows the focus
+     ring even while it is in error. */
+  .select:focus {
+    border-color: var(--color-primary);
+    box-shadow: var(--focus-ring);
+    background-color: var(--color-white);
+  }
+</style>

@@ -1,8 +1,27 @@
 ---
-// Placeholder while the V.2 port of this route is in progress.
 import Layout from "../layouts/Layout.astro";
+import PilotoHero from "../components/piloto/PilotoHero.astro";
+import PilotoAudience from "../components/piloto/PilotoAudience.astro";
+import PilotoOffer from "../components/piloto/PilotoOffer.astro";
+import PilotoCalendar from "../components/piloto/PilotoCalendar.astro";
+import PilotoApply from "../components/piloto/PilotoApply.astro";
+import { breadcrumbLd } from "../lib/schema";
+import { pilotoMeta } from "../data/piloto";
+
+const jsonLd = breadcrumbLd(pilotoMeta.breadcrumb, "/piloto/");
 ---
 
-<Layout title="Piloto 2027" description="Piloto 2027">
-  <h1>Piloto 2027</h1>
+<Layout title={pilotoMeta.title} description={pilotoMeta.description}>
+  <script slot="head" is:inline type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
+
+  <PilotoHero />
+  <PilotoAudience />
+  <PilotoOffer />
+  <PilotoCalendar />
+  <PilotoApply />
 </Layout>
+
+<script>
+  import { initPilotoPage } from "../scripts/piloto/page";
+  initPilotoPage();
+</script>

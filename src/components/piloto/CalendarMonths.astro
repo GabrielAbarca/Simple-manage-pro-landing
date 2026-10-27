@@ -1,0 +1,113 @@
+---
+// Desktop calendar body: the 11-month bar grid and the four milestone cards.
+// Start states (dim months, empty bars, lowered cards) exist only once the
+// page script runs, so the no-JS render is the finished calendar.
+import { calendarCopy } from "../../data/piloto";
+---
+
+<div class="months-body">
+  <div class="months" aria-hidden="true">
+    {
+      calendarCopy.months.map((month) => (
+        <div class="month" data-month>
+          <span class="month-name">{month}</span>
+          <div class="track"><div class="fill" data-month-bar /></div>
+        </div>
+      ))
+    }
+  </div>
+  <ol class="milestones">
+    {
+      calendarCopy.milestones.map((milestone) => (
+        <li class="milestone" data-milestone="grid">
+          <span class="range">{milestone.range}</span>
+          <span class="title">{milestone.title}</span>
+          <span class="body">{milestone.body}</span>
+        </li>
+      ))
+    }
+  </ol>
+</div>
+
+<style>
+  .months-body { display: none; }
+
+  @media (min-width: 1200px) {
+    .months-body {
+      display: flex;
+      flex-direction: column;
+      gap: clamp(16px, 3vh, 40px);
+    }
+    .months {
+      display: grid;
+      grid-template-columns: repeat(11, minmax(0, 1fr));
+      gap: clamp(4px, 0.8vw, 14px);
+    }
+    .month {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      transition: opacity 300ms;
+    }
+    .month-name {
+      font-size: clamp(10px, 0.9vw, 13px);
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      color: var(--ink);
+    }
+    .track {
+      height: 3px;
+      border-radius: 3px;
+      background: rgba(132, 139, 200, 0.25);
+      overflow: hidden;
+    }
+    .fill {
+      height: 100%;
+      background: var(--brand-text);
+      transform-origin: left;
+    }
+    .milestones {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(min(100%, 150px), 1fr));
+      gap: clamp(8px, 1.2vw, 16px);
+    }
+    .milestone {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      padding: clamp(16px, 2.4vh, 24px);
+      border-radius: var(--radius-milestone);
+      background: #fff;
+      box-shadow: var(--shadow-card-sm);
+    }
+    .range {
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--brand-text);
+    }
+    .title {
+      font-size: clamp(18px, 1.4vw, 22px);
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      color: var(--ink);
+    }
+    .body {
+      font-size: clamp(13px, 1.1vw, 15px);
+      line-height: 1.45;
+      color: var(--ink-muted);
+      text-wrap: pretty;
+    }
+
+    :global(html.js) .month { opacity: 0.35; }
+    :global(html.js) .fill { transform: scaleX(0); }
+    :global(html.js) .milestone {
+      opacity: 0.25;
+      transform: translateY(16px);
+    }
+  }
+</style>

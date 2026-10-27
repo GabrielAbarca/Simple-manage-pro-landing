@@ -1,0 +1,28 @@
+---
+// "Niveles que imparte": six DS checkbox rows, each a 44px touch target.
+// Repeated `niveles` values submit natively; at least one is required, which
+// only the script and the server can enforce.
+import Checkbox from "../../ui/Checkbox.astro";
+import { NIVELES, formCopy } from "../../../data/postulacion";
+import FieldError from "./FieldError.astro";
+import FieldLabel from "./FieldLabel.astro";
+import FormField from "./FormField.astro";
+
+const checkboxAttributes = { "aria-describedby": "pf-niveles-error", "data-control": "niveles" };
+---
+
+<FormField name="niveles" fullRow role="group" aria-labelledby="pf-niv-l">
+  <FieldLabel text={formCopy.labels.niveles} id="pf-niv-l" />
+  <div class="levels">
+    {NIVELES.map((nivel) => <Checkbox label={nivel} name="niveles" value={nivel} tapTarget inputAttributes={checkboxAttributes} />)}
+  </div>
+  <FieldError id="pf-niveles-error" />
+</FormField>
+
+<style>
+  .levels {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(84px, 1fr));
+    gap: 8px;
+  }
+</style>

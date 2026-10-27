@@ -1,0 +1,47 @@
+---
+// The Piloto section eyebrow: a periwinkle dot and an uppercase label. With
+// `rises` it sits in its own mask and rises with the section's headline;
+// the calendar's eyebrow is static in the design.
+interface Props {
+  label: string;
+  rises?: boolean;
+}
+
+const { label, rises = false } = Astro.props;
+---
+
+{
+  rises ? (
+    <div class="mask">
+      <div class="eyebrow" data-rise>
+        <span class="dot" />
+        {label}
+      </div>
+    </div>
+  ) : (
+    <div class="eyebrow">
+      <span class="dot" />
+      {label}
+    </div>
+  )
+}
+
+<style>
+  .mask { overflow: hidden; }
+  .eyebrow {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--brand-text);
+  }
+  .dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--brand-periwinkle);
+  }
+</style>

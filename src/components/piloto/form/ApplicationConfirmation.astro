@@ -1,0 +1,80 @@
+---
+// "Postulación recibida." It replaces the form in the same card: the script
+// fills in the address and the school summary and sets data-shown; the
+// no-JS endpoint redirects to #postulacion-recibida, where :target shows the
+// generic version. Either way the form, its next sibling, is hidden.
+import Icon from "../../ui/Icon.astro";
+import { confirmationCopy } from "../../../data/postulacion";
+---
+
+<div class="confirmation" id="postulacion-recibida" data-confirmation>
+  <Icon name="check_circle" color="var(--color-success-text)" size={48} />
+  <h3 tabindex="-1" data-confirmation-title>{confirmationCopy.title}</h3>
+  <p data-confirmation-generic>{confirmationCopy.genericEmailLine}</p>
+  <p data-confirmation-specific hidden>
+    {confirmationCopy.emailBefore}{" "}<strong data-sent-email></strong>{" "}{confirmationCopy.emailAfter}
+  </p>
+  <div class="summary" data-sent-summary hidden></div>
+</div>
+
+<style>
+  .confirmation {
+    display: none;
+    min-height: 360px;
+    border-radius: var(--radius-panel);
+    background: #fff;
+    border: 1px solid var(--hairline);
+    box-sizing: border-box;
+    padding: 28px 20px;
+    flex-direction: column;
+    justify-content: center;
+    gap: 20px;
+    scroll-margin-top: 100px;
+  }
+  .confirmation:target,
+  .confirmation[data-shown] { display: flex; }
+  .confirmation:target ~ :global(form),
+  .confirmation[data-shown] ~ :global(form) { display: none; }
+  h3 {
+    margin: 0;
+    font-size: clamp(28px, 2.4vw, 40px);
+    font-weight: 800;
+    line-height: 1.1;
+    letter-spacing: -0.03em;
+    color: var(--ink);
+    outline: none;
+  }
+  p {
+    margin: 0;
+    max-width: 28rem;
+    font-size: 17px;
+    line-height: 1.6;
+    color: var(--ink-lead);
+    text-wrap: pretty;
+  }
+  strong {
+    font-weight: 600;
+    color: var(--ink);
+  }
+  .summary {
+    padding-top: 16px;
+    border-top: 1px solid var(--hairline);
+    font-size: 14px;
+    line-height: 1.6;
+    color: var(--ink-micro);
+  }
+
+  @media (min-width: 768px) {
+    .confirmation { padding: 28px 40px; }
+    h3 { font-size: clamp(28px, 1.8vw, 60px); }
+  }
+
+  @media (min-width: 1200px) {
+    .confirmation {
+      min-height: clamp(420px, 64vh, 680px);
+      padding: clamp(28px, 4vw, 64px);
+      scroll-margin-top: 140px;
+    }
+    h3 { font-size: clamp(28px, 2.4vw, 40px); }
+  }
+</style>

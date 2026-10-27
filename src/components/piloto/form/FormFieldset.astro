@@ -1,0 +1,72 @@
+---
+// A numbered fieldset ("01 El colegio"). The legend floats so it joins the
+// fieldset's flex flow instead of sitting on the border, as in the design.
+// `ruled` adds the hairline above fieldsets 02 and 03; `grid` wraps the
+// fields in the two-column (desktop) field grid.
+interface Props {
+  number: string;
+  title: string;
+  ruled?: boolean;
+  grid?: boolean;
+}
+
+const { number, title, ruled = false, grid = true } = Astro.props;
+---
+
+<fieldset class:list={["fieldset", { ruled }]}>
+  <legend>
+    <span class="number">{number}</span>
+    <span class="title">{title}</span>
+  </legend>
+  {grid ? <div class="field-grid"><slot /></div> : <slot />}
+</fieldset>
+
+<style>
+  .fieldset {
+    margin: 0;
+    padding: 0;
+    border: none;
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+  .ruled {
+    padding: 32px 0 0;
+    border-top: 1px solid var(--hairline);
+  }
+  legend {
+    float: left;
+    width: 100%;
+    padding: 0 0 20px;
+    display: flex;
+    align-items: baseline;
+    gap: 12px;
+  }
+  .number {
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--brand-text);
+    font-variant-numeric: tabular-nums;
+  }
+  .title {
+    font-size: 18px;
+    font-weight: 700;
+    letter-spacing: -0.01em;
+    color: var(--ink);
+  }
+  .field-grid {
+    clear: both;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    gap: 18px;
+    align-items: start;
+  }
+
+  @media (min-width: 1200px) {
+    .field-grid {
+      grid-template-columns: repeat(auto-fit, minmax(min(100%, max(240px, calc(50% - 8px))), 1fr));
+      gap: 20px 16px;
+    }
+  }
+</style>
