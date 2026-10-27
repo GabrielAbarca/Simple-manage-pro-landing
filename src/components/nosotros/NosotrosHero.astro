@@ -15,7 +15,7 @@ const [lineOne, lineTwo, lineThree] = nosotrosHeroCopy.headline;
     <span class="line-mask"><span data-rise class="accent">{lineThree}</span></span>
   </h1>
   <div class="cue" data-fade>
-    <span class="cue-label">{scrollCue}<span class="cue-line"></span></span>
+    <span class="cue-label"><span>{scrollCue}</span><span class="cue-line"></span></span>
   </div>
 </section>
 
@@ -61,13 +61,14 @@ const [lineOne, lineTwo, lineThree] = nosotrosHeroCopy.headline;
     display: flex;
     justify-content: flex-end;
   }
+  /* Stronger micro tier: the design grey fails 4.5:1 here (contrast audit). */
   .cue-label {
     display: flex;
     align-items: center;
     gap: 12px;
     font-size: 13px;
     font-weight: 500;
-    color: var(--ink-micro);
+    color: var(--ink-micro-strong);
   }
   .cue-line {
     width: 48px;

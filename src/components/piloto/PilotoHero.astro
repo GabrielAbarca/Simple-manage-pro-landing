@@ -16,7 +16,7 @@ import { scrollCue } from "../../data/site";
     <p data-fade>{pilotoHeroCopy.lead}</p>
     <div class="actions" data-fade>
       <a class="pill pill-lg pill-primary rule-after" href="#postular">{pilotoHeroCopy.applyCta}</a>
-      <span class="cue">{scrollCue}<span class="cue-line"></span></span>
+      <span class="cue"><span>{scrollCue}</span><span class="cue-line"></span></span>
     </div>
   </div>
 </section>
@@ -95,13 +95,14 @@ import { scrollCue } from "../../data/site";
     --pill-gap: 12px;
     --pill-px: 28px;
   }
+  /* Stronger micro tier: the design grey fails 4.5:1 here (contrast audit). */
   .cue {
     display: flex;
     align-items: center;
     gap: 12px;
     font-size: 13px;
     font-weight: 500;
-    color: var(--ink-micro);
+    color: var(--ink-micro-strong);
   }
   .cue-line {
     width: 48px;

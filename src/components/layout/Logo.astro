@@ -11,9 +11,12 @@ const { href, class: className } = Astro.props;
 const Tag = href ? "a" : "div";
 ---
 
-<Tag href={href} class:list={["logo", className]} aria-label={href ? "Simple Manage Pro, inicio" : undefined}>
+<Tag href={href} class:list={["logo", className]}>
   <img src="/apple-touch-icon.png" alt="" width="32" height="32" />
-  <span>SIMPLE</span><span class="accent" data-logotype>MANAGE PRO</span>
+  {/* The two caps spans read as "SIMPLEMANAGE PRO" (the flex gap is the only
+      space), so assistive tech gets the prose name instead. */}
+  <span aria-hidden="true">SIMPLE</span><span class="accent" aria-hidden="true" data-logotype>MANAGE PRO</span>
+  <span class="visually-hidden">Simple Manage Pro</span>
 </Tag>
 
 <style>

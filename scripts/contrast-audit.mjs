@@ -17,6 +17,10 @@
 //
 // WCAG 1.4.3: 4.5:1 for normal text, 3:1 for large (>=24px, or >=18.66px bold).
 //
+// Skipped: the logotype (`data-logotype`, exempt under 1.4.3) and decorative
+// text that repeats something readable nearby (`data-decorative`, always also
+// aria-hidden): the ghost numerals and the founder's avatar initials.
+//
 // Text drawn over a live WebGL stage is reported as WARN, not FAIL: what sits
 // behind it depends on the animation frame (a slab mid-fan, a shadow passing),
 // so one sample proves little either way. Read those by eye in `npm run
@@ -77,7 +81,7 @@ function collectTargets() {
   const out = [];
   let next = document.querySelectorAll("[data-audit-id]").length;
   for (const el of document.body.querySelectorAll("*")) {
-    if (el.closest("[data-logotype]")) continue;
+    if (el.closest("[data-logotype], [data-decorative]")) continue;
     const ownText = [...el.childNodes].some((n) => n.nodeType === 3 && n.textContent.trim().length > 1);
     if (!ownText || !el.checkVisibility({ contentVisibilityAuto: true, visibilityProperty: true })) continue;
     if (effectiveOpacity(el) < 0.3) continue;
@@ -181,8 +185,9 @@ for (const route of selectedRoutes()) {
     checked += results.size;
     for (const result of results.values()) {
       const need = result.large ? 3 : 4.5;
-      // Epsilon: --color-info-dark sits on exactly 4.50 against the page.
-      if (result.ratio >= need - 0.01) continue;
+      // No epsilon. The DS treats #627388 on the page as 4.50, but it measures
+      // 4.49 and axe (Lighthouse) fails it, so the two audits must agree.
+      if (result.ratio >= need) continue;
       if (result.overStage) warnings++;
       else failures++;
       console.log(

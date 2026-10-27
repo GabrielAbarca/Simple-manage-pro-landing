@@ -72,7 +72,12 @@ import { footerCopy } from "../../data/site";
     font-size: 14px;
     flex: 0 1 220px;
   }
-  .head { margin-bottom: 4px; }
+  /* #627388 on the page measures 4.497:1, just under the line, so the
+     footer's micro text takes the stronger tier (contrast audit). */
+  .head {
+    margin-bottom: 4px;
+    color: var(--ink-micro-strong);
+  }
   .column a { color: var(--ink); }
   .column a:hover { color: var(--brand-text); }
   .residency {
@@ -85,7 +90,7 @@ import { footerCopy } from "../../data/site";
     flex-wrap: wrap;
     gap: 12px 32px;
     font-size: 13px;
-    color: var(--ink-micro);
+    color: var(--ink-micro-strong);
   }
 
   @media (min-width: 1200px) {
