@@ -4,14 +4,13 @@
 
 import * as THREE from "three";
 import { roundedRectShape } from "../../core/geometry";
-import { drawShadow } from "../../core/canvas2d";
-import { canvasTexture, redrawWhenFontsSettle, type RedrawableTexture } from "../../core/textures";
+import { HOME_SHADOW_ALPHA, drawShadow } from "../../core/canvas2d";
+import { canvasTexture, redrawWhenFontsSettle, yieldToMain, type RedrawableTexture } from "../../core/textures";
 import { drawAdmin } from "../../textures/home/admin";
 import { drawTeacher } from "../../textures/home/teacher";
 import { drawStudent } from "../../textures/home/student";
 
 export const SLAB = { width: 6.4, height: 4, radius: 0.3, depth: 0.12 } as const;
-const HOME_SHADOW_ALPHA = 0.42;
 
 function faceGeometry(shape: THREE.Shape): THREE.ShapeGeometry {
   const geometry = new THREE.ShapeGeometry(shape, 20);
@@ -44,13 +43,23 @@ function shadowPlane(): THREE.Mesh {
   return plane;
 }
 
-/** Builds the three slabs; returns them in admin, teacher, student order. */
-export function buildPortalSlabs(renderer: THREE.WebGLRenderer): THREE.Group[] {
+/**
+ * Builds the three slabs; returns them in admin, teacher, student order.
+ * Yields between textures: each is a 1600px canvas, and drawing all three in
+ * one task blocked a throttled phone for most of a second.
+ */
+export async function buildPortalSlabs(renderer: THREE.WebGLRenderer): Promise<THREE.Group[]> {
   const shape = roundedRectShape(SLAB.width, SLAB.height, SLAB.radius);
   const body = bodyGeometry(shape);
   const face = faceGeometry(shape);
   const bodyMaterial = new THREE.MeshStandardMaterial({ color: 0xffffff, roughness: 0.4, metalness: 0 });
-  const textures: RedrawableTexture[] = [drawAdmin, drawTeacher, drawStudent].map((draw) => canvasTexture(draw, renderer));
+  const textures: RedrawableTexture[] = [];
+  for (const draw of [drawAdmin, drawTeacher, drawStudent]) {
+    await yieldToMain();
+    const entry = canvasTexture(draw, renderer);
+    renderer.initTexture(entry.texture);
+    textures.push(entry);
+  }
   redrawWhenFontsSettle(textures);
   return textures.map(({ texture }) => {
     const group = new THREE.Group();

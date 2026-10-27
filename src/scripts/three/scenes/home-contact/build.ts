@@ -2,13 +2,12 @@
 // and float phase. Values from Home.dc.html initContact.
 
 import * as THREE from "three";
-import { drawShadow } from "../../core/canvas2d";
+import { HOME_SHADOW_ALPHA, drawShadow } from "../../core/canvas2d";
 import { homeSlab } from "../../core/geometry";
 import { canvasTexture, redrawWhenFontsSettle } from "../../core/textures";
 import { drawBubble } from "../../textures/home/bubble";
 import { createAppIconCanvas } from "../../textures/home/app-icon";
 
-const HOME_SHADOW_ALPHA = 0.42;
 const APP_ICON_URL = "/android-chrome-512x512.png";
 
 export interface ContactItem {

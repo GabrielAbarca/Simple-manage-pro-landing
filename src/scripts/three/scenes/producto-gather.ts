@@ -8,9 +8,9 @@ import * as THREE from "three";
 import { clamp01, easeOutExpo } from "../../core/anim";
 import { currentLayout } from "../../core/breakpoints";
 import type { ProductoMotion } from "../../producto/motion-state";
-import { createStage, startFrameLoop } from "../core/stage";
+import { compileInSteps, createStage, startFrameLoop } from "../core/stage";
 import { hoveredIndex, trackStagePointer, type StagePointer } from "../core/studio";
-import { loadPoppins } from "../core/textures";
+import { loadPoppins, yieldToMain } from "../core/textures";
 import { PRODUCTO_FONT_STYLES, PRODUCTO_FONT_WEIGHTS, addProductoLighting } from "./producto-lighting";
 import { framingFor, recordTarget, sampleKeyframes, type Vec3 } from "./producto-gather/keyframes";
 import { buildGatherScene, type GatherObject, type GatherScene } from "./producto-gather/objects";
@@ -83,10 +83,12 @@ export async function startProductoGather(container: HTMLElement, sticky: HTMLEl
   const stage = createStage(container, { fov: 34 });
   stage.camera.far = 200;
   stage.camera.updateProjectionMatrix();
+  await yieldToMain();
   addProductoLighting(stage);
-  const built = buildGatherScene(stage.renderer);
+  const built = await buildGatherScene(stage.renderer);
   built.objects.forEach((object) => stage.scene.add(object.root));
   stage.scene.add(built.record.root);
+  await compileInSteps(stage.renderer, stage.scene, stage.camera);
   const parts: SceneParts = {
     camera: stage.camera, built, sticky, pointer: trackStagePointer(sticky), raycaster: new THREE.Raycaster(),
   };

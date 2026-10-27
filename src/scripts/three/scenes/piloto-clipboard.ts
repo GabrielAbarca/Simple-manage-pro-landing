@@ -4,8 +4,8 @@
 // entrance runs 1800ms (cubic out) from the same delay.
 
 import { clamp01, easeOutCubic, prefersReducedMotion, tween } from "../../core/anim";
-import { loadPoppins } from "../core/textures";
-import { createStage, isOnScreen, startFrameLoop } from "../core/stage";
+import { loadPoppins, yieldToMain } from "../core/textures";
+import { compileInSteps, createStage, isOnScreen, startFrameLoop } from "../core/stage";
 import { addClipboardLighting } from "./piloto-clipboard/environment";
 import { buildClipboard } from "./piloto-clipboard/build";
 
@@ -34,9 +34,14 @@ export async function startPilotoClipboard(container: HTMLElement): Promise<void
   await loadPoppins(["500", "600", "700", "800"], ["italic 500"]);
   const stage = createStage(container, { fov: 30, canvasStyle: "width:100%;height:100%;display:block;" });
   const { scene, camera, renderer } = stage;
+  // One heavy step per task (environment, build, shader link), so the scene
+  // never blocks input for long on a throttled phone.
+  await yieldToMain();
   addClipboardLighting(scene, renderer);
+  await yieldToMain();
   const clipboard = buildClipboard(renderer);
   scene.add(clipboard);
+  await compileInSteps(renderer, scene, camera);
   const still = prefersReducedMotion();
   fadeInStage(container, still);
   const entranceStart = performance.now() + ENTRANCE_DELAY_MS;

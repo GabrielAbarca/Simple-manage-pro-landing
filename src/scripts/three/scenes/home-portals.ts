@@ -5,7 +5,7 @@
 import * as THREE from "three";
 import { clamp01, easeOutExpo, prefersReducedMotion, smoothstep } from "../../core/anim";
 import { currentLayout } from "../../core/breakpoints";
-import { createStage, smoothingFactor, startFrameLoop, trackWindowPointer, visibleSize } from "../core/stage";
+import { compileInSteps, createStage, smoothingFactor, startFrameLoop, trackWindowPointer, visibleSize } from "../core/stage";
 import { loadPoppins } from "../core/textures";
 import { SLAB, buildPortalSlabs } from "./home-portals/build";
 import { stackPose } from "./home-portals/poses";
@@ -74,10 +74,11 @@ export async function startHomePortals(
   const light = new THREE.DirectionalLight(0xffffff, 1.4);
   light.position.set(4, 6, 9);
   scene.add(light);
-  const slabs = buildPortalSlabs(renderer);
+  const slabs = await buildPortalSlabs(renderer);
   const root = new THREE.Group();
   slabs.forEach((slab) => root.add(slab));
   scene.add(root);
+  await compileInSteps(renderer, scene, camera);
 
   const pointer = trackWindowPointer();
   const idle = prefersReducedMotion() ? 0 : motionIntensity;

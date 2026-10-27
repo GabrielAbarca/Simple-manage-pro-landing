@@ -93,7 +93,12 @@ import { introCopy } from "../../data/home";
     transform: scaleX(0);
     transform-origin: left;
   }
+  /* Poppins has no tabular figures, so the counter changes width as it runs
+     and every frame registered as a layout shift. A box as wide as the widest
+     value ("044", 1.89em) with right-aligned text paints the same pixels. */
   .counter {
+    min-width: 1.9em;
+    text-align: right;
     margin-left: auto;
     font-size: clamp(80px, 26vw, 120px);
     font-weight: 800;

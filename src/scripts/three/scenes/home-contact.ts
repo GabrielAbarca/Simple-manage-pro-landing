@@ -10,6 +10,7 @@ import { currentLayout } from "../../core/breakpoints";
 import { waHref } from "../../../config";
 import { createStage, isOnScreen, startFrameLoop, trackWindowPointer, visibleSize } from "../core/stage";
 import { addStudioLighting, hoveredIndex, trackStagePointer } from "../core/studio";
+import { loadPoppins } from "../core/textures";
 import { buildContactItems, type ContactItem } from "./home-contact/build";
 
 function settleItem(item: ContactItem, index: number, entered: number, t: number, k: number): void {
@@ -41,7 +42,8 @@ function trackCtaHover(): { hovered: boolean } {
   return state;
 }
 
-export function startHomeContact(container: HTMLElement, motionIntensity: number): void {
+export async function startHomeContact(container: HTMLElement, motionIntensity: number): Promise<void> {
+  await loadPoppins(["500"]);
   const stage = createStage(container, { fov: 30 });
   addStudioLighting(stage);
   const { scene, camera, renderer } = stage;

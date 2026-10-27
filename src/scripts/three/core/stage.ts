@@ -85,3 +85,16 @@ export function trackWindowPointer(): { x: number; y: number } {
 export const smoothingFactor = (base: number, dt: number): number => 1 - Math.pow(base, dt * 60);
 
 export const lerp = (from: number, to: number, t: number): number => from + (to - from) * t;
+
+/**
+ * Link shader programs one top-level object per task. Without the parallel
+ * shader-compile extension (software GL, many phones) `compileAsync` still
+ * links every program in a single task; splitting by object keeps each task
+ * short, and programs shared across objects are only linked once.
+ */
+export async function compileInSteps(renderer: THREE.WebGLRenderer, scene: THREE.Scene, camera: THREE.Camera): Promise<void> {
+  for (const child of [...scene.children]) {
+    await new Promise((resolve) => setTimeout(resolve, 0));
+    await renderer.compileAsync(child, camera, scene);
+  }
+}

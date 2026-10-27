@@ -7,7 +7,7 @@
 import * as THREE from "three";
 import { productoSlab } from "../../core/geometry";
 import { PRODUCTO_SHADOW_ALPHA, drawShadow } from "../../core/canvas2d";
-import { canvasTexture, redrawWhenFontsSettle, type RedrawableTexture } from "../../core/textures";
+import { canvasTexture, redrawWhenFontsSettle, yieldToMain, type RedrawableTexture } from "../../core/textures";
 import { drawSheet } from "../../textures/producto/sheet";
 import { drawAttendance } from "../../textures/producto/attendance";
 import { drawPhone } from "../../textures/producto/phone-chat";
@@ -127,16 +127,23 @@ function collectFades(root: THREE.Object3D): FadingMaterial[] {
   return fades;
 }
 
-function buildObjects(ctx: BuildContext): GatherObject[] {
+/**
+ * Builds the objects one per task: each draws a large canvas, and all eight in
+ * one task blocked a throttled phone for over two seconds.
+ */
+async function buildObjects(ctx: BuildContext): Promise<GatherObject[]> {
+  const objects: GatherObject[] = [];
   let compactIndex = 0;
-  return OBJECT_DEFS.map((def, i) => {
+  for (const [i, def] of OBJECT_DEFS.entries()) {
+    await yieldToMain();
     const root = def.build(ctx);
     const compact = def.compact ? { index: compactIndex++, position: def.compact } : null;
-    return {
+    objects.push({
       root, width: def.size[0], height: def.size[1], rotation: def.rotation,
       wide: { index: i, position: def.wide }, compact, fades: collectFades(root), hover: 0,
-    };
-  });
+    });
+  }
+  return objects;
 }
 
 export interface GatherScene {
@@ -144,17 +151,20 @@ export interface GatherScene {
   record: RecordCard;
 }
 
-export function buildGatherScene(renderer: THREE.WebGLRenderer): GatherScene {
+export async function buildGatherScene(renderer: THREE.WebGLRenderer): Promise<GatherScene> {
   const textures: RedrawableTexture[] = [];
   const ctx: BuildContext = {
     shadowTexture: new THREE.CanvasTexture(drawShadow(PRODUCTO_SHADOW_ALPHA)),
     texture: (draw) => {
       const entry = canvasTexture(draw, renderer);
+      // Upload now, inside this object's task, rather than all at once on the first frame.
+      renderer.initTexture(entry.texture);
       textures.push(entry);
       return entry.texture;
     },
   };
-  const objects = buildObjects(ctx);
+  const objects = await buildObjects(ctx);
+  await yieldToMain();
   const recordRoot = card(ctx, [4.8, 3.2, 0.22], 0.14, whiteBody(), drawRecord);
   redrawWhenFontsSettle(textures);
   return { objects, record: { root: recordRoot, fades: collectFades(recordRoot), hover: 0 } };

@@ -52,6 +52,7 @@ function buildShadow(): THREE.Mesh {
 
 function buildPaper(renderer: THREE.WebGLRenderer): THREE.Mesh {
   const sheet = canvasTexture(drawForm, renderer);
+  renderer.initTexture(sheet.texture);
   redrawWhenFontsSettle([sheet]);
   const paper = new THREE.Mesh(
     new THREE.PlaneGeometry(3.0, 3.95),
