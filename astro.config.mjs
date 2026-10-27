@@ -18,6 +18,7 @@ export default defineConfig({
   trailingSlash: "always",
   compressHTML: true,
   adapter: vercel(),
+
   integrations: [sitemap()],
   build: {
     // Was "always", which is right for one page and wrong for five: the shared
