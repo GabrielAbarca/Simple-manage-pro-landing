@@ -5,26 +5,26 @@ export const homeMeta = {
 } as const;
 
 export const introCopy = {
-  lines: ["Hecho para", "Costa Rica."],
+  lines: ["Software", "Institucional"],
   months: ["FEB", "MAR", "ABR", "MAY", "JUN", "JUL", "AGO", "SET", "OCT", "NOV", "DIC"],
 } as const;
 
 export const heroCopy = {
-  headline: ["Hecho para", "Costa Rica."],
-  lead: "Notas, asistencia, horarios y expedientes en un solo lugar. Un programa piloto a partir de febrero de 2027.",
+  headline: ["Gestión escolar", "en un solo lugar"],
+  lead: "Somos un software pensado para la administración, los docentes y los estudiantes de su colegio.",
   demoCta: "Ver la demo",
+  formCta: "Llenar formulario",
   whatsappCta: "Conversar por WhatsApp",
-  fanTitle: ["Tres portales.", "Un mismo registro."],
+  fanTitle: ["Tres portales", "conectados"],
   captions: [
-    { number: "01", title: "Consola de administración", body: "Curso lectivo, secciones, horarios y matrícula." },
-    { number: "02", title: "Consola docente", body: "Lecciones del día, libro de notas y asistencia." },
-    { number: "03", title: "Portal estudiantil", body: "Notas por periodo, horario y asistencia." },
+    { number: "01", title: "Consola de administración", body: "Pensado para la dirección. Curso lectivo, secciones, horarios, matrícula y más." },
+    { number: "02", title: "Consola docente", body: "Pensado para los docentes. Horario, estudiantes, libro de notas, asistencia y más." },
+    { number: "03", title: "Portal estudiantil", body: "Pensado para los estudiantes. Notas por periodo, horario, asistencia, eventos y más. Todo en tiempo real" },
   ],
-  cueLeft: "Programa piloto · Febrero 2027",
 } as const;
 
 export const securityCopy = {
-  headline: ["La seguridad", "nos importa."],
+  headline: ["Su seguridad", "nos importa"],
   body: "Cada colegio tiene su propia base de datos, cifrada en tránsito y en reposo.",
   privacyCta: "Política de privacidad",
 } as const;
@@ -32,6 +32,6 @@ export const securityCopy = {
 export const homeContactCopy = {
   headline: ["¿Su colegio", "podría ser parte", "del piloto?"],
   whatsappCta: "Conversar por WhatsApp",
-  emailCta: "Escribir un correo",
+  formCta: "Llenar formulario",
   demoCta: "Ver la demo",
 } as const;

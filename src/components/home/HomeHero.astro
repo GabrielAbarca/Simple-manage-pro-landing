@@ -13,12 +13,12 @@ import { scrollCue } from "../../data/site";
 
     <div class="headline" data-hero-headline>
       <h1>
-        <span class="line-mask"><span data-rise>{heroCopy.headline[0]}</span></span>
+        <span class="line-mask"><span data-rise class="data-rise">{heroCopy.headline[0]}</span></span>
         <span class="line-mask"><span data-rise class="accent">{heroCopy.headline[1]}</span></span>
       </h1>
       <p class="lead" data-fade>{heroCopy.lead}</p>
       <div class="ctas" data-fade>
-        <a class="pill pill-primary" href={DEMO_URL} target="_blank" rel="noopener">{heroCopy.demoCta}</a>
+        <a class="pill pill-primary" href="./piloto/#postular">{heroCopy.formCta}</a>
         <a class="pill pill-outline" href={waHref()} target="_blank" rel="noopener">{heroCopy.whatsappCta}</a>
       </div>
     </div>
@@ -38,7 +38,6 @@ import { scrollCue } from "../../data/site";
     }
 
     <div class="cue" data-fade>
-      <span>{heroCopy.cueLeft}</span>
       <span class="cue-right"><span>{scrollCue}</span><span class="cue-line"></span></span>
     </div>
   </div>
@@ -75,7 +74,13 @@ import { scrollCue } from "../../data/site";
     inset: 0;
     pointer-events: none;
   }
-  .accent { color: var(--brand-text); }
+  .accent { 
+    color: var(--brand-text); 
+    padding-bottom: 1rem;
+  }
+  .data-rise {
+    padding-top: 1rem;
+  }
 
   .headline {
     position: absolute;
@@ -172,7 +177,7 @@ import { scrollCue } from "../../data/site";
       gap: 28px;
       max-width: min(52rem, 60vw);
     }
-    h1 { font-size: clamp(56px, 8.6vw, 156px); }
+    h1 { font-size: clamp(56px, 8.6vw, 130px); }
     .lead {
       font-size: clamp(16px, 1.25vw, 19px);
       line-height: 1.6;

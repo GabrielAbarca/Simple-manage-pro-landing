@@ -9,15 +9,15 @@ const [lineOne, lineTwo, lineThree] = homeContactCopy.headline;
   <div class="card">
     <div class="text" data-rv>
       <h2>
-        <span class="line-mask"><span data-rise>{lineOne}</span></span>
+        <span class="line-mask"><span data-rise class="data-rise">{lineOne}</span></span>
         <span class="line-mask"><span data-rise>{lineTwo}</span></span>
         <span class="line-mask"><span data-rise class="accent">{lineThree}</span></span>
       </h2>
       <div class="ctas" data-fade>
-        <a class="pill pill-lg pill-primary" href={waHref()} target="_blank" rel="noopener" data-contact-whatsapp>
-          {homeContactCopy.whatsappCta}
+        <a class="pill pill-lg pill-primary" href={mailtoHref()} target="_blank" rel="noopener" data-contact-whatsapp>
+          {homeContactCopy.formCta}
         </a>
-        <a class="pill pill-lg pill-outline" href={mailtoHref()}>{homeContactCopy.emailCta}</a>
+        <a class="pill pill-lg pill-outline" href={waHref()}>{homeContactCopy.whatsappCta}</a>
         <a class="text-rule rule-after" href={DEMO_URL} target="_blank" rel="noopener">{homeContactCopy.demoCta}</a>
       </div>
     </div>
@@ -59,7 +59,13 @@ const [lineOne, lineTwo, lineThree] = homeContactCopy.headline;
     letter-spacing: -0.05em;
     color: var(--ink);
   }
-  .accent { color: var(--brand-text); }
+  .accent {
+    color: var(--brand-text);
+    padding-top: 1rem;
+  }
+  .data-rise {
+    padding-bottom: 1rem;
+  }
   .ctas {
     display: flex;
     flex-direction: column;

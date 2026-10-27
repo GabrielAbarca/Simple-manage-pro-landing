@@ -7,13 +7,13 @@ import { securityCopy } from "../../data/home";
   <div class="top" data-rv>
     <div class="heading">
       <h2>
-        <span class="line-mask"><span data-rise>{securityCopy.headline[0]}</span></span>
+        <span class="line-mask"><span data-rise class="data-rise">{securityCopy.headline[0]}</span></span>
         <span class="line-mask"><span data-rise class="accent">{securityCopy.headline[1]}</span></span>
       </h2>
     </div>
     <div class="aside">
       <p data-fade>{securityCopy.body}</p>
-      <a class="pill pill-dark rule-after" data-fade href={PRIVACY_URL}>{securityCopy.privacyCta}</a>
+      <a class="pill pill-dark" data-fade href={PRIVACY_URL}>{securityCopy.privacyCta}</a>
     </div>
   </div>
   <div class="stage" data-stage data-security-stage aria-hidden="true"></div>
@@ -48,7 +48,13 @@ import { securityCopy } from "../../data/home";
     letter-spacing: -0.05em;
     color: var(--ink);
   }
-  .accent { color: var(--brand-text); }
+  .accent { 
+    color: var(--brand-text); 
+    padding-top: .5rem;
+  }
+  .data-rise {
+    padding: 1.5rem 0;
+  }
   .aside {
     display: flex;
     flex-direction: column;
