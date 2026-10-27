@@ -20,7 +20,7 @@ const lastMonth = calendarCopy.months[calendarCopy.months.length - 1];
       </div>
       {/* Final month in the markup so the no-JS render matches its full bars;
           the script rewinds it to FEB before the animation. */}
-      <div class="month-label" aria-hidden="true" data-decorative data-calendar-month-label>{lastMonth}</div>
+      <div class="month-label" aria-hidden="true" data-calendar-month-label>{lastMonth}</div>
     </div>
     <CalendarMonths />
     <CalendarTimeline />
