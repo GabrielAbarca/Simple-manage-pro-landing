@@ -1,0 +1,218 @@
+---
+// The pinned opening story: 700vh of scroll (520vh below 1200) over one
+// sticky viewport. Scattered "problem" objects are visited by the camera and
+// gather into one student record while four chapter captions crossfade.
+// Without JavaScript it collapses to the headline plus the four statements.
+import OpeningChapters from "./OpeningChapters.astro";
+import { openingCopy } from "../../data/producto";
+import { scrollCue } from "../../data/site";
+---
+
+<section class="opening" data-screen-label="Producto" data-opening>
+  <div class="sticky" data-opening-sticky>
+    <div class="glow" aria-hidden="true"></div>
+    <div class="stage" data-stage data-opening-stage aria-hidden="true"></div>
+    <div class="headline" data-opening-headline>
+      <h1>
+        <span class="line-mask"><span data-rise>{openingCopy.headline[0]}</span></span>
+        <span class="line-mask"><span data-rise class="accent">{openingCopy.headline[1]}</span></span>
+      </h1>
+      <p class="lead" data-fade>{openingCopy.lead}</p>
+    </div>
+    <div class="legibility" aria-hidden="true"></div>
+    <OpeningChapters />
+    <div class="steps" data-opening-steps data-js-only aria-hidden="true">
+      <span class="step-current" data-opening-step>{openingCopy.stepFirst}</span>
+      <div class="step-track"><div class="step-fill" data-opening-step-fill></div></div>
+      <span class="step-last">{openingCopy.stepLast}</span>
+    </div>
+    <div class="cue" data-opening-cue data-js-only aria-hidden="true">{scrollCue}<span class="cue-line"></span></div>
+  </div>
+</section>
+
+<style>
+  .opening {
+    position: relative;
+    height: 520vh;
+    background: var(--page);
+  }
+  .sticky {
+    position: sticky;
+    top: 0;
+    height: 100vh;
+    height: 100svh;
+    overflow: hidden;
+  }
+  .glow {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    width: 110vw;
+    height: 110vw;
+    max-width: 1500px;
+    max-height: 1500px;
+    transform: translate(-50%, -50%);
+    border-radius: 50%;
+    background: radial-gradient(closest-side, rgba(115, 128, 236, 0.14), rgba(115, 128, 236, 0));
+    pointer-events: none;
+  }
+  .stage {
+    position: absolute;
+    inset: 0;
+  }
+  .accent { color: var(--brand-text); }
+
+  .headline {
+    position: absolute;
+    left: var(--gutter);
+    right: var(--gutter);
+    top: 0;
+    padding-top: 100px;
+    z-index: 4;
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+    pointer-events: none;
+    will-change: transform, opacity;
+  }
+  h1 {
+    margin: 0;
+    font-weight: 800;
+    font-size: clamp(36px, 11vw, 52px);
+    line-height: 0.94;
+    letter-spacing: -0.05em;
+    color: var(--ink);
+  }
+  .lead {
+    margin: 0;
+    max-width: 30rem;
+    font-size: 16px;
+    line-height: 1.55;
+    color: var(--ink-muted);
+    text-wrap: pretty;
+  }
+
+  /* Phones and tablets set the captions over the objects, so the bottom of
+     the frame fades to the page colour behind them. */
+  .legibility {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: 44%;
+    z-index: 4;
+    background: linear-gradient(rgba(246, 246, 249, 0), rgba(246, 246, 249, 0.92) 45%, #f6f6f9);
+    pointer-events: none;
+  }
+
+  .steps { display: none; }
+  .step-current {
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--ink);
+    font-variant-numeric: tabular-nums;
+  }
+  .step-track {
+    width: 2px;
+    height: 160px;
+    background: var(--hairline);
+    border-radius: 2px;
+    overflow: hidden;
+  }
+  .step-fill {
+    width: 100%;
+    height: 100%;
+    background: var(--brand-text);
+    transform: scaleY(0);
+    transform-origin: top;
+  }
+  .step-last {
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--ink-micro);
+  }
+
+  .cue {
+    position: absolute;
+    left: var(--gutter);
+    right: var(--gutter);
+    bottom: 24px;
+    z-index: 4;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 12px;
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--ink-micro);
+    pointer-events: none;
+  }
+  .cue-line {
+    width: 48px;
+    height: 1px;
+    background: var(--ink-micro);
+  }
+
+  @media (min-width: 768px) {
+    h1 { font-size: clamp(36px, 8.25vw, 78px); }
+    .lead {
+      font-size: 18px;
+      line-height: 1.6;
+    }
+  }
+
+  @media (min-width: 1200px) {
+    .opening { height: 700vh; }
+    .sticky { height: 100vh; }
+    .headline {
+      bottom: 0;
+      padding-top: 0;
+      justify-content: center;
+      gap: 28px;
+    }
+    h1 {
+      font-size: clamp(48px, 7.4vw, 132px);
+      line-height: 0.92;
+    }
+    .lead {
+      font-size: clamp(16px, 1.25vw, 19px);
+      line-height: 1.6;
+    }
+    .legibility { display: none; }
+    .steps {
+      position: absolute;
+      right: 4vw;
+      top: 50%;
+      transform: translateY(-50%);
+      z-index: 4;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 16px;
+      opacity: 0;
+      pointer-events: none;
+    }
+    .cue { bottom: 28px; }
+  }
+
+  /* No scripting, no scroll story: a normal-height section that reads top to
+     bottom. */
+  :global(html:not(.js)) .opening { height: auto; }
+  :global(html:not(.js)) .sticky {
+    position: relative;
+    height: auto;
+    padding-bottom: 72px;
+  }
+  :global(html:not(.js)) .headline {
+    position: relative;
+    left: auto;
+    right: auto;
+    bottom: auto;
+    margin: 0 var(--gutter);
+  }
+  :global(html:not(.js)) .legibility { display: none; }
+
+  @media (min-width: 1200px) {
+    :global(html:not(.js)) .headline { padding-top: 160px; }
+  }
+</style>

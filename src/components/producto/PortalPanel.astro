@@ -1,0 +1,131 @@
+---
+// One portal panel: eyebrow, heading and three capability rows, then that
+// portal's live UI. The 3D object follows an anchor: on desktop it sits off
+// the UI's top-right corner, on phones and tablets in its own slot between
+// the text and the UI. Both anchors render; the scene reads the one the
+// current layout shows.
+import Eyebrow from "./Eyebrow.astro";
+import Icon from "../ui/Icon.astro";
+import type { PortalPanelCopy } from "../../data/producto";
+
+interface Props {
+  index: number;
+  copy: PortalPanelCopy;
+}
+
+const { index, copy } = Astro.props;
+---
+
+<div class="panel" data-portal-panel={index}>
+  <div class="text" data-panel-text>
+    <Eyebrow data-scroll-rise>{copy.eyebrow}</Eyebrow>
+    <h3 data-scroll-rise>{copy.title}</h3>
+    <div class="capabilities">
+      {
+        copy.capabilities.map((capability) => (
+          <div class="capability" data-scroll-rise>
+            <Icon name={capability.icon} color="#4455e6" />
+            {capability.text}
+          </div>
+        ))
+      }
+    </div>
+  </div>
+  <div class="slot" aria-hidden="true"><div class="anchor" data-portal-anchor="compact"></div></div>
+  <div class="ui" data-panel-ui>
+    <div class="anchor-wide" aria-hidden="true" data-portal-anchor="wide"></div>
+    <slot />
+  </div>
+</div>
+
+<style>
+  .panel {
+    position: relative;
+    box-sizing: border-box;
+    padding: 64px var(--gutter) 64px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+  .text {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    min-width: 0;
+  }
+  h3 {
+    margin: 0;
+    font-weight: 800;
+    font-size: clamp(28px, 8.4vw, 36px);
+    line-height: 1.02;
+    letter-spacing: -0.04em;
+    color: var(--ink);
+    text-wrap: balance;
+  }
+  .capabilities {
+    display: flex;
+    flex-direction: column;
+  }
+  .capability {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 14px 0;
+    border-top: 1px solid var(--hairline);
+    font-size: 16px;
+    font-weight: 500;
+    color: var(--ink);
+  }
+  .capability:last-child { border-bottom: 1px solid var(--hairline); }
+  .slot {
+    position: relative;
+    height: 230px;
+  }
+  .anchor {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    width: 1px;
+    height: 1px;
+  }
+  .ui {
+    position: relative;
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+  .anchor-wide { display: none; }
+
+  @media (min-width: 768px) {
+    h3 { font-size: clamp(28px, 6.3vw, 54px); }
+    .slot { height: 340px; }
+  }
+
+  @media (min-width: 1200px) {
+    .panel {
+      min-height: 100vh;
+      padding: 120px calc(4vw + 64px) 120px 4vw;
+      display: grid;
+      grid-template-columns: minmax(0, 4fr) minmax(0, 6fr);
+      gap: 5vw;
+      align-items: center;
+    }
+    .text { gap: 28px; }
+    h3 {
+      font-size: clamp(32px, 3.4vw, 60px);
+      line-height: 1;
+    }
+    .capability { padding: 16px 0; }
+    .slot { display: none; }
+    .ui { gap: 16px; }
+    .anchor-wide {
+      display: block;
+      position: absolute;
+      right: -2vw;
+      top: -4vh;
+      width: 1px;
+      height: 1px;
+    }
+  }
+</style>

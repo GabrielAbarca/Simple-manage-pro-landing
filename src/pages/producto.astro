@@ -1,8 +1,26 @@
 ---
-// Placeholder while the V.2 port of this route is in progress.
 import Layout from "../layouts/Layout.astro";
+import ProductoOpening from "../components/producto/ProductoOpening.astro";
+import ProductoPortals from "../components/producto/ProductoPortals.astro";
+import { breadcrumbLd } from "../lib/schema";
+import { productoMeta } from "../data/producto";
+
+const jsonLd = breadcrumbLd("Producto", "/producto/");
 ---
 
-<Layout title="Producto" description="Producto">
-  <h1>Producto</h1>
+<Layout title={productoMeta.title} description={productoMeta.description} withToast>
+  <script
+    slot="head"
+    is:inline
+    type="application/ld+json"
+    set:html={JSON.stringify(jsonLd)}
+  />
+
+  <ProductoOpening />
+  <ProductoPortals />
 </Layout>
+
+<script>
+  import { initProductoPage } from "../scripts/producto/page";
+  initProductoPage();
+</script>

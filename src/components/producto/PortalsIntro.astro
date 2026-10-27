@@ -1,0 +1,92 @@
+---
+// "Tres portales. Un mismo registro." The empty column beside it holds the
+// anchor the three 3D objects cluster around before each flies to its panel.
+import Eyebrow from "./Eyebrow.astro";
+import { portalsIntroCopy } from "../../data/producto";
+---
+
+<div class="intro" data-portal-panel="intro">
+  <div class="text" data-panel-text>
+    <Eyebrow data-scroll-rise>{portalsIntroCopy.eyebrow}</Eyebrow>
+    <h2>
+      <span class="line-mask"><span data-scroll-mask>{portalsIntroCopy.headline[0]}</span></span>
+      <span class="line-mask"><span data-scroll-mask class="accent">{portalsIntroCopy.headline[1]}</span></span>
+    </h2>
+    <p data-scroll-rise>{portalsIntroCopy.body}</p>
+  </div>
+  <div class="cluster" aria-hidden="true"><div class="anchor" data-portal-anchor="cluster"></div></div>
+</div>
+
+<style>
+  .intro {
+    position: relative;
+    box-sizing: border-box;
+    padding: 96px var(--gutter) 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+  }
+  .text {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    min-width: 0;
+  }
+  h2 {
+    margin: 0;
+    font-weight: 800;
+    font-size: clamp(40px, 12vw, 56px);
+    line-height: 0.94;
+    letter-spacing: -0.05em;
+    color: var(--ink);
+  }
+  [data-scroll-mask] { display: block; }
+  .accent { color: var(--brand-text); }
+  p {
+    margin: 0;
+    max-width: 30rem;
+    font-size: 16px;
+    line-height: 1.55;
+    color: var(--ink-muted);
+    text-wrap: pretty;
+  }
+  .cluster {
+    position: relative;
+    min-width: 0;
+    height: min(48vh, 380px);
+  }
+  .anchor {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    width: 1px;
+    height: 1px;
+  }
+
+  @media (min-width: 768px) {
+    h2 { font-size: clamp(40px, 9vw, 84px); }
+    p {
+      font-size: 18px;
+      line-height: 1.6;
+    }
+    .cluster { height: min(44vh, 460px); }
+  }
+
+  @media (min-width: 1200px) {
+    .intro {
+      min-height: 100vh;
+      padding: 140px calc(4vw + 64px) 120px 4vw;
+      display: grid;
+      grid-template-columns: minmax(0, 6fr) minmax(0, 5fr);
+      gap: 5vw;
+      align-items: center;
+    }
+    .text { gap: 28px; }
+    h2 { font-size: clamp(44px, 6vw, 108px); }
+    p {
+      font-size: clamp(16px, 1.25vw, 19px);
+      line-height: 1.6;
+    }
+    .cluster { height: 56vh; }
+  }
+</style>

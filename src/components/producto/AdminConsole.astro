@@ -1,0 +1,80 @@
+---
+// Live UI 01, Administración: the curso lectivo card whose button flips the
+// active periodo, three StatCards and the sections table. The table renders
+// twice because phones and tablets drop "Docente guía" and shorten the count
+// head; CSS shows the one that matches.
+import Badge from "../ui/Badge.astro";
+import Button from "../ui/Button.astro";
+import Card from "../ui/Card.astro";
+import DataTable from "../ui/DataTable.astro";
+import StatCard from "../ui/StatCard.astro";
+import { adminConsoleCopy as copy } from "../../data/producto";
+
+const rows = copy.rows.map((row) => ({ ...row }));
+---
+
+<Card>
+  <div class="course" data-admin-console>
+    <div class="course-info">
+      <div class="course-title">{copy.courseTitle}</div>
+      <div class="course-meta">
+        <Badge tone={copy.periodOne.tone} data-admin-badge>{copy.periodOne.badge}</Badge>
+        <span class="note">{copy.minimumGrade}</span>
+      </div>
+    </div>
+    <Button variant={copy.periodOne.variant} icon="event_available" data-admin-toggle>{copy.periodOne.cta}</Button>
+  </div>
+</Card>
+<div class="stats">
+  {copy.stats.map((stat) => <StatCard icon={stat.icon} label={stat.label} value={stat.value} tone={stat.tone} />)}
+</div>
+<Card padding="1.2rem 1.8rem">
+  <div class="tables">
+    <DataTable class="admin-table-wide" columns={[...copy.columnsWide]} rows={rows} tableLabel={copy.tableLabel} />
+    <DataTable class="admin-table-compact" columns={[...copy.columnsCompact]} rows={rows} tableLabel={copy.tableLabel} />
+  </div>
+</Card>
+
+<style>
+  .course {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    flex-wrap: wrap;
+  }
+  .course-info {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+  .course-title {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--ink);
+  }
+  .course-meta {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+  }
+  .note {
+    font-size: 0.82rem;
+    color: var(--ink-muted);
+  }
+  .stats {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+    gap: 12px;
+  }
+  .tables :global(.admin-table-wide) { display: none; }
+
+  @media (min-width: 1200px) {
+    .stats {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 16px;
+    }
+    .tables :global(.admin-table-wide) { display: block; }
+    .tables :global(.admin-table-compact) { display: none; }
+  }
+</style>
