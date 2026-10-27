@@ -237,7 +237,8 @@ asked, not foregrounded).
 >   one: he is named, the work is dated, nothing else.
 
 > **Third amendment, October 2026: the V.2 redesign.** Gabriel approved a
-> Claude Design redesign (`design_handoff_smp_landing/`) as an exact build
+> Claude Design redesign (`design_handoff_smp_landing/`, since removed from
+> the repo and kept in PR #12's history at `f2584a0`) as an exact build
 > target, and ruled that where it disagrees with this brief, **the design
 > wins and the deviation is recorded here**. Recorded rather than rewritten,
 > so the reasoning above stays readable.
@@ -253,8 +254,8 @@ asked, not foregrounded).
 > Deviations from the sections above, each Gabriel's call:
 >
 > - **Screenshots are gone** (§7.3, §9). The portals are shown as canvas-drawn
->   3D objects and as live, clickable UI built from the design system. The
->   capture pipeline survives only for the OG card.
+>   3D objects and as live, clickable UI built from the design system.
+>   `og.png` stays as a static asset.
 > - **WebGL is in** (three.js, lazy-loaded per scene, off with JS and inert
 >   under reduced motion). §9's "zero JS by default" now means "no JS needed
 >   to read anything".

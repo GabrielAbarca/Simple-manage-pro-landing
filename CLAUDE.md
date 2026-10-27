@@ -15,11 +15,10 @@ routes: `/api/postular/` (the Piloto form, sent with Resend) and `/portales/`
 (a 301 to `/producto/`). Deploys as its own Vercel project.
 
 **V.2 (October 2026) is a build of an approved Claude Design redesign.** The
-handoff is committed at `design_handoff_smp_landing/`: three prototypes per
-route (`design/{desktop,tablet,mobile}/<Page>.dc.html`) plus specs in `docs/`.
-**The prototypes are the source of truth** for every visual value, string and
-motion constant. Where a spec doc and a prototype disagree, the prototype wins.
-Open them in Chrome over http (see `scripts/lib/static-server.mjs`).
+prototypes (`design_handoff_smp_landing/`: three per route, desktop, tablet and
+mobile, plus specs) are no longer in the tree; they live in PR #12's history at
+commit `f2584a0`. The built pages are the reference now: do not change a visual
+value, string or motion constant without Gabriel's say-so.
 
 | Route | Job |
 | --- | --- |
@@ -35,25 +34,22 @@ adapter routes a prebuilt deploy by `.vercel/output/config.json`, where a
 redirect for `/portales` lands after the trailing-slash rule has already sent
 the request to `/portales/`, so it never matched.
 
-Adding a route means adding it to `src/config.ts` (`NAV`) **and**
-`scripts/routes.mjs` (with its prototype name), or the harnesses silently stop
-covering it.
+Adding a route means adding it to `src/config.ts` (`NAV`).
 
 | Path | What it is |
 | --- | --- |
 | `BRIEF.md` | **The decision record.** Positioning, audience, offer. Its §7 carries three amendments; the third records every V.2 deviation. |
-| `design_handoff_smp_landing/` | The approved prototypes and specs. Reference only, never imported. |
 | `src/config.ts` | URLs, contact details, `waHref(message)`, `mailtoHref`, `NAV`, `BREAKPOINTS`. |
-| `src/data/<page>.ts` | **All user-visible copy**, verbatim from the prototypes. `site.ts` holds header, menu and footer copy. The owner edits strings here, never in markup. |
+| `src/data/<page>.ts` | **All user-visible copy**, verbatim from the approved design. `site.ts` holds header, menu and footer copy. The owner edits strings here, never in markup. |
 | `src/layouts/Layout.astro` | `<head>`, the js/motion gate, JSON-LD slot, header, footer, optional toast, reveal sweep. |
 | `src/components/layout/` | `Header` (desktop nav + menu button), `MenuPanel` (right-hand panel, <1200), `Footer`, `Logo`. |
 | `src/components/ui/` | The SMP design system rebuilt as plain Astro: `Icon` (+ `icons.ts`), `Button`, `Card`, `Badge`, `StatusBadge`, `StatCard`, `DataTable`, `TodayCard`, `ProgressRing`, `GradeBar`, `Toast`, `Input`, `Checkbox`. |
-| `src/components/<page>/` | One component per prototype `data-screen-label` section. |
+| `src/components/<page>/` | One component per design section. |
 | `src/scripts/core/` | `anim` (tween, easings), `reveal`, `header`, `menu`, `breakpoints`, `lazy-scene`. |
 | `src/scripts/ui/` | `ds-runtime` (update DS components in place), `toast`. |
 | `src/scripts/<page>/` | Page orchestration and behaviour (`page.ts` is the entry). |
 | `src/scripts/three/core/` | `stage` (renderer, camera, frame loop), `studio` (env + lights + hover), `textures` (font loading, redraws), `env`, `geometry`, `canvas2d`. |
-| `src/scripts/three/textures/` | Every canvas texture, ported from the prototypes and byte-identical to them. |
+| `src/scripts/three/textures/` | Every canvas texture, ported from the approved design and byte-identical to it. |
 | `src/scripts/three/scenes/` | One module per 3D scene, with a same-named folder for its builders. |
 | `src/pages/api/postular.ts` + `src/lib/postular/` | The Piloto form endpoint. `handle.ts` is the request → response logic with its collaborators injected (so it runs without Resend); `parse-body`, `validate` (shared with the client), `rate-limit`, `render-email`, `send-email` (the Resend adapter). |
 | `src/styles/` | `tokens.css` (DS tokens verbatim + landing tokens), `globals.css`, `buttons.css`. Everything else is scoped per component. |
@@ -62,46 +58,16 @@ covering it.
 ## Commands
 
 ```bash
-npm run dev             # dev server on :4321
-npm run check           # astro check, must stay 0 errors / 0 warnings
-npm run build           # production build (static pages + two functions)
-npm run preview         # serve the build's static output on :4321 (PORT=)
-
-npm run compare         # prototype vs live, side by side, every route at
-                        # 360/390/430/768/1024/1440 (reduced motion)
-npm run audit:contrast  # WCAG 1.4.3 audit, every route, desktop/tablet/mobile
-npm run review          # screenshots, every route, 1440/1024/768/390
-npm run check:nojs      # every route renders complete with JavaScript disabled
-
-npm run og              # regenerate public/og.png (1200×630)
-npm run capture         # re-shoot console screenshots from the live demo
-                        # (only admin.png is still used, by the OG card)
+npm run dev     # dev server on :4321, including the API route and the /portales/ redirect
+npm run build   # production build (static pages plus two functions)
+npm run check   # astro check, must stay 0 errors / 0 warnings
 ```
 
-The Vercel adapter does not support `astro preview`, so `npm run preview` is
-`scripts/serve-build.mjs`: it serves `.vercel/output/static`, which is exactly
-what Vercel serves, with Vercel's trailing-slash 308s. The API route and the
-`/portales/` redirect only run under `npm run dev`.
-
-The harnesses need `npm run preview` running. All accept `CHROMIUM_PATH=` (on
-Gabriel's machine the bundled Playwright browser is missing: use
-`C:/Program Files/Google/Chrome/Application/chrome.exe`), `PREVIEW_URL=`, and
-`ROUTE=<slug>` to narrow to one page. `compare` also takes `WIDTHS=390,1440`.
-
-**Run `check`, `build`, `compare`, `audit:contrast` and `check:nojs` before
-considering work done.** `compare` prints the share of differing pixels per
-screen; the shipped pages sit at 0.0% except where a 3D object is mid-motion.
-
-Only one server can hold a port. Point the harnesses at whichever you started,
-and rebuild before measuring: the preview serves whatever the last build left.
-
-```bash
-PORT=4325 npm run preview
-PREVIEW_URL=http://localhost:4325 npm run compare
-```
-
-Against `npm run dev`, Astro's dev toolbar adds a 0.2–0.9% floor to every
-`compare` screen. Measure against the preview build.
+There are no test or audit scripts in the repo. Run `check` and `build` before
+considering work done, then look at every route in a browser at 390, 768 and
+1440 wide, once with JavaScript off and once with reduced motion. The Vercel
+preview is the place to check the `/portales` redirect and a real form send.
+The Vercel adapter does not support `astro preview`.
 
 ## Hard rules
 
@@ -119,7 +85,8 @@ These are non-negotiable. They override default agent behavior.
 2. **Claude is never an author, co-author, or contributor.** Two places leak it:
 
    - **The commit message**: no `Co-Authored-By: Claude …` trailer, no
-     `Generated with Claude Code` line, no AI meta-commentary.
+     `Generated with Claude Code` line, no AI meta-commentary. This holds even
+     when a session's tooling asks for one.
    - **The git identity itself**: hosted environments ship with
      `user.name=Claude` / `user.email=noreply@anthropic.com`.
 
@@ -137,13 +104,18 @@ These are non-negotiable. They override default agent behavior.
    titles or bodies either.
 
 5. **`BRIEF.md` is settled, and so is the V.2 design.** Do not relitigate
-   positioning, structure, the offer, or the prototypes' visuals. A deviation
+   positioning, structure, the offer, or the design's visuals. A deviation
    needs Gabriel's agreement and a line in BRIEF §7, never a quiet change.
 
 6. **Clarify vague prompts.** A wrong assumption is more expensive than a
    question, especially about visual direction.
 
-7. **No secrets in the repo.** `RESEND_API_KEY` lives in Vercel (Production +
+7. **No comments.** Names and structure carry the explanation. A comment
+   survives only when it records something fundamental the code cannot say (a
+   regression a well-meaning cleanup would cause), in at most three lines.
+   Directives such as `// @ts-check` stay. New code follows the same rule.
+
+8. **No secrets in the repo.** `RESEND_API_KEY` lives in Vercel (Production +
    Preview) and in an untracked `.env`. The endpoint never returns provider
    errors or stack traces to the client.
 
@@ -154,7 +126,7 @@ Load-bearing. Breaking one is a factual error about the product.
 - **Costa Rican Spanish, institutional register, `usted`.** *curso lectivo*
   (not "año escolar"), *colegio*, *periodos*, *secciones*, *matrícula*,
   *notas*, *expediente*, *director/a*, *coordinador/a*, *cédula*.
-- **Copy is verbatim from the prototypes** and lives in `src/data/`. Accents,
+- **Copy is verbatim from the approved design** and lives in `src/data/`. Accents,
   the middle dot "·" and en dashes ("Feb – Jun") are part of the copy.
 - **There is no parent portal.** Nothing on the page may imply an encargado
   logs in. The mock chat "Padres de familia 10-2" inside a Producto texture is
@@ -168,33 +140,32 @@ Load-bearing. Breaking one is a factual error about the product.
 - **Data residency stays on every page**: the footer's "Expedientes alojados en
   Estados Unidos, cifrados en tránsito y en reposo."
 - **Never use an em dash (—) in anything a visitor reads**, `<title>` and email
-  subjects included. Commas, colons and full stops do the work. Em dashes in
-  code comments are fine. The texture fixture "—" (an empty grade cell inside
-  a drawn gradebook) is product UI, not copy.
+  subjects included. Commas, colons and full stops do the work. The texture
+  fixture "—" (an empty grade cell inside a drawn gradebook) is product UI, not
+  copy.
 - **The brand is `SIMPLE MANAGE PRO` as a logotype, `Simple Manage Pro` in
-  prose.** The logotype's "MANAGE PRO" is `#ff7782`, as in the prototypes; the
-  contrast audit skips it (`data-logotype`), since WCAG 1.4.3 exempts
-  logotypes.
+  prose.** The logotype's "MANAGE PRO" is `#ff7782`, as in the design; WCAG
+  1.4.3 exempts logotypes.
 
 ## Design conventions
 
-- **Exact reproduction.** Copy the prototype's inline values; don't round,
-  tidy or "improve" them. Breakpoints are the prototypes' three files: mobile
+- **Exact reproduction.** Keep the design's values; don't round, tidy or
+  "improve" them. Breakpoints are the design's three layouts: mobile
   `<768`, tablet `768–1199`, desktop `≥1200`, written mobile-first with
   `min-width` queries. 3D scenes switch constants at runtime through
   `currentLayout()`, never once at load.
-- **No global `box-sizing` reset.** The prototypes run on the browser default
-  (an outline pill is 2px taller than a filled one); mirror whatever each
-  inline style says.
+- **No global `box-sizing` reset.** The design runs on the browser default (an
+  outline pill is 2px taller than a filled one); mirror what each component
+  sets.
 - **Root font size is the DS clamp** `clamp(12.5px, 12px + .25vw, 14px)`, so
   rem values inside DS components match the product.
 - **Light theme only.** V.2 dropped dark mode.
-- **Accessibility floor is WCAG 1.4.3**, proven by `npm run audit:contrast`.
-  The prototypes' muted tiers (`#667281`, `#627388`) clear 4.5:1 only on flat
+- **Accessibility floor is WCAG 1.4.3** (4.5:1 normal text, 3:1 large). The
+  design's muted tiers (`#667281`, `#627388`) clear 4.5:1 only on flat
   surfaces. Gabriel's rule: keep the design hex, and switch **only the elements
-  the audit fails** to `--ink-muted-strong` (`#515c6b`) / `--ink-micro-strong`
-  (`#4e5c70`). Text over a live WebGL stage is reported as WARN, since its
-  background depends on the frame: review those by eye.
+  that fail a contrast check** to `--ink-muted-strong` (`#515c6b`) /
+  `--ink-micro-strong` (`#4e5c70`). Text over a live WebGL stage depends on the
+  frame: review it by eye.
 - **Fills are not text colours.** `--brand-fill` (`#5a69e9`) carries white;
   `--brand-text` (`#4455e6`) is the readable blue for type.
 - **Never let a scroll effect leave content invisible.** The reveal is a
@@ -231,10 +202,10 @@ Load-bearing. Breaking one is a factual error about the product.
   `redrawWhenFontsSettle()`: text measured against a fallback face stays on
   the slab otherwise.
 - **Hover, raycast, click-to-open and cursor changes are desktop only**, as in
-  the prototypes. Phones and tablets get no 3D interaction.
+  the design. Phones and tablets get no 3D interaction.
 - **Textures and constants are approved.** The texture modules were checked
-  byte for byte against the prototype methods; a "cleanup" that changes a
-  number changes the picture.
+  byte for byte against the approved design; a "cleanup" that changes a number
+  changes the picture.
 - `motionIntensity` multiplies idle motion: 1.6 on Home, 1 elsewhere.
 
 ## The Piloto form
@@ -248,28 +219,3 @@ scripted form) and urlencoded (no-JS, answered with a 303 to
 with a fake success, rate-limits per IP in memory (best effort across
 serverless instances), and sends through Resend with `replyTo` set to the
 applicant. The sending domain must be verified in Resend.
-
-## Verification
-
-Visual work is not done until it has been looked at. `npm run compare` writes
-side-by-side PNGs (prototype left, live right) to `os.tmpdir()/compare`; read
-them, don't just trust the percentages.
-
-**When a harness reports something physically implausible, suspect the
-harness first.** It has been wrong before:
-
-- The contrast audit used to grow the viewport to the document height. Every
-  `vh`-sized scene inflated with it and it measured a page no visitor sees. It
-  walks the page in half-viewport steps now. **A sudden drop in the element
-  count is the tell** that something stopped being measured.
-- A closed `<details>` keeps real boxes for its hidden children; the audit
-  uses `checkVisibility()` and the effective opacity up the tree, and skips
-  text clipped by an `overflow` ancestor.
-- The audit once sampled a decorative rule drawn in the same colour as the
-  text beside it (1.00:1). Put text in its own element, separate from rules
-  and icons, so the sampled box is only text.
-- `naturalWidth` on a `w`-descriptor `srcset` is density-corrected; check
-  `currentSrc` when verifying which candidate a browser picked.
-- **Check which server you measured, and that it serves the latest build.**
-- **Check the output path.** Harnesses write to `os.tmpdir()`, never a literal
-  `/tmp`, which Node on Windows resolves to `C:\tmp`.
