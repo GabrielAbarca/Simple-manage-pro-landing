@@ -1,12 +1,7 @@
-// Live UI 03: the I / II Periodo switch moves the attendance ring, average,
-// attendance line and the five grade bars. Also sizes the bars the way the
-// prototype's renderVals did (barW), per layout, rounded, on every resize.
-
 import { currentLayout, type Layout } from "../core/breakpoints";
 import { studentConsoleCopy, type StudentPeriod } from "../../data/producto";
 import { setButtonVariant, setGradeBar, setProgressRing } from "../ui/ds-runtime";
 
-/** [floor px, share of innerWidth, ceiling px] per layout, from each file's barW. */
 const GRADE_BAR_WIDTH: Record<Layout, [number, number, number]> = {
   desktop: [60, 0.1, 220],
   tablet: [160, 0.42, 420],

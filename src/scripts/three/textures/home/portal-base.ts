@@ -1,7 +1,3 @@
-// Port of Home's `cv()` and `base(items, active)` from design_handoff_smp_landing/
-// design/desktop/Home.dc.html: the console chrome (logo and side nav) the three
-// hero slabs share. Coordinates and colours are approved; do not tidy them.
-
 import { context2d, createBrandGradient, createCanvas, drawText, roundRect } from "../../core/canvas2d";
 
 export interface PortalSurface {

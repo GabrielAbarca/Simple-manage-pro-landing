@@ -1,11 +1,3 @@
-// Home intro timeline, ported from Home.dc.html (runIntro, introPhase2,
-// introExit, heroIn). Constants are the approved ones; don't tune them here.
-//
-// Phase 1 (1.7s): counter 000→100, progress bar, months fill in sequence.
-// Phase 2: counter and months drop away, the two lines rise.
-// Exit (1.1s, or 0.7s if the visitor scrolls first): the overlay wipes up and
-// the hero headline and slabs enter.
-
 import { easeInOutCubic, fadeIn, riseIn, tween } from "../core/anim";
 import { setHeaderOnDark } from "../core/header";
 
@@ -39,7 +31,6 @@ function findIntroElements(): IntroElements | null {
   };
 }
 
-/** Hero headline rise and fades. Returns when the slabs' entrance starts. */
 export function revealHeroHeadline(instant: boolean): number {
   const hero = document.querySelector<HTMLElement>("[data-home-hero]");
   if (hero && !instant) {
@@ -81,7 +72,6 @@ export class HomeIntro {
     });
   }
 
-  /** The visitor scrolled into the hero before the intro finished. */
   exitEarly(): void {
     this.generation = 2;
     clearTimeout(this.exitTimer);

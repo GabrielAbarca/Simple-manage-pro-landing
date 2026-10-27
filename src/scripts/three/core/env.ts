@@ -1,8 +1,3 @@
-// Port of `makeEnv` from design_handoff_smp_landing/design/desktop/{Home,Producto}.dc.html
-// (identical in both). The panel sizes, positions and over-range colours are the
-// approved studio lighting, so constants must not be "tidied". Piloto inlines a
-// slightly different variant of its own; this is not that one.
-
 import * as THREE from "three";
 
 type EnvironmentPanel = readonly [
@@ -38,8 +33,6 @@ function buildStudioScene(): THREE.Scene {
   return scene;
 }
 
-// The prototype never freed the throwaway studio scene. Its GPU buffers are
-// released here once baked; the returned texture does not depend on them.
 function disposeStudioScene(scene: THREE.Scene): void {
   scene.traverse((node) => {
     if (!(node instanceof THREE.Mesh)) return;

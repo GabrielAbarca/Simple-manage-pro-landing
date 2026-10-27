@@ -1,7 +1,3 @@
-// Port of Producto's `drawSticky(lines, col)` from design_handoff_smp_landing/design/
-// desktop/Producto.dc.html. The two approved notes are exported as presets so the
-// scene does not have to retype their Spanish copy.
-
 import { context2d, createCanvas, drawText } from "../../core/canvas2d";
 
 export interface StickyNote {

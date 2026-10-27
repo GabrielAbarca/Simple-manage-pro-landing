@@ -1,8 +1,4 @@
 ---
-// The DS <Button>. Variant and size live in data attributes rather than in
-// classes so a page script can flip them (setButtonVariant) without knowing
-// any scoped class name. The label sits in its own span for the same reason:
-// setButtonLabel rewrites it without wiping the icon.
 import type { HTMLAttributes } from "astro/types";
 import type { ButtonVariant } from "../../scripts/ui/ds-runtime";
 import Icon from "./Icon.astro";
@@ -13,11 +9,9 @@ type SharedAttributes = Omit<HTMLAttributes<"button">, "type"> & Omit<HTMLAttrib
 interface Props extends SharedAttributes {
   variant?: ButtonVariant;
   size?: "sm" | "md";
-  /** Drawn before the label at 1.2rem, as the DS draws it. */
   icon?: IconName;
   disabled?: boolean;
   type?: "button" | "submit" | "reset";
-  /** Renders an <a> with the same look instead of a <button>. */
   href?: string;
 }
 
@@ -33,7 +27,6 @@ const {
 } = Astro.props;
 
 const isLink = typeof href === "string";
-// A disabled link drops its href, so it stops being focusable or followable.
 const linkHref = disabled ? undefined : href;
 ---
 
@@ -117,7 +110,6 @@ const linkHref = disabled ? undefined : href;
     border: 1px solid var(--border-control);
   }
 
-  /* Filled variants dim on hover; ghost tints its background instead. */
   .button:not([data-variant="ghost"], :disabled, [aria-disabled="true"]):hover {
     opacity: 0.9;
   }
@@ -126,7 +118,6 @@ const linkHref = disabled ? undefined : href;
     background: var(--color-background);
   }
 
-  /* Keeps the link form from picking up a global a:hover recolour. */
   .button:hover {
     text-decoration: none;
   }

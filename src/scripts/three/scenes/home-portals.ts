@@ -1,7 +1,3 @@
-// Home hero scene: the three portal slabs, scroll-fanned over the 300vh hero.
-// Also drives the hero's DOM: headline lift, fan title, captions projected
-// from each slab's corner, and the desktop scroll cue.
-
 import * as THREE from "three";
 import { clamp01, easeOutExpo, prefersReducedMotion, smoothstep } from "../../core/anim";
 import { currentLayout } from "../../core/breakpoints";

@@ -1,9 +1,3 @@
-// The Piloto form controller: the prototype's setF / touch / validate /
-// submit / renderVals, over the native form. Field values always come from
-// the DOM (readFields), so the only state kept here is what the DOM cannot
-// say: which fields were touched, whether a submit was attempted, whether a
-// send is in flight, and what the server last objected to.
-
 import {
   hasErrors,
   validatePostulacion,
@@ -22,14 +16,12 @@ interface FormState {
   serverErrors: FieldErrors;
 }
 
-/** One form's elements and its current state; handlers replace `state`, never mutate it. */
 interface FormContext {
   form: HTMLFormElement;
   confirmation: HTMLElement;
   state: FormState;
 }
 
-/** Fields the prototype marks touched on blur; the rest on pick or toggle. */
 const TOUCH_ON_BLUR = new Set<string>(["colegio", "provincia", "canton", "nombre", "cargo", "correo", "telefono"]);
 const TOUCH_ON_CHANGE = new Set<string>(["tipo", "niveles", "consent"]);
 const TOUCH_NONE = new Set<string>();
@@ -82,7 +74,6 @@ async function sendAndShowOutcome(context: FormContext): Promise<void> {
   if (result.kind === "failed") return setFailureVisible(form, true);
   context.state = { ...context.state, submitted: true, serverErrors: result.errors };
   render(context);
-  // A 422 that names no field the visitor can see still needs an answer.
   if (!revealFirstError(form)) setFailureVisible(form, true);
 }
 
@@ -108,7 +99,6 @@ export function initApplicationForm(form: HTMLFormElement | null, confirmation: 
     confirmation,
     state: { touched: new Set(), submitted: false, sending: false, serverErrors: {} },
   };
-  // The script owns validation from here; native checks remain for no-JS.
   form.noValidate = true;
   updateCommentCounter(form);
   form.addEventListener("input", (event) => handleValueChange(context, event, TOUCH_NONE));

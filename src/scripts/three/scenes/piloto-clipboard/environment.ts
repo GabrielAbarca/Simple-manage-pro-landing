@@ -1,11 +1,7 @@
-// Piloto's own studio, inlined in Piloto.dc.html initThree rather than
-// shared: its light panels are tinted Color(a, a, a * 1.05) and its key and
-// fill lights differ from core/env.ts and core/studio.ts. Constants are the
-// approved values; do not merge this with the shared environment.
-
+// Piloto's own light rig: tinted panels and a different key and fill than core/env.ts and
+// core/studio.ts. Approved values; do not merge with the shared environment.
 import * as THREE from "three";
 
-/** [width, height, x, y, z, brightness] per light panel. */
 const LIGHT_PANELS: readonly (readonly [number, number, number, number, number, number])[] = [
   [10, 5, 0, 9, 1, 4],
   [6, 8, -9, 1, 5, 2.6],
@@ -35,7 +31,6 @@ function buildStudioScene(): THREE.Scene {
   return studio;
 }
 
-// The baked texture no longer needs the throwaway scene's GPU buffers.
 function disposeStudioScene(studio: THREE.Scene): void {
   studio.traverse((node) => {
     if (!(node instanceof THREE.Mesh)) return;

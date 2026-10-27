@@ -1,14 +1,9 @@
 ---
-// The DS field label: small uppercase, tracked. A `<label>` when it names one
-// control; a `<span>` with an id when it names a group (radiogroup, checkbox
-// grid) through aria-labelledby. `optional` appends the lowercase hint.
 import { formCopy } from "../../../data/postulacion";
 
 interface Props {
   text: string;
-  /** The control this label names. Omit for a group label. */
   for?: string;
-  /** Needed on a group label so the group can reference it. */
   id?: string;
   optional?: boolean;
 }

@@ -1,6 +1,3 @@
-// Copy shared by every route: header, menu panel and footer. Verbatim from
-// design_handoff_smp_landing; the owner edits strings here, never in markup.
-
 export const headerCopy = {
   demoCta: "Ver la demo",
   openMenu: "Abrir menú",

@@ -1,8 +1,4 @@
 ---
-// The Piloto application form. It posts natively to /api/postular, so it
-// works without JS (native `required` checks, 303 back to this page); the
-// controller in src/scripts/piloto/form takes over when scripting runs,
-// switches native validation off and sends JSON instead.
 import { POSTULAR_ENDPOINT, formCopy } from "../../../data/postulacion";
 import FieldsetComments from "./FieldsetComments.astro";
 import FieldsetContact from "./FieldsetContact.astro";
@@ -19,7 +15,6 @@ import FormFooter from "./FormFooter.astro";
   <FieldsetContact />
   <FieldsetComments />
   <FormFooter />
-  {/* Honeypot: invisible and unreachable for people, filled in by bots. */}
   <div class="visually-hidden" aria-hidden="true">
     <label for="pf-website">{formCopy.honeypotLabel}</label>
     <input id="pf-website" type="text" name="website" tabindex="-1" autocomplete="off" />

@@ -1,9 +1,3 @@
-// Turns a raw POST to /api/postular into typed fields, or refuses it. This is
-// the structural gate (content type, size, value types); the business rules
-// run afterwards in validate.ts, the same function the browser uses.
-// Anything that is not a string, a list of short strings or a checkbox value
-// is treated as hostile and rejected outright.
-
 import { NIVELES } from "../../data/postulacion";
 import type { PostulacionFields } from "./validate";
 
@@ -12,7 +6,6 @@ export type BodyFormat = "json" | "form";
 export interface ParsedPostulacion {
   format: BodyFormat;
   fields: PostulacionFields;
-  /** The hidden `website` field: only bots fill it in. */
   honeypotFilled: boolean;
 }
 
@@ -26,7 +19,6 @@ const MAX_NIVEL_LENGTH = 8;
 const TEXT_FIELDS = ["colegio", "provincia", "canton", "tipo", "estudiantes", "nombre", "cargo", "correo", "comentarios"] as const;
 const CHECKED_VALUES = new Set(["on", "true", "1", "yes"]);
 
-/** A lookup that only ever answers for a field it was asked about by name. */
 type RawLookup = (name: string) => unknown;
 
 class RejectedBody extends Error {}
@@ -62,8 +54,6 @@ function readConsent(raw: unknown): boolean {
   return CHECKED_VALUES.has(raw.toLowerCase());
 }
 
-// A no-JS visitor types "8888 8888" or "8888-8888"; the script already sends
-// digits. Only separators are dropped, so letters still fail validation.
 const normalizePhone = (value: string): string => value.replace(/[\s\-().]/g, "");
 
 function fieldsFrom(lookup: RawLookup, nivelesRaw: unknown): PostulacionFields {
@@ -113,7 +103,6 @@ async function readLimitedText(request: Request): Promise<string> {
   return text;
 }
 
-/** Parses the request body. Never throws: a bad body is a typed refusal. */
 export async function parsePostulacionRequest(request: Request): Promise<ParseOutcome> {
   const format = detectFormat(request.headers.get("content-type"));
   if (!format) return { ok: false, format: "json" };
@@ -121,7 +110,6 @@ export async function parsePostulacionRequest(request: Request): Promise<ParseOu
     const text = await readLimitedText(request);
     return { ok: true, value: format === "json" ? parseJson(text) : parseForm(text) };
   } catch {
-    // Malformed JSON, oversized or mistyped values: all the same refusal.
     return { ok: false, format };
   }
 }

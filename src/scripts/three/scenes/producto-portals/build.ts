@@ -1,9 +1,3 @@
-// The three portal objects from Producto.dc.html initPortal: a database of
-// three white cylinders with periwinkle bands and green LEDs (Administración),
-// a brand-blue gradebook with a cream page block (Docente), and a dark phone
-// showing the student's grades (Estudiante). Each hangs in a holder group
-// with its own blurred drop shadow.
-
 import * as THREE from "three";
 import { productoSlab } from "../../core/geometry";
 import { PRODUCTO_SHADOW_ALPHA, drawShadow } from "../../core/canvas2d";
@@ -14,9 +8,7 @@ import { drawStudentPhone } from "../../textures/producto/student-phone";
 type Vec3 = [number, number, number];
 
 export interface PortalObject {
-  /** Positioned and scaled each frame; holds the shadow and the body. */
   holder: THREE.Group;
-  /** Rotated each frame. */
   body: THREE.Object3D;
   rotation: Vec3;
   scale: number;
@@ -64,7 +56,6 @@ function buildPhone(face: THREE.Texture): THREE.Group {
   return productoSlab(1.26, 2.6, 0.22, 0.12, dark, new THREE.MeshBasicMaterial({ map: face }), 0.03, 0.06);
 }
 
-/** Port of `holder(body, sw, sh, sy)`: a shadow plane 1.4 behind the body. */
 function holder(body: THREE.Object3D, shadowTexture: THREE.Texture, size: Vec3): THREE.Group {
   const [width, height, y] = size;
   const group = new THREE.Group();
@@ -76,7 +67,6 @@ function holder(body: THREE.Object3D, shadowTexture: THREE.Texture, size: Vec3):
   return group;
 }
 
-/** Builds the three objects in panel order: database, gradebook, phone. */
 export function buildPortalObjects(renderer: THREE.WebGLRenderer): PortalObject[] {
   const gradebookFace = canvasTexture(drawGradebook, renderer);
   const phoneFace = canvasTexture(drawStudentPhone, renderer);

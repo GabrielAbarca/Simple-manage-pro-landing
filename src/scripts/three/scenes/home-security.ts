@@ -1,8 +1,3 @@
-// Home "La seguridad nos importa." scene. The disks drop in as the section
-// enters, the stack turns slowly and the padlock orbits it. Desktop only:
-// hovering spreads the stack and lifts the lock, clicking spins it once and
-// clanks the shackle. From Home.dc.html initPilot.
-
 import * as THREE from "three";
 import { clamp01, easeOutCubic, prefersReducedMotion } from "../../core/anim";
 import { currentLayout } from "../../core/breakpoints";
@@ -42,7 +37,6 @@ function placeLock(db: DatabaseScene, entered: number, t: number, k: number, sta
   db.ring.material.opacity = 0.45 * appear;
 }
 
-/** Floor on the camera fit: lower below desktop so the orbit ring isn't cropped. */
 const fitFloor = () => (currentLayout() === "desktop" ? 0.5 : 0.36);
 
 export function startHomeSecurity(container: HTMLElement, motionIntensity: number): void {

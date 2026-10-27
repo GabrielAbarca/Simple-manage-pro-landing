@@ -1,8 +1,3 @@
-// The lit "studio" the Home security/contact scenes share (the prototypes'
-// makeStage): a PMREM room environment for the clearcoat materials, a soft
-// hemisphere fill and one key light. Plus the stage-local pointer that drives
-// desktop hover raycasts.
-
 import * as THREE from "three";
 import { currentLayout } from "../../core/breakpoints";
 import { makeEnvironment } from "./env";
@@ -21,11 +16,6 @@ export interface StagePointer {
   inside: boolean;
 }
 
-/**
- * Pointer in normalised device coordinates over `element`. Hover and
- * click-to-act are desktop-only in the design, so on mobile and tablet the
- * pointer never reports itself inside.
- */
 export function trackStagePointer(element: HTMLElement): StagePointer {
   const pointer: StagePointer = { position: new THREE.Vector2(), inside: false };
   element.addEventListener("pointermove", (event) => {
@@ -38,7 +28,6 @@ export function trackStagePointer(element: HTMLElement): StagePointer {
   return pointer;
 }
 
-/** Index of the item whose object tree contains the first ray hit, or -1. */
 export function hoveredIndex(
   raycaster: THREE.Raycaster,
   pointer: StagePointer,

@@ -1,10 +1,3 @@
-// "Nuestra historia" timeline, ported from playStory() in Nosotros.dc.html.
-// Plays once, when the list's top passes 80% of the viewport. Item i starts
-// at i * 250ms: its dot turns brand blue, its fill scales in over 250ms, and
-// its three beats (year, title, body) fade and rise 12px over 600ms, 60ms
-// apart. Under reduced motion the CSS gate never hides anything, so the list
-// is already in its played state and there is nothing to run.
-
 import { fadeIn, prefersReducedMotion, tween } from "../core/anim";
 
 const TRIGGER_VIEWPORT_FRACTION = 0.8;
@@ -42,7 +35,6 @@ function hasReachedTrigger(list: HTMLElement): boolean {
   return list.getBoundingClientRect().top < innerHeight * TRIGGER_VIEWPORT_FRACTION;
 }
 
-/** Same rAF-throttled sweep as the page reveal, so a fling scroll cannot skip it. */
 export function initHistoryTimeline(list: HTMLElement): void {
   if (prefersReducedMotion()) return;
   let scheduled = false;

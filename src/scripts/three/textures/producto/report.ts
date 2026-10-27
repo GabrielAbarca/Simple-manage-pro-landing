@@ -1,8 +1,3 @@
-// Port of Producto's `drawReport` from design_handoff_smp_landing/design/desktop/
-// Producto.dc.html: the hand-corrected printed report card in the "before" pile.
-// Split into helpers that issue the same draw calls in the same order; every
-// number and string is approved as is.
-
 import { context2d, createCanvas, drawText } from "../../core/canvas2d";
 
 type ReportGrade = readonly [subject: string, grade: string];

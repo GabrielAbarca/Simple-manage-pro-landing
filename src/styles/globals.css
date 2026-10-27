@@ -1,10 +1,5 @@
-/* Page-wide base. It reproduces what every V.2 prototype inherits: the DS
-   base.css (root size clamp, heading and paragraph resets, focus outline)
-   plus the prototypes' own <helmet> rules for body and links.
-
-   No global border-box: the prototypes run on the browser default, and their
-   pill buttons rely on it (an outline pill is 2px taller than a filled one). */
-
+/* No global border-box on purpose: the design's pills rely on content-box
+   sizing (an outline pill is 2px taller than a filled one). */
 html {
   font-size: clamp(12.5px, 12px + 0.25vw, 14px);
   background: var(--page);
@@ -36,7 +31,6 @@ button { font-family: inherit; }
 
 img { max-width: 100%; }
 
-/* ---- Skip link ---- */
 .skip-link {
   position: absolute;
   left: 12px;
@@ -50,7 +44,6 @@ img { max-width: 100%; }
 }
 .skip-link:focus { top: 12px; color: #fff; }
 
-/* ---- Shared micro-label (column heads, card labels) ---- */
 .micro-label {
   font-size: 12px;
   font-weight: 600;
@@ -59,21 +52,12 @@ img { max-width: 100%; }
   color: var(--ink-micro);
 }
 
-/* ---- Masked headline lines ----
-   One mask per visual line, so each line rises out of its own slot. */
 .line-mask { display: block; overflow: hidden; padding-bottom: 0.06em; }
 .line-mask > [data-rise] { display: block; }
 
-/* ---- Reveal gates ----
-   Start states exist only when the head script has marked the document:
-   `js` when scripting runs, `motion` when it runs and the visitor has not
-   asked for reduced motion. Without either, every line and fade renders in its
-   final place, which is what check:nojs asserts. */
 .motion [data-rise] { transform: translateY(110%); }
 .motion [data-fade] { opacity: 0; transform: translateY(14px); }
 
-/* The intro overlay and the WebGL stages are scripted surfaces: without
-   scripting they would be a blue screen and empty boxes. */
 html:not(.motion) [data-intro] { display: none !important; }
 html:not(.js) [data-stage] { display: none !important; }
 html:not(.js) [data-js-only] { display: none !important; }

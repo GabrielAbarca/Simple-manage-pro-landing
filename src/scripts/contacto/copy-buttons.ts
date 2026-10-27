@@ -1,8 +1,3 @@
-// The "Copiar" buttons on the contact cards, ported from copy() and
-// fallbackCopy() in Contacto.dc.html. The async Clipboard API first; when it
-// is missing or refuses (insecure origin, denied permission), a hidden
-// textarea and execCommand("copy"). Either way the visitor gets a toast.
-
 import { showToast } from "../ui/toast";
 
 export interface CopyFeedbackMessages {
@@ -10,7 +5,6 @@ export interface CopyFeedbackMessages {
   failure: string;
 }
 
-/** Legacy path: select a throwaway textarea and ask the browser to copy it. */
 export function copyWithExecCommand(text: string): boolean {
   const scratchTextarea = document.createElement("textarea");
   try {
@@ -39,7 +33,6 @@ export async function copyText(text: string): Promise<boolean> {
 
 async function copyAndAnnounce(text: string, messages: CopyFeedbackMessages): Promise<void> {
   const copied = await copyText(text);
-  // The design shows both outcomes in the same DS toast, without a tone change.
   showToast(copied ? messages.success : messages.failure);
 }
 

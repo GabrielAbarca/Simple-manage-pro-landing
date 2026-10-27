@@ -1,9 +1,3 @@
-// Per-frame placement of the opening objects and the record card, ported
-// from the body of Producto.dc.html initThree's loop. Objects start spread
-// (x1.3, pushed back 3) and settle by p 0.14; from p 0.72 each flies to the
-// record target, scaled to fit 4.8 x 3.2, and all fade over 0.84 to 0.89 as
-// the record card fades in over 0.83 to 0.89.
-
 import { clamp01, smoothstep } from "../../../core/anim";
 import { lerp } from "../../core/stage";
 import type { Vec3 } from "./keyframes";
@@ -14,18 +8,15 @@ export interface GatherFrame {
   timeSeconds: number;
   idle: number;
   target: Vec3;
-  /** Record rotation (RR): a slight tilt, yawed on wide desktop, plus pointer. */
   recordRotation: Vec3;
   exit: number;
 }
 
-/** Eases a hover value toward 1 while hovered, 0 otherwise. */
 export const easeHover = (current: number, hovered: boolean): number => current + ((hovered ? 1 : 0) - current) * 0.12;
 
 interface ObjectMotion {
   gathered: number;
   spread: number;
-  /** Hover, faded out as the object gathers. */
   lift: number;
   float: number;
   wobble: number;

@@ -1,7 +1,3 @@
-// Port of Home's `drawStudent` from design_handoff_smp_landing/design/desktop/Home.dc.html:
-// the Estudiante console face for the hero slab. Split into helpers that issue the
-// same draw calls in the same order; every number and string is approved as is.
-
 import {
   createBrandGradient,
   drawHomeCard,

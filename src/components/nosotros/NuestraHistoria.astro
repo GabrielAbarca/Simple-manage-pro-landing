@@ -1,10 +1,4 @@
 ---
-// "Empezó como un proyecto de feria científica." and the four-year timeline.
-// The heading group uses the standard reveal; the timeline plays once on its
-// own (src/scripts/nosotros/history-timeline.ts), so it sits outside data-rv.
-//
-// Every timeline start state (grey dot, empty fill, hidden beats) is gated
-// by .motion: without script or with reduced motion the list renders played.
 import Eyebrow from "./Eyebrow.astro";
 import { historyCopy } from "../../data/nosotros";
 
@@ -168,8 +162,7 @@ const [lineOne, lineTwo] = historyCopy.headline;
       line-height: 0.94;
     }
     .lead { font-size: clamp(18px, 1.45vw, 22px); }
-    /* Four columns once the list is 880px wide, two below it: the clamp
-       collapses to one bound or the other, straight from the file. */
+    /* 4 columns from an 880px list width, else 2: the clamp snaps to one bound. */
     .timeline {
       grid-template-columns: repeat(
         auto-fit,

@@ -1,13 +1,9 @@
 ---
-// One field's column: label, control, error. `data-field` names the field for
-// the controller, which flips `data-invalid` (the scroll-to-first-error hook)
-// alongside aria-invalid on the control itself.
 import type { HTMLAttributes } from "astro/types";
 import type { FieldName } from "../../../lib/postular/validate";
 
 interface Props extends HTMLAttributes<"div"> {
   name?: FieldName;
-  /** Spans the whole field grid, as the design does for wide controls. */
   fullRow?: boolean;
 }
 

@@ -1,7 +1,4 @@
 ---
-// The DS <StatusBadge>: SMP's fixed vocabulary of record states mapped onto
-// Badge tones. Attendance rows use present/absent/late/excused; grade rows
-// use pass/fail. Anything else falls back to the neutral tone.
 import type { HTMLAttributes } from "astro/types";
 import type { BadgeTone } from "../../scripts/ui/ds-runtime";
 import Badge from "./Badge.astro";
@@ -10,7 +7,6 @@ type RecordStatus = "present" | "pass" | "absent" | "fail" | "late" | "excused";
 
 interface Props extends HTMLAttributes<"span"> {
   status: RecordStatus | (string & {});
-  /** Visible text. Defaults to the status with its first letter capitalised. */
   label?: string;
 }
 

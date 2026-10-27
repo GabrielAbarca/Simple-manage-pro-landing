@@ -1,8 +1,3 @@
-// Piloto hero scene: the clipboard with the signed application sheet and a
-// pen, turning in from the side and then swaying. From Piloto.dc.html
-// initThree. The stage fades in over 1400ms after 350ms while the group's
-// entrance runs 1800ms (cubic out) from the same delay.
-
 import { clamp01, easeOutCubic, prefersReducedMotion, tween } from "../../core/anim";
 import { loadPoppins, yieldToMain } from "../core/textures";
 import { compileInSteps, createStage, isOnScreen, startFrameLoop } from "../core/stage";
@@ -15,7 +10,6 @@ const STAGE_FADE_MS = 1400;
 const MOTION_INTENSITY = 1;
 const HALF_FOV_RADIANS = (15 * Math.PI) / 180;
 
-/** Far enough that the board always fits, however narrow the stage. */
 const cameraDistance = (aspect: number): number => Math.max(12.5, 2.9 / (Math.tan(HALF_FOV_RADIANS) * aspect));
 
 function fadeInStage(container: HTMLElement, still: boolean): void {
@@ -34,8 +28,6 @@ export async function startPilotoClipboard(container: HTMLElement): Promise<void
   await loadPoppins(["500", "600", "700", "800"], ["italic 500"]);
   const stage = createStage(container, { fov: 30, canvasStyle: "width:100%;height:100%;display:block;" });
   const { scene, camera, renderer } = stage;
-  // One heavy step per task (environment, build, shader link), so the scene
-  // never blocks input for long on a throttled phone.
   await yieldToMain();
   addClipboardLighting(scene, renderer);
   await yieldToMain();

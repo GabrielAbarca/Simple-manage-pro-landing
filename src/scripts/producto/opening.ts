@@ -1,12 +1,6 @@
-// The opening story's DOM, ported from Producto.dc.html (intro, onScroll and
-// the opening half of domLoop): the on-load headline entrance, the headline
-// lift, the "Desplácese" cue, the four chapter windows, the desktop step
-// rail and the sticky layer's exit. Every constant is the prototype's.
-
 import { clamp01, fadeIn, riseIn, smoothstep } from "../core/anim";
 import type { ProductoMotion } from "./motion-state";
 
-/** Each chapter's [start, end] in opening progress; it ramps over 0.03 at both ends. */
 const CHAPTER_WINDOWS: readonly [number, number][] = [[0.2, 0.36], [0.38, 0.52], [0.54, 0.66], [0.89, 1.5]];
 const CHAPTER_RAMP = 0.03;
 const STEP_SWITCHES = [0.37, 0.53, 0.76];
@@ -36,11 +30,6 @@ export function findOpeningDom(section: HTMLElement): OpeningDom {
   };
 }
 
-/**
- * Headline rise (1200ms, 200 + i*100) and lead fade (900ms, 600 + i*90).
- * Returns when the 3D objects start their push-in; under reduced motion the
- * CSS gate never armed, so everything is already in place.
- */
 export function playOpeningIntro(dom: OpeningDom, reduce: boolean): number {
   if (reduce) return performance.now() - 5000;
   dom.headline.querySelectorAll<HTMLElement>("[data-rise]").forEach((el, i) => riseIn(el, 1200, 200 + i * 100));
@@ -48,7 +37,6 @@ export function playOpeningIntro(dom: OpeningDom, reduce: boolean): number {
   return performance.now() + 150;
 }
 
-/** The prototype's onScroll: progress, exit and the two offscreen flags. */
 export function measureScroll(motion: ProductoMotion, opening: HTMLElement, portals: HTMLElement): void {
   const rect = opening.getBoundingClientRect();
   motion.targetProgress = clamp01(-rect.top / (opening.offsetHeight - innerHeight));
@@ -58,10 +46,6 @@ export function measureScroll(motion: ProductoMotion, opening: HTMLElement, port
   motion.portalsOffscreen = portalsRect.bottom < 0 || portalsRect.top > innerHeight * 1.05;
 }
 
-/**
- * Scrolling past the opening drops the sticky layer half a screen, shrinks
- * and fades it. Writes only when the exit value moved.
- */
 export function createStickyExitPainter(sticky: HTMLElement): (exit: number) => void {
   let lastExit = Number.NaN;
   return (exit) => {

@@ -1,8 +1,3 @@
-// Misión / Visión tabs, ported from renderVals().mv in Nosotros.dc.html.
-// The card's data-mv-index drives every visual in CSS (indicator travel,
-// track slide, inactive panel at .15, tab colour); this module keeps the
-// index, the ARIA state, the "01 / 02" pager and the two DS buttons in step.
-
 import { setButtonVariant } from "../ui/ds-runtime";
 
 interface MissionTabsElements {
@@ -25,7 +20,6 @@ function queryElements(card: HTMLElement): MissionTabsElements {
   };
 }
 
-/** The disabled end of the pager renders ghost, the live one primary. */
 function syncStepButton(button: HTMLButtonElement | null, isAtLimit: boolean): void {
   if (!button) return;
   button.disabled = isAtLimit;
@@ -37,8 +31,6 @@ function syncAriaState(elements: MissionTabsElements, activeIndex: number): void
   elements.panels.forEach((panel, index) => panel.setAttribute("aria-hidden", String(index !== activeIndex)));
 }
 
-// A button that disables itself under the pointer or the keyboard would drop
-// focus to <body> and take the arrow keys with it; hand focus to its partner.
 function keepPagerFocus(elements: MissionTabsElements, focusedBefore: Element | null): void {
   const { previousButton, nextButton } = elements;
   if (focusedBefore === previousButton && previousButton?.disabled) nextButton?.focus();
@@ -48,6 +40,8 @@ function keepPagerFocus(elements: MissionTabsElements, focusedBefore: Element | 
 function applyIndex(elements: MissionTabsElements, activeIndex: number): void {
   const focusedBefore = document.activeElement;
   const lastIndex = elements.panels.length - 1;
+  // CSS reads data-mv-index (indicator, track slide, tab
+  // colour); nothing in TS does. Do not remove.
   elements.card.dataset.mvIndex = String(activeIndex);
   syncAriaState(elements, activeIndex);
   if (elements.count) elements.count.textContent = elements.panels[activeIndex]?.dataset.mvNumber ?? "";
@@ -70,7 +64,6 @@ export function initMissionTabs(card: HTMLElement): void {
     activeIndex = Math.max(0, Math.min(lastIndex, requestedIndex));
     const tabHadFocus = elements.tabs.some((tab) => tab === document.activeElement);
     applyIndex(elements, activeIndex);
-    // Arrow keys on a tab move the selection; focus follows it, as a tablist should.
     if (tabHadFocus) elements.tabs[activeIndex]?.focus();
   };
   elements.tabs.forEach((tab, index) => tab.addEventListener("click", () => goTo(index)));

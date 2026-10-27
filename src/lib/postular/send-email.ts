@@ -1,8 +1,3 @@
-// The Resend adapter behind /api/postular. The handler only knows "send this
-// and tell me whether it went", so tests can swap in a fake and no real email
-// ever leaves a development machine. Resend's error details are logged here,
-// server-side, and never travel back to the visitor.
-
 import { Resend } from "resend";
 import type { RenderedEmail } from "./render-email";
 

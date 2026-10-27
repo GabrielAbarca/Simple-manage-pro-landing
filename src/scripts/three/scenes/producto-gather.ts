@@ -1,9 +1,3 @@
-// Producto opening scene: eight scattered "problem" objects (four below
-// 1200px) visited by a keyframed camera, then gathered into one SMP student
-// record. Reads progress, pointer and exit from the page's DOM loop.
-// Desktop only: hovering an object lifts and flattens it. From
-// Producto.dc.html initThree.
-
 import * as THREE from "three";
 import { clamp01, easeOutExpo } from "../../core/anim";
 import { currentLayout } from "../../core/breakpoints";
@@ -26,7 +20,6 @@ interface SceneParts {
   sticky: HTMLElement;
 }
 
-/** Positions the camera from the layout's keyframes; returns the record pose for this frame. */
 function aimCamera(camera: THREE.PerspectiveCamera, motion: ProductoMotion, now: number): Pick<GatherFrame, "target" | "recordRotation"> {
   const layout = currentLayout();
   const { keyframes, fit, lift, wide } = framingFor(layout, camera.aspect);
@@ -45,7 +38,6 @@ function aimCamera(camera: THREE.PerspectiveCamera, motion: ProductoMotion, now:
   return { target: recordTarget(layout, wide), recordRotation };
 }
 
-/** The object or record under the pointer (desktop only), or null. */
 function pickHovered(parts: SceneParts): THREE.Object3D | null {
   const { objects, record } = parts.built;
   const candidates = objects.filter((object) => object.root.visible).map((object) => object.root);

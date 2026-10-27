@@ -1,8 +1,3 @@
-// Where the slab stack sits for a given fan progress. Desktop fans the slabs
-// out sideways; mobile and tablet stack them vertically below the fan title,
-// measured from the live headline and title boxes. Ported from the three
-// Home.dc.html files; every constant is theirs.
-
 import type { Layout } from "../../../core/breakpoints";
 import { lerp } from "../../core/stage";
 import { SLAB } from "./build";
@@ -53,7 +48,6 @@ function desktopPose(input: PoseInput): StackPose {
   };
 }
 
-/** Width the fanned slab may take: the whole column on phones, capped on tablets. */
 function stackedSlabWidthPx(layout: Layout, stageWidth: number): number {
   return layout === "tablet" ? Math.min(stageWidth * 0.72, 760) : stageWidth - 48;
 }

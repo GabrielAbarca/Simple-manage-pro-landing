@@ -1,7 +1,4 @@
 ---
-// The SIMPLE MANAGE PRO lockup: app icon plus the caps logotype. The crimson
-// half is the app's own sidebar colour; the contrast audit skips it through
-// data-logotype, since WCAG 1.4.3 exempts logotypes.
 interface Props {
   href?: string;
   class?: string;
@@ -13,8 +10,6 @@ const Tag = href ? "a" : "div";
 
 <Tag href={href} class:list={["logo", className]}>
   <img src="/apple-touch-icon.png" alt="" width="32" height="32" />
-  {/* The two caps spans read as "SIMPLEMANAGE PRO" (the flex gap is the only
-      space), so assistive tech gets the prose name instead. */}
   <span aria-hidden="true">SIMPLE</span><span class="accent" aria-hidden="true">MANAGE PRO</span>
   <span class="visually-hidden">Simple Manage Pro</span>
 </Tag>

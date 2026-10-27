@@ -1,7 +1,3 @@
-// The three portal slabs (admin, teacher, student) for the Home hero. Each is
-// a rounded 6.4 x 4 slab with a console texture on its face and a blurred
-// drop shadow behind it. Geometry values from Home.dc.html initThree.
-
 import * as THREE from "three";
 import { roundedRectShape } from "../../core/geometry";
 import { HOME_SHADOW_ALPHA, drawShadow } from "../../core/canvas2d";
@@ -43,11 +39,6 @@ function shadowPlane(): THREE.Mesh {
   return plane;
 }
 
-/**
- * Builds the three slabs; returns them in admin, teacher, student order.
- * Yields between textures: each is a 1600px canvas, and drawing all three in
- * one task blocked a throttled phone for most of a second.
- */
 export async function buildPortalSlabs(renderer: THREE.WebGLRenderer): Promise<THREE.Group[]> {
   const shape = roundedRectShape(SLAB.width, SLAB.height, SLAB.radius);
   const body = bodyGeometry(shape);

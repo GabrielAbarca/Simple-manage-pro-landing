@@ -1,9 +1,3 @@
-// The Piloto application form: labels, options, error copy and the states
-// after sending. Verbatim from design_handoff_smp_landing/design/*/Piloto.dc.html
-// and docs/FORM_RESEND.md. Imported by the form markup, the client controller
-// and the /api/postular route, so the browser and the server can never
-// disagree about what a valid option or an error message is.
-
 export const PROVINCIAS = ["San José", "Alajuela", "Cartago", "Heredia", "Guanacaste", "Puntarenas", "Limón"] as const;
 export const TIPOS = ["Público", "Privado", "Subvencionado"] as const;
 export const NIVELES = ["7°", "8°", "9°", "10°", "11°", "12°"] as const;
@@ -13,7 +7,6 @@ export const CARGOS = ["Director/a", "Subdirector/a", "Coordinación académica"
 export const COMENTARIOS_MAX_LENGTH = 500;
 export const TELEFONO_DIGITS = 8;
 
-/** Maxlength on each free-text control, re-checked by the server. */
 export const TEXT_MAX_LENGTH = {
   colegio: 160,
   canton: 80,
@@ -68,8 +61,6 @@ export const errorCopy = {
   correoInvalid: "Ingrese un correo válido.",
   telefono: "Ingrese un número de 8 dígitos.",
   consent: "Necesitamos su autorización para contactarle.",
-  // Only the server can produce these: the controls already cap length and
-  // offer nothing outside the lists.
   estudiantes: "Seleccione una opción de la lista.",
   tooLong: (maxLength: number) => `Use como máximo ${maxLength} caracteres.`,
 } as const;
@@ -78,7 +69,6 @@ export const confirmationCopy = {
   title: "Postulación recibida.",
   emailBefore: "Le escribiremos a",
   emailAfter: "en las próximas 24 horas hábiles.",
-  // The no-JS confirmation is a static page and cannot repeat the address.
   genericEmailLine: "Le escribiremos al correo que nos indicó en las próximas 24 horas hábiles.",
   summarySeparator: " · ",
 } as const;
@@ -89,7 +79,6 @@ export const failureCopy = {
   after: ".",
 } as const;
 
-/** Spanish labels for the notification email, one line per field. */
 export const emailCopy = {
   subjectPrefix: "Postulación Piloto 2027: ",
   heading: "Nueva postulación al Piloto 2027",
@@ -98,11 +87,10 @@ export const emailCopy = {
   emptyValue: "(sin indicar)",
 } as const;
 
-// Trailing slash because astro.config sets trailingSlash: "always"; the
-// slashless path is a 404 there, and a redirect would drop the POST body.
+// Trailing slash because astro.config sets trailingSlash: "always"; the slashless
+// path is a 404 there, and a redirect would drop the POST body.
 export const POSTULAR_ENDPOINT = "/api/postular/";
 
-/** Where the no-JS form lands after the endpoint answers. */
 export const NOJS_REDIRECT = {
   success: "/piloto/#postulacion-recibida",
   failure: "/piloto/#postulacion-error",

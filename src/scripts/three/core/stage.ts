@@ -1,7 +1,3 @@
-// Renderer, camera and frame loop shared by every scene. A scene never draws
-// while its section is off screen or the tab is hidden, and the GL context is
-// released on pagehide so a back/forward navigation doesn't leak it.
-
 import * as THREE from "three";
 import { pixelRatioCap } from "../../core/breakpoints";
 
@@ -15,7 +11,6 @@ export interface Stage {
 
 export interface StageOptions {
   fov: number;
-  /** "fill" stretches the canvas over an absolutely positioned container. */
   canvasStyle?: string;
 }
 
@@ -43,16 +38,11 @@ export function createStage(container: HTMLElement, options: StageOptions): Stag
   return { renderer, scene, camera, container, resize };
 }
 
-/** Visible height and width of the z=0 plane for a camera at `distance`. */
 export function visibleSize(camera: THREE.PerspectiveCamera, distance = camera.position.z) {
   const height = 2 * Math.tan((camera.fov * Math.PI) / 360) * distance;
   return { height, width: height * camera.aspect };
 }
 
-/**
- * rAF loop that calls `frame(now, dt)` only while `isActive()` is true.
- * dt is in seconds and capped at 1, as the prototypes do.
- */
 export function startFrameLoop(frame: (now: number, dt: number) => void, isActive: () => boolean): void {
   let lastTime = 0;
   const step = (now: number) => {
@@ -65,13 +55,11 @@ export function startFrameLoop(frame: (now: number, dt: number) => void, isActiv
   requestAnimationFrame(step);
 }
 
-/** True while any part of `element` is inside the viewport. */
 export function isOnScreen(element: Element): boolean {
   const rect = element.getBoundingClientRect();
   return rect.bottom > 0 && rect.top < innerHeight;
 }
 
-/** Window pointer in [-1, 1] on both axes; desktop scenes use it for parallax. */
 export function trackWindowPointer(): { x: number; y: number } {
   const pointer = { x: 0, y: 0 };
   addEventListener("mousemove", (event) => {
@@ -81,17 +69,12 @@ export function trackWindowPointer(): { x: number; y: number } {
   return pointer;
 }
 
-/** Per-frame smoothing factor: `1 - base^(dt*60)`, frame-rate independent. */
 export const smoothingFactor = (base: number, dt: number): number => 1 - Math.pow(base, dt * 60);
 
 export const lerp = (from: number, to: number, t: number): number => from + (to - from) * t;
 
-/**
- * Link shader programs one top-level object per task. Without the parallel
- * shader-compile extension (software GL, many phones) `compileAsync` still
- * links every program in a single task; splitting by object keeps each task
- * short, and programs shared across objects are only linked once.
- */
+// One object per task: without the parallel shader-compile extension (software GL, phones),
+// compileAsync(scene) links every program in a single long task that blocks input.
 export async function compileInSteps(renderer: THREE.WebGLRenderer, scene: THREE.Scene, camera: THREE.Camera): Promise<void> {
   for (const child of [...scene.children]) {
     await new Promise((resolve) => setTimeout(resolve, 0));

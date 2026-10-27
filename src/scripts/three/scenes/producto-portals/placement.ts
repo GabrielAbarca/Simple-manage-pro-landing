@@ -1,10 +1,3 @@
-// Where each portal object sits for a frame, ported from the loop in
-// Producto.dc.html initPortal. In the intro all three cluster around the
-// intro anchor (offsets CL); as panel 01 approaches, object 0 travels to its
-// own anchor, and 1 and 2 jump to theirs once the intro has passed. The gate
-// `g` scales an object in and out around its panel: desktop measures the
-// panel's distance, phones and tablets the anchor's.
-
 import type { Layout } from "../../../core/breakpoints";
 import { smoothstep } from "../../../core/anim";
 import { lerp } from "../../core/stage";
@@ -17,16 +10,13 @@ const CLUSTER_OFFSETS: Record<"wide" | "compact", readonly Vec3[]> = {
   compact: [[0.1, 0.9, 0.3], [-0.95, -0.4, -0.8], [0.95, -1.4, -0.4]],
 };
 
-/** Phones show the objects a little smaller; tablets and desktop at full size. */
 const LAYOUT_SCALE: Record<Layout, number> = { desktop: 1, tablet: 1.0, mobile: 0.85 };
 
 export interface PlacementInput {
   layout: Layout;
   index: number;
-  /** Intro panel's and this object's panel distance from the viewport centre. */
   introDistance: number;
   panelDistance: number;
-  /** World x/y of the intro anchor, and the object's anchor rect top/left in px. */
   cluster: [number, number];
   anchorRect: DOMRect;
   toWorld: (x: number, y: number) => [number, number];
@@ -37,7 +27,6 @@ export interface PlacementInput {
 }
 
 interface Travel {
-  /** 0 in the cluster, 1 at the panel anchor. */
   follow: number;
   anchor: [number, number];
   gate: number;
@@ -47,7 +36,6 @@ function travel(input: PlacementInput): Travel {
   const { layout, index, introDistance: dI, panelDistance: pd, anchorRect: r, viewportHeight: vh } = input;
   const follow = index === 0 ? smoothstep(-dI / 0.95) : dI < -0.95 ? 1 : 0;
   if (layout === "desktop") {
-    // Desktop anchors ride 72% of their distance from the viewport centre.
     const anchor = input.toWorld(r.left, vh / 2 + (r.top - vh / 2) * 0.72);
     const gate = follow > 0 ? smoothstep((pd + 1.35) / 0.4) * (index === 0 ? 1 : smoothstep((1.2 - pd) / 0.45)) : 1;
     return { follow, anchor, gate };
@@ -57,7 +45,6 @@ function travel(input: PlacementInput): Travel {
   return { follow, anchor: input.toWorld(r.left, r.top), gate };
 }
 
-/** Places, scales and turns one object; hides it when gated out or far off screen. */
 export function placePortalObject(object: PortalObject, input: PlacementInput, halfHeight: number): void {
   const { index: i, idle: k, timeSeconds: t, pointer: m } = input;
   const { follow: f, anchor, gate } = travel(input);

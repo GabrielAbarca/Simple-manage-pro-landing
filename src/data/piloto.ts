@@ -1,7 +1,3 @@
-// Piloto copy, verbatim from design_handoff_smp_landing/design/*/Piloto.dc.html.
-// The application form's copy lives in ./postulacion.ts, which the API route
-// imports too.
-
 import type { IconName } from "../components/ui/icons";
 
 export const pilotoMeta = {

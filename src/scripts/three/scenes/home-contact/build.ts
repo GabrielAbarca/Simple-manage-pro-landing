@@ -1,6 +1,3 @@
-// Objects for the Home contact scene, with their rest pose, entrance offset
-// and float phase. Values from Home.dc.html initContact.
-
 import * as THREE from "three";
 import { HOME_SHADOW_ALPHA, drawShadow } from "../../core/canvas2d";
 import { homeSlab } from "../../core/geometry";

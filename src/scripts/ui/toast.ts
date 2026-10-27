@@ -1,8 +1,3 @@
-// Drives the page's single <Toast> (src/components/ui/Toast.astro). The
-// timing is the prototypes': a 250ms fade and rise, then 2200ms on screen.
-// A second call while one is showing replaces the text and restarts the
-// clock rather than queueing.
-
 export type ToastTone = "success" | "danger";
 
 export interface ShowToastOptions {
@@ -12,8 +7,6 @@ export interface ShowToastOptions {
 
 const DEFAULT_TOAST_DURATION_MS = 2200;
 
-// Keyed by element so a page that swaps its toast out (or a test that mounts
-// several) never shares one timer between them.
 const hideTimerByToast = new WeakMap<HTMLElement, number>();
 
 function findPageToast(): HTMLElement | null {
@@ -29,8 +22,8 @@ function restartHideTimer(toastElement: HTMLElement, durationMs: number): void {
 }
 
 function announceMessage(messageElement: HTMLElement, message: string): void {
-  // Clearing first and writing on the next frame makes a live region repeat
-  // a message identical to the last one ("Copiado." twice in a row).
+  // Clear first, write on the next frame: this makes a live region
+  // repeat an identical message ("Copiado." twice in a row).
   messageElement.textContent = "";
   window.requestAnimationFrame(() => {
     messageElement.textContent = message;

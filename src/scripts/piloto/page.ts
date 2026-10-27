@@ -1,7 +1,3 @@
-// Piloto orchestration: the clipboard scene starts right after first paint
-// (it is the hero), the calendar arms its play-once trigger, and the
-// application form's controller takes over from the native form.
-
 import { reportSceneError } from "../core/lazy-scene";
 import { initCalendar } from "./calendar";
 import { initApplicationForm } from "./form/controller";

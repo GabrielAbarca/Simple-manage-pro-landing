@@ -1,8 +1,3 @@
-// Producto orchestration, after Producto.dc.html componentDidMount: open at
-// the top, play the headline entrance, run one DOM loop for the opening and
-// the portals, wire the three live consoles, and start the two scenes (the
-// opening right after first paint, the portals when they come near).
-
 import { prefersReducedMotion } from "../core/anim";
 import { reportSceneError, whenNear } from "../core/lazy-scene";
 import { smoothingFactor, trackWindowPointer } from "../three/core/stage";
@@ -13,7 +8,6 @@ import { createProductoMotion, type ProductoMotion } from "./motion-state";
 import { createStickyExitPainter, findOpeningDom, measureScroll, paintOpening, playOpeningIntro, type OpeningDom } from "./opening";
 import { collectPanels, findPortalRail, paintPortals, type PortalRail } from "./portal-dom";
 
-/** The design always opens Producto at the top, then honours a #fragment. */
 function resetScrollPosition(): void {
   if ("scrollRestoration" in history) history.scrollRestoration = "manual";
   scrollTo(0, 0);
@@ -30,7 +24,6 @@ interface LoopTargets {
   rail: PortalRail;
 }
 
-/** The prototype's domLoop: smoothing, portal DOM, sticky exit, opening DOM. */
 function startDomLoop(motion: ProductoMotion, targets: LoopTargets): void {
   const paintExit = createStickyExitPainter(targets.opening.sticky);
   let lastTime = 0;

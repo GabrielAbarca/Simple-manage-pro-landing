@@ -1,8 +1,3 @@
-// Port of Piloto's `drawForm` from design_handoff_smp_landing/design/desktop/
-// Piloto.dc.html: the signed application sheet on the clipboard. Split into
-// helpers that issue the same draw calls in the same order; every number and
-// string is approved as is.
-
 import { context2d, createCanvas, drawText, roundRect } from "../../core/canvas2d";
 
 type FormField = readonly [label: string, value: string];

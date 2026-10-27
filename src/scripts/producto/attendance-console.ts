@@ -1,7 +1,3 @@
-// Live UI 02: a pill sets that student's status, the pressed state moves
-// with it and the header summary recounts; "Guardar asistencia" confirms with
-// the toast. From Producto.dc.html renderVals (attRows, attSummary, saveAtt).
-
 import { attendanceStatuses, savedToast, teacherConsoleCopy, type AttendanceStatus } from "../../data/producto";
 import { showToast } from "../ui/toast";
 import { summariseAttendance } from "./attendance-summary";

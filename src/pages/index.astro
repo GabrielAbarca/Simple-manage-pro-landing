@@ -8,9 +8,6 @@ import { homeMeta } from "../data/home";
 
 const site = Astro.site?.origin ?? "https://simplemanagepro.com";
 
-// Organization and SoftwareApplication together: the first is what the brand
-// is, the second is what the page is about. WebSite carries the name a search
-// result renders above the URL.
 const jsonLd = {
   "@context": "https://schema.org",
   "@graph": [
@@ -23,8 +20,6 @@ const jsonLd = {
       email: EMAIL,
       areaServed: { "@type": "Country", name: "Costa Rica" },
       founder: { "@type": "Person", name: "Gabriel Zelaya" },
-      // The entity-resolution signal that ties the brand to a reachable
-      // channel.
       contactPoint: {
         "@type": "ContactPoint",
         contactType: "customer support",

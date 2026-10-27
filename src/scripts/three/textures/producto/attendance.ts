@@ -1,8 +1,3 @@
-// Port of Producto's `drawAttendance` from design_handoff_smp_landing/design/desktop/
-// Producto.dc.html: the handwritten attendance sheet in the "before" pile. Split
-// into helpers that issue the same draw calls, and consume the seeded random
-// sequence, in the same order. Every number and string is approved as is.
-
 import { context2d, createCanvas, createSeededRandom, drawText } from "../../core/canvas2d";
 
 const W = 900;
@@ -50,11 +45,11 @@ function drawCheckMark(ctx: CanvasRenderingContext2D, cx: number, cy: number, ra
   ctx.stroke();
 }
 
-// The random draw comes before the Friday skip, so skipped cells still advance
-// the sequence exactly as the prototype did.
 function drawDayMark(ctx: CanvasRenderingContext2D, row: number, day: number, y: number, random: () => number): void {
   const cx = 560 + day * 64;
   const cy = y - 10;
+  // Draw before the Friday skip: skipped cells must still consume
+  // the seeded sequence, or every later mark shifts.
   const roll = random();
   if (day === 4 && row > 7) return;
   if (roll < 0.1) {

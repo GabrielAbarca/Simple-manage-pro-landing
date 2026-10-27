@@ -1,20 +1,11 @@
 ---
-// The DS <GradeBar>: the 6px track in the subject-performance list. The fill
-// colour comes from the score band (>=85 success, >=70 warning, below that
-// danger), carried as data-band so setGradeBar() can move it at runtime.
 import type { HTMLAttributes } from "astro/types";
 import { computeGradePercentage, resolveGradeBand } from "../../scripts/ui/ds-runtime";
 
 interface Props extends Omit<HTMLAttributes<"span">, "style"> {
   value: number;
   max?: number;
-  /** Overrides the band colour; any CSS colour. */
   color?: string;
-  /**
-   * A number is px, as in the DS. A string is any CSS length, so a page can
-   * express the prototype's viewport-scaled width (clamp(60px, 10vw, 220px))
-   * without a script.
-   */
   width?: number | string;
   style?: string;
 }

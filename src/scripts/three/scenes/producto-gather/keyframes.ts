@@ -1,8 +1,3 @@
-// Camera keyframes for the opening, one table per layout, from the three
-// Producto.dc.html files. Each row is [progress, camera, lookAt]; between rows
-// the camera eases with a smoothstep. Phones frame with `fit` from the aspect,
-// tablets with a fixed 0.84 and everything lowered 0.9 to clear the captions.
-
 import type { Layout } from "../../../core/breakpoints";
 import { smoothstep } from "../../../core/anim";
 
@@ -41,7 +36,6 @@ const MOBILE_KEYFRAMES: readonly Keyframe[] = [
   [1, [0, -1.3, 18.5], [0, -1.3, 0]],
 ];
 
-// Tablet ends closer on the record than the phone does.
 const TABLET_KEYFRAMES: readonly Keyframe[] = [
   ...COMPACT_VISITS,
   [0.75, [0, -1.0, 19], [0, -1.0, 0]],
@@ -51,11 +45,8 @@ const TABLET_KEYFRAMES: readonly Keyframe[] = [
 
 export interface Framing {
   keyframes: readonly Keyframe[];
-  /** Camera distance divisor: below 1 pulls the camera back. */
   fit: number;
-  /** Added to both camera and lookAt y. */
   lift: number;
-  /** Landscape desktop: the record lands right of centre, turned towards the copy. */
   wide: boolean;
 }
 
@@ -67,13 +58,11 @@ export function framingFor(layout: Layout, aspect: number): Framing {
   return { keyframes: MOBILE_KEYFRAMES, fit: Math.min(1, aspect / 0.46), lift: 0, wide: false };
 }
 
-/** Where the gathered objects and the record card land. */
 export function recordTarget(layout: Layout, wide: boolean): Vec3 {
   if (layout !== "desktop") return [0, 0.9, 0];
   return wide ? [2.6, 0.1, 0] : [0, 1.4, 0];
 }
 
-/** Port of `kf`: column 1 is the camera, column 2 the lookAt. */
 export function sampleKeyframes(keyframes: readonly Keyframe[], progress: number, column: 1 | 2): Vec3 {
   let i = 0;
   while (i < keyframes.length - 2 && progress > keyframes[i + 1][0]) i++;

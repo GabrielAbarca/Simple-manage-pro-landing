@@ -1,11 +1,7 @@
 ---
-// The DS <Checkbox>: a bordered row, not a bare box, so a multi-select grid
-// reads at a glance. The checked tint follows the real input through
-// :has(:checked), so no script ever has to mirror state onto the row.
 import type { HTMLAttributes } from "astro/types";
 
 interface Props extends HTMLAttributes<"label"> {
-  /** Visible text. A default slot replaces it when the label needs markup. */
   label?: string;
   name?: string;
   value?: string;
@@ -13,18 +9,8 @@ interface Props extends HTMLAttributes<"label"> {
   checked?: boolean;
   required?: boolean;
   disabled?: boolean;
-  /**
-   * 44px tall with wider side padding: the prototypes' grid rows, where each
-   * box is a touch target of its own.
-   */
   tapTarget?: boolean;
-  /**
-   * No border, tint or padding, line-height 1.5: the prototypes' consent
-   * line, where a framed row would read as one more option to pick. Pair it
-   * with tapTarget to keep the consent line's 44px height.
-   */
   borderless?: boolean;
-  /** Any other attribute for the <input> itself, e.g. aria-describedby. */
   inputAttributes?: HTMLAttributes<"input">;
 }
 

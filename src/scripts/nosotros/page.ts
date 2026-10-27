@@ -1,7 +1,3 @@
-// Nosotros orchestration. The standard reveal runs from the layout; this
-// wires the two behaviours the page adds: the Misión / Visión tabs and the
-// history timeline that plays once.
-
 import { initHistoryTimeline } from "./history-timeline";
 import { initMissionTabs } from "./mission-tabs";
 

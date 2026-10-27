@@ -1,7 +1,4 @@
 ---
-// The blue "Hecho para Costa Rica." intro that opens Home: eleven month
-// ticks fill while a counter runs to 100, then the overlay wipes upward.
-// Rendered only when motion is allowed; src/scripts/home/intro.ts runs it.
 import { introCopy } from "../../data/home";
 ---
 
@@ -93,9 +90,8 @@ import { introCopy } from "../../data/home";
     transform: scaleX(0);
     transform-origin: left;
   }
-  /* Poppins has no tabular figures, so the counter changes width as it runs
-     and every frame registered as a layout shift. A box as wide as the widest
-     value ("044", 1.89em) with right-aligned text paints the same pixels. */
+  /* Poppins has no tabular figures: this fixed width (widest value "044") and
+     right align stop the counter shifting layout on every frame. */
   .counter {
     min-width: 1.9em;
     text-align: right;

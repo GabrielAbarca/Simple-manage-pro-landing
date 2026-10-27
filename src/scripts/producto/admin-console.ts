@@ -1,7 +1,3 @@
-// Live UI 01: "Activar II Periodo" flips the active periodo. The badge
-// retints and relabels, the button swaps variant and label, and the toast
-// confirms. From Producto.dc.html renderVals (adm).
-
 import { adminConsoleCopy, savedToast } from "../../data/producto";
 import { setBadge, setButtonLabel, setButtonVariant } from "../ui/ds-runtime";
 import { showToast } from "../ui/toast";

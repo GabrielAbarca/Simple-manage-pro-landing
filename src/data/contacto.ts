@@ -1,7 +1,3 @@
-// Contacto copy, verbatim from design_handoff_smp_landing/design/*/Contacto.dc.html.
-// Hrefs are built from src/config.ts so the number, the address and the
-// WhatsApp prefill stay single-sourced.
-
 import type { IconName } from "../components/ui/icons";
 import { EMAIL, WA_MSG_PRODUCTO, mailtoHref, waHref } from "../config";
 
@@ -25,18 +21,13 @@ export const copyFeedback = {
 export interface ContactCardAction {
   label: string;
   href: string;
-  /** Opens in a new tab (WhatsApp leaves the site). */
   external?: boolean;
-  /** Ends the pill in a 24px rule, as card 03 does. */
   withRule?: boolean;
 }
 
 export interface ContactCardCopyButton {
-  /** Visible label; the same on every card. */
   label: string;
-  /** Accessible name, so the two "Copiar" buttons are told apart. */
   accessibleLabel: string;
-  /** Exactly what lands on the clipboard. */
   value: string;
 }
 
@@ -47,11 +38,8 @@ export interface ContactCardContent {
   description: string;
   valueLabel: string;
   value: string;
-  /** Omit when the value is plain text rather than a link. */
   valueHref?: string;
-  /** Long unbroken values (the address) may wrap anywhere. */
   valueWrapsAnywhere?: boolean;
-  /** Tabular figures for the phone number. */
   valueIsNumeric?: boolean;
   primaryAction: ContactCardAction;
   copyButton?: ContactCardCopyButton;

@@ -1,8 +1,3 @@
-// Port of Producto's `drawPhone` from design_handoff_smp_landing/design/desktop/
-// Producto.dc.html: the parents' group chat on the phone in the "before" pile.
-// Split into helpers that issue the same draw calls in the same order; every
-// number and string is approved as is.
-
 import { context2d, createCanvas, drawText, roundRect, wrapText } from "../../core/canvas2d";
 
 interface ChatMessage {
@@ -38,7 +33,6 @@ function drawChatHeader(ctx: CanvasRenderingContext2D): void {
   drawText(ctx, "48 participantes", 124, 176, 20, 500, "#627388");
 }
 
-/** Returns the bubble height so the caller can stack the next one below it. */
 function drawChatBubble(ctx: CanvasRenderingContext2D, message: ChatMessage, y: number): number {
   ctx.font = "500 24px Poppins";
   const lines = wrapText(ctx, message.text, 390);

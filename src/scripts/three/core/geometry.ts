@@ -1,11 +1,5 @@
-// Ports of `rrShape` and the two `slab` builders from design_handoff_smp_landing/
-// design/desktop/{Home,Producto}.dc.html. Home and Producto each define their own
-// `slab` with different segment counts and face rules, so both are exported under
-// distinct names rather than merged. Constants must not be "tidied".
-
 import * as THREE from "three";
 
-/** Port of `rrShape`: centred on the origin, quadratic corners. */
 export function roundedRectShape(width: number, height: number, radius: number): THREE.Shape {
   const shape = new THREE.Shape();
   const x0 = -width / 2;
@@ -22,8 +16,6 @@ export function roundedRectShape(width: number, height: number, radius: number):
   return shape;
 }
 
-// ShapeGeometry's default UVs are the raw shape coordinates; the canvas
-// textures need the face mapped 0..1 across its own width and height.
 function mapUvsToBounds(geometry: THREE.ShapeGeometry, width: number, height: number): void {
   const positions = geometry.attributes.position;
   const uvs = geometry.attributes.uv;
@@ -51,7 +43,6 @@ function extrudedBody(
   return geometry;
 }
 
-/** Port of Home's `slab`: 5 bevel / 24 curve segments, optional full-size face. */
 export function homeSlab(
   width: number,
   height: number,
@@ -73,7 +64,6 @@ export function homeSlab(
   return group;
 }
 
-/** Port of Producto's `slab`: 4 bevel / 20 curve segments, required face shrunk by `inset`. */
 export function productoSlab(
   width: number,
   height: number,

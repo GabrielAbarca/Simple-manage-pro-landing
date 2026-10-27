@@ -1,7 +1,4 @@
 ---
-// The four chapter captions of the opening story, crossfaded by scroll
-// progress (src/scripts/producto/opening.ts). Without JavaScript they stack
-// under the headline as ordinary paragraphs, CTAs included.
 import Eyebrow from "./Eyebrow.astro";
 import { DEMO_URL, waHref } from "../../config";
 import { openingCopy } from "../../data/producto";
@@ -93,8 +90,6 @@ const lastChapter = openingCopy.chapters.length - 1;
     }
   }
 
-  /* Without scripting there is no scroll story: the captions read in order
-     below the headline. */
   :global(html:not(.js)) .chapter {
     position: relative;
     left: auto;

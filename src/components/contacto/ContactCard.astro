@@ -1,17 +1,10 @@
 ---
-// One contact channel: numbered gradient icon, title, description, the
-// ruled value block and its actions. Rendered once per entry in
-// contactCards (src/data/contacto.ts).
-//
-// The "Copiar" button needs the clipboard script, so it is data-js-only: the
-// value it copies is visible, selectable text right above it either way.
 import Button from "../ui/Button.astro";
 import Icon from "../ui/Icon.astro";
 import type { ContactCardContent } from "../../data/contacto";
 
 interface Props {
   card: ContactCardContent;
-  /** Tablet lays the cards out two up; the last one spans the row. */
   spansTabletRow?: boolean;
 }
 

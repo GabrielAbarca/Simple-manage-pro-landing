@@ -1,15 +1,10 @@
 ---
-// The DS <Icon>: one Material Symbols path painted inline, so a glyph never
-// waits on a sprite request. Decorative by contract (aria-hidden); the
-// control or text beside it carries the meaning.
 import type { HTMLAttributes } from "astro/types";
 import { ICON_PATHS, type IconName } from "./icons";
 
 interface Props extends Omit<HTMLAttributes<"svg">, "width" | "height" | "viewBox"> {
   name: IconName;
-  /** Any CSS length, or a number of px. Matches the DS default of 1.2rem. */
   size?: string | number;
-  /** Omit to inherit currentColor from the surrounding text. */
   color?: string;
 }
 

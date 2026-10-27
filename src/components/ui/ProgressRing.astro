@@ -1,8 +1,4 @@
 ---
-// The DS <ProgressRing>: a 14px round-capped arc with the figure centred
-// inside. Geometry is the bundle's verbatim (r 37, dash 232, translate 7),
-// including the arc starting at three o'clock. setProgressRing() updates the
-// [data-ring-value] arc and the [data-ring-label] text at runtime.
 import type { HTMLAttributes } from "astro/types";
 import {
   PROGRESS_RING_CIRCUMFERENCE,
@@ -11,13 +7,9 @@ import {
 } from "../../scripts/ui/ds-runtime";
 
 interface Props extends Omit<HTMLAttributes<"div">, "style"> {
-  /** 0 to 100. */
   value: number;
-  /** Rendered square size in px. */
   size?: number;
-  /** Arc colour; any CSS colour. */
   color?: string;
-  /** Replaces the default "N%" text. */
   label?: string;
   style?: string;
 }

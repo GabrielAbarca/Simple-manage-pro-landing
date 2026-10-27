@@ -1,11 +1,3 @@
-// Request → response for /api/postular, with its collaborators injected so it
-// can be exercised without Resend or a network. Order matters: rate limit
-// first (cheapest refusal), then structure, then the honeypot, then the same
-// validation the browser ran, and only then the email.
-//
-// JSON callers (the page script) get a status and a small body. The no-JS
-// form gets a 303 back to /piloto/, where a :target block says what happened.
-
 import { NOJS_REDIRECT } from "../../data/postulacion";
 import { detectFormat, parsePostulacionRequest, type BodyFormat } from "./parse-body";
 import type { RateLimiter } from "./rate-limit";
@@ -77,7 +69,6 @@ export async function handlePostulacion(
   try {
     return respond(format, await decide(request, deps));
   } catch (error) {
-    // Whatever broke stays in the server log; the visitor gets the generic failure.
     deps.logError("[postular] Unexpected failure handling an application.", error);
     return respond(format, { kind: "send-failed" });
   }

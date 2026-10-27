@@ -1,9 +1,3 @@
-// Scroll-linked DOM for the portals section, ported from Producto.dc.html
-// portalDom(): every panel's distance from the viewport centre (the portals
-// scene reads it too), the text block's parallax and exit fade, the UI
-// block's rise, each line's 36px rise over 28% of the viewport, the intro
-// headline's masked lines, and the desktop right rail.
-
 import { clamp01, smoothstep } from "../core/anim";
 import type { PanelMotion } from "./motion-state";
 
@@ -92,7 +86,6 @@ function paintPanel(panel: PanelMotion, frame: FrameContext): void {
   paintMasks(panel, frame);
 }
 
-/** Index (0..2) of the portal panel nearest the viewport centre, or -1. */
 function centredPortal(panels: PanelMotion[]): number {
   let best = -1;
   let bestDistance = RAIL_PANEL_RANGE;

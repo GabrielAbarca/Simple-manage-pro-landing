@@ -1,11 +1,4 @@
 ---
-// The DS <Input>: optional label above, optional leading glyph, error text
-// below. The focus ring is a 3px primary tint rather than an outline; the
-// ring IS the indicator.
-//
-// Error styling follows aria-invalid="true" on the <input> and the error
-// line shows whenever #{id}-error has text, so a validation script only sets
-// those two things and never touches a class.
 import type { HTMLAttributes } from "astro/types";
 import Icon from "./Icon.astro";
 import type { IconName } from "./icons";
@@ -13,13 +6,10 @@ import type { IconName } from "./icons";
 type InputAttributes = HTMLAttributes<"input">;
 
 interface Props extends HTMLAttributes<"div"> {
-  /** Required: the error line's id, #{id}-error, is derived from it. */
   id: string;
   label?: string;
   icon?: IconName;
-  /** Initial error text. Also sets aria-invalid="true". */
   error?: string;
-  /** Shown under the field while there is no error. */
   hint?: string;
   name?: string;
   type?: InputAttributes["type"];
@@ -29,7 +19,6 @@ interface Props extends HTMLAttributes<"div"> {
   maxlength?: number;
   required?: boolean;
   placeholder?: string;
-  /** Any other attribute for the <input> itself, e.g. aria-label. */
   inputAttributes?: InputAttributes;
 }
 
@@ -149,8 +138,6 @@ const describedBy = hint ? `${errorId} ${hintId}` : errorId;
     box-shadow: var(--focus-ring);
   }
 
-  /* After :focus on purpose: an invalid field keeps its danger ring while
-     focused, as in the DS. */
   .input[aria-invalid="true"] {
     border-color: var(--color-danger);
     box-shadow: 0 0 0 3px var(--color-danger-light);

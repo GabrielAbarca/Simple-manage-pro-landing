@@ -1,9 +1,3 @@
-// Home contact scene: the app-icon tile, the prefilled WhatsApp message as a
-// blue bubble, and a typing bubble whose dots pulse. They fly in as the card
-// enters and float. Desktop only: hovering an object (or the "Conversar por
-// WhatsApp" CTA, for the bubble) brings it forward, and clicking opens
-// WhatsApp. From Home.dc.html initContact.
-
 import * as THREE from "three";
 import { clamp01, easeOutCubic, prefersReducedMotion } from "../../core/anim";
 import { currentLayout } from "../../core/breakpoints";
@@ -33,7 +27,6 @@ function applyHover(item: ContactItem): void {
   item.object.scale.setScalar(1 + item.hover * 0.12);
 }
 
-/** Watches the WhatsApp CTA so hovering it lifts the bubble (desktop only). */
 function trackCtaHover(): { hovered: boolean } {
   const state = { hovered: false };
   const cta = document.querySelector<HTMLElement>("[data-contact-whatsapp]");

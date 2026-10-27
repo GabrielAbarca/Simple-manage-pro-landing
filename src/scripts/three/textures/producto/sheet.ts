@@ -1,8 +1,3 @@
-// Port of Producto's `drawSheet(i)` from design_handoff_smp_landing/design/desktop/
-// Producto.dc.html: the three messy spreadsheets in the "before" pile. Split into
-// helpers that issue the same draw calls, and consume the seeded random sequence,
-// in the same order. Every number and string is approved as is.
-
 import { context2d, createCanvas, createSeededRandom, drawText } from "../../core/canvas2d";
 
 export type SheetIndex = 0 | 1 | 2;
@@ -56,11 +51,11 @@ function drawColumnHeaders(ctx: CanvasRenderingContext2D): void {
   "ABCDEFG".split("").forEach((letter, j) => drawText(ctx, letter, (X[j + 1] + X[j + 2]) / 2, 157, 19, 600, "#627388", "center"));
 }
 
-// The random draw happens for every data cell before the overrides, so the
-// #¡DIV/0! and blank cells still advance the sequence exactly as the prototype did.
 function resolveCell(row: number, column: number, sheetIndex: SheetIndex, random: () => number): SheetCell {
   if (row === 0) return { text: HEADERS[column], color: "#363949", weight: 600 };
   if (column === 0) return { text: STUDENTS[(row - 1 + sheetIndex * 3) % STUDENTS.length], color: "#363949", weight: 400 };
+  // Draw for every data cell before the overrides: #¡DIV/0! and blank cells must
+  // still consume the seeded sequence, or every later score shifts.
   const score = String(Math.round(55 + random() * 43));
   if (row === 7 && column === 6) return { text: "#¡DIV/0!", color: "#d30011", weight: 600 };
   if (row === 9 - sheetIndex && column === 3) return { text: "", color: "#363949", weight: 400 };

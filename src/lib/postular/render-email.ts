@@ -1,9 +1,3 @@
-// The notification Gabriel receives for each application: a subject, a plain
-// text body and an HTML body, every field on its own line with its Spanish
-// label. Everything here is applicant input, so the HTML body escapes every
-// value and the subject is flattened to one line (a newline in a header is
-// how header injection starts).
-
 import { emailCopy, formCopy } from "../../data/postulacion";
 import type { PostulacionFields } from "./validate";
 
@@ -27,7 +21,6 @@ const HTML_ESCAPES: Record<string, string> = {
 
 export const escapeHtml = (value: string): string => value.replace(/[&<>"']/g, (char) => HTML_ESCAPES[char]);
 
-/** Collapses CR, LF and other control characters so the value fits one header line. */
 export const toSingleLine = (value: string): string =>
   value.replace(/[\u0000-\u001f\u007f]+/g, " ").replace(/\s+/g, " ").trim();
 

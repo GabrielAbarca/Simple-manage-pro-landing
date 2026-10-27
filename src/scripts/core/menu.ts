@@ -1,7 +1,3 @@
-// Mobile/tablet menu panel. Open: scroll locked on <html>, focus moved into
-// the panel and kept there, Escape and the scrim close it. Closed: inert, so
-// the off-screen links never take focus.
-
 const FOCUSABLE = 'a[href], button:not([disabled]), [tabindex]:not([tabindex="-1"])';
 
 function focusableIn(root: HTMLElement): HTMLElement[] {
@@ -50,7 +46,6 @@ export function initMenu(): void {
     if (event.key === "Escape") close();
     if (event.key === "Tab") trapTab(event, root);
   });
-  // A rotation or resize to desktop width removes the menu; don't leave the page locked.
   matchMedia("(min-width: 1200px)").addEventListener("change", (event) => {
     if (event.matches && isOpen()) setOpen(root, openButton, false);
   });

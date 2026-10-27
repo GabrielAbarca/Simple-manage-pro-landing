@@ -1,8 +1,3 @@
-// Port of Producto's `drawRecord` from design_handoff_smp_landing/design/desktop/
-// Producto.dc.html: the student expediente the "before" pile resolves into. Split
-// into helpers that issue the same draw calls in the same order; every number and
-// string is approved as is.
-
 import {
   context2d,
   createBrandGradient,
@@ -31,7 +26,6 @@ const SUBJECT_GRADES: readonly SubjectGrade[] = [
   ["Estudios Sociales", 86],
 ];
 
-// The prototype's inline `gr` gradient plus arc is the same disc gradientCircle draws.
 function drawRecordIdentity(ctx: CanvasRenderingContext2D): void {
   gradientCircle(ctx, 80, 70, 120);
   drawText(ctx, "YR", 140, 145, 38, 700, "#fff", "center");

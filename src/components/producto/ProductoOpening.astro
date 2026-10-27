@@ -1,8 +1,4 @@
 ---
-// The pinned opening story: 700vh of scroll (520vh below 1200) over one
-// sticky viewport. Scattered "problem" objects are visited by the camera and
-// gather into one student record while four chapter captions crossfade.
-// Without JavaScript it collapses to the headline plus the four statements.
 import OpeningChapters from "./OpeningChapters.astro";
 import { openingCopy } from "../../data/producto";
 import { scrollCue } from "../../data/site";
@@ -92,8 +88,6 @@ import { scrollCue } from "../../data/site";
     text-wrap: pretty;
   }
 
-  /* Phones and tablets set the captions over the objects, so the bottom of
-     the frame fades to the page colour behind them. */
   .legibility {
     position: absolute;
     left: 0;
@@ -195,8 +189,6 @@ import { scrollCue } from "../../data/site";
     .cue { bottom: 28px; }
   }
 
-  /* No scripting, no scroll story: a normal-height section that reads top to
-     bottom. */
   :global(html:not(.js)) .opening { height: auto; }
   :global(html:not(.js)) .sticky {
     position: relative;

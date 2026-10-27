@@ -1,10 +1,3 @@
-// Canvas textures need Poppins before their first draw, and need a redraw
-// whenever another weight finishes loading, or text measured against the
-// fallback font stays on the slab. Same triggers as the prototypes, minus the
-// ones that would only repeat a draw: when every face is already loaded at
-// build time, a redraw on fonts.ready paints the same pixels again, and on a
-// throttled phone each 1600px canvas costs a visible chunk of main thread.
-
 import * as THREE from "three";
 
 const REDRAW_FALLBACK_MS = [1500, 4000];
@@ -17,12 +10,10 @@ export async function loadPoppins(weights: string[] = ["400", "500", "600", "700
   try {
     await Promise.all(loads);
   } catch {
-    // A missing weight falls back to a system face; the redraw hooks below
-    // repaint once anything else arrives.
+    // A missing weight falls back to a system face; the redraw hooks repaint later.
   }
 }
 
-/** Gives the browser a turn between heavy steps, so no single task blocks input. */
 export function yieldToMain(): Promise<void> {
   return new Promise((resolve) => setTimeout(resolve, 0));
 }
@@ -46,7 +37,8 @@ export function canvasTexture(
   return { texture, redraw };
 }
 
-/** Repaint once fonts settle (only if they hadn't), and whenever a new face loads. */
+// Always redraw when a face finishes loading. Skip the ready and timer redraws if
+// everything was already loaded: they repaint identical pixels and burden phones.
 export function redrawWhenFontsSettle(textures: RedrawableTexture[]): void {
   const redrawAll = () => textures.forEach((entry) => entry.redraw());
   document.fonts.addEventListener("loadingdone", redrawAll);

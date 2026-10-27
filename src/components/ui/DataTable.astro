@@ -1,8 +1,4 @@
 ---
-// The DS <DataTable>: hairline row rules, nowrap heads, and a page-tinted row
-// hover that is a scanning aid, not an affordance. Rows are static here; the
-// bundle's onRowClick has no counterpart because nothing on the landing page
-// opens a record.
 import type { HTMLAttributes } from "astro/types";
 
 type CellValue = string | number;
@@ -17,7 +13,6 @@ export interface DataTableColumn {
   header: string;
   align?: "left" | "center" | "right";
   nowrap?: boolean;
-  /** Formats the cell as text. Defaults to the row's value under `key`. */
   render?: (row: DataTableRow) => CellValue;
 }
 
@@ -25,7 +20,6 @@ interface Props extends HTMLAttributes<"div"> {
   columns: DataTableColumn[];
   rows: DataTableRow[];
   emptyMessage?: string;
-  /** Accessible name for the <table>; the DS table has no visible caption. */
   tableLabel?: string;
 }
 

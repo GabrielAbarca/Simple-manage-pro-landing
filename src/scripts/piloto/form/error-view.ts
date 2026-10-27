@@ -1,8 +1,3 @@
-// Paints field errors and moves the visitor to the first one. A field shows
-// its error once it has been touched (blurred, picked or toggled) or after
-// the first submit attempt, as in the prototype's renderVals; a server error
-// shows at once, because it only ever arrives after a submit.
-
 import { currentLayout } from "../../core/breakpoints";
 import { prefersReducedMotion } from "../../core/anim";
 import type { FieldErrors, FieldName } from "../../../lib/postular/validate";
@@ -42,7 +37,6 @@ export function renderFieldErrors(form: HTMLFormElement, errors: FieldErrors): v
   });
 }
 
-/** Scrolls to the first invalid field and focuses its control. False if none is shown. */
 export function revealFirstError(form: HTMLFormElement): boolean {
   const field = form.querySelector<HTMLElement>('[data-invalid="true"]');
   if (!field) return false;

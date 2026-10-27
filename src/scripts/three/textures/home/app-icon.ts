@@ -1,9 +1,3 @@
-// Port of the app-icon tile texture built inline in Home's `initContact`
-// (design_handoff_smp_landing/design/desktop/Home.dc.html): a white 640px square
-// with the icon drawn at 96,96 / 448px. The canvas is usable immediately (plain
-// white) and `ready` settles once the icon is painted, so the caller can flag
-// its texture for re-upload. `ready` rejects if the image fails to load.
-
 import { context2d, createCanvas } from "../../core/canvas2d";
 
 export interface AppIconCanvas {

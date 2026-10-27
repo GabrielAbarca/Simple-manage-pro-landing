@@ -1,18 +1,10 @@
 ---
-// The DS <Toast> inside the prototypes' page-level wrapper: fixed, top-centre
-// and above the header, because status belongs where the eye already is.
-// Render one per page; showToast() in src/scripts/ui/toast.ts finds it by
-// [data-toast], writes the message and toggles data-visible.
-//
-// Both glyphs are rendered and the tone picks one in CSS, so a script can
-// switch tone without re-rendering markup.
 import type { HTMLAttributes } from "astro/types";
 import type { ToastTone } from "../../scripts/ui/toast";
 import Icon from "./Icon.astro";
 
 interface Props extends HTMLAttributes<"div"> {
   tone?: ToastTone;
-  /** Initial text; normally empty and written by showToast(). */
   message?: string;
 }
 
@@ -65,8 +57,6 @@ const { tone = "success", message = "", class: className, ...rest } = Astro.prop
       visibility 0s linear 250ms;
   }
 
-  /* Hidden toasts leave the accessibility tree once faded, so a stale
-     message is never read out of context. */
   [data-visible="true"] .toast-motion {
     opacity: 1;
     transform: translateY(0);
@@ -94,8 +84,6 @@ const { tone = "success", message = "", class: className, ...rest } = Astro.prop
     --toast-accent: var(--color-danger);
   }
 
-  /* A flex box, so the glyph is laid out like the bare flex-item svg the DS
-     renders and adds no line box of its own. */
   .glyph {
     display: flex;
   }

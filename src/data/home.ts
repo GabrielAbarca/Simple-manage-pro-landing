@@ -1,5 +1,3 @@
-// Home copy, verbatim from design_handoff_smp_landing/design/*/Home.dc.html.
-
 export const homeMeta = {
   title: "Sistema de gestión escolar en Costa Rica",
   description:

@@ -1,9 +1,3 @@
-// The opening's "problem" objects and the SMP record they gather into, from
-// Producto.dc.html initThree. Cards are Producto slabs with canvas faces;
-// paper is a curled plane lit by its own texture. Desktop shows all eight;
-// phones and tablets keep four (sheet 0, attendance list, phone, report card)
-// at their own positions, so every object carries both slots.
-
 import * as THREE from "three";
 import { productoSlab } from "../../core/geometry";
 import { PRODUCTO_SHADOW_ALPHA, drawShadow } from "../../core/canvas2d";
@@ -17,7 +11,6 @@ import { drawRecord } from "../../textures/producto/record";
 import type { Vec3 } from "./keyframes";
 
 export interface LayoutSlot {
-  /** Position in that layout's object list; drives the gather stagger and depth order. */
   index: number;
   position: Vec3;
 }
@@ -68,14 +61,12 @@ function addShadow(ctx: BuildContext, group: THREE.Group, width: number, height:
   return group;
 }
 
-/** Port of `card(w, h, r, d, body, tx, inset)`. */
 function card(ctx: BuildContext, size: Vec3, depth: number, body: THREE.Material, draw: () => HTMLCanvasElement, inset = 0) {
   const [width, height, radius] = size;
   const face = new THREE.MeshBasicMaterial({ map: ctx.texture(draw), transparent: true });
   return addShadow(ctx, productoSlab(width, height, radius, depth, body, face, 0.03, inset), width, height, -depth / 2 - 0.22);
 }
 
-/** Port of `paper(w, h, curl, tx)`: the right edge curls up, the bottom corner a little more. */
 function paper(ctx: BuildContext, width: number, height: number, curl: number, draw: () => HTMLCanvasElement) {
   const geometry = new THREE.PlaneGeometry(width, height, 32, 8);
   const position = geometry.attributes.position;
@@ -116,7 +107,6 @@ const OBJECT_DEFS: readonly ObjectDef[] = [
   { build: (c) => paper(c, 1.2, 1.2, 0.1, () => drawSticky(stickyTwo.lines, stickyTwo.color)), size: [1.2, 1.2], rotation: [-0.2, -0.2, -0.2], wide: [4.9, -3.0, 0.4], compact: null },
 ];
 
-/** Every material under `root` with the opacity it was built with, for the fade-out. */
 function collectFades(root: THREE.Object3D): FadingMaterial[] {
   const fades: FadingMaterial[] = [];
   root.traverse((node) => {
@@ -127,10 +117,6 @@ function collectFades(root: THREE.Object3D): FadingMaterial[] {
   return fades;
 }
 
-/**
- * Builds the objects one per task: each draws a large canvas, and all eight in
- * one task blocked a throttled phone for over two seconds.
- */
 async function buildObjects(ctx: BuildContext): Promise<GatherObject[]> {
   const objects: GatherObject[] = [];
   let compactIndex = 0;
@@ -157,7 +143,6 @@ export async function buildGatherScene(renderer: THREE.WebGLRenderer): Promise<G
     shadowTexture: new THREE.CanvasTexture(drawShadow(PRODUCTO_SHADOW_ALPHA)),
     texture: (draw) => {
       const entry = canvasTexture(draw, renderer);
-      // Upload now, inside this object's task, rather than all at once on the first frame.
       renderer.initTexture(entry.texture);
       textures.push(entry);
       return entry.texture;

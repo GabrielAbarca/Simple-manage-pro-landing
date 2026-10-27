@@ -1,7 +1,3 @@
-// Port of Producto's `drawGradebook` from design_handoff_smp_landing/design/desktop/
-// Producto.dc.html: the cover of the gradebook object in the portals scene. Every
-// number and string is approved as is, including the "—" placeholder grade.
-
 import { context2d, createCanvas, drawText, roundRect } from "../../core/canvas2d";
 
 type GradebookRow = readonly [student: string, firstPeriod: string, secondPeriod: string];
@@ -30,8 +26,6 @@ function drawCover(ctx: CanvasRenderingContext2D): void {
   drawText(ctx, "Sección 10-2 · 2026", 124, 400, 40, 500, "rgba(255,255,255,0.85)");
 }
 
-// The prototype compares the grade as a string (`r[1] < '70'`); kept, since it
-// is what was approved and it orders these two-digit grades correctly.
 function drawGradeRow(ctx: CanvasRenderingContext2D, [student, firstPeriod, secondPeriod]: GradebookRow, index: number): void {
   const y = 660 + index * 70;
   ctx.fillStyle = "rgba(132,139,200,0.25)";

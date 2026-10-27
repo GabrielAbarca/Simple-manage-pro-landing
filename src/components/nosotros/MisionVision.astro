@@ -1,11 +1,4 @@
 ---
-// Misión / Visión as one card with two tabs, a pager and a sliding track.
-// State lives in data-mv-index on the card and every visual follows it in
-// CSS, so src/scripts/nosotros/mission-tabs.ts only flips the index, the
-// ARIA state and the two pager buttons.
-//
-// Without JavaScript the controls are gone and the two panels stack at full
-// opacity, so both texts read in order.
 import Button from "../ui/Button.astro";
 import { missionVisionCopy } from "../../data/nosotros";
 
@@ -219,7 +212,6 @@ const lastPanelNumber = panels[panels.length - 1]?.number ?? "";
     text-wrap: pretty;
   }
 
-  /* No script, no tabs: both panels in reading order. */
   :global(html:not(.js)) .track {
     width: auto;
     flex-direction: column;
@@ -228,8 +220,6 @@ const lastPanelNumber = panels[panels.length - 1]?.number ?? "";
   }
   :global(html:not(.js)) .panel { opacity: 1; }
 
-  /* The tablet file scales this clamp on its own (rule 1), and the indicator
-     travels by the same gap, so both read one property. */
   @media (min-width: 768px) {
     .card { --mv-tab-gap: clamp(24px, 2.25vw, 72px); }
   }

@@ -1,14 +1,8 @@
-// Port of Home's `drawBubble` from design_handoff_smp_landing/design/desktop/Home.dc.html:
-// the WhatsApp message face on the contact scene's bubble slab. Sizes, wrap width
-// and line pitch are approved; do not tidy them.
-
 import { context2d, createCanvas } from "../../core/canvas2d";
 
 export const DEFAULT_BUBBLE_MESSAGE =
   "Buenas, soy director/a de [colegio] y quisiera conocer más sobre el piloto 2027.";
 
-// Deliberately not canvas2d's wrapText: this loop has no `&& line` guard, so an
-// overlong first word pushes an empty line. The bubble was approved with this one.
 function splitBubbleLines(ctx: CanvasRenderingContext2D, message: string): string[] {
   const lines: string[] = [];
   let line = "";

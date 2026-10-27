@@ -1,6 +1,3 @@
-// The form's non-field states: "Enviando…" on the submit button, the inline
-// send-failure message, and the confirmation that replaces the form.
-
 import { confirmationCopy, formCopy } from "../../../data/postulacion";
 import type { PostulacionFields } from "../../../lib/postular/validate";
 import { currentLayout } from "../../core/breakpoints";
@@ -25,7 +22,6 @@ export function setFailureVisible(form: HTMLFormElement, visible: boolean): void
   else delete message.dataset.shown;
 }
 
-/** "{colegio} · {cantón}, {provincia}", as the prototype composes it. */
 export function confirmationSummary(fields: PostulacionFields): string {
   const place = [fields.canton.trim(), fields.provincia].filter(Boolean).join(", ");
   return [fields.colegio.trim(), place].filter(Boolean).join(confirmationCopy.summarySeparator);
@@ -45,8 +41,6 @@ function fillConfirmation(confirmation: HTMLElement, fields: PostulacionFields):
   if (specific) specific.hidden = false;
 }
 
-// The form is far taller than the confirmation, so after the swap the card
-// can sit above the viewport; bring it back the way error scrolling does.
 function bringIntoView(confirmation: HTMLElement): void {
   const top = confirmation.getBoundingClientRect().top;
   if (top >= 0 && top < innerHeight) return;

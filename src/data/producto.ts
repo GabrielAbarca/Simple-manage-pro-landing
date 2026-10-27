@@ -1,6 +1,3 @@
-// Producto copy, verbatim from design_handoff_smp_landing/design/*/Producto.dc.html.
-// Mock-UI strings painted inside canvas textures stay in the texture modules.
-
 import type { IconName } from "../components/ui/icons";
 import type { BadgeTone, ButtonVariant } from "../scripts/ui/ds-runtime";
 
@@ -94,7 +91,6 @@ export const adminConsoleCopy = {
     { icon: "co_present", label: "Docentes", value: "28", tone: "warning" },
   ],
   tableLabel: "Secciones del curso lectivo",
-  // Mobile and tablet drop the homeroom teacher and shorten the count head.
   columnsWide: [
     { key: "sec", header: "Sección", nowrap: true },
     { key: "lvl", header: "Nivel" },
@@ -125,7 +121,6 @@ export const attendanceStatuses: readonly AttendanceStatus[] = ["present", "abse
 export interface AttendanceStudent {
   name: string;
   initials: string;
-  /** Where the pills start. */
   status: AttendanceStatus;
 }
 
@@ -140,7 +135,6 @@ export const teacherConsoleCopy = {
   today: { start: "07:00", end: "08:20", subject: "Matemáticas", meta: "10-2 · Aula 12", accent: "#7380ec" },
   attendanceTitle: "Asistencia · 10-2",
   pillLabels: { present: "Presente", absent: "Ausente", late: "Tardía" },
-  // [singular, plural] for the live summary, e.g. "2 presentes · 1 ausente".
   summaryWords: {
     present: ["presente", "presentes"],
     absent: ["ausente", "ausentes"],

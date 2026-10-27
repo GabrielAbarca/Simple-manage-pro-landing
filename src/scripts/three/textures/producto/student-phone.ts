@@ -1,8 +1,3 @@
-// Port of Producto's `drawStudentPhone` from design_handoff_smp_landing/design/
-// desktop/Producto.dc.html: the student's phone screen in the portals scene. Split
-// into helpers that issue the same draw calls in the same order; every number and
-// string is approved as is.
-
 import { context2d, createCanvas, drawProductoCard, drawText, roundRect, strokeProgressRing } from "../../core/canvas2d";
 
 type SubjectGrade = readonly [subject: string, grade: number];

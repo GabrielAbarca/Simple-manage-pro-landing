@@ -1,9 +1,5 @@
-// Verbatim ports of the 2D canvas helpers in design_handoff_smp_landing/design/
-// desktop/{Home,Producto}.dc.html. Every number, colour and draw order here was
-// tuned and approved in those prototypes, so constants must not be "tidied".
-// Where Home and Producto disagree (card radius, shadow alpha) both variants are
-// exported instead of merged, so each texture keeps the behaviour it was approved with.
-
+// Approved design output, pixel for pixel. Do not tidy constants, defaults or draw order, and keep
+// the Home and Producto variants (card radius, shadow alpha) separate instead of merging.
 export type CanvasPaint = string | CanvasGradient;
 
 export const HOME_SHADOW_ALPHA = 0.42;
@@ -24,7 +20,6 @@ export function context2d(canvas: HTMLCanvasElement): CanvasRenderingContext2D {
   return ctx;
 }
 
-/** Port of `rr`. A null fill leaves the path open for the caller to clip or stroke. */
 export function roundRect(
   ctx: CanvasRenderingContext2D,
   fill: CanvasPaint | null,
@@ -46,11 +41,6 @@ export function roundRect(
   ctx.fill();
 }
 
-/**
- * Port of `t`. Home's version has no font style; Producto's adds a trailing
- * one (e.g. "italic"). Omitting it yields Home's exact font string, so both
- * prototypes' call sites map 1:1 onto this signature.
- */
 export function drawText(
   ctx: CanvasRenderingContext2D,
   text: string,
@@ -87,7 +77,6 @@ function paintShadowCard(
   ctx.restore();
 }
 
-/** Port of Home's `card`. */
 export function drawHomeCard(
   ctx: CanvasRenderingContext2D,
   x: number,
@@ -99,7 +88,6 @@ export function drawHomeCard(
   paintShadowCard(ctx, x, y, width, height, radius);
 }
 
-/** Port of Producto's `card2d`, which reads `r || 40`, so a zero radius also means 40. */
 export function drawProductoCard(
   ctx: CanvasRenderingContext2D,
   x: number,
@@ -124,7 +112,6 @@ export function createBrandGradient(
   return gradient;
 }
 
-/** Port of Home's `grad`. */
 export function gradientCircle(ctx: CanvasRenderingContext2D, x: number, y: number, size: number): void {
   const gradient = createBrandGradient(ctx, x, y, x + size, y + size);
   ctx.beginPath();
@@ -133,7 +120,6 @@ export function gradientCircle(ctx: CanvasRenderingContext2D, x: number, y: numb
   ctx.fill();
 }
 
-/** Port of Home's `badge`. */
 export function drawBadge(
   ctx: CanvasRenderingContext2D,
   text: string,
@@ -150,10 +136,6 @@ export function drawBadge(
   drawText(ctx, text, badgeX + 16, y - 1, 19, 600, color);
 }
 
-/**
- * Shared by the rings drawStudent, drawRecord and drawStudentPhone draw inline.
- * Line width and cap stay set afterwards because the inline originals left them set.
- */
 export function strokeProgressRing(
   ctx: CanvasRenderingContext2D,
   centerX: number,
@@ -176,7 +158,6 @@ export function strokeProgressRing(
   ctx.stroke();
 }
 
-/** Port of Producto's `wrap`. Home's bubble wraps differently and keeps its own copy. */
 export function wrapText(ctx: CanvasRenderingContext2D, text: string, maxWidth: number): string[] {
   const lines: string[] = [];
   let line = "";
@@ -193,7 +174,6 @@ export function wrapText(ctx: CanvasRenderingContext2D, text: string, maxWidth: 
   return lines;
 }
 
-/** Port of Producto's `rnd`. A factory so every texture replays its own deterministic sequence. */
 export function createSeededRandom(seed: number): () => number {
   let state = seed;
   return () => {
@@ -202,7 +182,6 @@ export function createSeededRandom(seed: number): () => number {
   };
 }
 
-/** Home was approved at 0.42 and Producto at 0.38 (Piloto inlines 0.38 too), hence the parameter. */
 export function drawShadow(alpha: number): HTMLCanvasElement {
   const canvas = createCanvas(512, 512);
   const ctx = context2d(canvas);

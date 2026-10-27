@@ -1,8 +1,4 @@
 ---
-// The DS <TodayCard>: a row on the teacher's Today page. Subject-coloured
-// rail, the period's start and end, the class, then the actions that start
-// the lesson. The actions column renders even when empty because the DS
-// always reserves its padding, and the row's proportions depend on it.
 import type { HTMLAttributes } from "astro/types";
 
 interface Props extends Omit<HTMLAttributes<"div">, "style"> {
@@ -10,9 +6,7 @@ interface Props extends Omit<HTMLAttributes<"div">, "style"> {
   end: string;
   subject: string;
   meta: string;
-  /** Rail colour; any CSS colour. */
   accent?: string;
-  /** The DS uses <h3>; drop it to <p> where the card is a product mock. */
   subjectElement?: "h3" | "h4" | "p";
   style?: string;
 }

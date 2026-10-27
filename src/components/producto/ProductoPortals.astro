@@ -1,10 +1,4 @@
 ---
-// The three portals with live UI. A sticky full-viewport WebGL layer sits
-// behind the panels (margin-bottom: -100vh, so it takes no space) and each
-// 3D object follows its panel's anchor as the content scrolls over it.
-// Panel text and UI parallax are scroll-linked (src/scripts/producto/
-// portal-dom.ts), not the layout's one-shot reveal, hence their own
-// data-scroll-* attributes and the start states gated below.
 import PortalsIntro from "./PortalsIntro.astro";
 import PortalPanel from "./PortalPanel.astro";
 import PortalsEnd from "./PortalsEnd.astro";
@@ -106,8 +100,6 @@ import { portalPanels, portalsIntroCopy } from "../../data/producto";
     }
   }
 
-  /* Start states for the scroll-linked lines, armed only when the visitor
-     gets motion; portal-dom.ts writes every later frame inline. */
   :global(html.motion [data-portals] [data-scroll-rise]),
   :global(html.motion [data-portals] [data-panel-ui]) { opacity: 0; }
   :global(html.motion [data-portals] [data-scroll-mask]) { transform: translateY(110%); }

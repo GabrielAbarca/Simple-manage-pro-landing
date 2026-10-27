@@ -1,7 +1,3 @@
-// Reads the application form into typed fields, and keeps the two controls
-// that reshape what the visitor types: the phone (eight digits, shown as
-// "8888 8888") and the message (500 characters, with its live counter).
-
 import { COMENTARIOS_MAX_LENGTH, TELEFONO_DIGITS, formCopy } from "../../../data/postulacion";
 import type { PostulacionFields } from "../../../lib/postular/validate";
 
@@ -12,7 +8,6 @@ export const phoneDigits = (value: string): string => value.replace(/\D/g, "").s
 export const formatPhone = (digits: string): string =>
   digits.length > PHONE_GROUP_LENGTH ? `${digits.slice(0, PHONE_GROUP_LENGTH)} ${digits.slice(PHONE_GROUP_LENGTH)}` : digits;
 
-/** Index just past the `digitCount`-th digit, so the caret survives reformatting. */
 function caretAfterDigits(formatted: string, digitCount: number): number {
   if (digitCount === 0) return 0;
   let seen = 0;

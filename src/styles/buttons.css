@@ -1,7 +1,3 @@
-/* The pill family from the V.2 prototypes. Sizes vary per instance in the
-   design (24, 28 or 32px side padding), so the box reads custom properties a
-   section can override at a breakpoint instead of growing more classes. */
-
 .pill {
   display: inline-flex;
   align-items: center;
@@ -43,7 +39,6 @@
 }
 .pill-dark:hover { opacity: 0.9; color: #fff; }
 
-/* A pill or text link that ends in a 28px rule. */
 .rule-after::after {
   content: "";
   width: 28px;
@@ -62,7 +57,6 @@
 }
 .text-rule:hover { color: var(--brand-deep); }
 
-/* CTA groups: stacked and full width on phones, inline from tablet up. */
 .cta-group {
   display: flex;
   flex-direction: column;

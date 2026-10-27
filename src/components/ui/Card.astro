@@ -1,14 +1,10 @@
 ---
-// The DS <Card>: the one surface every SMP view is built from. Its wide
-// tinted shadow FLATTENS on hover instead of deepening; only a `clickable`
-// card lifts, because only then does it actually open something.
 import type { HTMLAttributes } from "astro/types";
 
 type CardElement = "div" | "article" | "section" | "li" | "aside";
 
 interface Props extends Omit<HTMLAttributes<"div">, "style"> {
   clickable?: boolean;
-  /** Any CSS padding value. Defaults to var(--card-padding). */
   padding?: string;
   as?: CardElement;
   style?: string;

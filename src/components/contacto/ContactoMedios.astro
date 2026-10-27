@@ -1,7 +1,4 @@
 ---
-// The three channels: WhatsApp, correo and the Piloto 2027 form. One column
-// on phones, two on tablets with the last card spanning the row, three on
-// desktop.
 import ContactCard from "./ContactCard.astro";
 import { contactCards } from "../../data/contacto";
 
@@ -41,7 +38,7 @@ const lastCardIndex = contactCards.length - 1;
 
   @media (min-width: 1200px) {
     .medios { padding: 0 var(--gutter) clamp(96px, 16vh, 180px); }
-    /* Three columns once the grid is 960px wide, one below it, from the file. */
+    /* 3 columns from a 960px grid width, else 1: the clamp snaps to one bound. */
     .grid {
       grid-template-columns: repeat(
         auto-fit,

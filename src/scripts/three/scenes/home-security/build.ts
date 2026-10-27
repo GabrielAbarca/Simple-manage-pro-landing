@@ -1,6 +1,3 @@
-// The stacked database (pedestal + three clearcoat disks with LEDs), its
-// orbit ring, and the padlock that circles it. From Home.dc.html initPilot.
-
 import * as THREE from "three";
 import { drawRadial } from "../../core/canvas2d";
 import { homeSlab } from "../../core/geometry";
@@ -8,7 +5,6 @@ import { homeSlab } from "../../core/geometry";
 export const DISK = { radius: 1.55, height: 0.58 } as const;
 export const ORBIT = { radiusX: 3.0, radiusZ: 2.35, centerY: 1.05 } as const;
 
-/** A rounded-edge cylinder: a lathe profile with quarter-circle corners. */
 function roundedDiskGeometry(radius: number, height: number, corner: number): THREE.LatheGeometry {
   const points = [new THREE.Vector2(0, -height / 2)];
   for (let a = 0; a <= 8; a++) {

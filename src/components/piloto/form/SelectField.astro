@@ -1,7 +1,4 @@
 ---
-// A native <select> in the DS input look (FORM_RESEND §1): the same border,
-// radius, tint and focus ring as <Input>, with the chevron drawn as a
-// background so the control stays native for keyboards and screen readers.
 import type { FieldName } from "../../../lib/postular/validate";
 import { formCopy } from "../../../data/postulacion";
 import FieldError from "./FieldError.astro";
@@ -60,8 +57,7 @@ const errorId = `${id}-error`;
     border-color: var(--color-danger);
     box-shadow: 0 0 0 3px var(--color-danger-light);
   }
-  /* After the invalid rule: in the design a focused select shows the focus
-     ring even while it is in error. */
+  /* Unlike <Input>, focus wins over the error ring here, as in the design: keep this rule last. */
   .select:focus {
     border-color: var(--color-primary);
     box-shadow: var(--focus-ring);

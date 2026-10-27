@@ -1,8 +1,3 @@
-// The attendance card's live summary ("2 presentes · 1 ausente · 1 tardía").
-// Pure, so the build renders the first state with the same words the page
-// script writes afterwards. Present always shows, even at zero; absent and
-// late only when someone has them, as in Producto.dc.html renderVals.
-
 import { teacherConsoleCopy, type AttendanceStatus } from "../../data/producto";
 
 function countWithNoun(count: number, [singular, plural]: readonly [string, string]): string {

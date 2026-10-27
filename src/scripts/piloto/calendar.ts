@@ -1,10 +1,3 @@
-// The Piloto calendar animation, ported from Piloto.dc.html `loop`. It plays
-// once, when the section's top passes 60% of the viewport. Both variants are
-// in the DOM (CSS shows one per breakpoint), so both are painted from the
-// same start time: the desktop month grid over 1000ms, the mobile/tablet
-// timeline over 1600ms, both quad in-out. Reduced motion paints the end
-// state at the trigger instead of animating to it, as the prototype does.
-
 import { calendarCopy } from "../../data/piloto";
 import { clamp01, easeInOutQuad, prefersReducedMotion } from "../core/anim";
 
@@ -12,7 +5,6 @@ const TRIGGER_VIEWPORT_FRACTION = 0.6;
 const GRID_DURATION_MS = 1000;
 const TIMELINE_DURATION_MS = 1600;
 const MONTH_COUNT = calendarCopy.months.length;
-/** Month index (0 = FEB) at which each milestone card starts to reveal. */
 const MILESTONE_MONTH_STARTS = [0, 0.5, 5, 10];
 const DOT_ACTIVE = "#4455e6";
 const DOT_IDLE = "#c9cdf5";
@@ -89,7 +81,6 @@ function play(elements: CalendarElements): void {
   requestAnimationFrame(frame);
 }
 
-/** Arms the calendar: rewinds the ghost label, then plays once on trigger. */
 export function initCalendar(section: HTMLElement | null): void {
   if (!section) return;
   const elements = collectElements(section);

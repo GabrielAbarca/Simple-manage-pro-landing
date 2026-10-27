@@ -1,9 +1,3 @@
-// The clipboard group from Piloto.dc.html initThree: blurred drop shadow,
-// brand board, the "Solicitud Piloto 2027" sheet, metal clip and hinge, and
-// the pen. Piloto's slab is its own (4 bevel / 16 curve segments, one
-// material, returns a Mesh), so it is inlined here rather than borrowed from
-// core/geometry.ts. Every size and position is the approved value.
-
 import * as THREE from "three";
 import { context2d, createCanvas, roundRect } from "../../core/canvas2d";
 import { roundedRectShape } from "../../core/geometry";

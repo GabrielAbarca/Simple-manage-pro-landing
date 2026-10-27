@@ -1,5 +1,3 @@
-// Nosotros copy, verbatim from design_handoff_smp_landing/design/*/Nosotros.dc.html.
-
 export const nosotrosMeta = {
   title: "Nosotros",
   description:
@@ -12,9 +10,7 @@ export const nosotrosHeroCopy = {
 } as const;
 
 export interface MissionVisionPanel {
-  /** Tab label and the panel it controls. */
   label: string;
-  /** Ghost numeral above the text; also feeds the "01 / 02" pager. */
   number: string;
   body: string;
 }
@@ -46,8 +42,6 @@ export interface HistoryMilestone {
 export const historyCopy = {
   eyebrow: "Nuestra historia",
   headline: ["Empezó como un proyecto", "de feria científica."],
-  // The paragraph is split around its one inline link so the markup can wrap
-  // it without the copy leaving this file.
   paragraphBeforeLink:
     "El problema era el mismo que sigue resolviendo hoy: al cierre de cada periodo, alguien en la dirección arma las notas a mano desde archivos sueltos, los resultados tardaban días o incluso semanas en llegar a los estudiantes. Tres cursos lectivos después, es un sistema que un colegio puede usar de verdad. Hoy ese trabajo lo hacen ",
   paragraphLinkLabel: "las tres consolas del sistema",
@@ -81,7 +75,6 @@ export const founderCopy = {
   eyebrow: "Fundador",
   initials: "GZ",
   name: "Gabriel Zelaya",
-  // English in the approved design; rendered uppercase by CSS.
   role: "Founder & CEO",
   bio: "Gabriel Zelaya es un desarrollador Full-Stack con experiencia remota e internacional. Especializado en la creación de software pensado para la aportación de valor para los clientes.",
 } as const;

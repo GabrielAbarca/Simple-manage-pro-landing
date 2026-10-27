@@ -1,17 +1,10 @@
-// Best-effort sliding-window limiter for /api/postular. It lives in the
-// serverless instance's memory, so a cold start or a second instance resets
-// it: it exists to blunt a script hammering one warm function, not to be a
-// guarantee. The key map is pruned and capped so it cannot grow unbounded.
-
 export interface RateLimiter {
-  /** Records one request for `key`; false once the key is over its limit. */
   allow(key: string, nowMs?: number): boolean;
 }
 
 export interface RateLimitOptions {
   maxRequests: number;
   windowMs: number;
-  /** Upper bound on tracked keys; the oldest is dropped past it. */
   maxKeys?: number;
 }
 

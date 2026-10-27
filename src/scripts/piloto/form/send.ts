@@ -1,7 +1,3 @@
-// Sends the application as JSON and sorts the answer into the three outcomes
-// the form can show. The response is untrusted data: only known field names
-// with string messages survive, and they are later written as text, never HTML.
-
 import { POSTULAR_ENDPOINT } from "../../../data/postulacion";
 import { FIELD_NAMES, type FieldErrors, type FieldName, type PostulacionFields } from "../../../lib/postular/validate";
 

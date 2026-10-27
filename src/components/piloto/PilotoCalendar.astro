@@ -1,8 +1,4 @@
 ---
-// "Calendario del piloto". Desktop draws the curso lectivo as an 11-month
-// grid under a ghost month label that ticks FEB → DIC; below 1200 the same
-// four milestones hang off a vertical track. Both are in the markup and CSS
-// picks one, so the animation (src/scripts/piloto/calendar.ts) drives both.
 import { calendarCopy } from "../../data/piloto";
 import CalendarMonths from "./CalendarMonths.astro";
 import CalendarTimeline from "./CalendarTimeline.astro";
@@ -18,8 +14,6 @@ const lastMonth = calendarCopy.months[calendarCopy.months.length - 1];
         <Eyebrow label={calendarCopy.eyebrow} />
         <h2>{calendarCopy.headline[0]}<br /><span class="accent">{calendarCopy.headline[1]}</span></h2>
       </div>
-      {/* Final month in the markup so the no-JS render matches its full bars;
-          the script rewinds it to FEB before the animation. */}
       <div class="month-label" aria-hidden="true" data-calendar-month-label>{lastMonth}</div>
     </div>
     <CalendarMonths />

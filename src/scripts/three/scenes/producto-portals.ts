@@ -1,9 +1,3 @@
-// Producto portals scene: a sticky full-viewport layer behind the panels in
-// which the database, the gradebook and the student phone follow their DOM
-// anchors. Panel distances come from the page's DOM loop (portal-dom.ts).
-// Desktop only: hovering an object (outside the live UI) lifts and flattens
-// it. From Producto.dc.html initPortal.
-
 import * as THREE from "three";
 import { currentLayout } from "../../core/breakpoints";
 import type { ProductoMotion } from "../../producto/motion-state";
@@ -33,10 +27,6 @@ function findAnchors(section: HTMLElement): Anchors | null {
   };
 }
 
-/**
- * Pointer over the stage in NDC. The stage sits under the panels, so events
- * come from the section; over a live UI block the objects are not hoverable.
- */
 function trackPortalPointer(section: HTMLElement, stage: HTMLElement): StagePointer {
   const pointer: StagePointer = { position: new THREE.Vector2(), inside: false };
   section.addEventListener("pointermove", (event) => {
@@ -49,7 +39,6 @@ function trackPortalPointer(section: HTMLElement, stage: HTMLElement): StagePoin
   return pointer;
 }
 
-/** Port of `toW`: a viewport point to world x/y on the z=0 plane. */
 function worldMapper(stage: HTMLElement, camera: THREE.PerspectiveCamera) {
   const rect = stage.getBoundingClientRect();
   const halfWidth = HALF_HEIGHT * camera.aspect;

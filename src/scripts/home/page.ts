@@ -1,13 +1,7 @@
-// Home orchestration: intro, early exit on scroll, and the three scenes.
-// The hero scene starts right after first paint; the other two load when
-// their stage comes within a viewport.
-
 import { prefersReducedMotion } from "../core/anim";
 import { reportSceneError, whenNear } from "../core/lazy-scene";
 import { HomeIntro, revealHeroHeadline } from "./intro";
 
-// The approved design plays the intro on every visit. Set false to play it
-// once per session (sessionStorage "smp-intro-seen" is already written).
 const ALWAYS_PLAY_INTRO = true;
 const EARLY_EXIT_PROGRESS = 0.015;
 export const HOME_MOTION_INTENSITY = 1.6;
@@ -22,7 +16,6 @@ function heroScrollProgress(hero: HTMLElement): number {
   return scrollable > 0 ? Math.min(1, Math.max(0, -rect.top / scrollable)) : 0;
 }
 
-/** The design always opens Home at the top, then honours a #fragment. */
 function resetScrollPosition(): void {
   if ("scrollRestoration" in history) history.scrollRestoration = "manual";
   scrollTo(0, 0);

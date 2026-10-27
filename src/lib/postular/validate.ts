@@ -1,8 +1,3 @@
-// The one rule set for the Piloto application. The browser runs it on every
-// keystroke and the /api/postular route runs it again on whatever arrives,
-// so a field the page accepts is exactly a field the server accepts.
-// Pure and dependency-free on purpose: it ships in the client bundle.
-
 import {
   CARGOS,
   ESTUDIANTES,
@@ -24,7 +19,6 @@ export interface PostulacionFields {
   nombre: string;
   cargo: string;
   correo: string;
-  /** Digits only; the "8888 8888" spacing is display. */
   telefono: string;
   comentarios: string;
   consent: boolean;
@@ -97,7 +91,6 @@ function contactErrors(fields: PostulacionFields): FieldErrors {
   };
 }
 
-/** Field name → message for every rule the fields break; empty when valid. */
 export function validatePostulacion(fields: PostulacionFields): FieldErrors {
   const all = { ...schoolErrors(fields), ...contactErrors(fields), ...optionalFieldErrors(fields) };
   const errors: FieldErrors = {};
