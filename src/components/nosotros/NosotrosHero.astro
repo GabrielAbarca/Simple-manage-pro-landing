@@ -1,0 +1,93 @@
+---
+// "Somos un software escolar pensado para su colegio." with the scroll cue
+// bottom right and the glow bleeding in from the bottom left.
+import { nosotrosHeroCopy } from "../../data/nosotros";
+import { scrollCue } from "../../data/site";
+
+const [lineOne, lineTwo, lineThree] = nosotrosHeroCopy.headline;
+---
+
+<section class="hero" data-screen-label="01 Hero" data-rv>
+  <div class="glow" aria-hidden="true"></div>
+  <h1>
+    <span class="line-mask"><span data-rise>{lineOne}</span></span>
+    <span class="line-mask"><span data-rise>{lineTwo}</span></span>
+    <span class="line-mask"><span data-rise class="accent">{lineThree}</span></span>
+  </h1>
+  <div class="cue" data-fade>
+    <span class="cue-label">{scrollCue}<span class="cue-line"></span></span>
+  </div>
+</section>
+
+<style>
+  .hero {
+    position: relative;
+    min-height: 88vh;
+    min-height: 88svh;
+    box-sizing: border-box;
+    padding: 104px var(--gutter) 32px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 32px;
+    background: var(--page);
+    overflow: hidden;
+  }
+  .glow {
+    position: absolute;
+    left: -18vw;
+    bottom: -34vw;
+    width: 80vw;
+    height: 80vw;
+    max-width: 1200px;
+    max-height: 1200px;
+    border-radius: 50%;
+    background: radial-gradient(closest-side, rgba(115, 128, 236, 0.14), rgba(115, 128, 236, 0));
+    pointer-events: none;
+  }
+  h1 {
+    position: relative;
+    margin: 0;
+    font-weight: 800;
+    font-size: clamp(38px, 11.5vw, 54px);
+    line-height: 0.94;
+    letter-spacing: -0.055em;
+    color: var(--ink);
+  }
+  h1 .line-mask { padding-bottom: 0.05em; }
+  .accent { color: var(--brand-text); }
+  .cue {
+    position: relative;
+    display: flex;
+    justify-content: flex-end;
+  }
+  .cue-label {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--ink-micro);
+  }
+  .cue-line {
+    width: 48px;
+    height: 1px;
+    background: var(--ink-micro);
+  }
+
+  @media (min-width: 768px) {
+    h1 { font-size: clamp(38px, 8.63vw, 81px); }
+  }
+
+  @media (min-width: 1200px) {
+    .hero {
+      min-height: 100vh;
+      padding: 128px var(--gutter) 40px;
+      gap: 48px;
+    }
+    h1 {
+      font-size: clamp(52px, 8.4vw, 164px);
+      line-height: 0.92;
+    }
+  }
+</style>

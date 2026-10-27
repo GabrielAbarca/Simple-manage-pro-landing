@@ -1,0 +1,183 @@
+---
+// "Empezó como un proyecto de feria científica." and the four-year timeline.
+// The heading group uses the standard reveal; the timeline plays once on its
+// own (src/scripts/nosotros/history-timeline.ts), so it sits outside data-rv.
+//
+// Every timeline start state (grey dot, empty fill, hidden beats) is gated
+// by .motion: without script or with reduced motion the list renders played.
+import Eyebrow from "./Eyebrow.astro";
+import { historyCopy } from "../../data/nosotros";
+
+const [lineOne, lineTwo] = historyCopy.headline;
+---
+
+<section class="history" data-screen-label="03 Nuestra historia">
+  <div class="inner">
+    <div class="heading" data-rv>
+      <Eyebrow label={historyCopy.eyebrow} />
+      <h2>
+        <span class="line-mask"><span data-rise>{lineOne}</span></span>
+        <span class="line-mask"><span data-rise class="accent">{lineTwo}</span></span>
+      </h2>
+      <p class="lead" data-fade>
+        {historyCopy.paragraphBeforeLink}<a href={historyCopy.paragraphLinkHref}
+          >{historyCopy.paragraphLinkLabel}</a
+        >{historyCopy.paragraphAfterLink}
+      </p>
+    </div>
+    <ol class="timeline" data-history-timeline>
+      {
+        historyCopy.milestones.map((milestone) => (
+          <li>
+            <div class="rail">
+              <div class="fill" data-fill />
+              <span class="dot" data-dot />
+            </div>
+            <span class="year" data-beat>{milestone.year}</span>
+            <h3 data-beat>{milestone.title}</h3>
+            <p class="body" data-beat>{milestone.body}</p>
+          </li>
+        ))
+      }
+    </ol>
+  </div>
+</section>
+
+<style>
+  .history {
+    position: relative;
+    background: var(--page);
+    padding: 0 var(--gutter) 72px;
+  }
+  .inner {
+    max-width: 1440px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+  }
+  .heading {
+    display: flex;
+    flex-direction: column;
+    gap: clamp(28px, 4vh, 40px);
+  }
+  h2 {
+    margin: 0;
+    font-weight: 800;
+    font-size: clamp(34px, 10vw, 46px);
+    line-height: 0.96;
+    letter-spacing: -0.05em;
+    color: var(--ink);
+  }
+  .accent { color: var(--brand-text); }
+  .lead {
+    margin: 0;
+    max-width: 46rem;
+    font-size: 17px;
+    line-height: 1.6;
+    color: var(--ink-lead);
+    text-wrap: pretty;
+  }
+  .lead a {
+    color: var(--brand-text);
+    font-weight: 600;
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }
+  .lead a:hover { color: var(--brand-deep); }
+  .timeline {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    gap: 36px;
+  }
+  li {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    min-width: 0;
+  }
+  .rail {
+    position: relative;
+    height: 2px;
+    border-radius: 2px;
+    background: var(--hairline);
+    margin-bottom: 14px;
+  }
+  .fill {
+    position: absolute;
+    inset: 0;
+    border-radius: 2px;
+    background: var(--brand-text);
+    transform-origin: left;
+  }
+  .dot {
+    position: absolute;
+    left: 0;
+    top: -5px;
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: var(--brand-text);
+    box-shadow: 0 0 0 4px var(--page);
+    transition: background 300ms var(--ease-ui);
+  }
+  :global(.motion) .fill { transform: scaleX(0); }
+  :global(.motion) .dot { background: var(--ghost-dot); }
+  :global(.motion) [data-beat] {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  .year {
+    font-size: 40px;
+    font-weight: 800;
+    line-height: 1;
+    letter-spacing: -0.04em;
+    color: var(--brand-text);
+    font-variant-numeric: tabular-nums;
+  }
+  h3 {
+    margin: 0;
+    font-size: clamp(18px, 1.4vw, 22px);
+    font-weight: 700;
+    line-height: 1.25;
+    letter-spacing: -0.02em;
+    color: var(--ink);
+    text-wrap: balance;
+  }
+  .body {
+    margin: 0;
+    font-size: 15px;
+    line-height: 1.6;
+    color: var(--ink-muted);
+    text-wrap: pretty;
+  }
+
+  @media (min-width: 768px) {
+    h2 { font-size: clamp(34px, 7.5vw, 69px); }
+    h3 { font-size: clamp(18px, 1.05vw, 33px); }
+  }
+
+  @media (min-width: 1200px) {
+    .history { padding: 0 var(--gutter) clamp(96px, 16vh, 180px); }
+    .inner { gap: clamp(56px, 9vh, 104px); }
+    h2 {
+      font-size: clamp(44px, 5.6vw, 100px);
+      line-height: 0.94;
+    }
+    .lead { font-size: clamp(18px, 1.45vw, 22px); }
+    /* Four columns once the list is 880px wide, two below it: the clamp
+       collapses to one bound or the other, straight from the file. */
+    .timeline {
+      grid-template-columns: repeat(
+        auto-fit,
+        minmax(clamp(calc(25% - 24px), (880px - 100%) * 999, calc(50% - 16px)), 1fr)
+      );
+      gap: 40px clamp(16px, 2vw, 32px);
+    }
+    .year { font-size: clamp(36px, 3.2vw, 56px); }
+    h3 { font-size: clamp(18px, 1.4vw, 22px); }
+  }
+</style>

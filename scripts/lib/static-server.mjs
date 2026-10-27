@@ -17,7 +17,9 @@ const CONTENT_TYPES = {
 };
 
 function resolveInsideRoot(rootDirectory, requestUrl) {
-  const requestedPath = decodeURIComponent(new URL(requestUrl, "http://x").pathname);
+  let requestedPath = decodeURIComponent(new URL(requestUrl, "http://x").pathname);
+  // Directory URLs (the site's trailing-slash routes) serve their index.html.
+  if (requestedPath.endsWith("/")) requestedPath += "index.html";
   const absolutePath = path.normalize(path.join(rootDirectory, requestedPath));
   // Refuse anything that climbs out of the served folder.
   if (!absolutePath.startsWith(path.normalize(rootDirectory))) return null;

@@ -1,8 +1,31 @@
 ---
-// Placeholder while the V.2 port of this route is in progress.
 import Layout from "../layouts/Layout.astro";
+import ContactoHero from "../components/contacto/ContactoHero.astro";
+import ContactoMedios from "../components/contacto/ContactoMedios.astro";
+import { breadcrumbLd } from "../lib/schema";
+import { contactoMeta } from "../data/contacto";
+
+const jsonLd = breadcrumbLd(contactoMeta.breadcrumb, "/contacto/");
 ---
 
-<Layout title="Contacto" description="Contacto">
-  <h1>Contacto</h1>
+<Layout
+  title={contactoMeta.title}
+  description={contactoMeta.description}
+  revealProfile="contacto"
+  withToast
+>
+  <script
+    slot="head"
+    is:inline
+    type="application/ld+json"
+    set:html={JSON.stringify(jsonLd)}
+  />
+
+  <ContactoHero />
+  <ContactoMedios />
 </Layout>
+
+<script>
+  import { initContactoPage } from "../scripts/contacto/page";
+  initContactoPage();
+</script>

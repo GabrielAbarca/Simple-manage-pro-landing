@@ -1,8 +1,30 @@
 ---
-// Placeholder while the V.2 port of this route is in progress.
 import Layout from "../layouts/Layout.astro";
+import NosotrosHero from "../components/nosotros/NosotrosHero.astro";
+import MisionVision from "../components/nosotros/MisionVision.astro";
+import NuestraHistoria from "../components/nosotros/NuestraHistoria.astro";
+import Fundador from "../components/nosotros/Fundador.astro";
+import { breadcrumbLd } from "../lib/schema";
+import { nosotrosMeta } from "../data/nosotros";
+
+const jsonLd = breadcrumbLd(nosotrosMeta.breadcrumb, "/nosotros/");
 ---
 
-<Layout title="Nosotros" description="Nosotros">
-  <h1>Nosotros</h1>
+<Layout title={nosotrosMeta.title} description={nosotrosMeta.description}>
+  <script
+    slot="head"
+    is:inline
+    type="application/ld+json"
+    set:html={JSON.stringify(jsonLd)}
+  />
+
+  <NosotrosHero />
+  <MisionVision />
+  <NuestraHistoria />
+  <Fundador />
 </Layout>
+
+<script>
+  import { initNosotrosPage } from "../scripts/nosotros/page";
+  initNosotrosPage();
+</script>

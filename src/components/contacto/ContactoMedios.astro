@@ -1,0 +1,53 @@
+---
+// The three channels: WhatsApp, correo and the Piloto 2027 form. One column
+// on phones, two on tablets with the last card spanning the row, three on
+// desktop.
+import ContactCard from "./ContactCard.astro";
+import { contactCards } from "../../data/contacto";
+
+const lastCardIndex = contactCards.length - 1;
+---
+
+<section class="medios" data-screen-label="02 Medios" data-rv>
+  <div class="grid">
+    {
+      contactCards.map((card, index) => (
+        <ContactCard card={card} spansTabletRow={index === lastCardIndex} />
+      ))
+    }
+  </div>
+</section>
+
+<style>
+  .medios {
+    position: relative;
+    background: var(--page);
+    padding: 0 var(--gutter-card) 72px;
+  }
+  .grid {
+    max-width: 1440px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    gap: 12px;
+  }
+
+  @media (min-width: 768px) {
+    .grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 16px;
+    }
+  }
+
+  @media (min-width: 1200px) {
+    .medios { padding: 0 var(--gutter) clamp(96px, 16vh, 180px); }
+    /* Three columns once the grid is 960px wide, one below it, from the file. */
+    .grid {
+      grid-template-columns: repeat(
+        auto-fit,
+        minmax(clamp(calc(33.333% - 16px), (960px - 100%) * 999, 100%), 1fr)
+      );
+      gap: 24px;
+    }
+  }
+</style>
