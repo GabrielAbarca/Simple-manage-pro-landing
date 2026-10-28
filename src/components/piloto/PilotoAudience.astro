@@ -1,0 +1,137 @@
+---
+import { audienceCopy } from "../../data/piloto";
+import Eyebrow from "./Eyebrow.astro";
+---
+
+<section class="audience" data-screen-label="02 Para quién es" data-rv>
+  <div class="grid">
+    <div class="heading">
+      <Eyebrow label={audienceCopy.eyebrow} rises />
+      <h2>
+        {
+          audienceCopy.headline.map((line, i) => (
+            <span class="line-mask">
+              <span data-rise class="data-rise" class:list={{ accent: i === audienceCopy.headline.length - 1 }}>{line}</span>
+            </span>
+          ))
+        }
+      </h2>
+    </div>
+    <div class="rows" data-fade>
+      {
+        audienceCopy.rows.map((row) => (
+          <div class="row">
+            <span class="number">{row.number}</span>
+            <div class="text">
+              <span class="title">{row.title}</span>
+              <span class="body">{row.body}</span>
+            </div>
+          </div>
+        ))
+      }
+    </div>
+  </div>
+</section>
+
+<style>
+  .audience {
+    position: relative;
+    background: var(--page);
+    padding: 72px var(--gutter);
+  }
+  .grid {
+    max-width: 1440px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    gap: 24px;
+    align-items: start;
+  }
+  .heading {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+  }
+  h2 {
+    margin: 0;
+    font-weight: 800;
+    font-size: clamp(34px, 10vw, 46px);
+    line-height: 0.96;
+    letter-spacing: -0.05em;
+    color: var(--ink);
+  }
+  .accent {
+     color: var(--brand-text);
+  }
+  .data-rise {
+    padding-bottom: .7rem;
+  }
+  .rows {
+    display: flex;
+    flex-direction: column;
+    padding-top: 0;
+  }
+  .row {
+    display: grid;
+    grid-template-columns: 2.2rem minmax(0, 1fr);
+    gap: 12px;
+    padding: 20px 0;
+    border-top: 1px solid var(--hairline);
+  }
+  .row:last-child { border-bottom: 1px solid var(--hairline); }
+  .number {
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--brand-text);
+    font-variant-numeric: tabular-nums;
+  }
+  .text {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+  .title {
+    font-size: clamp(19px, 1.5vw, 24px);
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    color: var(--ink);
+  }
+  .body {
+    font-size: 16px;
+    line-height: 1.55;
+    color: var(--ink-muted);
+    text-wrap: pretty;
+  }
+
+  @media (min-width: 768px) {
+    h2 { font-size: clamp(34px, 7.5vw, 69px); }
+    .title { font-size: clamp(19px, 1.13vw, 36px); }
+    .body {
+      font-size: 18px;
+      line-height: 1.6;
+    }
+  }
+
+  @media (min-width: 1200px) {
+    .audience { padding: clamp(96px, 16vh, 180px) 4vw; }
+    .grid {
+      grid-template-columns: repeat(auto-fit, minmax(min(100%, 420px), 1fr));
+      gap: 48px 6vw;
+    }
+    h2 {
+      font-size: clamp(44px, 5.6vw, 100px);
+      line-height: 0.94;
+    }
+    .rows { padding-top: clamp(0px, 4vw, 56px); }
+    .row {
+      grid-template-columns: 3rem minmax(0, 1fr);
+      gap: 16px;
+      padding: 28px 0;
+    }
+    .title { font-size: clamp(19px, 1.5vw, 24px); }
+    .body {
+      font-size: 16px;
+      line-height: 1.55;
+    }
+  }
+</style>

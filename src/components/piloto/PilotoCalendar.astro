@@ -1,0 +1,84 @@
+---
+import { calendarCopy } from "../../data/piloto";
+import CalendarMonths from "./CalendarMonths.astro";
+import CalendarTimeline from "./CalendarTimeline.astro";
+import Eyebrow from "./Eyebrow.astro";
+
+const lastMonth = calendarCopy.months[calendarCopy.months.length - 1];
+---
+
+<section class="calendar" data-screen-label="04 Calendario" data-calendar>
+  <div class="inner">
+    <div class="header">
+      <div class="heading">
+        <Eyebrow label={calendarCopy.eyebrow} />
+        <h2>{calendarCopy.headline[0]}<br /><span class="accent">{calendarCopy.headline[1]}</span></h2>
+      </div>
+      <div class="month-label" aria-hidden="true" data-calendar-month-label>{lastMonth}</div>
+    </div>
+    <CalendarMonths />
+    <CalendarTimeline />
+  </div>
+</section>
+
+<style>
+  .calendar {
+    position: relative;
+    background: var(--page);
+    padding: 0 var(--gutter) 80px;
+  }
+  .inner {
+    display: flex;
+    flex-direction: column;
+    gap: 36px;
+  }
+  .heading {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+  h2 {
+    margin: 0;
+    font-weight: 800;
+    font-size: clamp(34px, 10vw, 46px);
+    line-height: 0.96;
+    letter-spacing: -0.05em;
+    color: var(--ink);
+  }
+  .accent { color: var(--brand-text); }
+  .month-label { display: none; }
+
+  @media (min-width: 768px) {
+    h2 { font-size: clamp(34px, 7.5vw, 69px); }
+  }
+
+  @media (min-width: 1200px) {
+    .calendar { padding: 0; }
+    .inner {
+      box-sizing: border-box;
+      padding: clamp(48px, 8vh, 96px) 4vw clamp(96px, 14vh, 160px);
+      gap: clamp(40px, 7vh, 80px);
+    }
+    .header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      gap: 24px 48px;
+      flex-wrap: wrap;
+    }
+    .heading { gap: 24px; }
+    h2 {
+      font-size: clamp(36px, min(5.6vw, 9vh), 100px);
+      line-height: 0.94;
+    }
+    .month-label {
+      display: block;
+      font-size: clamp(56px, min(13vw, 20vh), 240px);
+      font-weight: 800;
+      line-height: 0.78;
+      letter-spacing: -0.05em;
+      color: var(--ghost-numeral);
+      font-variant-numeric: tabular-nums;
+    }
+  }
+</style>

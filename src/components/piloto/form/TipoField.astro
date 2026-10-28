@@ -1,0 +1,72 @@
+---
+import { TIPOS, formCopy } from "../../../data/postulacion";
+import FieldError from "./FieldError.astro";
+import FieldLabel from "./FieldLabel.astro";
+import FormField from "./FormField.astro";
+---
+
+<FormField name="tipo" fullRow role="radiogroup" aria-labelledby="pf-tipo-l">
+  <FieldLabel text={formCopy.labels.tipo} id="pf-tipo-l" />
+  <div class="pills">
+    {
+      TIPOS.map((tipo) => (
+        <label class="pill-option">
+          <input
+            class="visually-hidden"
+            type="radio"
+            name="tipo"
+            value={tipo}
+            required
+            aria-describedby="pf-tipo-error"
+            data-control="tipo"
+          />
+          <span>{tipo}</span>
+        </label>
+      ))
+    }
+  </div>
+  <FieldError id="pf-tipo-error" />
+</FormField>
+
+<style>
+  .pills {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+  .pill-option {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    box-sizing: border-box;
+    min-height: var(--tap-target);
+    margin: 0;
+    padding: 0.65rem 1.3rem;
+    border: 1px solid var(--border-control);
+    border-radius: var(--border-radius-1);
+    background: transparent;
+    color: var(--color-dark-variant);
+    font-family: var(--font-sans);
+    font-size: 0.85rem;
+    font-weight: 600;
+    line-height: normal;
+    letter-spacing: normal;
+    text-align: center;
+    white-space: nowrap;
+    cursor: pointer;
+    transition: 0.2s ease-in-out;
+  }
+  .pill-option:hover { background: var(--color-background); }
+  .pill-option:has(input:checked) {
+    border: none;
+    background: var(--color-primary-fill);
+    color: #fff;
+  }
+  .pill-option:has(input:checked):hover { opacity: 0.9; }
+  .pill-option:has(input:focus-visible) {
+    outline: var(--focus-outline);
+    outline-offset: 2px;
+  }
+</style>

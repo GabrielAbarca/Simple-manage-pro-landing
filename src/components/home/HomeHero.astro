@@ -1,0 +1,251 @@
+---
+import IntroOverlay from "./IntroOverlay.astro";
+import { DEMO_URL, waHref } from "../../config";
+import { heroCopy } from "../../data/home";
+import { scrollCue } from "../../data/site";
+---
+
+<section class="hero" data-screen-label="Hero" data-home-hero data-header-anchor>
+  <div class="sticky">
+    <div class="glow" aria-hidden="true"></div>
+    <div class="stage" data-stage data-hero-stage aria-hidden="true"></div>
+    <IntroOverlay />
+
+    <div class="headline" data-hero-headline>
+      <h1>
+        <span class="line-mask"><span data-rise class="data-rise">{heroCopy.headline[0]}</span></span>
+        <span class="line-mask"><span data-rise class="accent">{heroCopy.headline[1]}</span></span>
+      </h1>
+      <p class="lead" data-fade>{heroCopy.lead}</p>
+      <div class="ctas" data-fade>
+        <a class="pill pill-primary" href="./piloto/#postular">{heroCopy.formCta}</a>
+        <a class="pill pill-outline" href={waHref()} target="_blank" rel="noopener">{heroCopy.whatsappCta}</a>
+      </div>
+    </div>
+
+    <div class="fan-title" data-fan-title data-js-only aria-hidden="true">
+      <div>{heroCopy.fanTitle[0]}<br /><span class="accent">{heroCopy.fanTitle[1]}</span></div>
+    </div>
+
+    {
+      heroCopy.captions.map((caption) => (
+        <div class="caption" data-caption data-js-only aria-hidden="true">
+          <span class="number">{caption.number}</span>
+          <span class="title">{caption.title}</span>
+          <span class="body">{caption.body}</span>
+        </div>
+      ))
+    }
+
+    <div class="cue" data-fade>
+      <span class="cue-right"><span>{scrollCue}</span><span class="cue-line"></span></span>
+    </div>
+  </div>
+</section>
+
+<style>
+  .hero {
+    position: relative;
+    height: 300vh;
+    background: var(--page);
+  }
+  :global(html:not(.js)) .hero { height: 100vh; height: 100svh; }
+  .sticky {
+    position: sticky;
+    top: 0;
+    height: 100vh;
+    height: 100svh;
+    overflow: hidden;
+  }
+  .glow {
+    position: absolute;
+    right: -10vw;
+    top: 10vh;
+    width: 80vw;
+    height: 80vw;
+    max-width: 1100px;
+    max-height: 1100px;
+    border-radius: 50%;
+    background: radial-gradient(closest-side, var(--glow), rgba(115, 128, 236, 0));
+    pointer-events: none;
+  }
+  .stage {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+  }
+  .accent { 
+    color: var(--brand-text); 
+    padding-bottom: 1rem;
+  }
+  .data-rise {
+    padding-top: 1rem;
+  }
+
+  .headline {
+    position: absolute;
+    left: var(--gutter);
+    right: var(--gutter);
+    top: 0;
+    z-index: 4;
+    display: flex;
+    flex-direction: column;
+    padding-top: 100px;
+    gap: 20px;
+    will-change: transform, opacity;
+  }
+  h1 {
+    margin: 0;
+    font-weight: 800;
+    font-size: clamp(44px, 14vw, 64px);
+    line-height: 0.92;
+    letter-spacing: -0.05em;
+    color: var(--ink);
+  }
+  .lead {
+    margin: 0;
+    max-width: 30rem;
+    font-size: 16px;
+    line-height: 1.55;
+    color: var(--ink-muted-strong);
+    text-wrap: pretty;
+  }
+  .ctas {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    --pill-px: 24px;
+  }
+
+  .fan-title {
+    position: absolute;
+    left: var(--gutter);
+    right: var(--gutter);
+    top: 88px;
+    z-index: 4;
+    opacity: 0;
+    pointer-events: none;
+  }
+  .fan-title > div {
+    font-weight: 800;
+    font-size: clamp(30px, 9vw, 40px);
+    line-height: 0.98;
+    letter-spacing: -0.045em;
+    color: var(--ink);
+  }
+
+  .caption {
+    position: absolute;
+    left: 0;
+    top: 0;
+    z-index: 4;
+    opacity: 0;
+    width: calc(100vw - 2 * var(--gutter));
+    pointer-events: none;
+    display: flex;
+    align-items: baseline;
+    gap: 10px;
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--ink);
+    white-space: nowrap;
+  }
+  .number {
+    font-size: 13px;
+    color: var(--brand-text);
+  }
+  .body { display: none; }
+  .cue { display: none; }
+
+  @media (min-width: 768px) {
+    h1 { font-size: clamp(44px, 10.5vw, 96px); }
+    .lead {
+      font-size: 18px;
+      line-height: 1.6;
+    }
+    .fan-title > div { font-size: clamp(30px, 6.75vw, 60px); }
+  }
+
+  @media (min-width: 1200px) {
+    .sticky { height: 100vh; }
+    .headline {
+      left: 4vw;
+      right: auto;
+      bottom: 0;
+      justify-content: center;
+      padding-top: 0;
+      gap: 28px;
+      max-width: min(52rem, 60vw);
+    }
+    h1 { font-size: clamp(56px, 8.6vw, 90px); }
+    .lead {
+      font-size: clamp(16px, 1.25vw, 19px);
+      line-height: 1.6;
+      color: var(--ink-muted);
+    }
+    .ctas {
+      gap: 12px;
+      --pill-px: 28px;
+    }
+    .fan-title {
+      left: 4vw;
+      right: auto;
+      top: 15vh;
+    }
+    .fan-title > div {
+      font-size: clamp(40px, 4.8vw, 84px);
+      line-height: 0.95;
+    }
+    .caption {
+      display: block;
+      width: min(200px, 18vw);
+      white-space: normal;
+      font-size: inherit;
+      font-weight: 400;
+    }
+    .number {
+      display: block;
+      font-weight: 700;
+      margin-bottom: 6px;
+    }
+    .title {
+      display: block;
+      font-size: 19px;
+      font-weight: 700;
+      color: var(--ink);
+      letter-spacing: -0.01em;
+    }
+    .body {
+      display: block;
+      font-size: 14px;
+      line-height: 1.5;
+      color: var(--ink-muted-strong);
+      margin-top: 4px;
+    }
+    .cue {
+      position: absolute;
+      left: 4vw;
+      right: 4vw;
+      bottom: 28px;
+      z-index: 4;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 24px;
+      flex-wrap: wrap;
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--ink-micro-strong);
+    }
+    .cue-right {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .cue-line {
+      width: 48px;
+      height: 1px;
+      background: var(--ink-micro);
+    }
+  }
+</style>

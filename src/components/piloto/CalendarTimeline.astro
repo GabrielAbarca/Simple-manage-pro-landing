@@ -1,0 +1,101 @@
+---
+import { calendarCopy } from "../../data/piloto";
+---
+
+<div class="timeline">
+  <div class="track" aria-hidden="true"><div class="fill" data-timeline-fill></div></div>
+  <ol class="milestones">
+    {
+      calendarCopy.milestones.map((milestone) => (
+        <li class="milestone" data-milestone="timeline">
+          <span class="dot" aria-hidden="true" data-timeline-dot />
+          <span class="range">{milestone.range}</span>
+          <span class="title">{milestone.title}</span>
+          <span class="body">{milestone.body}</span>
+        </li>
+      ))
+    }
+  </ol>
+</div>
+
+<style>
+  .timeline {
+    position: relative;
+    padding-left: 36px;
+  }
+  .track {
+    position: absolute;
+    left: 7px;
+    top: 28px;
+    bottom: 28px;
+    width: 2px;
+    border-radius: 2px;
+    background: rgba(132, 139, 200, 0.25);
+    overflow: hidden;
+  }
+  .fill {
+    width: 100%;
+    height: 100%;
+    background: var(--brand-text);
+    transform-origin: top;
+  }
+  .milestones {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+  }
+  .milestone {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    padding: 20px;
+    border-radius: var(--radius-milestone);
+    background: #fff;
+    box-shadow: var(--shadow-card-sm);
+  }
+  .dot {
+    position: absolute;
+    left: -36px;
+    top: 24px;
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    background: var(--brand-text);
+    box-shadow: 0 0 0 4px var(--page);
+    transition: background 300ms var(--ease-ui);
+  }
+  .range {
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--brand-text);
+  }
+  .title {
+    font-size: 20px;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    color: var(--ink);
+  }
+  .body {
+    font-size: 15px;
+    line-height: 1.5;
+    color: var(--ink-muted);
+    text-wrap: pretty;
+  }
+
+  :global(html.js) .fill { transform: scaleY(0); }
+  :global(html.js) .milestone {
+    opacity: 0.25;
+    transform: translateY(16px);
+  }
+  :global(html.js) .dot { background: var(--ghost-dot); }
+
+  @media (min-width: 1200px) {
+    .timeline { display: none; }
+  }
+</style>

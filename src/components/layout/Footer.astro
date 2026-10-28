@@ -1,0 +1,101 @@
+---
+import Logo from "./Logo.astro";
+import { NAV, PRIVACY_URL, TERMS_URL } from "../../config";
+import { footerCopy } from "../../data/site";
+---
+
+<footer class="site-footer" data-screen-label="Footer">
+  <div class="inner">
+    <div class="columns">
+      <div class="brand">
+        <Logo />
+        <p>{footerCopy.blurb}</p>
+      </div>
+      <nav class="column" aria-label={footerCopy.siteHeading}>
+        <div class="micro-label head">{footerCopy.siteHeading}</div>
+        {NAV.map((item) => <a href={item.href}>{item.label}</a>)}
+      </nav>
+      <div class="column">
+        <div class="micro-label head">{footerCopy.legalHeading}</div>
+        <a href={PRIVACY_URL}>{footerCopy.privacy}</a>
+        <a href={TERMS_URL}>{footerCopy.terms}</a>
+        <span class="residency">{footerCopy.residency}</span>
+      </div>
+    </div>
+    <div class="bottom">
+      <span>{footerCopy.copyright}</span>
+      <span>{footerCopy.mepNote}</span>
+    </div>
+  </div>
+</footer>
+
+<style>
+  .site-footer {
+    position: relative;
+    z-index: 2;
+    background: var(--page);
+    padding: 0 var(--gutter) 32px;
+  }
+  .inner {
+    max-width: 1440px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+    padding-top: 40px;
+    border-top: 1px solid var(--hairline);
+  }
+  .columns {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 40px 64px;
+  }
+  .brand {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    flex: 1 1 320px;
+    min-width: 0;
+    color: var(--ink);
+  }
+  .brand p {
+    margin: 0;
+    max-width: 26rem;
+    font-size: 14px;
+    line-height: 1.6;
+    color: var(--ink-muted);
+  }
+  .column {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    font-size: 14px;
+    flex: 0 1 220px;
+  }
+  .head {
+    margin-bottom: 4px;
+    color: var(--ink-micro-strong);
+  }
+  .column a { color: var(--ink); }
+  .column a:hover { color: var(--brand-text); }
+  .residency {
+    color: var(--ink-muted);
+    line-height: 1.6;
+  }
+  .bottom {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 12px 32px;
+    font-size: 13px;
+    color: var(--ink-micro-strong);
+  }
+
+  @media (min-width: 1200px) {
+    .site-footer { padding-bottom: 40px; }
+    .inner {
+      gap: 56px;
+      padding-top: 56px;
+    }
+  }
+</style>

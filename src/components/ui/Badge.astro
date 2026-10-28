@@ -1,0 +1,54 @@
+---
+import type { HTMLAttributes } from "astro/types";
+import type { BadgeTone } from "../../scripts/ui/ds-runtime";
+
+interface Props extends HTMLAttributes<"span"> {
+  tone?: BadgeTone;
+}
+
+const { tone = "primary", class: className, ...rest } = Astro.props;
+---
+
+<span class:list={["badge", className]} data-tone={tone} {...rest}><slot /></span>
+
+<style>
+  .badge {
+    display: inline-block;
+    padding: 0.25rem 0.7rem;
+    border-radius: var(--border-radius-3);
+    font-size: var(--text-xs);
+    font-weight: 600;
+    line-height: normal;
+    letter-spacing: var(--tracking-badge);
+  }
+
+  .badge[data-tone="primary"] {
+    background: var(--color-primary-light);
+    color: var(--color-primary-text);
+  }
+
+  .badge[data-tone="success"] {
+    background: var(--color-success-light);
+    color: var(--color-success-text);
+  }
+
+  .badge[data-tone="danger"] {
+    background: var(--color-danger-light);
+    color: var(--color-danger-text);
+  }
+
+  .badge[data-tone="warning"] {
+    background: var(--color-warning-light);
+    color: var(--color-warning-text);
+  }
+
+  .badge[data-tone="info"] {
+    background: var(--color-info-bg);
+    color: var(--color-info-text);
+  }
+
+  .badge[data-tone="neutral"] {
+    background: var(--color-background);
+    color: var(--color-dark-variant);
+  }
+</style>

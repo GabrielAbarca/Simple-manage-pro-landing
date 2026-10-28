@@ -1,0 +1,77 @@
+---
+import Button from "../../ui/Button.astro";
+import Checkbox from "../../ui/Checkbox.astro";
+import { PRIVACY_URL, waHref } from "../../../config";
+import { failureCopy, formCopy } from "../../../data/postulacion";
+import FieldError from "./FieldError.astro";
+import FormField from "./FormField.astro";
+
+const consentAttributes = { "aria-describedby": "pf-consent-error", "data-control": "consent" };
+---
+
+<div class="footer">
+  <FormField name="consent">
+    <Checkbox
+      id="pf-consent"
+      label={formCopy.consent}
+      name="consent"
+      required
+      tapTarget
+      borderless
+      inputAttributes={consentAttributes}
+    />
+    <FieldError id="pf-consent-error" />
+    <a class="privacy" href={PRIVACY_URL}>{formCopy.privacyLink}</a>
+  </FormField>
+  <p class="failure" id="postulacion-error" role="alert" data-send-failure>
+    {failureCopy.before}<a href={waHref()} target="_blank" rel="noopener">{failureCopy.link}</a>{failureCopy.after}
+  </p>
+  <div class="submit-row">
+    <Button type="submit" data-submit>{formCopy.submit}</Button>
+    <span class="note">{formCopy.responseNote}</span>
+  </div>
+</div>
+
+<style>
+  .footer {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    padding-top: 28px;
+    border-top: 1px solid var(--hairline);
+  }
+  .privacy {
+    align-self: flex-start;
+    font-size: 0.82rem;
+    font-weight: 500;
+    color: var(--brand-text);
+  }
+  .privacy:hover { color: var(--brand-deep); }
+  .failure {
+    display: none;
+    margin: 0;
+    font-size: 0.82rem;
+    font-weight: 500;
+    line-height: 1.5;
+    color: var(--color-danger-text);
+    scroll-margin-top: 140px;
+  }
+  .failure:target,
+  .failure[data-shown] { display: block; }
+  .failure a {
+    color: inherit;
+    font-weight: 600;
+    text-decoration: underline;
+  }
+  .submit-row {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 12px 20px;
+  }
+  .note {
+    font-size: 14px;
+    line-height: 1.5;
+    color: var(--ink-micro);
+  }
+</style>

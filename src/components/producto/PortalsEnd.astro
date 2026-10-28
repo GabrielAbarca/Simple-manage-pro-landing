@@ -1,0 +1,113 @@
+---
+import { DEMO_URL, WA_MSG_PRODUCTO, waHref } from "../../config";
+import { portalsEndCopy } from "../../data/producto";
+---
+
+<div class="end" data-portal-panel="end">
+  <div class="text" data-panel-text>
+    <h2 data-scroll-rise>{portalsEndCopy.headline} <span class="accent">{portalsEndCopy.headlineAccent}</span></h2>
+    <p data-scroll-rise>{portalsEndCopy.body}</p>
+    <div class="ctas" data-scroll-rise>
+      <a class="header-cta" href={DEMO_URL} target="_blank" rel="noopener">{portalsEndCopy.demoCta}</a>
+      <a class="pill pill-lg pill-outline" href={waHref(WA_MSG_PRODUCTO)} target="_blank" rel="noopener">
+        {portalsEndCopy.whatsappCta}
+      </a>
+    </div>
+  </div>
+</div>
+
+<style>
+  .end {
+    position: relative;
+    box-sizing: border-box;
+    padding: 72px var(--gutter) 96px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 24px;
+  }
+  .text {
+    display: flex;
+    flex-direction: column;
+    gap: 28px;
+  }
+  h2 {
+    margin: 0;
+    font-weight: 800;
+    font-size: clamp(34px, 10vw, 48px);
+    line-height: 0.98;
+    letter-spacing: -0.05em;
+    color: var(--ink);
+    text-wrap: balance;
+  }
+  .accent { color: var(--brand-text); }
+  p {
+    margin: 0;
+    max-width: 30rem;
+    font-size: 16px;
+    line-height: 1.55;
+    color: var(--ink-muted);
+    text-wrap: pretty;
+  }
+  .ctas {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 10px;
+  }
+  .header-cta {
+      display: inline-flex;
+      align-items: center;
+      min-height: 56px;
+      padding: 0 22px;
+      border-radius: 999px;
+      background: var(--ink);
+      color: #fff;
+      font-size: 16px;
+      font-weight: 600;
+      transition:
+        opacity 100ms,
+        background 400ms,
+        color 400ms;
+    }
+    .header-cta:hover { opacity: 0.9; color: #fff; }
+  .ctas > .pill, .ctas > .header-cta {
+    justify-content: center;
+    --pill-px: 28px;
+  }
+
+  @media (min-width: 768px) {
+    h2 { font-size: clamp(34px, 7.5vw, 72px); }
+    p {
+      font-size: 18px;
+      line-height: 1.6;
+    }
+    .ctas {
+      flex-direction: row;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 12px;
+    }
+  }
+
+  @media (min-width: 1200px) {
+    .end {
+      min-height: 92vh;
+      padding: 120px 8vw 160px 4vw;
+      gap: 32px;
+    }
+    h2 {
+      font-size: clamp(40px, 5vw, 92px);
+      line-height: 0.96;
+    }
+    p {
+      font-size: clamp(16px, 1.25vw, 19px);
+      line-height: 1.6;
+    }
+    .ctas { align-items: normal; }
+    .ctas > .pill {
+      justify-content: normal;
+      --pill-px: 32px;
+    }
+  }
+</style>

@@ -1,0 +1,138 @@
+---
+import type { HTMLAttributes } from "astro/types";
+
+type CellValue = string | number;
+
+export interface DataTableRow {
+  id?: string | number;
+  [columnKey: string]: CellValue | undefined;
+}
+
+export interface DataTableColumn {
+  key: string;
+  header: string;
+  align?: "left" | "center" | "right";
+  nowrap?: boolean;
+  render?: (row: DataTableRow) => CellValue;
+}
+
+interface Props extends HTMLAttributes<"div"> {
+  columns: DataTableColumn[];
+  rows: DataTableRow[];
+  emptyMessage?: string;
+  tableLabel?: string;
+}
+
+const {
+  columns,
+  rows,
+  emptyMessage = "No se encontraron registros.",
+  tableLabel,
+  class: className,
+  ...rest
+} = Astro.props;
+
+function readCellText(column: DataTableColumn, row: DataTableRow): CellValue {
+  if (column.render) return column.render(row);
+  return row[column.key] ?? "";
+}
+
+function rowKey(row: DataTableRow, rowIndex: number): string | number {
+  return row.id ?? rowIndex;
+}
+---
+
+<div class:list={["data-table", className]} {...rest}>
+  <table aria-label={tableLabel}>
+    <thead>
+      <tr>
+        {columns.map((column) => <th scope="col" data-align={column.align ?? "left"}>{column.header}</th>)}
+      </tr>
+    </thead>
+    <tbody>
+      {
+        rows.length === 0 ? (
+          <tr>
+            <td class="empty" colspan={columns.length}>
+              {emptyMessage}
+            </td>
+          </tr>
+        ) : (
+          rows.map((row, rowIndex) => (
+            <tr data-row-key={rowKey(row, rowIndex)}>
+              {columns.map((column) => (
+                <td data-align={column.align ?? "left"} data-nowrap={column.nowrap ? "true" : undefined}>
+                  {readCellText(column, row)}
+                </td>
+              ))}
+            </tr>
+          ))
+        )
+      }
+    </tbody>
+  </table>
+</div>
+
+<style>
+  .data-table {
+    overflow-x: auto;
+    line-height: normal;
+  }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+
+  th {
+    padding: 0.8rem 0.9rem;
+    font-size: 0.78rem;
+    font-weight: 600;
+    color: var(--color-dark-variant);
+    border-bottom: 1px solid var(--color-light);
+    white-space: nowrap;
+  }
+
+  tbody tr {
+    background: transparent;
+    cursor: default;
+    transition: background var(--transition-speed) ease;
+  }
+
+  tbody tr:hover {
+    background: var(--color-background);
+  }
+
+  td {
+    padding: 0.9rem;
+    font-size: 0.85rem;
+    border-bottom: 1px solid var(--color-light);
+    vertical-align: middle;
+    color: var(--color-dark-variant);
+    white-space: normal;
+  }
+
+  td[data-nowrap="true"] {
+    white-space: nowrap;
+  }
+
+  [data-align="left"] {
+    text-align: left;
+  }
+
+  [data-align="center"] {
+    text-align: center;
+  }
+
+  [data-align="right"] {
+    text-align: right;
+  }
+
+  td.empty {
+    text-align: center;
+    color: var(--color-dark-variant);
+    padding: 1.4rem 0.9rem;
+    font-size: 0.85rem;
+    border-bottom: none;
+  }
+</style>

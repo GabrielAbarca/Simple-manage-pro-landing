@@ -1,0 +1,36 @@
+---
+import type { HTMLAttributes } from "astro/types";
+import { ICON_PATHS, type IconName } from "./icons";
+
+interface Props extends Omit<HTMLAttributes<"svg">, "width" | "height" | "viewBox"> {
+  name: IconName;
+  size?: string | number;
+  color?: string;
+}
+
+const { name, size = "1.2rem", color, class: className, style: callerStyle, ...rest } = Astro.props;
+
+const colorDeclaration = color ? `color:${color}` : "";
+const callerStyleDeclaration = typeof callerStyle === "string" ? callerStyle : "";
+const inlineStyle = [colorDeclaration, callerStyleDeclaration].filter(Boolean).join(";") || undefined;
+---
+
+<svg
+  class:list={["icon", className]}
+  width={size}
+  height={size}
+  viewBox="0 -960 960 960"
+  aria-hidden="true"
+  focusable="false"
+  style={inlineStyle}
+  {...rest}
+  set:html={ICON_PATHS[name]}
+/>
+
+<style>
+  .icon {
+    display: inline-block;
+    flex-shrink: 0;
+    vertical-align: middle;
+  }
+</style>

@@ -1,0 +1,161 @@
+---
+import type { HTMLAttributes } from "astro/types";
+import Icon from "./Icon.astro";
+import type { IconName } from "./icons";
+
+type InputAttributes = HTMLAttributes<"input">;
+
+interface Props extends HTMLAttributes<"div"> {
+  id: string;
+  label?: string;
+  icon?: IconName;
+  error?: string;
+  hint?: string;
+  name?: string;
+  type?: InputAttributes["type"];
+  value?: string;
+  autocomplete?: InputAttributes["autocomplete"];
+  inputmode?: InputAttributes["inputmode"];
+  maxlength?: number;
+  required?: boolean;
+  placeholder?: string;
+  inputAttributes?: InputAttributes;
+}
+
+const {
+  id,
+  label,
+  icon,
+  error = "",
+  hint,
+  name,
+  type = "text",
+  value,
+  autocomplete,
+  inputmode,
+  maxlength,
+  required,
+  placeholder,
+  inputAttributes = {},
+  class: className,
+  ...rest
+} = Astro.props;
+
+const errorId = `${id}-error`;
+const hintId = `${id}-hint`;
+const describedBy = hint ? `${errorId} ${hintId}` : errorId;
+---
+
+<div class:list={["field", className]} {...rest}>
+  {label && <label class="field-label" for={id}>{label}</label>}
+  <div class="control">
+    {
+      icon && (
+        <span class="leading-icon" aria-hidden="true">
+          <Icon name={icon} size="1.1rem" />
+        </span>
+      )
+    }
+    <input
+      class:list={["input", { "has-icon": Boolean(icon) }]}
+      id={id}
+      name={name}
+      type={type}
+      value={value}
+      autocomplete={autocomplete}
+      inputmode={inputmode}
+      maxlength={maxlength}
+      required={required}
+      placeholder={placeholder}
+      aria-invalid={error ? "true" : undefined}
+      aria-describedby={describedBy}
+      {...inputAttributes}
+    />
+  </div>
+  <span class="error-text" id={errorId} data-input-error>{error}</span>
+  {hint && <span class="hint-text" id={hintId}>{hint}</span>}
+</div>
+
+<style>
+  .field {
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+    line-height: normal;
+  }
+
+  .field-label {
+    font-size: 0.78rem;
+    font-weight: 600;
+    color: var(--color-dark-variant);
+    text-transform: uppercase;
+    letter-spacing: var(--tracking-label);
+  }
+
+  .control {
+    position: relative;
+    display: flex;
+    align-items: center;
+  }
+
+  .leading-icon {
+    position: absolute;
+    left: 0.85rem;
+    display: flex;
+    color: var(--color-info-dark);
+    pointer-events: none;
+  }
+
+  .control:focus-within .leading-icon {
+    color: var(--color-primary-text);
+  }
+
+  .input {
+    width: 100%;
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0.75rem 1rem;
+    border: 1.5px solid var(--border-control);
+    border-radius: var(--border-radius-2);
+    background: var(--color-background);
+    color: var(--color-dark);
+    font-family: var(--font-sans);
+    font-size: 0.87rem;
+    line-height: normal;
+    letter-spacing: normal;
+    box-shadow: none;
+    outline: none;
+    appearance: none;
+  }
+
+  .input.has-icon {
+    padding: 0.75rem 1rem 0.75rem 2.7rem;
+  }
+
+  .input:focus {
+    border-color: var(--color-primary);
+    background: var(--color-white);
+    box-shadow: var(--focus-ring);
+  }
+
+  .input[aria-invalid="true"] {
+    border-color: var(--color-danger);
+    box-shadow: 0 0 0 3px var(--color-danger-light);
+  }
+
+  .error-text {
+    font-size: 0.72rem;
+    color: var(--color-danger-text);
+    font-weight: 500;
+  }
+
+  .hint-text {
+    font-size: 0.75rem;
+    color: var(--color-info-dark);
+  }
+
+  .error-text:empty,
+  .field:has(.error-text:not(:empty)) .hint-text {
+    display: none;
+  }
+</style>

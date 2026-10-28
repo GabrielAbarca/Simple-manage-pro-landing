@@ -1,0 +1,98 @@
+---
+import { contactoHeroCopy } from "../../data/contacto";
+
+const [lineOne, lineTwo] = contactoHeroCopy.headline;
+---
+
+<section class="hero" data-screen-label="01 Contacto" data-rv>
+  <div class="glow" aria-hidden="true"></div>
+  <div class="grid">
+    <div class="heading">
+      <h1>
+        <span class="line-mask"><span data-rise class="data-rise">{lineOne}</span></span>
+        <span class="line-mask"><span data-rise class="accent">{lineTwo}</span></span>
+      </h1>
+    </div>
+    <p class="lead" data-fade>{contactoHeroCopy.lead}</p>
+  </div>
+</section>
+
+<style>
+  .hero {
+    position: relative;
+    background: var(--page);
+    padding: 112px var(--gutter) 40px;
+    overflow: hidden;
+  }
+  .glow {
+    position: absolute;
+    right: -16vw;
+    top: -30vw;
+    width: 72vw;
+    height: 72vw;
+    max-width: 1100px;
+    max-height: 1100px;
+    border-radius: 50%;
+    background: radial-gradient(closest-side, rgba(115, 128, 236, 0.14), rgba(115, 128, 236, 0));
+    pointer-events: none;
+  }
+  .grid {
+    position: relative;
+    max-width: 1440px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    gap: 20px;
+    align-items: end;
+  }
+  .heading {
+    display: flex;
+    flex-direction: column;
+    gap: 28px;
+  }
+  h1 {
+    margin: 0;
+    font-weight: 800;
+    font-size: clamp(40px, 12.5vw, 58px);
+    line-height: 0.94;
+    letter-spacing: -0.055em;
+    color: var(--ink);
+  }
+  h1 .line-mask { padding-bottom: 0.05em; }
+  .accent { 
+    color: var(--brand-text); 
+    padding: .5rem 0 1rem 0;
+  }
+  .lead {
+    margin: 0;
+    max-width: 30rem;
+    font-size: 16px;
+    line-height: 1.55;
+    color: var(--ink-lead);
+    text-wrap: pretty;
+  }
+
+  @media (min-width: 768px) {
+    h1 { font-size: clamp(40px, 9.38vw, 87px); }
+    .lead {
+      font-size: 18px;
+      line-height: 1.6;
+    }
+  }
+
+  @media (min-width: 1200px) {
+    .hero { padding: clamp(140px, 20vh, 200px) var(--gutter) clamp(56px, 9vh, 96px); }
+    .grid {
+      grid-template-columns: repeat(auto-fit, minmax(min(100%, 420px), 1fr));
+      gap: 32px 6vw;
+    }
+    h1 {
+      font-size: clamp(52px, 7.4vw, 132px);
+      line-height: 0.92;
+    }
+    .lead {
+      font-size: clamp(17px, 1.4vw, 21px);
+      line-height: 1.55;
+    }
+  }
+</style>

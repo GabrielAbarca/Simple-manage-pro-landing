@@ -1,0 +1,117 @@
+---
+import Eyebrow from "./Eyebrow.astro";
+import { DEMO_URL, waHref } from "../../config";
+import { openingCopy } from "../../data/producto";
+
+const lastChapter = openingCopy.chapters.length - 1;
+---
+
+{
+  openingCopy.chapters.map((chapter, i) => (
+    <div class="chapter" data-chapter>
+      <Eyebrow>{chapter.eyebrow}</Eyebrow>
+      <p class="statement">{chapter.statement}</p>
+      {i === lastChapter && (
+        <div class="ctas">
+          <a class="header-cta" href={DEMO_URL} target="_blank" rel="noopener">{openingCopy.demoCta}</a>
+          <a class="pill pill-outline" href={waHref()} target="_blank" rel="noopener">{openingCopy.whatsappCta}</a>
+        </div>
+      )}
+    </div>
+  ))
+}
+
+<style>
+  .chapter {
+    position: absolute;
+    left: var(--gutter);
+    right: var(--gutter);
+    bottom: calc(40px + env(safe-area-inset-bottom));
+    z-index: 5;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+  :global(html.js) .chapter {
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+  }
+  .statement {
+    margin: 0;
+    font-size: clamp(24px, 7vw, 30px);
+    font-weight: 700;
+    line-height: 1.12;
+    letter-spacing: -0.03em;
+    color: var(--ink);
+    text-wrap: balance;
+  }
+  .ctas {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 10px;
+    padding-top: 6px;
+  }
+  .header-cta {
+      display: inline-flex;
+      align-items: center;
+      min-height: 56px;
+      padding: 0 22px;
+      border-radius: 999px;
+      background: var(--ink);
+      color: #fff;
+      font-size: 16px;
+      font-weight: 600;
+      transition:
+        opacity 100ms,
+        background 400ms,
+        color 400ms;
+    }
+    .header-cta:hover { opacity: 0.9; color: #fff; }
+  .ctas > .pill, .ctas > .header-cta {
+    justify-content: center;
+    --pill-px: 24px;
+  }
+
+  @media (min-width: 768px) {
+    .statement { font-size: clamp(24px, 5.25vw, 45px); }
+    .ctas {
+      flex-direction: row;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 12px;
+    }
+  }
+
+  @media (min-width: 1200px) {
+    .chapter {
+      left: 4vw;
+      right: auto;
+      bottom: 12vh;
+      width: min(30rem, 84vw);
+      gap: 16px;
+    }
+    .statement {
+      font-size: clamp(28px, 2.8vw, 46px);
+      line-height: 1.1;
+    }
+    .ctas {
+      align-items: normal;
+      padding-top: 8px;
+    }
+    .ctas > .pill {
+      justify-content: normal;
+      --pill-px: 28px;
+    }
+  }
+
+  :global(html:not(.js)) .chapter {
+    position: relative;
+    left: auto;
+    right: auto;
+    bottom: auto;
+    width: auto;
+    margin: 56px var(--gutter) 0;
+  }
+</style>

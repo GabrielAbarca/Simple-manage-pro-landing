@@ -1,0 +1,164 @@
+---
+import Button from "../ui/Button.astro";
+import Card from "../ui/Card.astro";
+import GradeBar from "../ui/GradeBar.astro";
+import ProgressRing from "../ui/ProgressRing.astro";
+import StatusBadge from "../ui/StatusBadge.astro";
+import { studentConsoleCopy as copy } from "../../data/producto";
+
+const initial = copy.periods.I;
+---
+
+<Card>
+  <div class="student" data-student-console>
+    <div class="head">
+      <div class="who">
+        <span class="avatar" aria-hidden="true">{copy.initials}</span>
+        <div class="who-text">
+          <span class="name">{copy.name}</span>
+          <span class="meta">{copy.meta}</span>
+        </div>
+      </div>
+      <div class="periods">
+        <Button size="sm" variant="primary" data-period="I" aria-pressed="true">{copy.periodButtons.I}</Button>
+        <Button size="sm" variant="ghost" data-period="II" aria-pressed="false">{copy.periodButtons.II}</Button>
+      </div>
+    </div>
+    <div class="summary">
+      <ProgressRing value={initial.attendance} size={92} data-student-ring />
+      <div class="figures">
+        <span class="average-label">{copy.averageLabel}</span>
+        <span class="average" data-student-average>{initial.average}</span>
+        <span class="attendance" data-student-attendance>{initial.attendanceLine}</span>
+      </div>
+    </div>
+    <div class="grades" data-student-grades>
+      {
+        copy.subjects.map((subject, i) => (
+          <div class="grade-row">
+            <span class="subject">{subject}</span>
+            <GradeBar value={initial.grades[i]} width="var(--grade-bar-w)" data-student-bar />
+            <span class="grade" data-student-grade>{initial.grades[i]}</span>
+            <StatusBadge status="pass" label={copy.passLabel} class="student-pass" />
+          </div>
+        ))
+      }
+    </div>
+  </div>
+</Card>
+
+<style>
+  .student {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+  }
+  .head {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 16px;
+    flex-wrap: wrap;
+  }
+  .who {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .avatar {
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #7380ec, #a78bfa);
+    color: #fff;
+    font-size: 14px;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .who-text {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+  .name {
+    font-size: 1.05rem;
+    font-weight: 700;
+    color: var(--ink);
+  }
+  .meta,
+  .attendance {
+    font-size: 0.82rem;
+    color: var(--ink-muted);
+  }
+  .periods {
+    display: flex;
+    gap: 6px;
+  }
+  .summary {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    padding: 4px 0 8px;
+  }
+  .figures {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+  .average-label {
+    font-size: 0.78rem;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: var(--ink-micro);
+  }
+  .average {
+    font-size: 2.2rem;
+    font-weight: 800;
+    letter-spacing: -0.03em;
+    color: var(--ink);
+    font-variant-numeric: tabular-nums;
+  }
+  .grades {
+    display: flex;
+    flex-direction: column;
+    --grade-bar-w: clamp(80px, 30vw, 180px);
+  }
+  .grade-row {
+    display: grid;
+    grid-template-columns: minmax(0, 7.5rem) minmax(0, 1fr) 2.2rem;
+    align-items: center;
+    gap: 12px;
+    padding: 10px 0;
+    border-top: 1px solid var(--hairline-card);
+  }
+  .subject {
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: var(--ink);
+  }
+  .grade {
+    font-size: 0.95rem;
+    font-weight: 700;
+    color: var(--ink);
+    text-align: right;
+    font-variant-numeric: tabular-nums;
+  }
+  .grade-row :global(.student-pass) { display: none; }
+
+  @media (min-width: 768px) {
+    .grades { --grade-bar-w: clamp(160px, 42vw, 420px); }
+  }
+
+  @media (min-width: 1200px) {
+    .summary { gap: 28px; }
+    .grades { --grade-bar-w: clamp(60px, 10vw, 220px); }
+    .grade-row {
+      grid-template-columns: minmax(0, 9rem) minmax(0, 1fr) 2.4rem auto;
+      gap: 16px;
+    }
+    .grade-row :global(.student-pass) { display: inline-block; }
+  }
+</style>

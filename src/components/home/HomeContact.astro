@@ -1,0 +1,118 @@
+---
+import { DEMO_URL, mailtoHref, waHref } from "../../config";
+import { homeContactCopy } from "../../data/home";
+
+const [lineOne, lineTwo, lineThree] = homeContactCopy.headline;
+---
+
+<section class="contact" id="contacto" data-screen-label="Contacto">
+  <div class="card">
+    <div class="text" data-rv>
+      <h2>
+        <span class="line-mask"><span data-rise class="data-rise">{lineOne}</span></span>
+        <span class="line-mask"><span data-rise>{lineTwo}</span></span>
+        <span class="line-mask"><span data-rise class="accent">{lineThree}</span></span>
+      </h2>
+      <div class="ctas" data-fade>
+        <a class="pill pill-lg pill-primary" href="./piloto/#postular" target="_blank" rel="noopener" data-contact-whatsapp>
+          {homeContactCopy.formCta}
+        </a>
+        <a class="pill pill-lg pill-outline" href={waHref()} target="_blank">{homeContactCopy.whatsappCta}</a>
+        <a class="text-rule rule-after" href={DEMO_URL} target="_blank" rel="noopener">{homeContactCopy.demoCta}</a>
+      </div>
+    </div>
+    <div class="stage" data-stage data-contact-stage aria-hidden="true"></div>
+  </div>
+</section>
+
+<style>
+  .contact {
+    position: relative;
+    z-index: 2;
+    background: var(--page);
+    padding: 24px var(--gutter-card) 56px;
+  }
+  .card {
+    max-width: 1560px;
+    margin: 0 auto;
+    background: #fff;
+    border-radius: var(--radius-section);
+    box-shadow: var(--shadow-card);
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    gap: 8px;
+    padding: 8px;
+    box-sizing: border-box;
+  }
+  .text {
+    padding: 32px 16px 24px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 28px;
+  }
+  h2 {
+    margin: 0;
+    font-weight: 800;
+    font-size: clamp(38px, 11vw, 52px);
+    line-height: 0.95;
+    letter-spacing: -0.05em;
+    color: var(--ink);
+  }
+  .accent {
+    color: var(--brand-text);
+    padding-top: 1rem;
+  }
+  .data-rise {
+    padding-bottom: 1rem;
+  }
+  .ctas {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 10px;
+  }
+  .ctas > a { justify-content: center; }
+  .stage {
+    position: relative;
+    min-height: 360px;
+    border-radius: var(--radius-panel);
+    background: var(--page);
+    overflow: hidden;
+    touch-action: pan-y;
+  }
+
+  @media (min-width: 768px) {
+    .text {
+      padding: 45px 36px 34px;
+    }
+    h2 { font-size: clamp(38px, 8.25vw, 78px); }
+    .ctas {
+      flex-direction: row;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 12px;
+    }
+  }
+
+  @media (min-width: 1200px) {
+    .contact { padding: clamp(32px, 6vh, 72px) 2vw clamp(64px, 10vh, 120px); }
+    .card {
+      grid-template-columns: repeat(auto-fit, minmax(min(100%, 440px), 1fr));
+      gap: 16px;
+      padding: 16px;
+    }
+    .text {
+      padding: clamp(28px, 5vw, 80px);
+      gap: 36px;
+    }
+    h2 { font-size: clamp(44px, 5.2vw, 96px); }
+    .ctas {
+      gap: 12px 20px;
+    }
+    .ctas > a { justify-content: flex-start; }
+    .stage {
+      min-height: clamp(420px, 64vh, 680px);
+    }
+  }
+</style>

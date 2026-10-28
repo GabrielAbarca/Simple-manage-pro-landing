@@ -1,0 +1,119 @@
+---
+import Icon from "../ui/Icon.astro";
+import { offerPanels } from "../../data/piloto";
+import Eyebrow from "./Eyebrow.astro";
+---
+
+<section class="offer" data-screen-label="03 Recibe y pedimos" data-rv>
+  <div class="card">
+    {
+      offerPanels.map((panel, panelIndex) => (
+        <div class:list={["panel", { inset: panelIndex === 1 }]}>
+          <div class="heading">
+            <Eyebrow label={panel.eyebrow} rises />
+            <h2>
+              <span class="line-mask"><span data-rise>{panel.headline[0]}</span></span>
+              <span class="line-mask"><span data-rise class="accent">{panel.headline[1]}</span></span>
+            </h2>
+          </div>
+          <div class="items" data-fade>
+            {panel.items.map((item) => (
+              <div class="item">
+                <Icon name={item.icon} color="#4455e6" />
+                {item.label}
+              </div>
+            ))}
+          </div>
+        </div>
+      ))
+    }
+  </div>
+</section>
+
+<style>
+  .offer {
+    position: relative;
+    background: var(--page);
+    padding: 0 var(--gutter-card) 72px;
+  }
+  .card {
+    max-width: 1560px;
+    margin: 0 auto;
+    background: #fff;
+    border-radius: var(--radius-section);
+    box-shadow: var(--shadow-card);
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    gap: 8px;
+    padding: 8px;
+    box-sizing: border-box;
+  }
+  .panel {
+    padding: 28px 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 28px;
+  }
+  .inset {
+    border-radius: var(--radius-panel);
+    background: var(--page);
+  }
+  .heading {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+  h2 {
+    margin: 0;
+    font-weight: 800;
+    font-size: clamp(30px, 9vw, 40px);
+    line-height: 0.98;
+    letter-spacing: -0.045em;
+    color: var(--ink);
+  }
+  .accent { color: var(--brand-text); }
+  .items {
+    display: flex;
+    flex-direction: column;
+  }
+  .item {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 16px 0;
+    border-top: 1px solid var(--hairline);
+    font-size: 16px;
+    font-weight: 500;
+    color: var(--ink);
+  }
+  .item:last-child {
+    gap: 16px;
+    padding: 18px 0;
+    border-bottom: 1px solid var(--hairline);
+    font-size: 17px;
+  }
+
+  @media (min-width: 768px) {
+    .panel { padding: 39px 36px; }
+    h2 { font-size: clamp(30px, 6.75vw, 60px); }
+  }
+
+  @media (min-width: 1200px) {
+    .offer { padding: 0 2vw clamp(96px, 16vh, 180px); }
+    .card {
+      grid-template-columns: repeat(auto-fit, minmax(min(100%, 440px), 1fr));
+      gap: 16px;
+      padding: 16px;
+    }
+    .panel {
+      padding: clamp(28px, 4.5vw, 72px);
+      gap: 40px;
+    }
+    h2 { font-size: clamp(36px, 3.8vw, 68px); }
+    .item {
+      gap: 16px;
+      padding: 18px 0;
+      font-size: 17px;
+    }
+  }
+</style>

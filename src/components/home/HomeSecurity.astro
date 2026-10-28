@@ -1,0 +1,97 @@
+---
+import { PRIVACY_URL } from "../../config";
+import { securityCopy } from "../../data/home";
+---
+
+<section class="security" data-screen-label="Piloto">
+  <div class="top" data-rv>
+    <div class="heading">
+      <h2>
+        <span class="line-mask"><span data-rise class="data-rise">{securityCopy.headline[0]}</span></span>
+        <span class="line-mask"><span data-rise class="accent">{securityCopy.headline[1]}</span></span>
+      </h2>
+    </div>
+    <div class="aside">
+      <p data-fade>{securityCopy.body}</p>
+      <a class="pill pill-dark" data-fade href={PRIVACY_URL} target="_blank">{securityCopy.privacyCta}</a>
+    </div>
+  </div>
+  <div class="stage" data-stage data-security-stage aria-hidden="true"></div>
+</section>
+
+<style>
+  .security {
+    position: relative;
+    z-index: 2;
+    background: var(--page);
+    padding: 96px var(--gutter) 24px;
+  }
+  .top {
+    max-width: 1440px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    gap: 32px 64px;
+    flex-wrap: wrap;
+  }
+  .heading {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+  }
+  h2 {
+    margin: 0;
+    font-weight: 800;
+    font-size: clamp(44px, 13vw, 60px);
+    line-height: 0.92;
+    letter-spacing: -0.05em;
+    color: var(--ink);
+  }
+  .accent { 
+    color: var(--brand-text); 
+    padding-top: .5rem;
+  }
+  .data-rise {
+    padding: 1.5rem 0;
+  }
+  .aside {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 20px;
+    max-width: 20rem;
+    padding-bottom: 12px;
+  }
+  p {
+    margin: 0;
+    font-size: clamp(16px, 1.2vw, 18px);
+    line-height: 1.6;
+    color: var(--ink-muted);
+    text-wrap: pretty;
+  }
+  .pill {
+    --pill-gap: 12px;
+    --pill-px: 24px;
+  }
+  .stage {
+    position: relative;
+    max-width: 1440px;
+    margin: clamp(16px, 3vh, 40px) auto 0;
+    height: clamp(340px, 50vh, 440px);
+    touch-action: pan-y;
+  }
+
+  @media (min-width: 768px) {
+    h2 { font-size: clamp(44px, 9.75vw, 90px); }
+    p { font-size: clamp(16px, 0.9vw, 27px); }
+  }
+
+  @media (min-width: 1200px) {
+    .security { padding: clamp(96px, 16vh, 180px) 4vw clamp(32px, 6vh, 72px); }
+    h2 { font-size: clamp(56px, 8.4vw, 152px); }
+    p { font-size: clamp(16px, 1.2vw, 18px); }
+    .pill { --pill-px: 28px; }
+    .stage { height: clamp(380px, 60vh, 640px); }
+  }
+</style>

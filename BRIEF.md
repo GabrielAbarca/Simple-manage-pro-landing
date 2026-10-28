@@ -8,7 +8,7 @@ the product as it actually exists.
 Written to be portable — paste into design prompts, copy prompts, or
 brainstorming sessions as the shared starting context.
 
-Last updated: August 2026
+Last updated: October 2026
 
 ---
 
@@ -235,6 +235,52 @@ asked, not foregrounded).
 >   it. Gabriel's call, on the one route §7's amendment already assigns to the
 >   founder. It stays off every other route, and the biography stays off this
 >   one: he is named, the work is dated, nothing else.
+
+> **Third amendment, October 2026: the V.2 redesign.** Gabriel approved a
+> Claude Design redesign (`design_handoff_smp_landing/`, since removed from
+> the repo and kept in PR #12's history at `f2584a0`) as an exact build
+> target, and ruled that where it disagrees with this brief, **the design
+> wins and the deviation is recorded here**. Recorded rather than rewritten,
+> so the reasoning above stays readable.
+>
+> | Route | Carries |
+> | --- | --- |
+> | `/` | Claim + 3D portals, data security, contact block |
+> | `/producto` (was `/portales`; `/portales` redirects) | Problem → one expediente, then the three portals as live UI |
+> | `/piloto` | Eligibility, what the colegio gets and gives, calendar, application form |
+> | `/nosotros` | Misión/visión, dated history, founder |
+> | `/contacto` | WhatsApp, email, pilot form |
+>
+> Deviations from the sections above, each Gabriel's call:
+>
+> - **Screenshots are gone** (§7.3, §9). The portals are shown as canvas-drawn
+>   3D objects and as live, clickable UI built from the design system.
+>   `og.png` stays as a static asset.
+> - **WebGL is in** (three.js, lazy-loaded per scene, off with JS and inert
+>   under reduced motion). §9's "zero JS by default" now means "no JS needed
+>   to read anything".
+> - **A form is in** (§8 said no forms). `/piloto` carries an application form
+>   sent with Resend through one on-demand route (`/api/postular`), the only
+>   server code on the site. WhatsApp stays the primary CTA everywhere else.
+> - **The FAQ is gone from `/piloto`.** The answers it carried go back to the
+>   conversation, as the second amendment already did for two of them. *Data
+>   hosted abroad* stays on the page: the footer of every route says
+>   "Expedientes alojados en Estados Unidos".
+>   **Reversed, 28 Oct 2026 (Gabriel's call):** the eight V1 cards return
+>   after the application form, under the eyebrow only; the 8th answer is
+>   reworded to usted without the colegio count.
+> - **The pilot calendar is back**, as month ranges (Feb, Feb–Jun, Jul–Nov,
+>   Dec), not per-colegio dates, which answers the first amendment's objection.
+> - **The offer framing changed** (§5): no "three colegios", no cost-recovery
+>   line, no written list of commitments. The page says what the colegio gets
+>   and what it is asked for; price and numbers are for the conversation.
+> - **"privado" appears** in the eligibility line ("públicos o privados") and
+>   as a form option. The rule against the word is withdrawn.
+> - **The founder gets a two-sentence bio on `/nosotros`**, still only there.
+> - **Dark mode is dropped** (§9). Light only.
+> - **Page titles stay keyword-led** (28 Oct 2026). The design's short page
+>   names ("Producto", "Nosotros") cost search ranking, so `<title>` goes back
+>   to V1's wording, and every meta description stays under 160 characters.
 
 One page. Order follows the director's skepticism.
 

@@ -1,0 +1,52 @@
+---
+import { COMENTARIOS_MAX_LENGTH, formCopy } from "../../../data/postulacion";
+import FieldLabel from "./FieldLabel.astro";
+import FormField from "./FormField.astro";
+import FormFieldset from "./FormFieldset.astro";
+
+const { fieldsets, labels } = formCopy;
+---
+
+<FormFieldset number={fieldsets.comments.number} title={fieldsets.comments.title} ruled grid={false}>
+  <FormField>
+    <FieldLabel text={labels.comentarios} for="pf-com" optional />
+    <textarea
+      class="message"
+      id="pf-com"
+      name="comentarios"
+      rows="4"
+      maxlength={COMENTARIOS_MAX_LENGTH}
+      aria-describedby="pf-com-count"
+      data-control="comentarios"></textarea>
+    <span class="counter" id="pf-com-count" data-comment-counter>0{formCopy.counterSuffix}</span>
+  </FormField>
+</FormFieldset>
+
+<style>
+  .message {
+    width: 100%;
+    box-sizing: border-box;
+    min-height: 120px;
+    resize: vertical;
+    padding: 0.75rem 1rem;
+    border: 1.5px solid var(--border-control);
+    border-radius: var(--border-radius-2);
+    background: var(--color-background);
+    color: var(--color-dark);
+    font-family: var(--font-sans);
+    font-size: 0.87rem;
+    line-height: 1.6;
+    outline: none;
+  }
+  .message:focus {
+    border-color: var(--color-primary);
+    box-shadow: var(--focus-ring);
+    background: var(--color-white);
+  }
+  .counter {
+    align-self: flex-end;
+    font-size: 0.75rem;
+    color: var(--color-info-dark);
+    font-variant-numeric: tabular-nums;
+  }
+</style>

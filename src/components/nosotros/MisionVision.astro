@@ -1,0 +1,241 @@
+---
+import Button from "../ui/Button.astro";
+import { missionVisionCopy } from "../../data/nosotros";
+
+const { panels } = missionVisionCopy;
+const lastPanelNumber = panels[panels.length - 1]?.number ?? "";
+---
+
+<section class="mv" data-screen-label="02 Misión y visión" data-rv>
+  <div class="card" data-mv data-mv-index="0">
+    <div class="controls" data-js-only>
+      <div class="tabs">
+        <div class="tablist" role="tablist" aria-label={missionVisionCopy.tablistLabel}>
+          {
+            panels.map((panel, index) => (
+              <button
+                type="button"
+                role="tab"
+                class="tab"
+                id={`mv-t${index}`}
+                aria-selected={index === 0 ? "true" : "false"}
+                aria-controls={`mv-p${index}`}
+                data-mv-tab={index}
+              >
+                {panel.label}
+              </button>
+            ))
+          }
+        </div>
+        <div class="tab-rail" aria-hidden="true"></div>
+        <div class="tab-indicator" aria-hidden="true"></div>
+      </div>
+      <div class="pager">
+        <span class="count" aria-live="polite"
+          ><span data-mv-count>{panels[0]?.number}</span> <span class="count-total">/ {lastPanelNumber}</span></span
+        >
+        <div class="pager-buttons">
+          <Button
+            variant="ghost"
+            icon="chevron_left"
+            aria-label={missionVisionCopy.previous}
+            disabled
+            data-mv-step="-1">{missionVisionCopy.previous}</Button
+          >
+          <Button
+            variant="primary"
+            icon="chevron_right"
+            aria-label={missionVisionCopy.next}
+            data-mv-step="1">{missionVisionCopy.next}</Button
+          >
+        </div>
+      </div>
+    </div>
+    <div class="viewport" data-fade>
+      <div class="track">
+        {
+          panels.map((panel, index) => (
+            <div
+              role="tabpanel"
+              class="panel"
+              id={`mv-p${index}`}
+              aria-labelledby={`mv-t${index}`}
+              data-mv-panel={index}
+              data-mv-number={panel.number}
+            >
+              <div class="numeral-row">
+                <span class="numeral" aria-hidden="true">{panel.number}</span>
+              </div>
+              <p>{panel.body}</p>
+            </div>
+          ))
+        }
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .mv {
+    position: relative;
+    background: var(--page);
+    padding: 24px var(--gutter-card) 72px;
+  }
+  .card {
+    --mv-tab-gap: clamp(24px, 3vw, 48px);
+    max-width: 1560px;
+    margin: 0 auto;
+    background: #fff;
+    border-radius: var(--radius-section);
+    box-shadow: var(--shadow-card);
+    box-sizing: border-box;
+    padding: 28px var(--gutter);
+    display: flex;
+    flex-direction: column;
+    gap: clamp(32px, 5vh, 56px);
+  }
+  .controls {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    gap: 24px;
+    flex-wrap: wrap;
+  }
+  .tabs {
+    position: relative;
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: var(--mv-tab-gap);
+  }
+  .tablist { display: contents; }
+  .tab {
+    min-height: 56px;
+    padding: 0 0 14px;
+    border: none;
+    background: transparent;
+    cursor: pointer;
+    text-align: left;
+    font-family: inherit;
+    font-size: 22px;
+    font-weight: 700;
+    letter-spacing: -0.03em;
+    color: var(--ink-micro);
+    transition: color 300ms var(--ease-ui);
+  }
+  .tab[aria-selected="true"],
+  .tab:hover { color: var(--ink); }
+  .tab:focus-visible {
+    outline: 2px solid var(--brand-text);
+    outline-offset: 3px;
+    border-radius: 6px;
+  }
+  .tab-rail,
+  .tab-indicator {
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    height: 3px;
+    border-radius: 3px;
+  }
+  .tab-rail {
+    right: 0;
+    background: rgba(132, 139, 200, 0.25);
+  }
+  .tab-indicator {
+    width: calc(50% - var(--mv-tab-gap) / 2);
+    background: var(--brand-text);
+    transition: transform 600ms var(--ease-move);
+  }
+  [data-mv-index="1"] .tab-indicator {
+    transform: translateX(calc(100% + var(--mv-tab-gap)));
+  }
+  .pager {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+  }
+  .count {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--ink);
+    font-variant-numeric: tabular-nums;
+  }
+  .count-total {
+    color: var(--ink-micro);
+    font-weight: 500;
+  }
+  .pager-buttons {
+    display: flex;
+    gap: 8px;
+  }
+  .viewport { overflow: hidden; }
+  .track {
+    display: flex;
+    width: 200%;
+    align-items: flex-start;
+    transition: transform 700ms var(--ease-move);
+  }
+  [data-mv-index="1"] .track { transform: translateX(-50%); }
+  .panel {
+    flex: 0 0 50%;
+    box-sizing: border-box;
+    padding-right: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: clamp(20px, 3vh, 32px);
+    opacity: 0.15;
+    transition: opacity 600ms var(--ease-move);
+  }
+  [data-mv-index="0"] [data-mv-panel="0"],
+  [data-mv-index="1"] [data-mv-panel="1"] { opacity: 1; }
+  .numeral-row {
+    display: flex;
+    align-items: baseline;
+    gap: 16px;
+  }
+  .numeral {
+    font-size: 48px;
+    font-weight: 800;
+    line-height: 0.9;
+    letter-spacing: -0.05em;
+    color: var(--ghost-numeral);
+    font-variant-numeric: tabular-nums;
+  }
+  p {
+    margin: 0;
+    max-width: 62rem;
+    font-size: 18px;
+    font-weight: 500;
+    line-height: 1.55;
+    letter-spacing: -0.015em;
+    color: var(--ink);
+    text-wrap: pretty;
+  }
+
+  :global(html:not(.js)) .track {
+    width: auto;
+    flex-direction: column;
+    gap: clamp(32px, 5vh, 56px);
+    transform: none;
+  }
+  :global(html:not(.js)) .panel { opacity: 1; }
+
+  @media (min-width: 768px) {
+    .card { --mv-tab-gap: clamp(24px, 2.25vw, 72px); }
+  }
+
+  @media (min-width: 1200px) {
+    .mv { padding: clamp(48px, 8vh, 96px) var(--gutter-card) clamp(96px, 16vh, 180px); }
+    .card {
+      --mv-tab-gap: clamp(24px, 3vw, 48px);
+      padding: clamp(28px, 4.5vw, 80px);
+    }
+    .tab { font-size: clamp(22px, 2vw, 32px); }
+    .panel { padding-right: clamp(24px, 4vw, 64px); }
+    .numeral { font-size: clamp(56px, 6vw, 108px); }
+    p {
+      font-size: clamp(21px, 2vw, 32px);
+      line-height: 1.48;
+    }
+  }
+</style>

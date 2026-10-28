@@ -1,0 +1,29 @@
+---
+import type { HTMLAttributes } from "astro/types";
+import type { FieldName } from "../../../lib/postular/validate";
+
+interface Props extends HTMLAttributes<"div"> {
+  name?: FieldName;
+  fullRow?: boolean;
+}
+
+const { name, fullRow = false, class: className, ...rest } = Astro.props;
+---
+
+<div
+  class:list={["form-field", { "full-row": fullRow }, className]}
+  data-field={name}
+  data-invalid={name ? "false" : undefined}
+  {...rest}
+>
+  <slot />
+</div>
+
+<style>
+  .form-field {
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+  }
+  .full-row { grid-column: 1 / -1; }
+</style>

@@ -1,0 +1,54 @@
+---
+import type { HTMLAttributes } from "astro/types";
+import Input from "../../ui/Input.astro";
+import { formCopy } from "../../../data/postulacion";
+import FieldLabel from "./FieldLabel.astro";
+import FormField from "./FormField.astro";
+
+const inputAttributes = {
+  "aria-label": formCopy.phoneAriaLabel,
+  "data-control": "telefono",
+} as HTMLAttributes<"input">;
+---
+
+<FormField name="telefono">
+  <FieldLabel text={formCopy.labels.telefono} for="pf-tel" />
+  <div class="row">
+    <span class="prefix" aria-hidden="true">{formCopy.phonePrefix}</span>
+    <div class="number">
+      <Input
+        id="pf-tel"
+        name="telefono"
+        type="tel"
+        inputmode="numeric"
+        autocomplete="tel-national"
+        required
+        inputAttributes={inputAttributes}
+      />
+    </div>
+  </div>
+</FormField>
+
+<style>
+  .row {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+  }
+  .prefix {
+    flex: 0 0 auto;
+    box-sizing: border-box;
+    padding: 0.75rem 1rem;
+    border: 1.5px solid var(--border-control);
+    border-radius: var(--border-radius-2);
+    background: var(--color-background);
+    font-family: var(--font-sans);
+    font-size: 0.87rem;
+    color: var(--color-dark);
+    font-variant-numeric: tabular-nums;
+  }
+  .number {
+    flex: 1;
+    min-width: 0;
+  }
+</style>

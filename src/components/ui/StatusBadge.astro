@@ -1,0 +1,36 @@
+---
+import type { HTMLAttributes } from "astro/types";
+import type { BadgeTone } from "../../scripts/ui/ds-runtime";
+import Badge from "./Badge.astro";
+
+type RecordStatus = "present" | "pass" | "absent" | "fail" | "late" | "excused";
+
+interface Props extends HTMLAttributes<"span"> {
+  status: RecordStatus | (string & {});
+  label?: string;
+}
+
+const TONE_BY_STATUS: Record<RecordStatus, BadgeTone> = {
+  present: "success",
+  pass: "success",
+  absent: "danger",
+  fail: "danger",
+  late: "warning",
+  excused: "primary",
+};
+
+function isRecordStatus(status: string): status is RecordStatus {
+  return Object.hasOwn(TONE_BY_STATUS, status);
+}
+
+function capitaliseFirstLetter(text: string): string {
+  return text.charAt(0).toUpperCase() + text.slice(1);
+}
+
+const { status, label, ...rest } = Astro.props;
+
+const tone: BadgeTone = isRecordStatus(status) ? TONE_BY_STATUS[status] : "neutral";
+const visibleText = label || capitaliseFirstLetter(status);
+---
+
+<Badge tone={tone} data-status={status} {...rest}>{visibleText}</Badge>

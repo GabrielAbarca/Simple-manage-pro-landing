@@ -1,0 +1,141 @@
+---
+import Button from "../ui/Button.astro";
+import Card from "../ui/Card.astro";
+import TodayCard from "../ui/TodayCard.astro";
+import { attendanceStatuses, teacherConsoleCopy as copy } from "../../data/producto";
+import { summariseAttendance } from "../../scripts/producto/attendance-summary";
+
+const initialSummary = summariseAttendance(copy.students.map((student) => student.status));
+---
+
+<TodayCard
+  start={copy.today.start}
+  end={copy.today.end}
+  subject={copy.today.subject}
+  meta={copy.today.meta}
+  accent={copy.today.accent}
+  subjectElement="p"
+/>
+<Card>
+  <div class="attendance" data-attendance>
+    <div class="head">
+      <div class="title">{copy.attendanceTitle}</div>
+      <div class="summary" data-attendance-summary>{initialSummary}</div>
+    </div>
+    {
+      copy.students.map((student) => (
+        <div class="row" data-attendance-row>
+          <div class="who">
+            <span class="avatar" aria-hidden="true">{student.initials}</span>
+            <span class="name">{student.name}</span>
+          </div>
+          <div class="pills" role="group" aria-label={student.name}>
+            {attendanceStatuses.map((status) => (
+              <button type="button" class="status" data-status={status} aria-pressed={student.status === status ? "true" : "false"}>
+                {copy.pillLabels[status]}
+              </button>
+            ))}
+          </div>
+        </div>
+      ))
+    }
+    <div class="foot">
+      <Button icon="save" data-attendance-save>{copy.saveCta}</Button>
+    </div>
+  </div>
+</Card>
+
+<style>
+  .attendance {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+  .head {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 12px;
+    padding-bottom: 10px;
+  }
+  .title {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--ink);
+  }
+  .summary {
+    font-size: 0.82rem;
+    color: var(--ink-muted);
+  }
+  .row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    padding: 10px 0;
+    border-top: 1px solid var(--hairline-card);
+    flex-wrap: wrap;
+  }
+  .who {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .avatar {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #7380ec, #a78bfa);
+    color: #fff;
+    font-size: 12px;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .name {
+    font-size: 0.92rem;
+    font-weight: 600;
+    color: var(--ink);
+  }
+  .pills {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+  }
+  .status {
+    min-height: 44px;
+    padding: 0.4rem 0.8rem;
+    font-size: 0.78rem;
+    font-weight: 600;
+    font-family: var(--font-sans);
+    border-radius: var(--border-radius-1);
+    cursor: pointer;
+    background: var(--color-background);
+    color: var(--color-dark-variant);
+    border: 1px solid var(--border-control);
+  }
+  .status[aria-pressed="true"] { color: #fff; }
+  .status[aria-pressed="true"][data-status="present"] {
+    background: var(--color-success-fill);
+    border-color: var(--color-success-fill);
+  }
+  .status[aria-pressed="true"][data-status="absent"] {
+    background: var(--color-danger-fill);
+    border-color: var(--color-danger-fill);
+  }
+  .status[aria-pressed="true"][data-status="late"] {
+    background: var(--color-warning-fill);
+    border-color: var(--color-warning-fill);
+  }
+  .foot {
+    display: flex;
+    justify-content: flex-end;
+    padding-top: 12px;
+    border-top: 1px solid var(--hairline-card);
+  }
+
+  @media (min-width: 1200px) {
+    .status { min-height: auto; }
+  }
+</style>

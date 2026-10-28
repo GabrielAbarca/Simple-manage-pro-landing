@@ -1,0 +1,31 @@
+---
+interface Props {
+  label: string;
+}
+
+const { label } = Astro.props;
+---
+
+<div class="eyebrow-mask">
+  <div class="eyebrow" data-rise><span class="dot" aria-hidden="true"></span>{label}</div>
+</div>
+
+<style>
+  .eyebrow-mask { overflow: hidden; }
+  .eyebrow {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--brand-text);
+  }
+  .dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--brand-periwinkle);
+  }
+</style>
