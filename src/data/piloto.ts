@@ -70,3 +70,46 @@ export const applyCopy = {
   emailCta: "Escribir un correo",
   demoCta: "Ver la demo",
 } as const;
+
+export interface FaqItem {
+  question: string;
+  answer: string;
+}
+
+export const faqCopy: { eyebrow: string; items: readonly FaqItem[] } = {
+  eyebrow: "Preguntas frecuentes",
+  items: [
+    {
+      question: "¿Podemos traer lo que ya tenemos en Excel?",
+      answer: "Sí. Los documentos se importan desde los archivos que el colegio ya usa, y lo mismo con docentes y secciones. No hay que volver a digitar el colegio entero para empezar.",
+    },
+    {
+      question: "¿Se puede dejar un colegio configurado desde cero en menos de una hora?",
+      answer: "La estructura sí: curso lectivo, periodos, niveles, secciones, materias y aulas se configuran en esa primera sesión, y la matrícula entra importada desde su archivo de Excel. Lo que toma tiempo no es el sistema, es ponerse de acuerdo en cómo está organizado el colegio.",
+    },
+    {
+      question: "¿Cada docente entra con su propia cuenta?",
+      answer: "Sí. Cada docente recibe su usuario y ve únicamente sus secciones, sus materias y sus estudiantes. La dirección crea y desactiva esas cuentas desde su consola, sin depender de nadie más.",
+    },
+    {
+      question: "¿Los estudiantes también entran?",
+      answer: "Sí, con su propio usuario. Ven su promedio, su porcentaje de asistencia, su horario semanal y sus notas por materia y periodo. No pueden modificar nada.",
+    },
+    {
+      question: "¿Esto reemplaza algo del MEP?",
+      answer: "No. Simple Manage Pro no reemplaza nada del MEP. Ordena la información que el colegio ya maneja por dentro: notas, asistencia, horarios, expedientes y documentos para una mejor experiencia administrativa.",
+    },
+    {
+      question: "¿Funciona desde el teléfono?",
+      answer: "Sí. Docentes y estudiantes entran desde el teléfono con el mismo usuario, que es donde se pasa asistencia y donde se consultan notas. Sin embargo, la configuración del colegio se hace más cómoda desde una computadora.",
+    },
+    {
+      question: "¿Dónde se aloja la información?",
+      answer: "En Estados Unidos, fuera del país. Está dicho también en la política de privacidad.",
+    },
+    {
+      question: "¿Y si algo falla durante el curso lectivo?",
+      answer: "Escríbanos por cualquier medio de contacto y recibirá respuesta en menos de 24 horas. Durante el piloto, el soporte es prioritario y se atiende de inmediato.",
+    },
+  ],
+};

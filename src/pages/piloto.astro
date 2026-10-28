@@ -5,10 +5,11 @@ import PilotoAudience from "../components/piloto/PilotoAudience.astro";
 import PilotoOffer from "../components/piloto/PilotoOffer.astro";
 import PilotoCalendar from "../components/piloto/PilotoCalendar.astro";
 import PilotoApply from "../components/piloto/PilotoApply.astro";
-import { breadcrumbLd } from "../lib/schema";
-import { pilotoMeta } from "../data/piloto";
+import PilotoFaq from "../components/piloto/PilotoFaq.astro";
+import { breadcrumbLd, faqLd } from "../lib/schema";
+import { faqCopy, pilotoMeta } from "../data/piloto";
 
-const jsonLd = breadcrumbLd(pilotoMeta.breadcrumb, "/piloto/");
+const jsonLd = [breadcrumbLd(pilotoMeta.breadcrumb, "/piloto/"), faqLd(faqCopy.items)];
 ---
 
 <Layout title={pilotoMeta.title} description={pilotoMeta.description}>
@@ -19,6 +20,7 @@ const jsonLd = breadcrumbLd(pilotoMeta.breadcrumb, "/piloto/");
   <PilotoOffer />
   <PilotoCalendar />
   <PilotoApply />
+  <PilotoFaq />
 </Layout>
 
 <script>

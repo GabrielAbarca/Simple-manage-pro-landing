@@ -24,7 +24,7 @@ value, string or motion constant without Gabriel's say-so.
 | --- | --- |
 | `/` | Intro, 3D hero with the three portals, data security, contact block |
 | `/producto` | Problem → one expediente (3D scroll story), then the three portals with live UI |
-| `/piloto` | Eligibility, what the colegio gets and gives, calendar, application form |
+| `/piloto` | Eligibility, what the colegio gets and gives, calendar, application form, FAQ |
 | `/nosotros` | Misión/visión tabs, dated history, founder |
 | `/contacto` | WhatsApp, email and pilot form cards |
 

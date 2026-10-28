@@ -266,6 +266,9 @@ asked, not foregrounded).
 >   conversation, as the second amendment already did for two of them. *Data
 >   hosted abroad* stays on the page: the footer of every route says
 >   "Expedientes alojados en Estados Unidos".
+>   **Reversed, 28 Oct 2026 (Gabriel's call):** the eight V1 cards return
+>   after the application form, under the eyebrow only; the 8th answer is
+>   reworded to usted without the colegio count.
 > - **The pilot calendar is back**, as month ranges (Feb, Feb–Jun, Jul–Nov,
 >   Dec), not per-colegio dates, which answers the first amendment's objection.
 > - **The offer framing changed** (§5): no "three colegios", no cost-recovery
