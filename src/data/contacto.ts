@@ -45,7 +45,7 @@ export interface ContactCardContent {
   copyButton?: ContactCardCopyButton;
 }
 
-const PHONE_DISPLAY = "+506 7184-8300";
+const PHONE_DISPLAY = "+1 224-216-4181";
 const COPY_LABEL = "Copiar";
 
 export const contactCards: readonly ContactCardContent[] = [
@@ -56,7 +56,7 @@ export const contactCards: readonly ContactCardContent[] = [
     description: "Para consultas rápidas o coordinar una llamada.",
     valueLabel: "Teléfono",
     value: PHONE_DISPLAY,
-    valueHref: "tel:+50671848300",
+    valueHref: "tel:+12242164181",
     valueIsNumeric: true,
     primaryAction: { label: "Abrir WhatsApp", href: waHref(WA_MSG_PRODUCTO), external: true },
     copyButton: { label: COPY_LABEL, accessibleLabel: "Copiar número", value: PHONE_DISPLAY },

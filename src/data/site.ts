@@ -8,7 +8,7 @@ export const headerCopy = {
 
 export const menuContacts = {
   whatsappLabel: "WhatsApp",
-  whatsappDisplay: "+506 7184 8300",
+  whatsappDisplay: "+1 224 216 4181",
   emailLabel: "Correo",
 } as const;
 
