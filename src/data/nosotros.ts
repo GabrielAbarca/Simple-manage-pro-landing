@@ -6,7 +6,7 @@ export const nosotrosMeta = {
 } as const;
 
 export const nosotrosHeroCopy = {
-  headline: ["Somos un software", "escolar pensado", "para su colegio."],
+  headline: ["Somos un software", "escolar pensado", "para su colegio"],
 } as const;
 
 export interface MissionVisionPanel {
@@ -41,7 +41,7 @@ export interface HistoryMilestone {
 
 export const historyCopy = {
   eyebrow: "Nuestra historia",
-  headline: ["Empezó como un proyecto", "de feria científica."],
+  headline: ["Empezó como un proyecto", "de feria científica"],
   paragraphBeforeLink:
     "Utilizando técnicas de el sistema educativo estadounidense, Simple Manage Pro fue pensado con el propósito de resolver los problemas que la gestión escolar latinoamericana enfrenta, y fue desarrollado para reflejar la estructura del sistema educativo costarricense, con curso lectivo, periodos, niveles, secciones y expedientes. El sistema está compuesto por ",
   paragraphLinkLabel: "las tres consolas del sistema",
