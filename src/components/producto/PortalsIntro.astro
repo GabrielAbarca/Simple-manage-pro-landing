@@ -7,7 +7,7 @@ import { portalsIntroCopy } from "../../data/producto";
   <div class="text" data-panel-text>
     <Eyebrow data-scroll-rise>{portalsIntroCopy.eyebrow}</Eyebrow>
     <h2>
-      <span class="line-mask"><span data-scroll-mask>{portalsIntroCopy.headline[0]}</span></span>
+      <span class="line-mask"><span data-scroll-mask class="data-rise">{portalsIntroCopy.headline[0]}</span></span>
       <span class="line-mask"><span data-scroll-mask class="accent">{portalsIntroCopy.headline[1]}</span></span>
     </h2>
     <p data-scroll-rise>{portalsIntroCopy.body}</p>
@@ -39,7 +39,13 @@ import { portalsIntroCopy } from "../../data/producto";
     color: var(--ink);
   }
   [data-scroll-mask] { display: block; }
-  .accent { color: var(--brand-text); }
+  .data-rise {
+    padding-top: 1rem;
+  }
+  .accent { 
+    color: var(--brand-text);
+    padding-bottom: 2rem;
+  }
   p {
     margin: 0;
     max-width: 30rem;

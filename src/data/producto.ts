@@ -4,17 +4,17 @@ import type { BadgeTone, ButtonVariant } from "../scripts/ui/ds-runtime";
 export const productoMeta = {
   title: "Producto",
   description:
-    "Del cierre de periodo a un solo expediente. Notas, asistencia e informes reunidos en el expediente de cada estudiante, con portales para la dirección, los docentes y los estudiantes.",
+    "Buscamos unificar el registro académico. Simple Manage Pro busca facilitar la tarea de la gestión académica. ¿Alguna vez ha tenido que leer una hoja de cálculo interminable?",
 } as const;
 
 export const openingCopy = {
-  headline: ["Del cierre de periodo", "a un solo expediente."],
-  lead: "Notas, asistencia e informes reunidos en el expediente de cada estudiante.",
+  headline: ["Buscamos unificar", "el registro académico"],
+  lead: "Simple Manage Pro busca facilitar la tarea de la gestión académica. ¿Alguna vez ha tenido que leer una hoja de cálculo interminable?",
   chapters: [
-    { eyebrow: "01 · Las notas", statement: "Cada docente lleva su propia hoja de cálculo." },
-    { eyebrow: "02 · La asistencia", statement: "La asistencia se pasa en papel. Las consultas llegan por WhatsApp." },
-    { eyebrow: "03 · El cierre", statement: "Al cierre de periodo, los informes se arman a mano." },
-    { eyebrow: "04 · Simple Manage Pro", statement: "Con SMP, todo queda en un solo expediente." },
+    { eyebrow: "01 · Las notas", statement: "A veces, una hoja de cálculo no es ideal" },
+    { eyebrow: "02 · La asistencia", statement: "Los estudiantes no pueden consultar su estado en tiempo real" },
+    { eyebrow: "03 · Final de periodo", statement: "¿Hubo un error en los cálculos? Una modificación puede tardar días" },
+    { eyebrow: "04 · Simple Manage Pro", statement: "Con SMP, todo queda en un solo expediente" },
   ],
   demoCta: "Ver la demo",
   whatsappCta: "Conversar por WhatsApp",
@@ -24,8 +24,8 @@ export const openingCopy = {
 
 export const portalsIntroCopy = {
   eyebrow: "Cómo funciona",
-  headline: ["Tres portales.", "Un mismo registro."],
-  body: "Dirección, docentes y estudiantes trabajan sobre la misma base de datos. Cada rol ve solo lo que le corresponde.",
+  headline: ["Tres portales", "Un mismo registro"],
+  body: "Dirección, docentes y estudiantes trabajan sobre la misma base de datos. Cada rol ve solo lo que le corresponde",
   railFirst: "01",
   railLast: "03",
 } as const;
@@ -44,7 +44,7 @@ export interface PortalPanelCopy {
 export const portalPanels: readonly PortalPanelCopy[] = [
   {
     eyebrow: "01 · Administración",
-    title: "La dirección arma el curso lectivo una sola vez.",
+    title: "La dirección arma el curso lectivo una sola vez",
     capabilities: [
       { icon: "calendar_month", text: "Años, periodos, niveles y secciones" },
       { icon: "groups", text: "Docentes y asignaciones por sección" },
@@ -53,7 +53,7 @@ export const portalPanels: readonly PortalPanelCopy[] = [
   },
   {
     eyebrow: "02 · Docente",
-    title: "Asistencia y notas, desde la misma lección.",
+    title: "El docente utiliza la consola diseñada para simplicidad y rapidez",
     capabilities: [
       { icon: "today", text: "Las lecciones del día, en orden" },
       { icon: "fact_check", text: "Asistencia por lección" },
@@ -62,7 +62,7 @@ export const portalPanels: readonly PortalPanelCopy[] = [
   },
   {
     eyebrow: "03 · Estudiante",
-    title: "Cada estudiante consulta sus notas sin preguntar.",
+    title: "Cada estudiante ve sus notas en tiempo real",
     capabilities: [
       { icon: "grade", text: "Notas por periodo y materia" },
       { icon: "schedule", text: "Horario semanal" },

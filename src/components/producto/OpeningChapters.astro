@@ -13,7 +13,7 @@ const lastChapter = openingCopy.chapters.length - 1;
       <p class="statement">{chapter.statement}</p>
       {i === lastChapter && (
         <div class="ctas">
-          <a class="pill pill-primary" href={DEMO_URL} target="_blank" rel="noopener">{openingCopy.demoCta}</a>
+          <a class="header-cta" href={DEMO_URL} target="_blank" rel="noopener">{openingCopy.demoCta}</a>
           <a class="pill pill-outline" href={waHref()} target="_blank" rel="noopener">{openingCopy.whatsappCta}</a>
         </div>
       )}
@@ -53,7 +53,23 @@ const lastChapter = openingCopy.chapters.length - 1;
     gap: 10px;
     padding-top: 6px;
   }
-  .ctas > .pill {
+  .header-cta {
+      display: inline-flex;
+      align-items: center;
+      min-height: 56px;
+      padding: 0 22px;
+      border-radius: 999px;
+      background: var(--ink);
+      color: #fff;
+      font-size: 16px;
+      font-weight: 600;
+      transition:
+        opacity 100ms,
+        background 400ms,
+        color 400ms;
+    }
+    .header-cta:hover { opacity: 0.9; color: #fff; }
+  .ctas > .pill, .ctas > .header-cta {
     justify-content: center;
     --pill-px: 24px;
   }

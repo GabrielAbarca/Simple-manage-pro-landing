@@ -8,7 +8,7 @@ import { portalsEndCopy } from "../../data/producto";
     <h2 data-scroll-rise>{portalsEndCopy.headline} <span class="accent">{portalsEndCopy.headlineAccent}</span></h2>
     <p data-scroll-rise>{portalsEndCopy.body}</p>
     <div class="ctas" data-scroll-rise>
-      <a class="pill pill-lg pill-primary" href={DEMO_URL} target="_blank" rel="noopener">{portalsEndCopy.demoCta}</a>
+      <a class="header-cta" href={DEMO_URL} target="_blank" rel="noopener">{portalsEndCopy.demoCta}</a>
       <a class="pill pill-lg pill-outline" href={waHref(WA_MSG_PRODUCTO)} target="_blank" rel="noopener">
         {portalsEndCopy.whatsappCta}
       </a>
@@ -55,7 +55,23 @@ import { portalsEndCopy } from "../../data/producto";
     align-items: stretch;
     gap: 10px;
   }
-  .ctas > .pill {
+  .header-cta {
+      display: inline-flex;
+      align-items: center;
+      min-height: 56px;
+      padding: 0 22px;
+      border-radius: 999px;
+      background: var(--ink);
+      color: #fff;
+      font-size: 16px;
+      font-weight: 600;
+      transition:
+        opacity 100ms,
+        background 400ms,
+        color 400ms;
+    }
+    .header-cta:hover { opacity: 0.9; color: #fff; }
+  .ctas > .pill, .ctas > .header-cta {
     justify-content: center;
     --pill-px: 28px;
   }
