@@ -9,7 +9,7 @@ const [lineOne, lineTwo] = contactoHeroCopy.headline;
   <div class="grid">
     <div class="heading">
       <h1>
-        <span class="line-mask"><span data-rise>{lineOne}</span></span>
+        <span class="line-mask"><span data-rise class="data-rise">{lineOne}</span></span>
         <span class="line-mask"><span data-rise class="accent">{lineTwo}</span></span>
       </h1>
     </div>
@@ -59,7 +59,10 @@ const [lineOne, lineTwo] = contactoHeroCopy.headline;
     color: var(--ink);
   }
   h1 .line-mask { padding-bottom: 0.05em; }
-  .accent { color: var(--brand-text); }
+  .accent { 
+    color: var(--brand-text); 
+    padding: .5rem 0 1rem 0;
+  }
   .lead {
     margin: 0;
     max-width: 30rem;

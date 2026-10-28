@@ -4,18 +4,18 @@ import { EMAIL, WA_MSG_PRODUCTO, mailtoHref, waHref } from "../config";
 export const contactoMeta = {
   title: "Contacto",
   description:
-    "Escríbanos por WhatsApp o por correo electrónico, o postule a su colegio al Piloto 2027. Respondemos en las próximas 24 horas hábiles.",
+    "Escríbanos por WhatsApp o por correo electrónico, o postule a su colegio al Piloto 2027. Respondemos en las próximas 24 horas hábiles",
   breadcrumb: "Contacto",
 } as const;
 
 export const contactoHeroCopy = {
-  headline: ["Hablemos de", "su colegio."],
-  lead: "Escríbanos por el medio que prefiera. Respondemos en las próximas 24 horas hábiles.",
+  headline: ["Hablemos de", "su colegio"],
+  lead: "Escríbanos por el medio que prefiera. Respondemos en las próximas 24 horas hábiles",
 } as const;
 
 export const copyFeedback = {
-  success: "Copiado.",
-  failure: "No se pudo copiar. Selecciónelo manualmente.",
+  success: "Copiado al portapapeles",
+  failure: "No se pudo copiar. Selecciónelo manualmente",
 } as const;
 
 export interface ContactCardAction {
@@ -77,9 +77,9 @@ export const contactCards: readonly ContactCardContent[] = [
     icon: "edit_note",
     number: "03",
     title: "Piloto 2027",
-    description: "Para postular a su colegio al curso lectivo 2027.",
+    description: "Para postular a su colegio al curso lectivo 2027 con Simple Manage Pro",
     valueLabel: "Formulario",
-    value: "Postulación",
+    value: "Postulación 2027",
     primaryAction: { label: "Llenar el formulario", href: "/piloto/#postular", withRule: true },
   },
 ];

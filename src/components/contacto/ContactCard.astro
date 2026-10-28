@@ -39,12 +39,11 @@ const externalLinkAttributes = primaryAction.external ? { target: "_blank", rel:
   </div>
   <div class="actions">
     <a
-      class:list={["pill", "pill-primary", { "with-rule": primaryAction.withRule }]}
+      class:list={["pill", "pill-primary"]}
       href={primaryAction.href}
       {...externalLinkAttributes}
     >
       {primaryAction.label}
-      {primaryAction.withRule && <span class="rule" aria-hidden="true" />}
     </a>
     {
       copyButton && (
