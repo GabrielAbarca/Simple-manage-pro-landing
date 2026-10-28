@@ -43,7 +43,7 @@ export const historyCopy = {
   eyebrow: "Nuestra historia",
   headline: ["Empezó como un proyecto", "de feria científica."],
   paragraphBeforeLink:
-    "El problema era el mismo que sigue resolviendo hoy: al cierre de cada periodo, alguien en la dirección arma las notas a mano desde archivos sueltos, los resultados tardaban días o incluso semanas en llegar a los estudiantes. Tres cursos lectivos después, es un sistema que un colegio puede usar de verdad. Hoy ese trabajo lo hacen ",
+    "Utilizando técnicas de el sistema educativo estadounidense, Simple Manage Pro fue pensado con el propósito de resolver los problemas que la gestión escolar latinoamericana enfrenta, y fue desarrollado para reflejar la estructura del sistema educativo costarricense, con curso lectivo, periodos, niveles, secciones y expedientes. El sistema está compuesto por ",
   paragraphLinkLabel: "las tres consolas del sistema",
   paragraphLinkHref: "/producto/",
   paragraphAfterLink: ".",
@@ -56,17 +56,17 @@ export const historyCopy = {
     {
       year: "2025",
       title: "De prototipo a sistema",
-      body: "Las tres consolas, los periodos ponderados, la asistencia por sección y la matrícula. Se empezó a construir un software funcional con un propósito.",
+      body: "Las tres consolas, los periodos ponderados, la asistencia por sección y la matrícula. El proyecto se transformó en una idea de negocio, dando inico al desarrollo del software escolar.",
     },
     {
       year: "2026",
       title: "Lanzamiento oficial del sistema junto a la demo pública",
-      body: "Curso lectivo, secciones, cédula y materias en español, abierta para que cualquier colegio la revise sin pedir permiso ni dejar datos.",
+      body: "El software fue oficialmente abierto al público, en busca de colegios que escogan a Simple Manage Pro como su herramienta de gestión escolar.",
     },
     {
       year: "2027",
       title: "Piloto 2027",
-      body: "El piloto arranca en febrero con el curso lectivo 2027. Cada colegio con su estructura y su propia base de datos.",
+      body: "El plan para la implementación del sistema escolar en el curso lectivo 2027 es ejecutado. Se espera que los colegios que adopten el sistema puedan experimentar una mejora significativa en la eficiencia de sus procesos administrativos y académicos.",
     },
   ],
 } as const;
@@ -76,5 +76,5 @@ export const founderCopy = {
   initials: "GZ",
   name: "Gabriel Zelaya",
   role: "Founder & CEO",
-  bio: "Gabriel Zelaya es un desarrollador Full-Stack con experiencia remota e internacional. Especializado en la creación de software pensado para la aportación de valor para los clientes.",
+  bio: "Gabriel Zelaya es un desarrollador Full-Stack con experiencia remota e internacional. Gabriel analizó las diferencias en el manejo de información escolar en el extranjero con países como Costa Rica. Dando lugar a la idea de un software para mejorar la experiencia de gestión escolar latinoamericana.",
 } as const;
