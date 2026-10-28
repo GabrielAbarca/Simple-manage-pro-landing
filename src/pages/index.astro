@@ -3,7 +3,7 @@ import Layout from "../layouts/Layout.astro";
 import HomeHero from "../components/home/HomeHero.astro";
 import HomeSecurity from "../components/home/HomeSecurity.astro";
 import HomeContact from "../components/home/HomeContact.astro";
-import { DEMO_URL, EMAIL, SITE_NAME } from "../config";
+import { DEMO_URL, EMAIL, SITE_NAME, WHATSAPP } from "../config";
 import { homeMeta } from "../data/home";
 
 const site = Astro.site?.origin ?? "https://simplemanagepro.com";
@@ -23,6 +23,7 @@ const jsonLd = {
       contactPoint: {
         "@type": "ContactPoint",
         contactType: "customer support",
+        telephone: `+${WHATSAPP}`,
         email: EMAIL,
         areaServed: "CR",
         availableLanguage: "Spanish",

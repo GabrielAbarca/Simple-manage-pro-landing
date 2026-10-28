@@ -2,9 +2,9 @@ import type { IconName } from "../components/ui/icons";
 import type { BadgeTone, ButtonVariant } from "../scripts/ui/ds-runtime";
 
 export const productoMeta = {
-  title: "Producto",
+  title: "Libro de notas, asistencia y matrícula",
   description:
-    "Buscamos unificar el registro académico. Simple Manage Pro busca facilitar la tarea de la gestión académica. ¿Alguna vez ha tenido que leer una hoja de cálculo interminable?",
+    "Una consola para la dirección, una para cada docente y un portal para el estudiante. Notas, asistencia, horarios y matrícula sobre la misma información.",
 } as const;
 
 export const openingCopy = {

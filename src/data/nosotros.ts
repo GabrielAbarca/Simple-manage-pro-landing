@@ -1,7 +1,7 @@
 export const nosotrosMeta = {
-  title: "Nosotros",
+  title: "Software escolar hecho en Costa Rica",
   description:
-    "Simple Manage Pro es un software escolar pensado para los colegios de Costa Rica. Conozca nuestra misión, nuestra visión, la historia del sistema y a su fundador.",
+    "Simple Manage Pro es un software escolar pensado para los colegios de Costa Rica. Conozca su misión, su visión, su historia y a su fundador.",
   breadcrumb: "Nosotros",
 } as const;
 

@@ -2,9 +2,9 @@ import type { IconName } from "../components/ui/icons";
 import { EMAIL, WA_MSG_PRODUCTO, mailtoHref, waHref } from "../config";
 
 export const contactoMeta = {
-  title: "Contacto",
+  title: "Hablemos del piloto 2027",
   description:
-    "Escríbanos por WhatsApp o por correo electrónico, o postule a su colegio al Piloto 2027. Respondemos en las próximas 24 horas hábiles",
+    "Escríbanos por WhatsApp o por correo electrónico, o postule a su colegio al Piloto 2027. Respondemos en las próximas 24 horas hábiles.",
   breadcrumb: "Contacto",
 } as const;
 

@@ -1,7 +1,7 @@
 export const homeMeta = {
   title: "Sistema de gestión escolar en Costa Rica",
   description:
-    "Notas, asistencia, horarios y expedientes de su colegio en un solo lugar, para la dirección, los docentes y los estudiantes. Programa piloto a partir de febrero de 2027.",
+    "Notas, asistencia, horarios y expedientes de su colegio en un solo lugar, para la dirección, los docentes y los estudiantes. Piloto desde febrero de 2027.",
 } as const;
 
 export const introCopy = {

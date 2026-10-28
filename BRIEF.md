@@ -278,6 +278,9 @@ asked, not foregrounded).
 >   as a form option. The rule against the word is withdrawn.
 > - **The founder gets a two-sentence bio on `/nosotros`**, still only there.
 > - **Dark mode is dropped** (§9). Light only.
+> - **Page titles stay keyword-led** (28 Oct 2026). The design's short page
+>   names ("Producto", "Nosotros") cost search ranking, so `<title>` goes back
+>   to V1's wording, and every meta description stays under 160 characters.
 
 One page. Order follows the director's skepticism.
 

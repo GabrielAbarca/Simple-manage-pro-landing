@@ -1,9 +1,9 @@
 import type { IconName } from "../components/ui/icons";
 
 export const pilotoMeta = {
-  title: "Piloto 2027",
+  title: "Piloto 2027 para colegios de Costa Rica",
   description:
-    "Un curso lectivo completo con Simple Manage Pro, de febrero a diciembre. Curso lectivo configurado, matrícula importada y acompañamiento para su colegio. Postule a su colegio para 2027",
+    "El piloto 2027: un curso lectivo completo, de febrero a diciembre, con el sistema configurado, la matrícula importada y acompañamiento. Postule a su colegio.",
   breadcrumb: "Piloto 2027",
 } as const;
 
