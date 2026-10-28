@@ -7,13 +7,13 @@ import { scrollCue } from "../../data/site";
   <div class="glow" aria-hidden="true"></div>
   <div class="stage" data-stage data-clipboard-stage aria-hidden="true"></div>
   <h1>
-    <span class="line-mask"><span data-rise>{pilotoHeroCopy.headline[0]}</span></span>
+    <span class="line-mask"><span data-rise class="data-rise">{pilotoHeroCopy.headline[0]}</span></span>
     <span class="line-mask"><span data-rise class="accent">{pilotoHeroCopy.headline[1]}</span></span>
   </h1>
   <div class="bottom">
     <p data-fade>{pilotoHeroCopy.lead}</p>
     <div class="actions" data-fade>
-      <a class="pill pill-lg pill-primary rule-after" href="#postular">{pilotoHeroCopy.applyCta}</a>
+      <a class="pill pill-lg pill-primary" href="#postular">{pilotoHeroCopy.applyCta}</a>
       <span class="cue"><span>{scrollCue}</span><span class="cue-line"></span></span>
     </div>
   </div>
@@ -64,7 +64,12 @@ import { scrollCue } from "../../data/site";
     color: var(--ink);
   }
   h1 .line-mask { padding-bottom: 0.04em; }
-  .accent { color: var(--brand-text); }
+  .accent { 
+    color: var(--brand-text); 
+  }
+  .data-rise {
+    padding-top: 1rem;
+  }
   .bottom {
     position: relative;
     display: flex;

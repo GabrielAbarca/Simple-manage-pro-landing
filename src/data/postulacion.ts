@@ -43,7 +43,7 @@ export const formCopy = {
   counterSuffix: ` / ${COMENTARIOS_MAX_LENGTH}`,
   consent: "Acepto que el equipo de Simple Manage Pro me contacte sobre el piloto 2027.",
   privacyLink: "Leer la política de privacidad",
-  submit: "Enviar postulación",
+  submit: "Enviar",
   sending: "Enviando…",
   responseNote: "Respondemos en las próximas 24 horas hábiles.",
   honeypotLabel: "Sitio web",

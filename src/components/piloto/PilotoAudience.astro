@@ -11,7 +11,7 @@ import Eyebrow from "./Eyebrow.astro";
         {
           audienceCopy.headline.map((line, i) => (
             <span class="line-mask">
-              <span data-rise class:list={{ accent: i === audienceCopy.headline.length - 1 }}>{line}</span>
+              <span data-rise class="data-rise" class:list={{ accent: i === audienceCopy.headline.length - 1 }}>{line}</span>
             </span>
           ))
         }
@@ -60,7 +60,12 @@ import Eyebrow from "./Eyebrow.astro";
     letter-spacing: -0.05em;
     color: var(--ink);
   }
-  .accent { color: var(--brand-text); }
+  .accent {
+     color: var(--brand-text);
+  }
+  .data-rise {
+    padding-bottom: .7rem;
+  }
   .rows {
     display: flex;
     flex-direction: column;
