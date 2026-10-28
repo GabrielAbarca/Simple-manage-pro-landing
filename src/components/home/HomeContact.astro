@@ -14,10 +14,10 @@ const [lineOne, lineTwo, lineThree] = homeContactCopy.headline;
         <span class="line-mask"><span data-rise class="accent">{lineThree}</span></span>
       </h2>
       <div class="ctas" data-fade>
-        <a class="pill pill-lg pill-primary" href={mailtoHref()} target="_blank" rel="noopener" data-contact-whatsapp>
+        <a class="pill pill-lg pill-primary" href="./piloto/#postular" target="_blank" rel="noopener" data-contact-whatsapp>
           {homeContactCopy.formCta}
         </a>
-        <a class="pill pill-lg pill-outline" href={waHref()}>{homeContactCopy.whatsappCta}</a>
+        <a class="pill pill-lg pill-outline" href={waHref()} target="_blank">{homeContactCopy.whatsappCta}</a>
         <a class="text-rule rule-after" href={DEMO_URL} target="_blank" rel="noopener">{homeContactCopy.demoCta}</a>
       </div>
     </div>
